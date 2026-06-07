@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WK 2026 Simulator — Instagram Slides</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #111;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+      padding: 40px 20px;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .label {
+      color: #666;
+      font-size: 13px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: -30px;
+      align-self: flex-start;
+      margin-left: calc(50% - 270px);
+    }
+
+    .slide {
+      width: 540px;
+      height: 540px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 4px;
+    }
+
+    /* ── SLIDE 1 ── */
+    .slide-1 {
+      background: #0a0a0a;
+    }
+
+    .slide-1 .field-lines {
+      position: absolute;
+      inset: 0;
+      opacity: 0.07;
+      background-image:
+        radial-gradient(ellipse 300px 200px at 50% 110%, #fff 0%, transparent 70%),
+        linear-gradient(#fff 1px, transparent 1px),
+        linear-gradient(90deg, #fff 1px, transparent 1px);
+      background-size: 100% 100%, 54px 54px, 54px 54px;
+    }
+
+    .slide-1 .glow {
+      position: absolute;
+      top: -80px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 500px;
+      height: 300px;
+      background: radial-gradient(ellipse, rgba(255,120,0,0.18) 0%, transparent 70%);
+    }
+
+    .slide-1 .content {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 52px;
+    }
+
+    .slide-1 .eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #FF6B00;
+      margin-bottom: 20px;
+    }
+
+    .slide-1 h1 {
+      font-size: 52px;
+      font-weight: 900;
+      line-height: 1.05;
+      color: #fff;
+      margin-bottom: 24px;
+    }
+
+    .slide-1 h1 span {
+      color: #FF6B00;
+    }
+
+    .slide-1 .sub {
+      font-size: 15px;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.6;
+      max-width: 340px;
+    }
+
+    .slide-1 .badge {
+      position: absolute;
+      bottom: 48px;
+      right: 52px;
+      background: #FF6B00;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 8px 16px;
+      border-radius: 2px;
+    }
+
+    /* ── SLIDE 2 ── */
+    .slide-2 {
+      background: #FF6B00;
+    }
+
+    .slide-2 .bg-text {
+      position: absolute;
+      bottom: -20px;
+      right: -10px;
+      font-size: 220px;
+      font-weight: 900;
+      color: rgba(0,0,0,0.1);
+      line-height: 1;
+      user-select: none;
+    }
+
+    .slide-2 .content {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 52px;
+    }
+
+    .slide-2 .eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(0,0,0,0.45);
+      margin-bottom: 20px;
+    }
+
+    .slide-2 h2 {
+      font-size: 44px;
+      font-weight: 900;
+      line-height: 1.05;
+      color: #000;
+      margin-bottom: 36px;
+    }
+
+    .slide-2 .features {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .slide-2 .feature {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .slide-2 .feature .icon {
+      width: 36px;
+      height: 36px;
+      background: rgba(0,0,0,0.12);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .slide-2 .feature .text {
+      font-size: 16px;
+      font-weight: 700;
+      color: #000;
+    }
+
+    /* ── SLIDE 3 ── */
+    .slide-3 {
+      background: #0d0d0d;
+    }
+
+    .slide-3 .grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,107,0,0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,107,0,0.08) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    .slide-3 .corner-tl {
+      position: absolute;
+      top: 40px; left: 40px;
+      width: 40px; height: 40px;
+      border-top: 3px solid #FF6B00;
+      border-left: 3px solid #FF6B00;
+    }
+    .slide-3 .corner-br {
+      position: absolute;
+      bottom: 40px; right: 40px;
+      width: 40px; height: 40px;
+      border-bottom: 3px solid #FF6B00;
+      border-right: 3px solid #FF6B00;
+    }
+
+    .slide-3 .content {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 52px;
+    }
+
+    .slide-3 .number {
+      font-size: 100px;
+      font-weight: 900;
+      color: #FF6B00;
+      line-height: 1;
+      margin-bottom: 8px;
+      opacity: 0.9;
+    }
+
+    .slide-3 .number-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 32px;
+    }
+
+    .slide-3 h3 {
+      font-size: 36px;
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    .slide-3 .sub {
+      font-size: 14px;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 40px;
+      line-height: 1.6;
+    }
+
+    .slide-3 .cta {
+      background: #FF6B00;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 14px 32px;
+      border-radius: 2px;
+    }
+
+    .nav-hint {
+      color: #444;
+      font-size: 12px;
+      margin-top: -20px;
+      letter-spacing: 1px;
+    }
+  </style>
+</head>
+<body>
+
+  <p class="label">Slide 1 van 3</p>
+
+  <!-- SLIDE 1 -->
+  <div class="slide slide-1">
+    <div class="field-lines"></div>
+    <div class="glow"></div>
+    <div class="content">
+      <div class="eyebrow">WK 2026 · Simulator</div>
+      <h1>Wat als <span>Nederland</span> het WK wint?</h1>
+      <p class="sub">Vul zelf alle groepsuitslagen in en zie wie er doorgaat. Jij bepaalt de uitkomst.</p>
+    </div>
+    <div class="badge">Probeer het zelf →</div>
+  </div>
+
+  <p class="label">Slide 2 van 3</p>
+
+  <!-- SLIDE 2 -->
+  <div class="slide slide-2">
+    <div class="bg-text">26</div>
+    <div class="content">
+      <div class="eyebrow">Zo werkt het</div>
+      <h2>Jij vult in.<br>Wij rekenen.</h2>
+      <div class="features">
+        <div class="feature">
+          <div class="icon">⚽</div>
+          <div class="text">12 groepen, 48 teams — alles invulbaar</div>
+        </div>
+        <div class="feature">
+          <div class="icon">📊</div>
+          <div class="text">Live standen met officiële FIFA-regels</div>
+        </div>
+        <div class="feature">
+          <div class="icon">🔗</div>
+          <div class="text">Deel je bracket via één link</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="label">Slide 3 van 3</p>
+
+  <!-- SLIDE 3 -->
+  <div class="slide slide-3">
+    <div class="grid"></div>
+    <div class="corner-tl"></div>
+    <div class="corner-br"></div>
+    <div class="content">
+      <div class="number">48</div>
+      <div class="number-label">teams · 12 groepen · 1 kampioen</div>
+      <h3>Maak jouw WK-scenario</h3>
+      <p class="sub">Gratis. Geen account nodig.<br>Link in bio.</p>
+      <div class="cta">Speel nu mee</div>
+    </div>
+  </div>
+
+  <p class="nav-hint">Screenshot elke slide afzonderlijk voor Instagram</p>
+
+</body>
+</html>

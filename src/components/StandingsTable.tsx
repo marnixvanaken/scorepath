@@ -1,0 +1,91 @@
+'use client';
+
+import { AnimatePresence, motion } from 'motion/react';
+import type { Standing } from '@/lib/types';
+import { teamById } from '@/data/worldcup2026';
+import { Flag } from './Flag';
+import { Tooltip } from './Tooltip';
+import { NL } from '@/i18n/nl';
+
+interface Props {
+  standings: Standing[];
+  bestThirdIds: Set<string>;
+  groupColor?: string;
+}
+
+export function StandingsTable({ standings, bestThirdIds, groupColor }: Props) {
+  const groupComplete = standings.length === 4 && standings.every((s) => s.played === 3);
+
+  return (
+    <div className="mt-3 rounded-lg overflow-hidden">
+      {/* Header */}
+      <div className="grid grid-cols-[1rem_1fr_repeat(5,_1.5rem)] px-1.5 py-1 bg-[--color-wk-navy]/80 text-[9px] font-semibold text-slate-600 uppercase tracking-wider">
+        <span />
+        <span>{NL.table.club}</span>
+        <Tooltip text="Gespeeld" className="text-center">{NL.table.played}</Tooltip>
+        <Tooltip text="Gewonnen" className="text-center">{NL.table.won}</Tooltip>
+        <Tooltip text="Verloren" className="text-center">{NL.table.lost}</Tooltip>
+        <Tooltip text="Doelsaldo" className="text-center">{NL.table.gd}</Tooltip>
+        <Tooltip text="Punten" className="text-center font-bold text-slate-500">{NL.table.points}</Tooltip>
+      </div>
+
+      <AnimatePresence mode="popLayout" initial={false}>
+        {standings.map((s, i) => {
+          const team = teamById(s.teamId);
+          const advances = i < 2 || (i === 2 && bestThirdIds.has(s.teamId));
+          const isNed = s.teamId === 'NED';
+
+          const statusBar = advances ? 'border-l-2' : 'border-l-2 border-transparent';
+          const statusBarStyle = advances ? { borderLeftColor: groupColor ?? '#22c55e' } : {};
+
+          const nameCls = isNed ? 'text-orange-400' : advances ? 'text-slate-100' : 'text-slate-500';
+          const ptsCls = advances ? 'font-bold' : 'text-slate-400';
+
+          return (
+            <motion.div
+              key={s.teamId}
+              layout
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ type: 'spring', stiffness: 420, damping: 36 }}
+              className={`grid grid-cols-[1rem_1fr_repeat(5,_1.5rem)] px-2 py-1.5 items-center text-[11px] ${statusBar} ${i > 0 ? 'border-t border-white/5' : ''}`}
+              style={statusBarStyle}
+            >
+              <span
+                className={`w-4 h-4 rounded-full flex items-center justify-center text-[8px] font-bold tabular-nums shrink-0 ${
+                  i < 2 ? 'text-white' : i === 2 ? 'bg-amber-500/20 text-amber-400' : 'text-slate-600'
+                }`}
+                style={i < 2 ? { backgroundColor: groupColor ?? '#22c55e' } : undefined}
+              >
+                {i + 1}
+              </span>
+              <span className={`flex items-center gap-1.5 font-semibold min-w-0 ${nameCls}`}>
+                <Flag teamId={s.teamId} size={18} />
+                <span className="truncate uppercase text-[11px] tracking-wide">{team?.name ?? s.teamId}</span>
+                {groupComplete && (
+                  <span className={`shrink-0 text-[8px] font-bold px-1 py-0.5 rounded leading-none ${
+                    i < 2
+                      ? 'bg-emerald-500/15 text-emerald-400'
+                      : i === 2
+                      ? 'bg-amber-500/15 text-amber-400'
+                      : 'bg-slate-700/50 text-slate-600'
+                  }`}>
+                    {i < 2 ? '✓' : i === 2 ? '?' : '✗'}
+                  </span>
+                )}
+              </span>
+              <span className="text-center tabular-nums text-slate-500">{s.played}</span>
+              <span className="text-center tabular-nums text-slate-500">{s.won}</span>
+              <span className="text-center tabular-nums text-slate-500">{s.lost}</span>
+              <span className={`text-center tabular-nums text-[10px] ${s.gd > 0 ? 'text-emerald-500' : s.gd < 0 ? 'text-red-500' : 'text-slate-600'}`}>
+                {s.played > 0 ? (s.gd > 0 ? `+${s.gd}` : s.gd) : '–'}
+              </span>
+              <span className={`text-center tabular-nums font-bold ${ptsCls}`}>{s.points}</span>
+            </motion.div>
+          );
+        })}
+      </AnimatePresence>
+    </div>
+  );
+}

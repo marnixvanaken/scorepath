@@ -1,0 +1,139 @@
+'use client';
+
+import { motion } from 'motion/react';
+import type { MatchResult, GroupId } from '@/lib/types';
+import { teamById, GROUP_COLORS } from '@/data/worldcup2026';
+import { getResultForMatch, type InputMode } from '@/hooks/useSimulatorState';
+import { Flag } from './Flag';
+import { NL } from '@/i18n/nl';
+
+interface Props {
+  group: GroupId;
+  homeId: string;
+  awayId: string;
+  results: MatchResult[];
+  inputMode: InputMode;
+  onResult: (r: MatchResult) => void;
+}
+
+function LockIcon() {
+  return (
+    <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" className="text-slate-500 shrink-0">
+      <path d="M18 8h-1V6A5 5 0 0 0 7 6v2H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2zm-6 9a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm3.1-9H8.9V6a3.1 3.1 0 0 1 6.2 0v2z"/>
+    </svg>
+  );
+}
+
+// Vaste grid: [slot(10px)] [vlag] [naam flex-1] [score/inputs] [naam flex-1] [vlag]
+const ROW_GRID = 'grid items-center gap-x-2 py-2 px-2';
+const GRID_COLS = { gridTemplateColumns: '10px 24px 1fr auto 1fr 24px' };
+
+export function MatchInputRow({ group, homeId, awayId, results, inputMode, onResult }: Props) {
+  const home = teamById(homeId)!;
+  const away = teamById(awayId)!;
+  const current = getResultForMatch(results, group, homeId, awayId);
+  const groupColor = GROUP_COLORS[group];
+  const isNed = (id: string) => id === 'NED';
+
+  function handleGoal(side: 'home' | 'away', value: string) {
+    const n = parseInt(value, 10);
+    if (isNaN(n) || n < 0 || n > 20) return;
+    const base = current ?? { group, homeId, awayId };
+    onResult({ ...base, [side === 'home' ? 'homeGoals' : 'awayGoals']: n, outcome: undefined });
+  }
+
+  function handleOutcome(o: 'H' | 'D' | 'A') {
+    onResult({ group, homeId, awayId, outcome: o });
+  }
+
+  const nameCls = (id: string) =>
+    `text-[13px] font-semibold uppercase tracking-wide truncate ${isNed(id) ? 'text-orange-400' : 'text-slate-200'}`;
+
+  const homeName = <span className={`${nameCls(homeId)} text-right`}>{home.name}</span>;
+  const awayName = <span className={nameCls(awayId)}>{away.name}</span>;
+
+  if (current?.locked) {
+    return (
+      <div className={`${ROW_GRID} opacity-75`} style={GRID_COLS}>
+        <LockIcon />
+        <Flag teamId={homeId} size={24} />
+        {homeName}
+        <div className="flex items-center gap-1">
+          <span className="w-7 h-7 flex items-center justify-center text-xs font-bold tabular-nums text-slate-300 bg-[--color-wk-navy] rounded border border-[--color-wk-border]">
+            {current.homeGoals}
+          </span>
+          <span className="text-slate-600 text-[10px]">–</span>
+          <span className="w-7 h-7 flex items-center justify-center text-xs font-bold tabular-nums text-slate-300 bg-[--color-wk-navy] rounded border border-[--color-wk-border]">
+            {current.awayGoals}
+          </span>
+        </div>
+        {awayName}
+        <Flag teamId={awayId} size={24} />
+      </div>
+    );
+  }
+
+  const homeGoals = current?.homeGoals;
+  const awayGoals = current?.awayGoals;
+  const outcome = current?.outcome;
+
+  const scoreArea = inputMode === 'exact' ? (
+    <div className="flex items-center gap-1">
+      <motion.input
+        whileFocus={{ scale: 1.08 }}
+        type="number" min={0} max={20}
+        value={homeGoals ?? ''}
+        onChange={(e) => handleGoal('home', e.target.value)}
+        placeholder="–"
+        className="w-7 h-7 bg-[--color-wk-navy] border border-[--color-wk-border] rounded text-center text-xs font-bold tabular-nums text-slate-100 focus:outline-none transition-colors"
+        style={{ '--tw-ring-color': groupColor } as React.CSSProperties}
+        onFocus={(e) => { e.currentTarget.style.borderColor = groupColor; }}
+        onBlur={(e) => { e.currentTarget.style.borderColor = ''; }}
+        aria-label={`${home.name} doelpunten`}
+      />
+      <span className="text-slate-600 text-[10px]">–</span>
+      <motion.input
+        whileFocus={{ scale: 1.08 }}
+        type="number" min={0} max={20}
+        value={awayGoals ?? ''}
+        onChange={(e) => handleGoal('away', e.target.value)}
+        placeholder="–"
+        className="w-7 h-7 bg-[--color-wk-navy] border border-[--color-wk-border] rounded text-center text-xs font-bold tabular-nums text-slate-100 focus:outline-none transition-colors"
+        onFocus={(e) => { e.currentTarget.style.borderColor = groupColor; }}
+        onBlur={(e) => { e.currentTarget.style.borderColor = ''; }}
+        aria-label={`${away.name} doelpunten`}
+      />
+    </div>
+  ) : (
+    <div className="flex items-center gap-0.5" role="group" aria-label={`${homeId} vs ${awayId}`}>
+      {(['H', 'D', 'A'] as const).map((o) => {
+        const label = o === 'H' ? NL.match.win : o === 'D' ? NL.match.draw : NL.match.loss;
+        const active = outcome === o;
+        return (
+          <motion.button
+            key={o} whileTap={{ scale: 0.9 }}
+            onClick={() => handleOutcome(o)}
+            aria-pressed={active}
+            className={`w-7 h-7 rounded text-[10px] font-bold transition-all ${
+              active ? 'text-white' : 'bg-[--color-wk-navy] text-slate-500 hover:text-slate-200'
+            }`}
+            style={active ? { backgroundColor: o === 'H' ? groupColor : o === 'D' ? '#475569' : '#7f1d1d' } : {}}
+          >
+            {label}
+          </motion.button>
+        );
+      })}
+    </div>
+  );
+
+  return (
+    <div className={ROW_GRID} style={GRID_COLS}>
+      <span />
+      <Flag teamId={homeId} size={24} />
+      {homeName}
+      {scoreArea}
+      {awayName}
+      <Flag teamId={awayId} size={24} />
+    </div>
+  );
+}

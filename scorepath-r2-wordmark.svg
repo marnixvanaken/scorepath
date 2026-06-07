@@ -1,0 +1,22 @@
+<svg width="220" height="56" viewBox="0 0 220 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Icon -->
+  <rect width="56" height="56" rx="13" fill="#FF6B00"/>
+  <line x1="8" y1="13" x2="18" y2="13" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.75"/>
+  <line x1="8" y1="22" x2="18" y2="22" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.75"/>
+  <path d="M18 13 Q18 17.5 22 17.5" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.75"/>
+  <path d="M18 22 Q18 17.5 22 17.5" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.75"/>
+  <line x1="22" y1="17.5" x2="30" y2="17.5" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.75"/>
+  <line x1="8" y1="34" x2="18" y2="34" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.75"/>
+  <line x1="8" y1="43" x2="18" y2="43" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.75"/>
+  <path d="M18 34 Q18 38.5 22 38.5" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.75"/>
+  <path d="M18 43 Q18 38.5 22 38.5" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.75"/>
+  <line x1="22" y1="38.5" x2="30" y2="38.5" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.75"/>
+  <path d="M30 17.5 Q30 28 35 28" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  <path d="M30 38.5 Q30 28 35 28" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  <path d="M35 28H46" stroke="white" stroke-width="3" stroke-linecap="round"/>
+  <path d="M41 23L46 28L41 33" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Wordmark -->
+  <text x="70" y="19" font-family="Inter, -apple-system, sans-serif" font-size="9" font-weight="500" fill="#888888" letter-spacing="2.5" text-anchor="start">SCORE</text>
+  <text x="69" y="44" font-family="Inter, -apple-system, sans-serif" font-size="26" font-weight="900" fill="#FFFFFF" letter-spacing="-0.5" text-anchor="start">Path</text>
+</svg>

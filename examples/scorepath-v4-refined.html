@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <title>ScorePath — V4 Bracket Tree Verfijningen</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=JetBrains+Mono:wght@400;700&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #0c0c0c;
+      font-family: 'Inter', sans-serif;
+      padding: 60px 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 56px;
+    }
+
+    .page-header {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .page-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: #333;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+    .page-sub {
+      font-size: 22px;
+      font-weight: 900;
+      color: #fff;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .icon-card {
+      background: #111;
+      border: 1px solid #1c1c1c;
+      border-radius: 10px;
+      padding: 32px 24px 22px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      position: relative;
+    }
+
+    .card-label {
+      position: absolute;
+      top: 13px; left: 16px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      color: #333;
+      letter-spacing: 1.5px;
+    }
+
+    .icon-large { width: 96px; height: 96px; }
+
+    .wordmark {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .wm-icon { width: 30px; height: 30px; flex-shrink: 0; }
+    .wm-text { display: flex; flex-direction: column; line-height: 1; }
+    .wm-score {
+      font-size: 7px; font-weight: 500; color: #555;
+      letter-spacing: 2.5px; text-transform: uppercase;
+    }
+    .wm-path {
+      font-size: 17px; font-weight: 900; color: #fff; letter-spacing: -0.3px;
+    }
+
+    .card-desc {
+      font-size: 11px;
+      color: #3a3a3a;
+      text-align: center;
+      line-height: 1.6;
+      padding-top: 10px;
+      border-top: 1px solid #191919;
+      width: 100%;
+    }
+
+    .card-name {
+      font-size: 12px;
+      font-weight: 700;
+      color: #666;
+      text-align: center;
+      margin-bottom: -12px;
+    }
+
+    /* ── Full-width winner row ── */
+    .winner-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .winner-card {
+      background: rgba(255,107,0,0.04);
+      border: 1px solid rgba(255,107,0,0.15);
+      border-radius: 10px;
+      padding: 28px 20px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+      position: relative;
+    }
+
+    .winner-tag {
+      position: absolute;
+      top: 12px; right: 14px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8px;
+      color: #FF6B00;
+      background: rgba(255,107,0,0.1);
+      padding: 2px 7px;
+      border-radius: 2px;
+      letter-spacing: 1px;
+    }
+
+    .section-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      color: #2a2a2a;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-header">
+    <div class="page-title">// V4 bracket tree — verfijningen</div>
+    <div class="page-sub">ScorePath Icon · 6 Variaties</div>
+  </div>
+
+  <div class="grid">
+
+    <!-- R1: Scherp, dun -->
+    <div class="icon-card">
+      <span class="card-label">R1</span>
+      <div class="card-name">Scherp · Dun</div>
+      <svg class="icon-large" viewBox="0 0 96 96" fill="none">
+        <rect width="96" height="96" rx="22" fill="#FF6B00"/>
+        <line x1="14" y1="22" x2="30" y2="22" stroke="white" stroke-width="1.5" stroke-linecap="square" opacity="0.7"/>
+        <line x1="14" y1="38" x2="30" y2="38" stroke="white" stroke-width="1.5" stroke-linecap="square" opacity="0.7"/>
+        <line x1="30" y1="22" x2="30" y2="38" stroke="white" stroke-width="1.5" stroke-linecap="square" opacity="0.7"/>
+        <line x1="30" y1="30" x2="48" y2="30" stroke="white" stroke-width="1.5" stroke-linecap="square" opacity="0.7"/>
+        <line x1="14" y1="58" x2="30" y2="58" stroke="white" stroke-width="1.5" stroke-linecap="square" opacity="0.7"/>
+        <line x1="14" y1="74" x2="30" y2="74" stroke="white" stroke-width="1.5" stroke-linecap="square" opacity="0.7"/>
+        <line x1="30" y1="58" x2="30" y2="74" stroke="white" stroke-width="1.5" stroke-linecap="square" opacity="0.7"/>
+        <line x1="30" y1="66" x2="48" y2="66" stroke="white" stroke-width="1.5" stroke-linecap="square" opacity="0.7"/>
+        <line x1="48" y1="30" x2="48" y2="66" stroke="white" stroke-width="1.5" stroke-linecap="square"/>
+        <line x1="48" y1="48" x2="62" y2="48" stroke="white" stroke-width="1.5" stroke-linecap="square"/>
+        <path d="M62 48H80" stroke="white" stroke-width="2" stroke-linecap="square"/>
+        <path d="M73 40L81 48L73 56" stroke="white" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"/>
+      </svg>
+
+      <div class="wordmark">
+        <svg class="wm-icon" viewBox="0 0 96 96" fill="none">
+          <rect width="96" height="96" rx="22" fill="#FF6B00"/>
+          <line x1="14" y1="22" x2="30" y2="22" stroke="white" stroke-width="1.5" stroke-linecap="square" opacity="0.7"/>
+          <line x1="14" y1="38" x2="30" y2="38" stroke="white" stroke-width="1.5" stroke-linecap="square" opacity="0.7"/>
+          <line x1="30" y1="22" x2="30" y2="38" stroke="white" stroke-width="1.5" stroke-linecap="square" opacity="0.7"/>
+          <line x1="30" y1="30" x2="48" y2="30" stroke="white" stroke-width="1.5" stroke-linecap="square" opacity="0.7"/>
+          <line x1="14" y1="58" x2="30" y2="58" stroke="white" stroke-width="1.5" stroke-linecap="square" opacity="0.7"/>
+          <line x1="14" y1="74" x2="30" y2="74" stroke="white" stroke-width="1.5" stroke-linecap="square" opacity="0.7"/>
+          <line x1="30" y1="58" x2="30" y2="74" stroke="white" stroke-width="1.5" stroke-linecap="square" opacity="0.7"/>
+          <line x1="30" y1="66" x2="48" y2="66" stroke="white" stroke-width="1.5" stroke-linecap="square" opacity="0.7"/>
+          <line x1="48" y1="30" x2="48" y2="66" stroke="white" stroke-width="1.5" stroke-linecap="square"/>
+          <line x1="48" y1="48" x2="62" y2="48" stroke="white" stroke-width="1.5" stroke-linecap="square"/>
+          <path d="M62 48H80" stroke="white" stroke-width="2" stroke-linecap="square"/>
+          <path d="M73 40L81 48L73 56" stroke="white" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"/>
+        </svg>
+        <div class="wm-text">
+          <span class="wm-score">Score</span>
+          <span class="wm-path">Path</span>
+        </div>
+      </div>
+      <div class="card-desc">Strak, technisch.<br>Hoeken = scherp, architecturaal gevoel.</div>
+    </div>
+
+    <!-- R2: Rounded, dik -->
+    <div class="icon-card">
+      <span class="card-label">R2</span>
+      <div class="card-name">Rond · Dik</div>
+      <svg class="icon-large" viewBox="0 0 96 96" fill="none">
+        <rect width="96" height="96" rx="22" fill="#FF6B00"/>
+        <line x1="14" y1="22" x2="30" y2="22" stroke="white" stroke-width="3.5" stroke-linecap="round" opacity="0.75"/>
+        <line x1="14" y1="38" x2="30" y2="38" stroke="white" stroke-width="3.5" stroke-linecap="round" opacity="0.75"/>
+        <path d="M30 22 Q30 30 38 30" stroke="white" stroke-width="3.5" stroke-linecap="round" fill="none" opacity="0.75"/>
+        <path d="M30 38 Q30 30 38 30" stroke="white" stroke-width="3.5" stroke-linecap="round" fill="none" opacity="0.75"/>
+        <line x1="38" y1="30" x2="50" y2="30" stroke="white" stroke-width="3.5" stroke-linecap="round" opacity="0.75"/>
+        <line x1="14" y1="58" x2="30" y2="58" stroke="white" stroke-width="3.5" stroke-linecap="round" opacity="0.75"/>
+        <line x1="14" y1="74" x2="30" y2="74" stroke="white" stroke-width="3.5" stroke-linecap="round" opacity="0.75"/>
+        <path d="M30 58 Q30 66 38 66" stroke="white" stroke-width="3.5" stroke-linecap="round" fill="none" opacity="0.75"/>
+        <path d="M30 74 Q30 66 38 66" stroke="white" stroke-width="3.5" stroke-linecap="round" fill="none" opacity="0.75"/>
+        <line x1="38" y1="66" x2="50" y2="66" stroke="white" stroke-width="3.5" stroke-linecap="round" opacity="0.75"/>
+        <path d="M50 30 Q50 48 58 48" stroke="white" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+        <path d="M50 66 Q50 48 58 48" stroke="white" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+        <path d="M58 48H78" stroke="white" stroke-width="4" stroke-linecap="round"/>
+        <path d="M70 40L78 48L70 56" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+
+      <div class="wordmark">
+        <svg class="wm-icon" viewBox="0 0 96 96" fill="none">
+          <rect width="96" height="96" rx="22" fill="#FF6B00"/>
+          <line x1="14" y1="22" x2="30" y2="22" stroke="white" stroke-width="3.5" stroke-linecap="round" opacity="0.75"/>
+          <line x1="14" y1="38" x2="30" y2="38" stroke="white" stroke-width="3.5" stroke-linecap="round" opacity="0.75"/>
+          <path d="M30 22 Q30 30 38 30" stroke="white" stroke-width="3.5" stroke-linecap="round" fill="none" opacity="0.75"/>
+          <path d="M30 38 Q30 30 38 30" stroke="white" stroke-width="3.5" stroke-linecap="round" fill="none" opacity="0.75"/>
+          <line x1="38" y1="30" x2="50" y2="30" stroke="white" stroke-width="3.5" stroke-linecap="round" opacity="0.75"/>
+          <line x1="14" y1="58" x2="30" y2="58" stroke="white" stroke-width="3.5" stroke-linecap="round" opacity="0.75"/>
+          <line x1="14" y1="74" x2="30" y2="74" stroke="white" stroke-width="3.5" stroke-linecap="round" opacity="0.75"/>
+          <path d="M30 58 Q30 66 38 66" stroke="white" stroke-width="3.5" stroke-linecap="round" fill="none" opacity="0.75"/>
+          <path d="M30 74 Q30 66 38 66" stroke="white" stroke-width="3.5" stroke-linecap="round" fill="none" opacity="0.75"/>
+          <line x1="38" y1="66" x2="50" y2="66" stroke="white" stroke-width="3.5" stroke-linecap="round" opacity="0.75"/>
+          <path d="M50 30 Q50 48 58 48" stroke="white" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+          <path d="M50 66 Q50 48 58 48" stroke="white" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+          <path d="M58 48H78" stroke="white" stroke-width="4" stroke-linecap="round"/>
+          <path d="M70 40L78 48L70 56" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="wm-text">
+          <span class="wm-score">Score</span>
+          <span class="wm-path">Path</span>
+        </div>
+      </div>
+      <div class="card-desc">Ronde bochten, dikkere lijnen.<br>Vriendelijker, moderner.</div>
+    </div>
+
+    <!-- R3: Cirkel achtergrond -->
+    <div class="icon-card">
+      <span class="card-label">R3</span>
+      <div class="card-name">Cirkel</div>
+      <svg class="icon-large" viewBox="0 0 96 96" fill="none">
+        <circle cx="48" cy="48" r="48" fill="#FF6B00"/>
+        <line x1="16" y1="24" x2="32" y2="24" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.75"/>
+        <line x1="16" y1="38" x2="32" y2="38" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.75"/>
+        <line x1="32" y1="24" x2="32" y2="38" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.75"/>
+        <line x1="32" y1="31" x2="48" y2="31" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.75"/>
+        <line x1="16" y1="58" x2="32" y2="58" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.75"/>
+        <line x1="16" y1="72" x2="32" y2="72" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.75"/>
+        <line x1="32" y1="58" x2="32" y2="72" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.75"/>
+        <line x1="32" y1="65" x2="48" y2="65" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.75"/>
+        <line x1="48" y1="31" x2="48" y2="65" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="48" y1="48" x2="60" y2="48" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M60 48H78" stroke="white" stroke-width="3" stroke-linecap="round"/>
+        <path d="M70 40L78 48L70 56" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+
+      <div class="wordmark">
+        <svg class="wm-icon" viewBox="0 0 96 96" fill="none">
+          <circle cx="48" cy="48" r="48" fill="#FF6B00"/>
+          <line x1="16" y1="24" x2="32" y2="24" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.75"/>
+          <line x1="16" y1="38" x2="32" y2="38" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.75"/>
+          <line x1="32" y1="24" x2="32" y2="38" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.75"/>
+          <line x1="32" y1="31" x2="48" y2="31" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.75"/>
+          <line x1="16" y1="58" x2="32" y2="58" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.75"/>
+          <line x1="16" y1="72" x2="32" y2="72" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.75"/>
+          <line x1="32" y1="58" x2="32" y2="72" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.75"/>
+          <line x1="32" y1="65" x2="48" y2="65" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.75"/>
+          <line x1="48" y1="31" x2="48" y2="65" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="48" y1="48" x2="60" y2="48" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M60 48H78" stroke="white" stroke-width="3" stroke-linecap="round"/>
+          <path d="M70 40L78 48L70 56" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="wm-text">
+          <span class="wm-score">Score</span>
+          <span class="wm-path">Path</span>
+        </div>
+      </div>
+      <div class="card-desc">Cirkel ipv vierkant.<br>Zachter, werkt goed als avatar.</div>
+    </div>
+
+    <!-- R4: Zwart, oranje bracket -->
+    <div class="icon-card">
+      <span class="card-label">R4</span>
+      <div class="card-name">Donker · Oranje</div>
+      <svg class="icon-large" viewBox="0 0 96 96" fill="none">
+        <rect width="96" height="96" rx="22" fill="#0f0f0f"/>
+        <rect x="1" y="1" width="94" height="94" rx="21" stroke="#FF6B00" stroke-width="1.5" opacity="0.3"/>
+        <line x1="14" y1="22" x2="30" y2="22" stroke="#FF6B00" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+        <line x1="14" y1="38" x2="30" y2="38" stroke="#FF6B00" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+        <line x1="30" y1="22" x2="30" y2="38" stroke="#FF6B00" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+        <line x1="30" y1="30" x2="48" y2="30" stroke="#FF6B00" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+        <line x1="14" y1="58" x2="30" y2="58" stroke="#FF6B00" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+        <line x1="14" y1="74" x2="30" y2="74" stroke="#FF6B00" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+        <line x1="30" y1="58" x2="30" y2="74" stroke="#FF6B00" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+        <line x1="30" y1="66" x2="48" y2="66" stroke="#FF6B00" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+        <line x1="48" y1="30" x2="48" y2="66" stroke="#FF6B00" stroke-width="2" stroke-linecap="round"/>
+        <line x1="48" y1="48" x2="62" y2="48" stroke="#FF6B00" stroke-width="2" stroke-linecap="round"/>
+        <path d="M62 48H80" stroke="#FF6B00" stroke-width="3" stroke-linecap="round"/>
+        <path d="M72 40L80 48L72 56" stroke="#FF6B00" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+
+      <div class="wordmark">
+        <svg class="wm-icon" viewBox="0 0 96 96" fill="none">
+          <rect width="96" height="96" rx="22" fill="#0f0f0f"/>
+          <rect x="1" y="1" width="94" height="94" rx="21" stroke="#FF6B00" stroke-width="1.5" opacity="0.3"/>
+          <line x1="14" y1="22" x2="30" y2="22" stroke="#FF6B00" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+          <line x1="14" y1="38" x2="30" y2="38" stroke="#FF6B00" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+          <line x1="30" y1="22" x2="30" y2="38" stroke="#FF6B00" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+          <line x1="30" y1="30" x2="48" y2="30" stroke="#FF6B00" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+          <line x1="14" y1="58" x2="30" y2="58" stroke="#FF6B00" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+          <line x1="14" y1="74" x2="30" y2="74" stroke="#FF6B00" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+          <line x1="30" y1="58" x2="30" y2="74" stroke="#FF6B00" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+          <line x1="30" y1="66" x2="48" y2="66" stroke="#FF6B00" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+          <line x1="48" y1="30" x2="48" y2="66" stroke="#FF6B00" stroke-width="2" stroke-linecap="round"/>
+          <line x1="48" y1="48" x2="62" y2="48" stroke="#FF6B00" stroke-width="2" stroke-linecap="round"/>
+          <path d="M62 48H80" stroke="#FF6B00" stroke-width="3" stroke-linecap="round"/>
+          <path d="M72 40L80 48L72 56" stroke="#FF6B00" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="wm-text">
+          <span class="wm-score">Score</span>
+          <span class="wm-path">Path</span>
+        </div>
+      </div>
+      <div class="card-desc">Donker met oranje bracket.<br>Past perfect bij de app-stijl.</div>
+    </div>
+
+    <!-- R5: Compact, 3 niveaus -->
+    <div class="icon-card">
+      <span class="card-label">R5</span>
+      <div class="card-name">3 Niveaus</div>
+      <svg class="icon-large" viewBox="0 0 96 96" fill="none">
+        <rect width="96" height="96" rx="22" fill="#FF6B00"/>
+        <!-- Level 1: 4 teams -->
+        <line x1="8"  y1="18" x2="20" y2="18" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.55"/>
+        <line x1="8"  y1="30" x2="20" y2="30" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.55"/>
+        <line x1="20" y1="18" x2="20" y2="30" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.55"/>
+        <line x1="20" y1="24" x2="32" y2="24" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.55"/>
+
+        <line x1="8"  y1="42" x2="20" y2="42" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.55"/>
+        <line x1="8"  y1="54" x2="20" y2="54" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.55"/>
+        <line x1="20" y1="42" x2="20" y2="54" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.55"/>
+        <line x1="20" y1="48" x2="32" y2="48" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.55"/>
+
+        <line x1="8"  y1="66" x2="20" y2="66" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.55"/>
+        <line x1="8"  y1="78" x2="20" y2="78" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.55"/>
+        <line x1="20" y1="66" x2="20" y2="78" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.55"/>
+        <line x1="20" y1="72" x2="32" y2="72" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.55"/>
+
+        <!-- Level 2 -->
+        <line x1="32" y1="24" x2="32" y2="48" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.75"/>
+        <line x1="32" y1="36" x2="52" y2="36" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.75"/>
+
+        <line x1="32" y1="48" x2="32" y2="72" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.75"/>
+        <line x1="32" y1="60" x2="52" y2="60" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.75"/>
+
+        <!-- Level 3 / Final -->
+        <line x1="52" y1="36" x2="52" y2="60" stroke="white" stroke-width="3" stroke-linecap="round"/>
+        <line x1="52" y1="48" x2="64" y2="48" stroke="white" stroke-width="3" stroke-linecap="round"/>
+        <path d="M64 48H84" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+        <path d="M76 40L84 48L76 56" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+
+      <div class="wordmark">
+        <svg class="wm-icon" viewBox="0 0 96 96" fill="none">
+          <rect width="96" height="96" rx="22" fill="#FF6B00"/>
+          <line x1="8"  y1="18" x2="20" y2="18" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.55"/>
+          <line x1="8"  y1="30" x2="20" y2="30" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.55"/>
+          <line x1="20" y1="18" x2="20" y2="30" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.55"/>
+          <line x1="20" y1="24" x2="32" y2="24" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.55"/>
+          <line x1="8"  y1="42" x2="20" y2="42" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.55"/>
+          <line x1="8"  y1="54" x2="20" y2="54" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.55"/>
+          <line x1="20" y1="42" x2="20" y2="54" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.55"/>
+          <line x1="20" y1="48" x2="32" y2="48" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.55"/>
+          <line x1="8"  y1="66" x2="20" y2="66" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.55"/>
+          <line x1="8"  y1="78" x2="20" y2="78" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.55"/>
+          <line x1="20" y1="66" x2="20" y2="78" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.55"/>
+          <line x1="20" y1="72" x2="32" y2="72" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.55"/>
+          <line x1="32" y1="24" x2="32" y2="48" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.75"/>
+          <line x1="32" y1="36" x2="52" y2="36" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.75"/>
+          <line x1="32" y1="48" x2="32" y2="72" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.75"/>
+          <line x1="32" y1="60" x2="52" y2="60" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.75"/>
+          <line x1="52" y1="36" x2="52" y2="60" stroke="white" stroke-width="3" stroke-linecap="round"/>
+          <line x1="52" y1="48" x2="64" y2="48" stroke="white" stroke-width="3" stroke-linecap="round"/>
+          <path d="M64 48H84" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+          <path d="M76 40L84 48L76 56" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="wm-text">
+          <span class="wm-score">Score</span>
+          <span class="wm-path">Path</span>
+        </div>
+      </div>
+      <div class="card-desc">Volledig toernooi: 3 niveaus.<br>Complexer, meest informatief.</div>
+    </div>
+
+    <!-- R6: Alleen rechterhelft bracket -->
+    <div class="icon-card">
+      <span class="card-label">R6</span>
+      <div class="card-name">Half Bracket</div>
+      <svg class="icon-large" viewBox="0 0 96 96" fill="none">
+        <rect width="96" height="96" rx="22" fill="#FF6B00"/>
+        <!-- Only the right half: vertical bar + horizontal outs + big arrow -->
+        <!-- Vertical spine -->
+        <line x1="30" y1="18" x2="30" y2="78" stroke="white" stroke-width="3" stroke-linecap="round" opacity="0.4"/>
+        <!-- 4 horizontal ticks out left -->
+        <line x1="14" y1="24" x2="30" y2="24" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.5"/>
+        <line x1="14" y1="38" x2="30" y2="38" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.5"/>
+        <line x1="14" y1="58" x2="30" y2="58" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.5"/>
+        <line x1="14" y1="72" x2="30" y2="72" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.5"/>
+        <!-- Right bracket to final -->
+        <line x1="30" y1="31" x2="52" y2="31" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.75"/>
+        <line x1="30" y1="65" x2="52" y2="65" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.75"/>
+        <line x1="52" y1="31" x2="52" y2="65" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.75"/>
+        <line x1="52" y1="48" x2="62" y2="48" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+        <!-- Arrow -->
+        <path d="M62 48H82" stroke="white" stroke-width="4" stroke-linecap="round"/>
+        <path d="M73 39L82 48L73 57" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+
+      <div class="wordmark">
+        <svg class="wm-icon" viewBox="0 0 96 96" fill="none">
+          <rect width="96" height="96" rx="22" fill="#FF6B00"/>
+          <line x1="30" y1="18" x2="30" y2="78" stroke="white" stroke-width="3" stroke-linecap="round" opacity="0.4"/>
+          <line x1="14" y1="24" x2="30" y2="24" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.5"/>
+          <line x1="14" y1="38" x2="30" y2="38" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.5"/>
+          <line x1="14" y1="58" x2="30" y2="58" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.5"/>
+          <line x1="14" y1="72" x2="30" y2="72" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.5"/>
+          <line x1="30" y1="31" x2="52" y2="31" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.75"/>
+          <line x1="30" y1="65" x2="52" y2="65" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.75"/>
+          <line x1="52" y1="31" x2="52" y2="65" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.75"/>
+          <line x1="52" y1="48" x2="62" y2="48" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M62 48H82" stroke="white" stroke-width="4" stroke-linecap="round"/>
+          <path d="M73 39L82 48L73 57" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="wm-text">
+          <span class="wm-score">Score</span>
+          <span class="wm-path">Path</span>
+        </div>
+      </div>
+      <div class="card-desc">Vertikale spine + horizontale ticks.<br>Meest minimaal, werkt klein het best.</div>
+    </div>
+
+  </div>
+
+  <!-- Winner row: toon favorieten op wit en klein -->
+  <div class="section-label">// ook bekijken op wit</div>
+
+  <div class="winner-row">
+    <!-- R1 wit -->
+    <div class="winner-card">
+      <span class="card-label" style="color:#2a2a2a">R1</span>
+      <svg width="64" height="64" viewBox="0 0 96 96" fill="none">
+        <rect width="96" height="96" rx="22" fill="#f5f5f5"/>
+        <line x1="14" y1="22" x2="30" y2="22" stroke="#111" stroke-width="2" stroke-linecap="square" opacity="0.4"/>
+        <line x1="14" y1="38" x2="30" y2="38" stroke="#111" stroke-width="2" stroke-linecap="square" opacity="0.4"/>
+        <line x1="30" y1="22" x2="30" y2="38" stroke="#111" stroke-width="2" stroke-linecap="square" opacity="0.4"/>
+        <line x1="30" y1="30" x2="48" y2="30" stroke="#111" stroke-width="2" stroke-linecap="square" opacity="0.4"/>
+        <line x1="14" y1="58" x2="30" y2="58" stroke="#111" stroke-width="2" stroke-linecap="square" opacity="0.4"/>
+        <line x1="14" y1="74" x2="30" y2="74" stroke="#111" stroke-width="2" stroke-linecap="square" opacity="0.4"/>
+        <line x1="30" y1="58" x2="30" y2="74" stroke="#111" stroke-width="2" stroke-linecap="square" opacity="0.4"/>
+        <line x1="30" y1="66" x2="48" y2="66" stroke="#111" stroke-width="2" stroke-linecap="square" opacity="0.4"/>
+        <line x1="48" y1="30" x2="48" y2="66" stroke="#111" stroke-width="2" stroke-linecap="square"/>
+        <line x1="48" y1="48" x2="62" y2="48" stroke="#111" stroke-width="2" stroke-linecap="square"/>
+        <path d="M62 48H80" stroke="#FF6B00" stroke-width="2.5" stroke-linecap="square"/>
+        <path d="M73 40L81 48L73 56" stroke="#FF6B00" stroke-width="2.5" stroke-linecap="square" stroke-linejoin="miter"/>
+      </svg>
+      <div style="font-size:10px; color:#333; text-align:center">R1 op wit</div>
+    </div>
+    <!-- R2 wit -->
+    <div class="winner-card">
+      <span class="card-label" style="color:#2a2a2a">R2</span>
+      <svg width="64" height="64" viewBox="0 0 96 96" fill="none">
+        <rect width="96" height="96" rx="22" fill="#f5f5f5"/>
+        <line x1="14" y1="22" x2="30" y2="22" stroke="#111" stroke-width="3.5" stroke-linecap="round" opacity="0.3"/>
+        <line x1="14" y1="38" x2="30" y2="38" stroke="#111" stroke-width="3.5" stroke-linecap="round" opacity="0.3"/>
+        <path d="M30 22 Q30 30 38 30" stroke="#111" stroke-width="3.5" stroke-linecap="round" fill="none" opacity="0.3"/>
+        <path d="M30 38 Q30 30 38 30" stroke="#111" stroke-width="3.5" stroke-linecap="round" fill="none" opacity="0.3"/>
+        <line x1="38" y1="30" x2="50" y2="30" stroke="#111" stroke-width="3.5" stroke-linecap="round" opacity="0.3"/>
+        <line x1="14" y1="58" x2="30" y2="58" stroke="#111" stroke-width="3.5" stroke-linecap="round" opacity="0.3"/>
+        <line x1="14" y1="74" x2="30" y2="74" stroke="#111" stroke-width="3.5" stroke-linecap="round" opacity="0.3"/>
+        <path d="M30 58 Q30 66 38 66" stroke="#111" stroke-width="3.5" stroke-linecap="round" fill="none" opacity="0.3"/>
+        <path d="M30 74 Q30 66 38 66" stroke="#111" stroke-width="3.5" stroke-linecap="round" fill="none" opacity="0.3"/>
+        <line x1="38" y1="66" x2="50" y2="66" stroke="#111" stroke-width="3.5" stroke-linecap="round" opacity="0.3"/>
+        <path d="M50 30 Q50 48 58 48" stroke="#111" stroke-width="3.5" stroke-linecap="round" fill="none" opacity="0.5"/>
+        <path d="M50 66 Q50 48 58 48" stroke="#111" stroke-width="3.5" stroke-linecap="round" fill="none" opacity="0.5"/>
+        <path d="M58 48H78" stroke="#FF6B00" stroke-width="4" stroke-linecap="round"/>
+        <path d="M70 40L78 48L70 56" stroke="#FF6B00" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div style="font-size:10px; color:#333; text-align:center">R2 op wit</div>
+    </div>
+    <!-- R4 wit -->
+    <div class="winner-card">
+      <span class="card-label" style="color:#2a2a2a">R4</span>
+      <svg width="64" height="64" viewBox="0 0 96 96" fill="none">
+        <rect width="96" height="96" rx="22" fill="#fff"/>
+        <rect x="1" y="1" width="94" height="94" rx="21" stroke="#FF6B00" stroke-width="1.5" opacity="0.25"/>
+        <line x1="14" y1="22" x2="30" y2="22" stroke="#FF6B00" stroke-width="2" stroke-linecap="round" opacity="0.35"/>
+        <line x1="14" y1="38" x2="30" y2="38" stroke="#FF6B00" stroke-width="2" stroke-linecap="round" opacity="0.35"/>
+        <line x1="30" y1="22" x2="30" y2="38" stroke="#FF6B00" stroke-width="2" stroke-linecap="round" opacity="0.35"/>
+        <line x1="30" y1="30" x2="48" y2="30" stroke="#FF6B00" stroke-width="2" stroke-linecap="round" opacity="0.35"/>
+        <line x1="14" y1="58" x2="30" y2="58" stroke="#FF6B00" stroke-width="2" stroke-linecap="round" opacity="0.35"/>
+        <line x1="14" y1="74" x2="30" y2="74" stroke="#FF6B00" stroke-width="2" stroke-linecap="round" opacity="0.35"/>
+        <line x1="30" y1="58" x2="30" y2="74" stroke="#FF6B00" stroke-width="2" stroke-linecap="round" opacity="0.35"/>
+        <line x1="30" y1="66" x2="48" y2="66" stroke="#FF6B00" stroke-width="2" stroke-linecap="round" opacity="0.35"/>
+        <line x1="48" y1="30" x2="48" y2="66" stroke="#FF6B00" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="48" y1="48" x2="62" y2="48" stroke="#FF6B00" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M62 48H80" stroke="#FF6B00" stroke-width="3" stroke-linecap="round"/>
+        <path d="M72 40L80 48L72 56" stroke="#FF6B00" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div style="font-size:10px; color:#333; text-align:center">R4 op wit</div>
+    </div>
+    <!-- R6 wit -->
+    <div class="winner-card">
+      <span class="card-label" style="color:#2a2a2a">R6</span>
+      <svg width="64" height="64" viewBox="0 0 96 96" fill="none">
+        <rect width="96" height="96" rx="22" fill="#f5f5f5"/>
+        <line x1="30" y1="18" x2="30" y2="78" stroke="#111" stroke-width="3" stroke-linecap="round" opacity="0.15"/>
+        <line x1="14" y1="24" x2="30" y2="24" stroke="#111" stroke-width="2.5" stroke-linecap="round" opacity="0.3"/>
+        <line x1="14" y1="38" x2="30" y2="38" stroke="#111" stroke-width="2.5" stroke-linecap="round" opacity="0.3"/>
+        <line x1="14" y1="58" x2="30" y2="58" stroke="#111" stroke-width="2.5" stroke-linecap="round" opacity="0.3"/>
+        <line x1="14" y1="72" x2="30" y2="72" stroke="#111" stroke-width="2.5" stroke-linecap="round" opacity="0.3"/>
+        <line x1="30" y1="31" x2="52" y2="31" stroke="#111" stroke-width="2.5" stroke-linecap="round" opacity="0.5"/>
+        <line x1="30" y1="65" x2="52" y2="65" stroke="#111" stroke-width="2.5" stroke-linecap="round" opacity="0.5"/>
+        <line x1="52" y1="31" x2="52" y2="65" stroke="#111" stroke-width="2.5" stroke-linecap="round" opacity="0.5"/>
+        <line x1="52" y1="48" x2="62" y2="48" stroke="#111" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M62 48H82" stroke="#FF6B00" stroke-width="4" stroke-linecap="round"/>
+        <path d="M73 39L82 48L73 57" stroke="#FF6B00" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div style="font-size:10px; color:#333; text-align:center">R6 op wit</div>
+    </div>
+  </div>
+
+  <div style="
+    font-family:'JetBrains Mono',monospace;
+    font-size:10px;
+    color:#1e1e1e;
+    letter-spacing:2px;
+    text-align:center;
+    padding-top:20px;
+    border-top:1px solid #161616;
+  ">
+    // ScorePath · V4 bracket tree verfijningen · 2026
+  </div>
+
+</body>
+</html>

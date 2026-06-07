@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <title>ScorePath — Icon Iteraties</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=JetBrains+Mono:wght@400;700&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #0c0c0c;
+      font-family: 'Inter', sans-serif;
+      padding: 60px 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 64px;
+    }
+
+    .page-header {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .page-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: #333;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    .page-sub {
+      font-size: 22px;
+      font-weight: 900;
+      color: #fff;
+    }
+
+    /* ── Grid ── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .icon-card {
+      background: #111;
+      border: 1px solid #1c1c1c;
+      border-radius: 10px;
+      padding: 32px 24px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      position: relative;
+      transition: border-color 0.2s;
+    }
+
+    .icon-card.current {
+      border-color: #2a2a2a;
+    }
+
+    .card-label {
+      position: absolute;
+      top: 14px;
+      left: 16px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      color: #333;
+      letter-spacing: 1.5px;
+    }
+
+    .card-tag {
+      position: absolute;
+      top: 12px;
+      right: 14px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8px;
+      color: #FF6B00;
+      background: rgba(255,107,0,0.08);
+      padding: 2px 7px;
+      border-radius: 2px;
+      letter-spacing: 1px;
+    }
+
+    /* Large icon */
+    .icon-large {
+      width: 88px;
+      height: 88px;
+    }
+
+    /* Wordmark */
+    .wordmark {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .wordmark .icon-sm {
+      width: 28px;
+      height: 28px;
+      flex-shrink: 0;
+    }
+
+    .wordmark .text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+    }
+
+    .wordmark .score {
+      font-size: 7px;
+      font-weight: 500;
+      color: #666;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+    }
+
+    .wordmark .path {
+      font-size: 16px;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: -0.3px;
+    }
+
+    /* Description */
+    .card-desc {
+      font-size: 11px;
+      color: #444;
+      text-align: center;
+      line-height: 1.5;
+      padding-top: 4px;
+      border-top: 1px solid #1a1a1a;
+      width: 100%;
+    }
+
+    .card-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: #888;
+      text-align: center;
+      margin-bottom: -16px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-header">
+    <div class="page-title">// variant B — icon iteraties</div>
+    <div class="page-sub">ScorePath Icon — 6 richtingen</div>
+  </div>
+
+  <div class="grid">
+
+    <!-- ── 1. Huidig (referentie) ── -->
+    <div class="icon-card current">
+      <span class="card-label">V1</span>
+      <span class="card-tag">huidig</span>
+      <div class="card-name">Referentie</div>
+
+      <svg class="icon-large" viewBox="0 0 88 88" fill="none">
+        <rect width="88" height="88" rx="20" fill="#FF6B00"/>
+        <circle cx="20" cy="24" r="4.5" fill="white" opacity="0.85"/>
+        <circle cx="20" cy="44" r="4.5" fill="white" opacity="0.85"/>
+        <circle cx="20" cy="64" r="4.5" fill="white" opacity="0.85"/>
+        <line x1="24.5" y1="24" x2="40" y2="44" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.5"/>
+        <line x1="24.5" y1="64" x2="40" y2="44" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.5"/>
+        <line x1="24.5" y1="44" x2="40" y2="44" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.5"/>
+        <circle cx="44" cy="44" r="4.5" fill="white"/>
+        <path d="M48.5 44H68" stroke="white" stroke-width="3" stroke-linecap="round"/>
+        <path d="M60 35L68 44L60 53" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+
+      <div class="wordmark">
+        <svg class="icon-sm" viewBox="0 0 88 88" fill="none">
+          <rect width="88" height="88" rx="20" fill="#FF6B00"/>
+          <circle cx="20" cy="24" r="4.5" fill="white" opacity="0.85"/>
+          <circle cx="20" cy="44" r="4.5" fill="white" opacity="0.85"/>
+          <circle cx="20" cy="64" r="4.5" fill="white" opacity="0.85"/>
+          <line x1="24.5" y1="24" x2="40" y2="44" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.5"/>
+          <line x1="24.5" y1="64" x2="40" y2="44" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.5"/>
+          <line x1="24.5" y1="44" x2="40" y2="44" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.5"/>
+          <circle cx="44" cy="44" r="4.5" fill="white"/>
+          <path d="M48.5 44H68" stroke="white" stroke-width="3" stroke-linecap="round"/>
+          <path d="M60 35L68 44L60 53" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="text">
+          <span class="score">Score</span>
+          <span class="path">Path</span>
+        </div>
+      </div>
+
+      <div class="card-desc">Dots + rechte lijnen + pijl.<br>Letterlijk maar herkenbaar.</div>
+    </div>
+
+    <!-- ── 2. Strak, geen dots ── -->
+    <div class="icon-card">
+      <span class="card-label">V2</span>
+      <div class="card-name">Minimal Stroke</div>
+
+      <svg class="icon-large" viewBox="0 0 88 88" fill="none">
+        <rect width="88" height="88" rx="20" fill="#FF6B00"/>
+        <!-- Three ticks left -->
+        <line x1="16" y1="24" x2="26" y2="24" stroke="white" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+        <line x1="16" y1="44" x2="26" y2="44" stroke="white" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+        <line x1="16" y1="64" x2="26" y2="64" stroke="white" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+        <!-- Converge -->
+        <path d="M26 24 L44 44" stroke="white" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+        <path d="M26 64 L44 44" stroke="white" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+        <path d="M26 44 L44 44" stroke="white" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+        <!-- Arrow -->
+        <path d="M44 44H70" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+        <path d="M61 35L70 44L61 53" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+
+      <div class="wordmark">
+        <svg class="icon-sm" viewBox="0 0 88 88" fill="none">
+          <rect width="88" height="88" rx="20" fill="#FF6B00"/>
+          <line x1="16" y1="24" x2="26" y2="24" stroke="white" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+          <line x1="16" y1="44" x2="26" y2="44" stroke="white" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+          <line x1="16" y1="64" x2="26" y2="64" stroke="white" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+          <path d="M26 24 L44 44" stroke="white" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+          <path d="M26 64 L44 44" stroke="white" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+          <path d="M26 44 L44 44" stroke="white" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+          <path d="M44 44H70" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+          <path d="M61 35L70 44L61 53" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="text">
+          <span class="score">Score</span>
+          <span class="path">Path</span>
+        </div>
+      </div>
+
+      <div class="card-desc">Geen dots, alleen lijnen.<br>Strakker en meer grafisch.</div>
+    </div>
+
+    <!-- ── 3. Ronde curves ── -->
+    <div class="icon-card">
+      <span class="card-label">V3</span>
+      <div class="card-name">Curved Path</div>
+
+      <svg class="icon-large" viewBox="0 0 88 88" fill="none">
+        <rect width="88" height="88" rx="20" fill="#FF6B00"/>
+        <!-- Curved paths converging -->
+        <path d="M16 20 Q32 20 44 44" stroke="white" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.65"/>
+        <path d="M16 44 Q30 44 44 44" stroke="white" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.65"/>
+        <path d="M16 68 Q32 68 44 44" stroke="white" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.65"/>
+        <!-- Center to arrow -->
+        <path d="M44 44 L70 44" stroke="white" stroke-width="4" stroke-linecap="round"/>
+        <path d="M61 35L70 44L61 53" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- Center dot -->
+        <circle cx="44" cy="44" r="5" fill="white"/>
+      </svg>
+
+      <div class="wordmark">
+        <svg class="icon-sm" viewBox="0 0 88 88" fill="none">
+          <rect width="88" height="88" rx="20" fill="#FF6B00"/>
+          <path d="M16 20 Q32 20 44 44" stroke="white" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.65"/>
+          <path d="M16 44 Q30 44 44 44" stroke="white" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.65"/>
+          <path d="M16 68 Q32 68 44 44" stroke="white" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.65"/>
+          <path d="M44 44 L70 44" stroke="white" stroke-width="4" stroke-linecap="round"/>
+          <path d="M61 35L70 44L61 53" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="44" cy="44" r="5" fill="white"/>
+        </svg>
+        <div class="text">
+          <span class="score">Score</span>
+          <span class="path">Path</span>
+        </div>
+      </div>
+
+      <div class="card-desc">Gebogen curves, organischer.<br>Vriendelijker gevoel.</div>
+    </div>
+
+    <!-- ── 4. Bracket-boom ── -->
+    <div class="icon-card">
+      <span class="card-label">V4</span>
+      <div class="card-name">Bracket Tree</div>
+
+      <svg class="icon-large" viewBox="0 0 88 88" fill="none">
+        <rect width="88" height="88" rx="20" fill="#FF6B00"/>
+        <!-- Left bracket structure -->
+        <!-- Top branch: 2 lines + vertical -->
+        <line x1="14" y1="20" x2="28" y2="20" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+        <line x1="14" y1="34" x2="28" y2="34" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+        <line x1="28" y1="20" x2="28" y2="34" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+        <line x1="28" y1="27" x2="44" y2="27" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+
+        <!-- Bottom branch -->
+        <line x1="14" y1="54" x2="28" y2="54" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+        <line x1="14" y1="68" x2="28" y2="68" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+        <line x1="28" y1="54" x2="28" y2="68" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+        <line x1="28" y1="61" x2="44" y2="61" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+
+        <!-- Final bracket -->
+        <line x1="44" y1="27" x2="44" y2="61" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.85"/>
+        <line x1="44" y1="44" x2="56" y2="44" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.85"/>
+
+        <!-- Arrow -->
+        <path d="M56 44H74" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+        <path d="M66 36L74 44L66 52" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+
+      <div class="wordmark">
+        <svg class="icon-sm" viewBox="0 0 88 88" fill="none">
+          <rect width="88" height="88" rx="20" fill="#FF6B00"/>
+          <line x1="14" y1="20" x2="28" y2="20" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+          <line x1="14" y1="34" x2="28" y2="34" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+          <line x1="28" y1="20" x2="28" y2="34" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+          <line x1="28" y1="27" x2="44" y2="27" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+          <line x1="14" y1="54" x2="28" y2="54" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+          <line x1="14" y1="68" x2="28" y2="68" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+          <line x1="28" y1="54" x2="28" y2="68" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+          <line x1="28" y1="61" x2="44" y2="61" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+          <line x1="44" y1="27" x2="44" y2="61" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.85"/>
+          <line x1="44" y1="44" x2="56" y2="44" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.85"/>
+          <path d="M56 44H74" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+          <path d="M66 36L74 44L66 52" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="text">
+          <span class="score">Score</span>
+          <span class="path">Path</span>
+        </div>
+      </div>
+
+      <div class="card-desc">Echte bracket-structuur.<br>Direct herkenbaar als toernooi.</div>
+    </div>
+
+    <!-- ── 5. Chevron stack ── -->
+    <div class="icon-card">
+      <span class="card-label">V5</span>
+      <div class="card-name">Chevron Stack</div>
+
+      <svg class="icon-large" viewBox="0 0 88 88" fill="none">
+        <rect width="88" height="88" rx="20" fill="#FF6B00"/>
+        <!-- Three chevrons, left to right, increasing opacity -->
+        <path d="M18 28 L30 44 L18 60" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.3"/>
+        <path d="M32 30 L46 44 L32 58" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+        <path d="M48 32 L64 44 L48 56" stroke="white" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+      </svg>
+
+      <div class="wordmark">
+        <svg class="icon-sm" viewBox="0 0 88 88" fill="none">
+          <rect width="88" height="88" rx="20" fill="#FF6B00"/>
+          <path d="M18 28 L30 44 L18 60" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.3"/>
+          <path d="M32 30 L46 44 L32 58" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+          <path d="M48 32 L64 44 L48 56" stroke="white" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+        </svg>
+        <div class="text">
+          <span class="score">Score</span>
+          <span class="path">Path</span>
+        </div>
+      </div>
+
+      <div class="card-desc">Drie chevrons = snelheid + pad.<br>Abstract, snel leesbaar klein.</div>
+    </div>
+
+    <!-- ── 6. Dark icon / oranje lijnen ── -->
+    <div class="icon-card">
+      <span class="card-label">V6</span>
+      <div class="card-name">Donker Icon</div>
+
+      <svg class="icon-large" viewBox="0 0 88 88" fill="none">
+        <rect width="88" height="88" rx="20" fill="#111111"/>
+        <rect width="88" height="88" rx="20" fill="none" stroke="#FF6B00" stroke-width="1.5" opacity="0.4"/>
+        <!-- Curved paths in orange -->
+        <path d="M16 22 Q32 22 44 44" stroke="#FF6B00" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.5"/>
+        <path d="M16 44 Q30 44 44 44" stroke="#FF6B00" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.5"/>
+        <path d="M16 66 Q32 66 44 44" stroke="#FF6B00" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.5"/>
+        <!-- Arrow in bright orange -->
+        <path d="M44 44 L70 44" stroke="#FF6B00" stroke-width="3.5" stroke-linecap="round"/>
+        <path d="M61 35L70 44L61 53" stroke="#FF6B00" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- Center dot -->
+        <circle cx="44" cy="44" r="4.5" fill="#FF6B00"/>
+      </svg>
+
+      <div class="wordmark">
+        <svg class="icon-sm" viewBox="0 0 88 88" fill="none">
+          <rect width="88" height="88" rx="20" fill="#111111"/>
+          <rect width="88" height="88" rx="20" fill="none" stroke="#FF6B00" stroke-width="1.5" opacity="0.4"/>
+          <path d="M16 22 Q32 22 44 44" stroke="#FF6B00" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.5"/>
+          <path d="M16 44 Q30 44 44 44" stroke="#FF6B00" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.5"/>
+          <path d="M16 66 Q32 66 44 44" stroke="#FF6B00" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.5"/>
+          <path d="M44 44 L70 44" stroke="#FF6B00" stroke-width="3.5" stroke-linecap="round"/>
+          <path d="M61 35L70 44L61 53" stroke="#FF6B00" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="44" cy="44" r="4.5" fill="#FF6B00"/>
+        </svg>
+        <div class="text">
+          <span class="score">Score</span>
+          <span class="path">Path</span>
+        </div>
+      </div>
+
+      <div class="card-desc">Donkere achtergrond, oranje lijnen.<br>Past perfect op donkere websites.</div>
+    </div>
+
+  </div>
+
+  <div style="
+    font-family:'JetBrains Mono',monospace;
+    font-size:10px;
+    color:#222;
+    letter-spacing:2px;
+    text-align:center;
+    padding-top:20px;
+    border-top:1px solid #161616;
+  ">
+    // screenshot je favoriet voor Google Flow &nbsp;·&nbsp; ScorePath 2026
+  </div>
+
+</body>
+</html>

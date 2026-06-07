@@ -1,0 +1,106 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme inline {
+  /* Fonts */
+  --font-display: var(--font-bebas), ui-sans-serif, sans-serif;
+  --font-ui:      var(--font-barlow), ui-sans-serif, system-ui, sans-serif;
+  --font-sans:    var(--font-barlow), ui-sans-serif, system-ui, sans-serif;
+
+  /* WK 2026-geïnspireerd kleurenpalet */
+  --color-wk-navy:    #000000;
+  --color-wk-card:    #0B1628;
+  --color-wk-panel:   #081020;
+  --color-wk-border:  #1A3050;
+  --color-wk-gold:    #C9A843;
+  --color-wk-gold-lt: #E2C46A;
+  --color-wk-red:     #C4122F;
+  --color-wk-red-lt:  #E8415A;
+}
+
+/* ── DARK (standaard) ── */
+:root {
+  --bg:            #080808;
+  --bg-card:       #0D0D0D;
+  --bg-panel:      #0A0A0A;
+  --border:        #1A1A1A;
+  --border-strong: #2A2A2A;
+  --fg:            #F2F2F2;
+  --fg-muted:      #94A3B8;
+  --fg-subtle:     #475569;
+  --cta:           #D93B1F;
+  --cta-hover:     #E8351E;
+  --gold:          #C9A843;
+  --gold-lt:       #E2C46A;
+
+  --color-wk-navy:    #080808;
+  --color-wk-card:    #0D0D0D;
+  --color-wk-panel:   #0A0A0A;
+  --color-wk-border:  #1A1A1A;
+  --color-wk-gold:    #C9A843;
+  --color-wk-gold-lt: #E2C46A;
+  --color-wk-red:     #C4122F;
+  --color-wk-red-lt:  #E8415A;
+}
+
+/* ── LIGHT ── */
+[data-theme="light"] {
+  --bg:            #F2EDE4;
+  --bg-card:       #FFFFFF;
+  --bg-panel:      #EDE8DF;
+  --border:        #E0D8CC;
+  --border-strong: #CFC5B5;
+  --fg:            #0D0D0D;
+  --fg-muted:      #6B6158;
+  --fg-subtle:     #9B8E82;
+  --cta:           #D93B1F;
+  --cta-hover:     #C42F15;
+  --gold:          #A8852A;
+  --gold-lt:       #C9A843;
+
+  --color-wk-navy:    #F2EDE4;
+  --color-wk-card:    #FFFFFF;
+  --color-wk-panel:   #EDE8DF;
+  --color-wk-border:  #E0D8CC;
+  --color-wk-gold:    #A8852A;
+  --color-wk-gold-lt: #C9A843;
+  --color-wk-red:     #D93B1F;
+  --color-wk-red-lt:  #C42F15;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-ui);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Tabular numbers voor score/stats */
+.font-tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Bebas Neue utility */
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: 0.04em;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Verwijder number input spinners */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}

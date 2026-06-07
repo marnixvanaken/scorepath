@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Bebas_Neue, Barlow_Condensed } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import { SITE_URL, SITE_NAME } from "@/lib/siteConfig";
 import { Toaster } from "@/components/Toaster";
@@ -54,6 +55,11 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: `(function(){try{var t=localStorage.getItem('theme');if(t==='light'){document.documentElement.dataset.theme='light';}else if(!t&&window.matchMedia('(prefers-color-scheme: light)').matches){document.documentElement.dataset.theme='light';}}catch(e){}})();` }} />
         {children}
         <Toaster />
+        <Script
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1392037508470232"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );

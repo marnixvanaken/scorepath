@@ -1,6 +1,7 @@
 'use client';
 
 import { AnimatePresence, motion } from 'motion/react';
+import { Reorder, useDragControls } from 'motion/react';
 import type { ThirdPlaceRank, GroupId } from '@/lib/types';
 import type { MatchResult } from '@/lib/types';
 import { teamById } from '@/data/worldcup2026';
@@ -8,13 +9,18 @@ import { isGroupComplete } from '@/lib/standings';
 import { tieGroupKey } from '@/hooks/useTiebreakState';
 import { Flag } from './Flag';
 import { NL } from '@/i18n/nl';
+import type { InputMode } from '@/hooks/useSimulatorState';
 
 interface Props {
   thirds: ThirdPlaceRank[];
   results: MatchResult[];
+  inputMode: InputMode;
   manualOrders: Record<string, string[]>;
   onSetManualOrder: (key: string, order: string[]) => void;
   onClearManual: (key: string) => void;
+  dragOrders: Record<GroupId, string[]>;
+  thirdsDragOrder: GroupId[];
+  onThirdsDragChange: (order: GroupId[]) => void;
 }
 
 // Vindt de groep teams die gelijkstaan rondom de grens (rank 8/9).
@@ -43,13 +49,57 @@ function findBoundaryTie(
   return { teamIds: tied.map((t) => t.teamId), positions };
 }
 
-export function ThirdPlacePanel({ thirds, results, manualOrders, onSetManualOrder, onClearManual }: Props) {
+function ThirdsDragItem({
+  groupId, idx, dragOrders,
+}: {
+  groupId: GroupId;
+  idx: number;
+  dragOrders: Record<GroupId, string[]>;
+}) {
+  const controls = useDragControls();
+  const teamId = dragOrders[groupId]?.[2];
+  const team = teamId ? teamById(teamId) : null;
+  const through = idx < 8;
+
+  return (
+    <Reorder.Item
+      value={groupId}
+      dragListener={false}
+      dragControls={controls}
+      className={`flex items-center gap-2 px-3 py-2 select-none ${
+        idx === 8 ? 'border-t-2 border-dashed border-slate-700/60' : idx > 0 ? 'border-t border-white/5' : ''
+      }`}
+    >
+      <span className={`text-[11px] font-black w-4 text-right tabular-nums shrink-0 ${through ? 'text-[#C9A843]' : 'text-slate-600'}`}>{idx + 1}</span>
+      <span className={`text-[11px] font-bold w-4 shrink-0 ${through ? 'text-[#C9A843]' : 'text-slate-600'}`}>{groupId}</span>
+      {teamId && <Flag teamId={teamId} size={13} />}
+      <span className={`text-[12px] font-semibold uppercase tracking-wide flex-1 truncate ${through ? 'text-[#E2C46A]' : 'text-slate-500'}`}>
+        {team?.name ?? teamId ?? '—'}
+      </span>
+      <div
+        onPointerDown={(e) => { e.preventDefault(); controls.start(e); }}
+        style={{ touchAction: 'none', cursor: 'grab' }}
+        className="p-1.5 -m-1.5 shrink-0 active:cursor-grabbing"
+        aria-hidden
+      >
+        <svg width="10" height="10" viewBox="0 0 20 20" fill="currentColor" className="text-slate-600">
+          <path d="M7 2a2 2 0 1 0 .001 4.001A2 2 0 0 0 7 2zm0 6a2 2 0 1 0 .001 4.001A2 2 0 0 0 7 8zm0 6a2 2 0 1 0 .001 4.001A2 2 0 0 0 7 14zm6-8a2 2 0 1 0-.001-4.001A2 2 0 0 0 13 6zm0 2a2 2 0 1 0 .001 4.001A2 2 0 0 0 13 8zm0 6a2 2 0 1 0 .001 4.001A2 2 0 0 0 13 14z"/>
+        </svg>
+      </div>
+    </Reorder.Item>
+  );
+}
+
+export function ThirdPlacePanel({
+  thirds, results, inputMode, manualOrders, onSetManualOrder, onClearManual,
+  dragOrders, thirdsDragOrder, onThirdsDragChange,
+}: Props) {
   const sorted = [...thirds].sort((a, b) => a.rank - b.rank);
   const boundary = findBoundaryTie(sorted, results);
 
   return (
     <section
-      className="bg-[--color-wk-card] rounded-xl shadow-lg shadow-black/40 overflow-hidden"
+      className="bg-card rounded-xl shadow-lg shadow-black/40 overflow-hidden"
       style={{ border: '1px solid rgba(201,168,67,0.35)' }}
     >
       {/* Header */}
@@ -58,12 +108,34 @@ export function ThirdPlacePanel({ thirds, results, manualOrders, onSetManualOrde
         <span className="text-[10px] text-slate-500">{NL.thirds.subtitle}</span>
       </div>
 
+      {/* Drag mode: versleep groepen om top 8 te kiezen */}
+      {inputMode === 'drag' ? (
+        <>
+          <p className="text-[10px] text-slate-500 px-3 pt-2 pb-1">Sleep de groepen om de volgorde te bepalen — top 8 gaat door.</p>
+          <Reorder.Group
+            axis="y"
+            values={thirdsDragOrder}
+            onReorder={onThirdsDragChange}
+            className="flex flex-col py-1"
+          >
+            {thirdsDragOrder.map((groupId, idx) => (
+              <ThirdsDragItem
+                key={groupId}
+                groupId={groupId as GroupId}
+                idx={idx}
+                dragOrders={dragOrders}
+              />
+            ))}
+          </Reorder.Group>
+        </>
+      ) : (
+      <>
       {/* Table — horizontaal scrollbaar op mobiel */}
       <div className="overflow-x-auto">
       <div className="min-w-[420px]">
 
       {/* Table header */}
-      <div className="grid grid-cols-[1.5rem_1.5rem_1fr_repeat(8,_1.75rem)] gap-x-0.5 px-3 py-1 bg-[--color-wk-panel] text-[9px] font-semibold text-slate-600 uppercase tracking-wider">
+      <div className="grid grid-cols-[1.5rem_1.5rem_1fr_repeat(8,_1.75rem)] gap-x-0.5 px-3 py-1 bg-panel text-xs font-semibold text-slate-600 uppercase tracking-wider">
         <span className="text-center">#</span>
         <span>Gr</span>
         <span>{NL.table.club}</span>
@@ -93,10 +165,10 @@ export function ThirdPlacePanel({ thirds, results, manualOrders, onSetManualOrde
           const nameCls = isNed
             ? 'text-orange-400'
             : isLast8
-            ? 'text-[--color-wk-gold-lt]'
+            ? 'text-[#E2C46A]'
             : 'text-slate-500';
 
-          const ptsCls = isLast8 ? 'text-[--color-wk-gold] font-bold' : 'text-slate-400';
+          const ptsCls = isLast8 ? 'text-[#C9A843] font-bold' : 'text-slate-400';
 
           return (
             <motion.div
@@ -111,17 +183,11 @@ export function ThirdPlacePanel({ thirds, results, manualOrders, onSetManualOrde
                 <div className="border-t-2 border-dashed border-slate-700/60 mx-3 my-0" />
               )}
               <div
-                className={`grid grid-cols-[1.5rem_1.5rem_1fr_repeat(8,_1.75rem)] gap-x-0.5 px-3 py-1.5 items-center text-[11px] ${rowBg} ${i > 0 && !isCutoff ? 'border-t border-white/5' : ''}`}
+                className={`grid grid-cols-[1.5rem_1.5rem_1fr_repeat(8,_1.75rem)] gap-x-0.5 px-3 py-1.5 items-center text-xs ${rowBg} ${i > 0 && !isCutoff ? 'border-t border-white/5' : ''}`}
                 style={rowStyle}
               >
-                {t.rank <= 3 ? (
-                  <span className="text-center text-[11px]" title={`Rank ${t.rank}`}>
-                    {t.rank === 1 ? '🥇' : t.rank === 2 ? '🥈' : '🥉'}
-                  </span>
-                ) : (
-                  <span className="text-center tabular-nums text-slate-600 text-[9px]">{t.rank}</span>
-                )}
-                <span className={`text-[9px] font-bold ${isLast8 ? 'text-[--color-wk-gold]' : 'text-slate-700'}`}>{t.group}</span>
+                <span className="text-center tabular-nums text-slate-600">{t.rank}</span>
+                <span className={`font-bold ${isLast8 ? 'text-[#C9A843]' : 'text-slate-700'}`}>{t.group}</span>
                 <span className={`flex items-center gap-1 font-semibold min-w-0 ${nameCls}`}>
                   <Flag teamId={t.teamId} size={14} />
                   <span className="truncate uppercase tracking-wide">{team?.name ?? t.teamId}</span>
@@ -132,7 +198,7 @@ export function ThirdPlacePanel({ thirds, results, manualOrders, onSetManualOrde
                 <span className="text-center tabular-nums text-slate-500">{t.lost}</span>
                 <span className="text-center tabular-nums text-slate-500">{t.hasScores ? t.gf : '–'}</span>
                 <span className="text-center tabular-nums text-slate-500">{t.hasScores ? t.ga : '–'}</span>
-                <span className={`text-center tabular-nums text-[10px] font-medium ${t.gd > 0 ? 'text-emerald-500' : t.gd < 0 ? 'text-red-500' : 'text-slate-600'}`}>
+                <span className={`text-center tabular-nums font-medium ${t.gd > 0 ? 'text-emerald-500' : t.gd < 0 ? 'text-red-500' : 'text-slate-600'}`}>
                   {t.played > 0 ? (t.gd > 0 ? `+${t.gd}` : t.gd) : '–'}
                 </span>
                 <span className={`text-center tabular-nums font-bold ${ptsCls}`}>{t.points}</span>
@@ -165,16 +231,16 @@ export function ThirdPlacePanel({ thirds, results, manualOrders, onSetManualOrde
         }
 
         return (
-          <div className="border-t border-[--color-wk-gold]/20 bg-[--color-wk-gold]/5 px-3 py-2">
+          <div className="border-t border-[#C9A843]/20 bg-[#C9A843]/5 px-3 py-2">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-[10px] font-bold text-[--color-wk-gold-lt] flex items-center gap-1.5">
-                <span className="text-[--color-wk-gold]">⚠</span>
+              <span className="text-[10px] font-bold text-[#E2C46A] flex items-center gap-1.5">
+                <span className="text-[#C9A843]">⚠</span>
                 Gelijkstand op de grens — kies wie doorgaat
               </span>
               {manualOrders[key] && (
                 <button
                   onClick={() => onClearManual(key)}
-                  className="text-[9px] text-slate-600 hover:text-slate-400 transition-colors"
+                  className="text-[10px] text-slate-600 hover:text-slate-400 transition-colors"
                 >
                   Wissen
                 </button>
@@ -187,15 +253,15 @@ export function ThirdPlacePanel({ thirds, results, manualOrders, onSetManualOrde
                 const team = teamById(teamId);
                 return (
                   <div key={teamId} className="flex items-center gap-1.5">
-                    <span className={`text-[9px] font-bold w-5 text-right tabular-nums ${isThrough ? 'text-[--color-wk-gold]' : 'text-slate-600'}`}>
+                    <span className={`text-[10px] font-bold w-5 text-right tabular-nums ${isThrough ? 'text-[#C9A843]' : 'text-slate-600'}`}>
                       {LABELS[absPos]}
                     </span>
-                    <div className={`flex items-center gap-1.5 flex-1 rounded px-2 py-1 min-w-0 ${isThrough ? 'bg-[--color-wk-gold]/10' : 'bg-slate-800/40'}`}>
+                    <div className={`flex items-center gap-1.5 flex-1 rounded px-2 py-1 min-w-0 ${isThrough ? 'bg-[#C9A843]/10' : 'bg-slate-800/40'}`}>
                       <Flag teamId={teamId} size={13} />
-                      <span className={`text-[11px] font-semibold uppercase tracking-wide truncate ${isThrough ? 'text-[--color-wk-gold-lt]' : 'text-slate-500'}`}>
+                      <span className={`text-[11px] font-semibold uppercase tracking-wide truncate ${isThrough ? 'text-[#E2C46A]' : 'text-slate-500'}`}>
                         {team?.name ?? teamId}
                       </span>
-                      <span className="text-[9px] text-slate-600 ml-auto shrink-0">
+                      <span className="text-[10px] text-slate-600 ml-auto shrink-0">
                         {isThrough ? '✓ door' : '✗ uit'}
                       </span>
                     </div>
@@ -222,14 +288,16 @@ export function ThirdPlacePanel({ thirds, results, manualOrders, onSetManualOrde
       })()}
 
       {/* Legend */}
-      <div className="flex items-center gap-4 px-3 py-2 text-[9px] text-slate-600" style={{ borderTop: '1px solid rgba(201,168,67,0.2)' }}>
+      <div className="flex items-center gap-4 px-3 py-2 text-[10px] text-slate-600" style={{ borderTop: '1px solid rgba(201,168,67,0.2)' }}>
         <span className="flex items-center gap-1.5">
-          <span className="w-2 h-2 rounded-sm bg-[--color-wk-gold] shrink-0" />
+          <span className="w-2 h-2 rounded-sm bg-[#C9A843] shrink-0" />
           Beste 8 door naar R32
         </span>
         <span className="text-slate-700">– – –  cutoff</span>
         <span className="text-slate-700 ml-auto">Tiebreak: Ptn → +/- → DV | Fair play niet meegenomen</span>
       </div>
+      </>
+      )}
     </section>
   );
 }

@@ -3,9 +3,8 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'motion/react';
-import Image from 'next/image';
 import { TEAMS } from '@/data/worldcup2026';
-import { flagUrl } from '@/data/flags';
+import { Flag } from './Flag';
 
 interface Props {
   s: string;
@@ -19,13 +18,19 @@ export function TeamPickerButton({ s, k }: Props) {
   const router = useRouter();
 
   useEffect(() => {
-    function onClickOutside(e: MouseEvent) {
+    function onOutside(e: MouseEvent | TouchEvent) {
       if (panelRef.current && !panelRef.current.contains(e.target as Node)) {
         setOpen(false);
       }
     }
-    if (open) document.addEventListener('mousedown', onClickOutside);
-    return () => document.removeEventListener('mousedown', onClickOutside);
+    if (open) {
+      document.addEventListener('mousedown', onOutside);
+      document.addEventListener('touchstart', onOutside, { passive: true });
+    }
+    return () => {
+      document.removeEventListener('mousedown', onOutside);
+      document.removeEventListener('touchstart', onOutside as EventListener);
+    };
   }, [open]);
 
   const filtered = TEAMS.filter((t) =>
@@ -86,32 +91,26 @@ export function TeamPickerButton({ s, k }: Props) {
                   background: 'var(--bg)',
                   border: '1px solid var(--border)',
                   color: 'var(--fg)',
+                  fontSize: '1rem',
                 }}
               />
             </div>
             <div className="max-h-64 overflow-y-auto">
-              {filtered.map((team) => {
-                const flag = flagUrl(team.id, 24);
-                return (
-                  <button
-                    key={team.id}
-                    onClick={() => pick(team.id)}
-                    className="w-full flex items-center gap-3 px-4 py-2.5 text-left text-xs font-semibold transition-opacity hover:opacity-70"
-                    style={{
-                      color: 'var(--fg)',
-                      borderBottom: '1px solid var(--border)',
-                    }}
-                  >
-                    {flag && (
-                      <span className="overflow-hidden rounded-sm shrink-0" style={{ border: '1px solid var(--border)' }}>
-                        <Image src={flag} alt={team.name} width={20} height={14} unoptimized />
-                      </span>
-                    )}
-                    <span>{team.name}</span>
-                    <span className="ml-auto opacity-30 font-mono">{team.id}</span>
-                  </button>
-                );
-              })}
+              {filtered.map((team) => (
+                <button
+                  key={team.id}
+                  onClick={() => pick(team.id)}
+                  className="w-full flex items-center gap-3 px-4 py-2.5 text-left text-xs font-semibold transition-opacity hover:opacity-70"
+                  style={{
+                    color: 'var(--fg)',
+                    borderBottom: '1px solid var(--border)',
+                  }}
+                >
+                  <Flag teamId={team.id} size={20} />
+                  <span>{team.name}</span>
+                  <span className="ml-auto opacity-30 font-mono text-[10px]">{team.id}</span>
+                </button>
+              ))}
               {filtered.length === 0 && (
                 <p className="px-4 py-6 text-xs text-center" style={{ color: 'var(--fg-subtle)' }}>
                   Geen team gevonden

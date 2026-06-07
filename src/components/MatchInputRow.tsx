@@ -59,11 +59,11 @@ export function MatchInputRow({ group, homeId, awayId, results, inputMode, onRes
         <Flag teamId={homeId} size={24} />
         {homeName}
         <div className="flex items-center gap-1">
-          <span className="w-7 h-7 flex items-center justify-center text-xs font-bold tabular-nums text-slate-300 bg-[--color-wk-navy] rounded border border-[--color-wk-border]">
+          <span className="w-7 h-7 flex items-center justify-center text-xs font-bold tabular-nums text-slate-300 bg-panel rounded border border-themed">
             {current.homeGoals}
           </span>
           <span className="text-slate-600 text-[10px]">–</span>
-          <span className="w-7 h-7 flex items-center justify-center text-xs font-bold tabular-nums text-slate-300 bg-[--color-wk-navy] rounded border border-[--color-wk-border]">
+          <span className="w-7 h-7 flex items-center justify-center text-xs font-bold tabular-nums text-slate-300 bg-panel rounded border border-themed">
             {current.awayGoals}
           </span>
         </div>
@@ -77,45 +77,50 @@ export function MatchInputRow({ group, homeId, awayId, results, inputMode, onRes
   const awayGoals = current?.awayGoals;
   const outcome = current?.outcome;
 
+  // Exact: numeric score inputs — font-size 1rem (16px) prevents iOS auto-zoom
+  const inputCls = 'w-9 h-9 bg-panel border border-themed rounded text-center font-bold tabular-nums text-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-1 focus-visible:ring-offset-transparent transition-colors';
+
   const scoreArea = inputMode === 'exact' ? (
     <div className="flex items-center gap-1">
-      <motion.input
-        whileFocus={{ scale: 1.08 }}
-        type="number" min={0} max={20}
+      <input
+        type="number" min={0} max={20} inputMode="numeric"
         value={homeGoals ?? ''}
         onChange={(e) => handleGoal('home', e.target.value)}
         placeholder="–"
-        className="w-7 h-7 bg-[--color-wk-navy] border border-[--color-wk-border] rounded text-center text-xs font-bold tabular-nums text-slate-100 focus:outline-none transition-colors"
-        style={{ '--tw-ring-color': groupColor } as React.CSSProperties}
-        onFocus={(e) => { e.currentTarget.style.borderColor = groupColor; }}
+        className={inputCls}
+        style={{ fontSize: '1rem', lineHeight: 1, '--tw-ring-color': groupColor } as React.CSSProperties}
+        onFocus={(e) => { e.currentTarget.style.borderColor = groupColor; e.currentTarget.select(); }}
         onBlur={(e) => { e.currentTarget.style.borderColor = ''; }}
+        onWheel={(e) => e.currentTarget.blur()}
         aria-label={`${home.name} doelpunten`}
       />
       <span className="text-slate-600 text-[10px]">–</span>
-      <motion.input
-        whileFocus={{ scale: 1.08 }}
-        type="number" min={0} max={20}
+      <input
+        type="number" min={0} max={20} inputMode="numeric"
         value={awayGoals ?? ''}
         onChange={(e) => handleGoal('away', e.target.value)}
         placeholder="–"
-        className="w-7 h-7 bg-[--color-wk-navy] border border-[--color-wk-border] rounded text-center text-xs font-bold tabular-nums text-slate-100 focus:outline-none transition-colors"
-        onFocus={(e) => { e.currentTarget.style.borderColor = groupColor; }}
+        className={inputCls}
+        style={{ fontSize: '1rem', lineHeight: 1 }}
+        onFocus={(e) => { e.currentTarget.style.borderColor = groupColor; e.currentTarget.select(); }}
         onBlur={(e) => { e.currentTarget.style.borderColor = ''; }}
+        onWheel={(e) => e.currentTarget.blur()}
         aria-label={`${away.name} doelpunten`}
       />
     </div>
   ) : (
     <div className="flex items-center gap-0.5" role="group" aria-label={`${homeId} vs ${awayId}`}>
       {(['H', 'D', 'A'] as const).map((o) => {
-        const label = o === 'H' ? NL.match.win : o === 'D' ? NL.match.draw : NL.match.loss;
+        // 1/X/2 notation (TOTO-stijl)
+        const label = o === 'H' ? '1' : o === 'D' ? 'X' : '2';
         const active = outcome === o;
         return (
           <motion.button
             key={o} whileTap={{ scale: 0.9 }}
             onClick={() => handleOutcome(o)}
             aria-pressed={active}
-            className={`w-7 h-7 rounded text-[10px] font-bold transition-all ${
-              active ? 'text-white' : 'bg-[--color-wk-navy] text-slate-500 hover:text-slate-200'
+            className={`w-10 h-10 rounded text-[11px] font-bold transition-all ${
+              active ? 'text-white' : 'bg-panel text-slate-500 hover:text-slate-200'
             }`}
             style={active ? { backgroundColor: o === 'H' ? groupColor : o === 'D' ? '#475569' : '#7f1d1d' } : {}}
           >

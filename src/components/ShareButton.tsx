@@ -23,7 +23,8 @@ export function ShareButton() {
     <motion.button
       whileTap={{ scale: 0.95 }}
       onClick={handleShare}
-      className="flex items-center gap-2 px-3 py-1.5 bg-orange-500 hover:bg-orange-400 text-white text-sm font-semibold rounded-lg transition-colors"
+      className="flex items-center gap-2 px-3 min-h-[44px] bg-[#D93B1F] hover:bg-[#C42F15] text-white text-xs font-bold tracking-wide transition-colors"
+      style={{ borderRadius: '0 8px 0 8px' }}
       aria-label={NL.header.share}
     >
       <ShareIcon />

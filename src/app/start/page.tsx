@@ -45,7 +45,7 @@ export default function StartPage() {
   }
 
   return (
-    <div className="min-h-dvh bg-[#080808] text-slate-100 flex flex-col overflow-hidden">
+    <div className="min-h-dvh bg-panel text-slate-100 flex flex-col overflow-hidden">
       {/* Header */}
       <header className="shrink-0 px-5 py-4 border-b border-[#141414] flex items-center justify-between">
         <AnimatePresence mode="wait">

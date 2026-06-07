@@ -5,6 +5,7 @@ export interface Messages {
     share: string;
     reset: string;
     prefill: string;
+    prefillKnockout: string;
     copied: string;
     liveLoading: string;
     liveError: string;
@@ -12,7 +13,8 @@ export interface Messages {
   };
   modes: {
     exact: string;
-    quick: string;
+    winner: string;
+    drag: string;
   };
   table: {
     club: string;
@@ -52,17 +54,19 @@ export const NL: Messages = {
   header: {
     title: 'WK 2026 Simulator',
     subtitle: 'Vul de groepsuitslagen in en zie live wie doorgaat',
-    share: 'Deel bracket',
+    share: 'DEEL LINK',
     reset: 'Reset',
-    prefill: 'Vul alles voor',
+    prefill: 'Vul alles in',
+    prefillKnockout: 'Simuleer',
     copied: 'Link gekopieerd!',
     liveLoading: 'Live data laden...',
     liveError: 'Live data niet beschikbaar',
     liveRefresh: 'Ververs',
   },
   modes: {
-    exact: 'Exacte uitslag',
-    quick: 'Snel (W/G/V)',
+    exact: 'Exact',
+    winner: '1X2',
+    drag: 'Sleep',
   },
   table: {
     club: 'Team',

@@ -7,7 +7,8 @@ interface Props {
 }
 
 export function Flag({ teamId, size = 20 }: Props) {
-  const src = flagUrl(teamId, 40);
+  const cdnWidth = size > 48 ? 160 : 40;
+  const src = flagUrl(teamId, cdnWidth);
   if (!src) {
     return (
       <span

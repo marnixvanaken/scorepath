@@ -48,16 +48,16 @@ export function CardActions({ ogUrl, teamName }: Props) {
       <motion.button
         whileTap={{ scale: 0.95 }}
         onClick={downloadImage}
-        className="px-6 py-3 text-sm font-bold tracking-widest uppercase rounded-sm text-white transition-opacity hover:opacity-90"
-        style={{ background: 'var(--cta)' }}
+        className="px-6 py-3 text-sm font-bold tracking-widest uppercase text-white transition-opacity hover:opacity-90"
+        style={{ background: 'var(--cta)', borderRadius: '0 8px 0 8px' }}
       >
         DOWNLOAD AFBEELDING
       </motion.button>
       <motion.button
         whileTap={{ scale: 0.95 }}
         onClick={shareLink}
-        className="px-6 py-3 text-sm font-bold tracking-widest uppercase rounded-sm transition-opacity hover:opacity-70"
-        style={{ border: '1px solid var(--border)', color: 'var(--fg)' }}
+        className="px-6 py-3 text-sm font-bold tracking-widest uppercase text-white transition-opacity hover:opacity-90"
+        style={{ background: '#D93B1F', borderRadius: '0 8px 0 8px' }}
       >
         DEEL LINK
       </motion.button>

@@ -1,14 +1,13 @@
 'use client';
 
 import { useMemo } from 'react';
-import { motion } from 'motion/react';
+import Link from 'next/link';
+import { motion, AnimatePresence } from 'motion/react';
 import type { BracketMatch, KnockoutResults } from '@/lib/bracket';
 import type { Qualifiers } from '@/lib/types';
 import { buildBracket } from '@/lib/bracket';
 import { teamById } from '@/data/worldcup2026';
 import { Flag } from './Flag';
-
-// ── Atoms ────────────────────────────────────────────────────────────────────
 
 interface SlotProps {
   slot: BracketMatch['slot1'];
@@ -31,7 +30,7 @@ function TeamSlot({ slot, slotNum, matchId, winner, onPick }: SlotProps) {
       onClick={() => canPick && onPick(matchId, slotNum)}
       disabled={!canPick}
       aria-pressed={isWinner}
-      className={`flex items-center gap-1.5 h-[26px] px-2 w-full text-left transition-colors min-w-0 ${
+      className={`flex items-center gap-1 h-[60px] px-1.5 flex-1 min-w-0 transition-colors ${
         canPick ? 'cursor-pointer' : 'cursor-default'
       } ${
         isWinner
@@ -46,7 +45,7 @@ function TeamSlot({ slot, slotNum, matchId, winner, onPick }: SlotProps) {
       {slot.teamId ? (
         <>
           <Flag teamId={slot.teamId} size={13} />
-          <span className={`text-[11px] font-semibold uppercase tracking-wide truncate leading-none flex-1 ${
+          <span className={`text-[12px] font-semibold uppercase tracking-wide truncate leading-none flex-1 ${
             isNed ? 'text-orange-400' : isWinner ? 'text-emerald-300' : 'text-slate-200'
           }`}>
             {team?.name ?? slot.teamId}
@@ -58,7 +57,7 @@ function TeamSlot({ slot, slotNum, matchId, winner, onPick }: SlotProps) {
           )}
         </>
       ) : (
-        <span className="text-[10px] text-slate-600 truncate leading-none font-bold uppercase tracking-wider">{slot.label}</span>
+        <span className="text-[11px] text-slate-600 truncate leading-none font-bold uppercase tracking-wider">{slot.label}</span>
       )}
     </motion.button>
   );
@@ -69,36 +68,138 @@ function MatchBox({
   highlight,
   kr,
   onPick,
+  className = 'w-[11rem] shrink-0',
 }: {
   match: BracketMatch;
   highlight?: boolean;
   kr: KnockoutResults;
   onPick: (matchId: string, slot: 1 | 2) => void;
+  className?: string;
 }) {
   const known = match.slot1.teamId || match.slot2.teamId;
   const winner = kr[match.id];
   return (
-    <div className={`w-[10rem] shrink-0 overflow-hidden border ${
+    <div className={`${className} overflow-hidden border ${
       highlight
-        ? 'border-[--color-wk-gold] bg-[--color-wk-card]'
+        ? 'border-[#C9A843] bg-card'
         : known
-        ? 'border-[--color-wk-gold]/35 bg-[--color-wk-card]'
-        : 'border-[--color-wk-gold]/10 bg-[--color-wk-panel]/50'
+        ? 'border-[#C9A843]/35 bg-card'
+        : 'border-[#C9A843]/10 bg-[#0A0A0A]/50'
     }`} style={{ borderRadius: '0 6px 0 6px' }}>
-      <TeamSlot slot={match.slot1} slotNum={1} matchId={match.id} winner={winner} onPick={onPick} />
-      <div className="border-t border-white/5" />
-      <TeamSlot slot={match.slot2} slotNum={2} matchId={match.id} winner={winner} onPick={onPick} />
+      <div className="flex items-stretch">
+        <TeamSlot slot={match.slot1} slotNum={1} matchId={match.id} winner={winner} onPick={onPick} />
+        <div className="border-l border-white/5 shrink-0" />
+        <TeamSlot slot={match.slot2} slotNum={2} matchId={match.id} winner={winner} onPick={onPick} />
+      </div>
     </div>
   );
 }
 
-// ── Connector: vertic line + 2 horizontal branches ───────────────────────────
+function MobileRound({
+  label,
+  matches,
+  single,
+  kr,
+  onPick,
+}: {
+  label: string;
+  matches: BracketMatch[];
+  single?: boolean;
+  kr: KnockoutResults;
+  onPick: (matchId: string, slot: 1 | 2) => void;
+}) {
+  return (
+    <div>
+      <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest px-3 mb-1.5">
+        {label}
+      </p>
+      {single ? (
+        <div className="px-3">
+          <MatchBox
+            match={matches[0]}
+            highlight={matches[0].slot1.teamId === 'NED' || matches[0].slot2.teamId === 'NED'}
+            kr={kr}
+            onPick={onPick}
+            className="w-full"
+          />
+        </div>
+      ) : (
+        <div className="flex flex-col gap-1.5 px-3">
+          {matches.map((m) => (
+            <MatchBox
+              key={m.id}
+              match={m}
+              highlight={m.slot1.teamId === 'NED' || m.slot2.teamId === 'NED'}
+              kr={kr}
+              onPick={onPick}
+              className="w-full"
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+const WC_TITLES: Record<string, number> = {
+  BRA: 5, GER: 4, ARG: 3, FRA: 2, URU: 2, ENG: 1, ESP: 1,
+};
+
+function WinnerBanner({ teamId, encodedS, encodedK }: { teamId: string; encodedS: string; encodedK: string }) {
+  const team = teamById(teamId);
+  const stars = (WC_TITLES[teamId] ?? 0) + 1;
+  const cardHref = `/wk-2026/card?team=${teamId}&s=${encodedS}${encodedK ? `&k=${encodedK}` : ''}`;
+
+  function handleShare() {
+    if (typeof navigator !== 'undefined' && navigator.share) {
+      navigator.share({ url: window.location.href });
+    } else {
+      navigator.clipboard?.writeText(window.location.href);
+    }
+  }
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4, ease: 'easeOut' }}
+      className="mx-3 mt-2 mb-4 flex flex-col items-center gap-4 border border-[#C9A843]/30 bg-card rounded-xl py-8 px-4"
+      style={{ borderRadius: '0 12px 0 12px' }}
+    >
+      <div className="flex gap-1.5 flex-wrap justify-center">
+        {Array.from({ length: stars }).map((_, i) => (
+          <svg key={i} width="20" height="20" viewBox="0 0 24 24" fill="currentColor" className="text-[#C9A843]" aria-hidden>
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+          </svg>
+        ))}
+      </div>
+      <Flag teamId={teamId} size={120} />
+      <p className="text-lg font-bold uppercase tracking-widest text-slate-100 text-center">
+        {team?.name ?? teamId}
+      </p>
+      <div className="w-full flex flex-col gap-2.5">
+        <Link
+          href={cardHref}
+          className="w-full py-3.5 text-center font-bold text-sm uppercase tracking-widest text-white transition-opacity hover:opacity-90"
+          style={{ backgroundColor: '#D93B1F', borderRadius: '0 10px 0 10px' }}
+        >
+          MIJN KAART
+        </Link>
+        <button
+          onClick={handleShare}
+          className="w-full py-3.5 font-bold text-sm uppercase tracking-widest transition-colors hover:bg-[#D93B1F]/10"
+          style={{ border: '2px solid #D93B1F', color: '#D93B1F', borderRadius: '0 10px 0 10px', background: 'transparent' }}
+        >
+          DEEL LINK
+        </button>
+      </div>
+    </motion.div>
+  );
+}
 
 function Connector() {
   return <div className="shrink-0 self-stretch" style={{ width: 10 }} />;
 }
-
-// ── BracketGroup: 2 left children → connector → 1 right child ─────────────
 
 function BG({ a, b, right, gap = 6 }: {
   a: React.ReactNode;
@@ -120,21 +221,19 @@ function BG({ a, b, right, gap = 6 }: {
   );
 }
 
-// ── Section header ────────────────────────────────────────────────────────────
-
-const ROUNDS = ['R32', '1/16e finale', 'Kwartfinale', 'Halve finale', 'Finale'];
-const COL_W = 160;
+const ROUNDS = ['Ronde van 32', '1/16e finale', 'Kwartfinale', 'Halve finale', 'Finale'];
+const COL_W = 176;
 const CONN_W = 10;
-
-// ── Main component ────────────────────────────────────────────────────────────
 
 interface Props {
   qualifiers: Qualifiers;
   kr: KnockoutResults;
   onPick: (matchId: string, slot: 1 | 2) => void;
+  encodedS: string;
+  encodedK: string;
 }
 
-export function BracketView({ qualifiers, kr, onPick }: Props) {
+export function BracketView({ qualifiers, kr, onPick, encodedS, encodedK }: Props) {
   const { r32, r16, qf, sf, final } = useMemo(
     () => buildBracket(qualifiers, kr),
     [qualifiers, kr],
@@ -157,50 +256,59 @@ export function BracketView({ qualifiers, kr, onPick }: Props) {
 
   const colOffsets = ROUNDS.map((_, ri) => ri * (COL_W + CONN_W));
 
+  const finalWinnerSlot = kr[final.id];
+  const finalWinnerId = finalWinnerSlot
+    ? (finalWinnerSlot === 1 ? final.slot1.teamId : final.slot2.teamId) ?? null
+    : null;
+
   return (
-    <div className="overflow-x-auto pb-2">
-      {/* Round labels */}
-      <div className="relative h-5 mb-2 min-w-max" style={{ paddingLeft: 12 }}>
-        {ROUNDS.map((label, ri) => (
-          <span
-            key={label}
-            className="absolute text-[9px] font-bold text-slate-400 uppercase tracking-widest whitespace-nowrap"
-            style={{ left: 12 + colOffsets[ri], width: COL_W, textAlign: 'center' }}
-          >
-            {label}
-          </span>
-        ))}
+    <>
+      {/* ── Mobile (< 640px): verticale scroll per ronde ── */}
+      <div className="sm:hidden flex flex-col gap-4 py-2">
+        <MobileRound label="Ronde van 32"   matches={r32}    kr={kr} onPick={onPick} />
+        <MobileRound label="1/16e finale"   matches={r16}    kr={kr} onPick={onPick} />
+        <MobileRound label="Kwartfinale"    matches={qf}     kr={kr} onPick={onPick} />
+        <MobileRound label="Halve finale"   matches={sf}     kr={kr} onPick={onPick} />
+        <MobileRound label="Finale"         matches={[final]} kr={kr} onPick={onPick} single />
+        <AnimatePresence>
+          {finalWinnerId && <WinnerBanner key={finalWinnerId} teamId={finalWinnerId} encodedS={encodedS} encodedK={encodedK} />}
+        </AnimatePresence>
       </div>
 
-      {/* Hint */}
-      <p className="text-[10px] text-slate-300 px-3 mb-2">
-        Klik op een team om de winnaar te kiezen — klik opnieuw om te wissen.
-      </p>
+      {/* ── Desktop (≥ 640px): horizontale boom ── */}
+      <div className="hidden sm:block overflow-x-auto pb-2">
+        <div className="relative h-5 mb-2 min-w-max" style={{ paddingLeft: 12 }}>
+          {ROUNDS.map((label, ri) => (
+            <span
+              key={label}
+              className="absolute text-[11px] font-bold text-slate-400 uppercase tracking-widest whitespace-nowrap"
+              style={{ left: 12 + colOffsets[ri], width: COL_W, textAlign: 'center' }}
+            >
+              {label}
+            </span>
+          ))}
+        </div>
 
-      {/* Tree */}
-      <div className="inline-block px-3">
-        <BG gap={12}
-          a={
-            <BG gap={8}
-              a={branch(0, 0, 0)}
-              b={branch(4, 2, 1)}
-              right={mk(sf[0])}
-            />
-          }
-          b={
-            <BG gap={8}
-              a={branch(8, 4, 2)}
-              b={branch(12, 6, 3)}
-              right={mk(sf[1])}
-            />
-          }
-          right={mk(final)}
-        />
+        <div className="inline-block px-3">
+          <BG gap={12}
+            a={
+              <BG gap={8}
+                a={branch(0, 0, 0)}
+                b={branch(4, 2, 1)}
+                right={mk(sf[0])}
+              />
+            }
+            b={
+              <BG gap={8}
+                a={branch(8, 4, 2)}
+                b={branch(12, 6, 3)}
+                right={mk(sf[1])}
+              />
+            }
+            right={mk(final)}
+          />
+        </div>
       </div>
-
-      <p className="text-[9px] text-slate-400 px-3 mt-3 italic">
-        * Sectie D (nummers 3): volgorde indicatief — officiële FIFA-matrix volgt.
-      </p>
-    </div>
+    </>
   );
 }

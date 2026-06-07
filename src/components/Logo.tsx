@@ -40,12 +40,15 @@ export function Logo({ variant = 'wordmark', size = 'md', className = '' }: Logo
       {icon}
       <span className="flex flex-col leading-none">
         <span
-          className="font-bold text-slate-500 uppercase tracking-widest"
-          style={{ fontSize: scoreSizes[size] }}
+          className="font-bold uppercase tracking-widest"
+          style={{ fontSize: scoreSizes[size], color: 'var(--fg-subtle)' }}
         >
           Score
         </span>
-        <span className={`font-black text-white tracking-tight leading-none ${textSizes[size]}`}>
+        <span
+          className={`font-black tracking-tight leading-none ${textSizes[size]}`}
+          style={{ color: 'var(--fg)' }}
+        >
           Path
         </span>
       </span>

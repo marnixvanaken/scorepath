@@ -1,7 +1,9 @@
 'use client';
 
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { encodeKnockout, decodeKnockout, type KnockoutResults } from '@/lib/bracket';
+import { encodeKnockout, decodeKnockout, buildBracket, type KnockoutResults } from '@/lib/bracket';
+import { teamById } from '@/data/worldcup2026';
+import type { Qualifiers } from '@/lib/types';
 
 function readUrl(): KnockoutResults {
   if (typeof window === 'undefined') return {};
@@ -52,7 +54,45 @@ export function useKnockoutState() {
     sync({});
   }, [sync]);
 
-  return { kr, pick, resetKnockout };
+  // Auto-fill bracket: pick the team with the higher strength rating in each match
+  const prefillKnockout = useCallback((qualifiers: Qualifiers) => {
+    const bracket = buildBracket(qualifiers, {});
+    const rounds = [bracket.r32, bracket.r16, bracket.qf, bracket.sf, [bracket.final]];
+    const roundKeys = ['r32', 'r16', 'kw', 'hf', 'finale'];
+    const next: KnockoutResults = {};
+
+    for (let ri = 0; ri < rounds.length; ri++) {
+      const matches = rounds[ri];
+      const key = roundKeys[ri];
+      for (let i = 0; i < matches.length; i++) {
+        const match = matches[i];
+        const t1 = match.slot1.teamId ? teamById(match.slot1.teamId) : null;
+        const t2 = match.slot2.teamId ? teamById(match.slot2.teamId) : null;
+        if (!t1 && !t2) continue;
+        const id = key === 'finale' ? 'finale' : `${key}-${i}`;
+        if (t1 && t2) {
+          next[id] = t1.strength >= t2.strength ? 1 : 2;
+        } else if (t1) {
+          next[id] = 1;
+        } else if (t2) {
+          next[id] = 2;
+        }
+        // Rebuild bracket with current picks to propagate winners to next round
+        if (ri < rounds.length - 1) {
+          const updated = buildBracket(qualifiers, next);
+          rounds[ri + 1] = ri === 0 ? updated.r16
+            : ri === 1 ? updated.qf
+            : ri === 2 ? updated.sf
+            : [updated.final];
+        }
+      }
+    }
+
+    setKr(next);
+    sync(next);
+  }, [sync]);
+
+  return { kr, pick, resetKnockout, prefillKnockout };
 }
 
 // When a result changes, clear all results that depend on it downstream.

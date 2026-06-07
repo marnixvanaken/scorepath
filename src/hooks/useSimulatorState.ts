@@ -6,7 +6,7 @@ import type { LiveMatchResult } from '@/lib/footballDataMapper';
 import { encodeResults, decodeResults } from '@/lib/serialization';
 import { prefillResults } from '@/lib/prefill';
 
-export type InputMode = 'exact' | 'quick';
+export type InputMode = 'exact' | 'winner' | 'drag';
 export type LiveStatus = 'idle' | 'loading' | 'error';
 
 export interface SimulatorState {
@@ -46,7 +46,7 @@ function writeUrlState(results: MatchResult[]) {
   window.history.replaceState(null, '', url.toString());
 }
 
-export function useSimulatorState(initialMode: InputMode = 'exact'): SimulatorState {
+export function useSimulatorState(initialMode: InputMode = 'drag'): SimulatorState {
   const [results, setResults] = useState<MatchResult[]>([]);
   const [lockedKeys, setLockedKeys] = useState<Set<string>>(new Set());
   const [inputMode, setInputMode] = useState<InputMode>(initialMode);

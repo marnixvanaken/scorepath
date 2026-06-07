@@ -114,7 +114,7 @@ export default async function BlogPostPage(
   };
 
   return (
-    <div className="min-h-dvh bg-[#080808] text-slate-100 flex flex-col">
+    <div className="min-h-dvh bg-panel text-slate-100 flex flex-col">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}

@@ -25,7 +25,6 @@ export default async function CardPage({
   if (k) ogParams.set('k', k);
   const ogUrl = `/api/og?${ogParams.toString()}`;
 
-  const resultUrl = `/wk-2026/result?${ogParams.toString()}`;
   const backUrl = `/wk-2026?s=${s}${k ? `&k=${k}` : ''}`;
 
   return (
@@ -36,13 +35,6 @@ export default async function CardPage({
         <div className="max-w-3xl mx-auto flex items-center justify-between">
           <Logo size="sm" />
           <div className="flex items-center gap-3">
-            <Link
-              href={resultUrl}
-              className="text-xs font-bold tracking-widest uppercase transition-opacity opacity-40 hover:opacity-70"
-              style={{ color: 'var(--fg)' }}
-            >
-              ← Route
-            </Link>
             <ThemeToggle />
           </div>
         </div>
@@ -51,7 +43,7 @@ export default async function CardPage({
       {/* ── CARD PREVIEW ── */}
       <section className="flex-1 flex flex-col items-center px-6 pt-12 pb-8">
         <p className="text-xs font-bold tracking-[0.2em] uppercase mb-8 opacity-40">
-          Jouw kaart · {team.name}
+          Jouw kaart · {team.name.toUpperCase()}
         </p>
 
         {/* Card image */}
@@ -67,16 +59,9 @@ export default async function CardPage({
         <div className="flex flex-wrap gap-3 mt-8 justify-center">
           <CardActions ogUrl={ogUrl} teamName={team.name} />
           <Link
-            href={resultUrl}
-            className="px-6 py-3 text-sm font-bold tracking-widest uppercase rounded-sm transition-opacity hover:opacity-70"
-            style={{ border: '1px solid var(--border)', color: 'var(--fg)' }}
-          >
-            BEKIJK ROUTE
-          </Link>
-          <Link
             href={backUrl}
-            className="px-6 py-3 text-sm font-bold tracking-widest uppercase rounded-sm transition-opacity hover:opacity-70"
-            style={{ border: '1px solid var(--border)', color: 'var(--fg-subtle)' }}
+            className="px-6 py-3 text-sm font-bold tracking-widest uppercase transition-opacity hover:opacity-70"
+            style={{ border: '1px solid var(--border)', color: 'var(--fg-subtle)', borderRadius: '0 8px 0 8px' }}
           >
             TERUG
           </Link>
@@ -88,7 +73,7 @@ export default async function CardPage({
         <div className="max-w-3xl mx-auto flex items-center justify-between">
           <Logo size="sm" />
           <p className="text-[10px] font-bold tracking-widest uppercase" style={{ color: 'var(--fg-subtle)' }}>
-            scorepath.app
+            scorepath.nl
           </p>
         </div>
       </footer>

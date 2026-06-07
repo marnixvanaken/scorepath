@@ -6,27 +6,26 @@ import { motion, AnimatePresence } from 'motion/react';
 import { ShareButton } from './ShareButton';
 import { Logo } from './Logo';
 import { ThemeToggle } from './ThemeToggle';
-import { Tooltip } from './Tooltip';
 import { type InputMode, type LiveStatus } from '@/hooks/useSimulatorState';
 import { NL } from '@/i18n/nl';
 
-type View = 'groepsfase' | 'bracket';
+type View = 'groepsfase' | 'knockout';
 
 interface Props {
   inputMode: InputMode;
   liveStatus: LiveStatus;
   view: View;
   onViewChange: (v: View) => void;
-  onInputModeChange: (mode: InputMode) => void;
   onReset: () => void;
   onPrefill: () => void;
+  onPrefillKnockout: () => void;
   onRefreshLive: () => void;
 }
 
 function LiveIndicator({ status, onRefresh }: { status: LiveStatus; onRefresh: () => void }) {
   if (status === 'loading') {
     return (
-      <span className="flex items-center gap-1.5 text-[10px]" style={{ color: 'var(--fg-subtle)' }}>
+      <span className="c-fg-subtle flex items-center gap-1.5 text-[11px]">
         <svg className="animate-spin shrink-0" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" aria-hidden="true">
           <path d="M21 12a9 9 0 1 1-6.219-8.56" />
         </svg>
@@ -38,10 +37,9 @@ function LiveIndicator({ status, onRefresh }: { status: LiveStatus; onRefresh: (
     return (
       <button
         onClick={onRefresh}
-        className="flex items-center gap-1 text-[10px] transition-opacity hover:opacity-70"
-        style={{ color: 'var(--gold)' }}
+        className="c-gold flex items-center gap-1 text-[11px] min-h-[44px] transition-opacity hover:opacity-70"
       >
-        <span className="w-1.5 h-1.5 rounded-full" style={{ background: 'var(--gold)' }} />
+        <span className="w-1.5 h-1.5 rounded-full bg-[var(--gold)]" />
         {NL.header.liveError} — {NL.header.liveRefresh}
       </button>
     );
@@ -51,124 +49,118 @@ function LiveIndicator({ status, onRefresh }: { status: LiveStatus; onRefresh: (
 
 export function SimulatorHeader({
   inputMode, liveStatus, view,
-  onViewChange, onInputModeChange, onReset, onPrefill, onRefreshLive,
+  onViewChange, onReset, onPrefill, onPrefillKnockout, onRefreshLive,
 }: Props) {
   const [moreOpen, setMoreOpen] = useState(false);
   const moreRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    function onClickOutside(e: MouseEvent) {
+    function onOutside(e: Event) {
       if (moreRef.current && !moreRef.current.contains(e.target as Node)) {
         setMoreOpen(false);
       }
     }
-    if (moreOpen) document.addEventListener('mousedown', onClickOutside);
-    return () => document.removeEventListener('mousedown', onClickOutside);
+    if (moreOpen) {
+      document.addEventListener('mousedown', onOutside);
+      document.addEventListener('touchstart', onOutside, { passive: true });
+    }
+    return () => {
+      document.removeEventListener('mousedown', onOutside);
+      document.removeEventListener('touchstart', onOutside);
+    };
   }, [moreOpen]);
+
+  const prefillBtn = view === 'groepsfase' && inputMode !== 'drag'
+    ? { label: NL.header.prefill, action: onPrefill }
+    : view === 'knockout'
+    ? { label: NL.header.prefillKnockout, action: onPrefillKnockout }
+    : null;
 
   return (
     <header
-      className="sticky top-0 z-20 backdrop-blur-md px-4 py-2.5"
-      style={{ background: 'var(--bg-panel)', borderBottom: '1px solid var(--border)' }}
+      className="sim-header sticky top-0 z-20 px-4"
+      style={{ WebkitTransform: 'translateZ(0)', transform: 'translateZ(0)' }}
     >
-      <div className="max-w-7xl mx-auto flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-        {/* Logo + view toggle */}
-        <div className="flex items-center gap-3">
-          <Link href="/" className="shrink-0 hover:opacity-70 transition-opacity" aria-label="Terug naar home">
-            <Logo size="sm" />
-          </Link>
-          <span className="text-xs opacity-20" aria-hidden="true" style={{ color: 'var(--fg)' }}>/</span>
+      <div className="max-w-7xl mx-auto">
 
-          <h1 className="font-display text-2xl leading-none tracking-wider shrink-0" style={{ color: 'var(--fg)' }}>
-            <span style={{ color: 'var(--gold)' }}>WK</span>
-            {' '}2026
-          </h1>
+        {/* ── Row 1: Brand + meta actions ── */}
+        <div className="flex items-center justify-between pt-3 pb-1">
+          <div className="flex items-center gap-2.5 min-w-0">
+            <Link
+              href="/"
+              className="shrink-0 hover:opacity-70 transition-opacity min-h-[44px] flex items-center"
+              aria-label="Terug naar home"
+            >
+              <Logo size="sm" />
+            </Link>
+            <span className="c-fg text-xs opacity-20" aria-hidden="true">/</span>
+            <h1 className="font-display text-xl leading-none tracking-wider shrink-0 c-fg">
+              <span className="c-gold">WK</span>
+              {' '}2026
+            </h1>
+            <LiveIndicator status={liveStatus} onRefresh={onRefreshLive} />
+          </div>
 
-          {/* View toggle */}
+          <div className="flex items-center gap-1.5 shrink-0">
+            <ShareButton />
+            <ThemeToggle />
+          </div>
+        </div>
+
+        {/* ── Row 2: View toggle + Mode selector + More ── */}
+        <div className="flex items-center gap-1.5 pb-3">
+
+          {/* ViewToggle — stretches full width on mobile */}
           <div
-            className="flex rounded-lg p-0.5 gap-0.5"
-            style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}
+            className="view-toggle flex rounded-lg p-0.5 gap-0.5 flex-1 sm:flex-none"
             role="group"
             aria-label="Weergave"
           >
-            {(['groepsfase', 'bracket'] as View[]).map((v) => (
+            {(['groepsfase', 'knockout'] as View[]).map((v) => (
               <motion.button
                 key={v}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => onViewChange(v)}
                 aria-pressed={view === v}
-                className="relative px-2.5 py-1 rounded-md text-xs font-semibold transition-colors"
-                style={{ color: view === v ? 'var(--fg)' : 'var(--fg-subtle)' }}
+                className={`relative flex-1 sm:flex-none px-2.5 min-h-[44px] flex items-center justify-center rounded-md text-xs font-semibold transition-colors ${view === v ? 'c-fg' : 'c-fg-subtle'}`}
               >
                 {view === v && (
                   <motion.span
                     layoutId="header-view-pill"
-                    className="absolute inset-0 rounded-md"
-                    style={{ background: 'var(--border)' }}
+                    className="absolute inset-0 rounded-md view-pill"
+                    style={{ pointerEvents: 'none' }}
                     transition={{ type: 'spring', stiffness: 400, damping: 35 }}
                   />
                 )}
-                <span className="relative">{v === 'groepsfase' ? 'Groepsfase' : 'Bracket'}</span>
+                <span className="relative">{v === 'groepsfase' ? 'GROEPSFASE' : 'KNOCK-OUT'}</span>
               </motion.button>
             ))}
           </div>
 
-          <LiveIndicator status={liveStatus} onRefresh={onRefreshLive} />
-        </div>
-
-        {/* Controls */}
-        <div className="flex items-center gap-2">
-          {view === 'groepsfase' && (
-            <div
-              className="flex rounded-lg p-0.5 gap-0.5"
-              style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}
-              role="group"
-              aria-label="Invoermodus"
+          {/* Prefill + Reset — desktop only */}
+          {prefillBtn && (
+            <motion.button
+              whileTap={{ scale: 0.95 }}
+              onClick={prefillBtn.action}
+              className="ctrl-btn c-fg-muted hidden sm:flex items-center px-2.5 min-h-[44px] text-xs font-semibold rounded-lg transition-colors shrink-0"
             >
-              {(['exact', 'quick'] as InputMode[]).map((mode) => (
-                <Tooltip
-                  key={mode}
-                  text={mode === 'exact' ? 'Vul exacte scores in (bijv. 2–1)' : 'Kies alleen W / G / V per wedstrijd'}
-                >
-                  <motion.button
-                    whileTap={{ scale: 0.95 }}
-                    onClick={() => onInputModeChange(mode)}
-                    aria-pressed={inputMode === mode}
-                    className="px-2.5 py-1 rounded-md text-xs font-semibold transition-all"
-                    style={{
-                      background: inputMode === mode ? 'var(--border)' : 'transparent',
-                      color: inputMode === mode ? 'var(--fg)' : 'var(--fg-subtle)',
-                    }}
-                  >
-                    {mode === 'exact' ? NL.modes.exact : NL.modes.quick}
-                  </motion.button>
-                </Tooltip>
-              ))}
-            </div>
+              {prefillBtn.label}
+            </motion.button>
           )}
-
           <motion.button
-            whileTap={{ scale: 0.95 }} onClick={onPrefill}
-            className="hidden sm:block px-2.5 py-1 text-xs font-semibold rounded-lg transition-colors"
-            style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', color: 'var(--fg-muted)' }}
-          >
-            {NL.header.prefill}
-          </motion.button>
-          <motion.button
-            whileTap={{ scale: 0.95 }} onClick={onReset}
-            className="hidden sm:block px-2.5 py-1 text-xs font-semibold rounded-lg transition-colors"
-            style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', color: 'var(--fg-subtle)' }}
+            whileTap={{ scale: 0.95 }}
+            onClick={onReset}
+            className="ctrl-btn c-fg-subtle hidden sm:flex items-center px-2.5 min-h-[44px] text-xs font-semibold rounded-lg transition-colors shrink-0"
           >
             {NL.header.reset}
           </motion.button>
 
-          {/* ⋯ dropdown — alleen mobiel */}
-          <div className="relative sm:hidden" ref={moreRef}>
+          {/* ⋯ dropdown — mobiel only */}
+          <div className="relative sm:hidden shrink-0" ref={moreRef}>
             <motion.button
               whileTap={{ scale: 0.95 }}
               onClick={() => setMoreOpen((v) => !v)}
-              className="px-2.5 py-1 text-xs font-bold rounded-lg transition-colors"
-              style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', color: 'var(--fg-muted)' }}
+              className="ctrl-btn c-fg-muted min-w-[44px] min-h-[44px] flex items-center justify-center text-sm font-bold rounded-lg transition-colors"
               aria-label="Meer opties"
             >
               ⋯
@@ -180,20 +172,19 @@ export function SimulatorHeader({
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.95, y: -4 }}
                   transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-                  className="absolute right-0 top-full mt-1 z-30 rounded-xl shadow-xl overflow-hidden min-w-[9rem]"
-                  style={{ background: 'var(--bg-panel)', border: '1px solid var(--border)' }}
+                  className="dropdown absolute right-0 top-full mt-1 z-30 rounded-xl shadow-xl overflow-hidden min-w-[9rem]"
                 >
-                  <button
-                    onClick={() => { onPrefill(); setMoreOpen(false); }}
-                    className="w-full text-left px-4 py-2.5 text-xs font-semibold transition-colors hover:opacity-70"
-                    style={{ color: 'var(--fg-muted)' }}
-                  >
-                    {NL.header.prefill}
-                  </button>
+                  {prefillBtn && (
+                    <button
+                      onClick={() => { prefillBtn.action(); setMoreOpen(false); }}
+                      className="c-fg-muted w-full text-left px-4 py-3 text-xs font-semibold transition-colors hover:opacity-70"
+                    >
+                      {prefillBtn.label}
+                    </button>
+                  )}
                   <button
                     onClick={() => { onReset(); setMoreOpen(false); }}
-                    className="w-full text-left px-4 py-2.5 text-xs font-semibold transition-colors hover:opacity-70"
-                    style={{ color: 'var(--fg-subtle)', borderTop: '1px solid var(--border)' }}
+                    className={`c-fg-subtle w-full text-left px-4 py-3 text-xs font-semibold transition-colors hover:opacity-70 ${prefillBtn ? 'dropdown-item-border' : ''}`}
                   >
                     {NL.header.reset}
                   </button>
@@ -201,10 +192,8 @@ export function SimulatorHeader({
               )}
             </AnimatePresence>
           </div>
-
-          <ShareButton />
-          <ThemeToggle />
         </div>
+
       </div>
     </header>
   );

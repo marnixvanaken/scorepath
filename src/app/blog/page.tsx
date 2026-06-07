@@ -43,7 +43,7 @@ export default async function BlogPage() {
   const posts = combined;
 
   return (
-    <div className="min-h-dvh bg-[#080808] text-slate-100 flex flex-col">
+    <div className="min-h-dvh bg-panel text-slate-100 flex flex-col">
 
       <nav className="px-6 py-4 border-b border-[#141414]">
         <div className="max-w-5xl mx-auto flex items-center justify-between">
@@ -68,7 +68,7 @@ export default async function BlogPage() {
       <main className="flex-1">
         <section className="px-6 pt-16 pb-10">
           <div className="max-w-5xl mx-auto">
-            <p className="text-[11px] font-bold text-slate-600 uppercase tracking-widest mb-3">
+            <p className="text-xs font-bold text-slate-600 uppercase tracking-widest mb-3">
               ScorePath Blog
             </p>
             <h1 className="font-display text-5xl sm:text-6xl text-white mb-4">
@@ -94,7 +94,7 @@ export default async function BlogPage() {
                       <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-orange-500/10 text-orange-400 border border-orange-500/20 uppercase tracking-widest">
                         {post.category}
                       </span>
-                      <span className="text-[11px] text-slate-600">
+                      <span className="text-xs text-slate-600">
                         {post.readTime} min lezen
                       </span>
                     </div>
@@ -108,7 +108,7 @@ export default async function BlogPage() {
                     </p>
 
                     <div className="flex items-center justify-between">
-                      <span className="text-[11px] text-slate-700">
+                      <span className="text-xs text-slate-700">
                         {new Date(post.date).toLocaleDateString('nl-NL', {
                           day: 'numeric',
                           month: 'long',
@@ -133,7 +133,7 @@ export default async function BlogPage() {
       <footer className="border-t border-[#141414] px-6 py-6">
         <div className="max-w-5xl mx-auto flex items-center justify-between">
           <Logo size="sm" />
-          <p className="text-[11px] text-slate-700">
+          <p className="text-xs text-slate-700">
             WK 2026 · 48 teams · 12 groepen
           </p>
         </div>

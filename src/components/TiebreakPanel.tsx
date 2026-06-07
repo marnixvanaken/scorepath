@@ -15,7 +15,7 @@ interface Props {
 }
 
 const POSITION_LABELS = ['1e', '2e', '3e', '4e'];
-const POSITION_COLORS = ['text-emerald-400', 'text-emerald-400', 'text-[--color-wk-gold]', 'text-slate-500'];
+const POSITION_COLORS = ['text-emerald-400', 'text-emerald-400', 'text-[#C9A843]', 'text-slate-500'];
 
 export function TiebreakPanel({ tiedGroups, manualOrders, onSetManualOrder, onClearManual }: Props) {
   const [open, setOpen] = useState(true);
@@ -23,13 +23,13 @@ export function TiebreakPanel({ tiedGroups, manualOrders, onSetManualOrder, onCl
   if (relevant.length === 0) return null;
 
   return (
-    <div className="mt-2 rounded-lg border border-[--color-wk-gold]/25 bg-[--color-wk-gold]/5 overflow-hidden">
+    <div className="mt-2 rounded-lg border border-[#C9A843]/25 bg-[#C9A843]/5 overflow-hidden">
       <button
         className="w-full flex items-center gap-2 px-3 py-2 text-left"
         onClick={() => setOpen((v) => !v)}
       >
-        <span className="text-[--color-wk-gold] text-[11px]">⚠</span>
-        <span className="text-xs font-bold text-[--color-wk-gold-lt] flex-1 uppercase tracking-wide">
+        <span className="text-[#C9A843] text-[11px]">⚠</span>
+        <span className="text-xs font-bold text-[#E2C46A] flex-1 uppercase tracking-wide">
           Gelijkstand — kies volgorde
         </span>
         <span className="text-slate-500 text-[10px]">{open ? '▲' : '▼'}</span>
@@ -64,9 +64,9 @@ export function TiebreakPanel({ tiedGroups, manualOrders, onSetManualOrder, onCl
                 return (
                   <div key={key}>
                     <div className="flex items-center justify-between mb-2">
-                      <span className="text-[10px] text-slate-400">
+                      <span className="text-[11px] text-slate-400">
                         Positie {group.positions.map((p) => POSITION_LABELS[p]).join(' & ')} gelijk —{' '}
-                        <span className="text-[--color-wk-gold]">
+                        <span className="text-[#C9A843]">
                           {group.positions.some((p) => p >= 2)
                             ? 'bepaalt wie naar nummers 3 gaat'
                             : 'bepaalt bracketpositie'}
@@ -75,7 +75,7 @@ export function TiebreakPanel({ tiedGroups, manualOrders, onSetManualOrder, onCl
                       {manualOrders[key] && (
                         <button
                           onClick={() => onClearManual(key)}
-                          className="text-[10px] text-slate-500 hover:text-slate-300 transition-colors ml-2 shrink-0"
+                          className="text-[11px] text-slate-500 hover:text-slate-300 transition-colors ml-2 shrink-0"
                         >
                           Wissen
                         </button>
@@ -88,10 +88,10 @@ export function TiebreakPanel({ tiedGroups, manualOrders, onSetManualOrder, onCl
                         const team = teamById(teamId);
                         return (
                           <div key={teamId} className="flex items-center gap-2">
-                            <span className={`text-[10px] font-bold w-4 text-right tabular-nums shrink-0 ${POSITION_COLORS[pos]}`}>
+                            <span className={`text-[11px] font-bold w-4 text-right tabular-nums shrink-0 ${POSITION_COLORS[pos]}`}>
                               {POSITION_LABELS[pos]}
                             </span>
-                            <div className="flex items-center gap-1.5 flex-1 bg-[--color-wk-card] rounded px-2 py-1.5 min-w-0">
+                            <div className="flex items-center gap-1.5 flex-1 bg-card rounded px-2 py-1.5 min-w-0">
                               <Flag teamId={teamId} size={14} />
                               <span className="text-[11px] font-semibold text-slate-200 uppercase tracking-wide truncate">
                                 {team?.name ?? teamId}

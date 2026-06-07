@@ -48,12 +48,10 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="nl" className={`${bebasNeue.variable} ${barlowCondensed.variable} h-full antialiased`}>
-      <head>
-        {/* Geen flash bij laden: theme uit localStorage voor hydration */}
-        <script dangerouslySetInnerHTML={{ __html: `(function(){try{var t=localStorage.getItem('theme');if(t==='light')document.documentElement.dataset.theme='light';}catch(e){}})();` }} />
-      </head>
-      <body className="min-h-full flex flex-col font-ui">
+    <html lang="nl" className={`${bebasNeue.variable} ${barlowCondensed.variable} h-full antialiased`} suppressHydrationWarning>
+      <body className="min-h-full font-ui">
+        {/* Theme init: run vóór eerste paint om flash te voorkomen */}
+        <script dangerouslySetInnerHTML={{ __html: `(function(){try{var t=localStorage.getItem('theme');if(t==='light'){document.documentElement.dataset.theme='light';}else if(!t&&window.matchMedia('(prefers-color-scheme: light)').matches){document.documentElement.dataset.theme='light';}}catch(e){}})();` }} />
         {children}
         <Toaster />
       </body>

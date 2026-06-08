@@ -103,7 +103,6 @@ export function SimulatorHeader({
               <span className="c-gold">WK</span>
               {' '}2026
             </h1>
-            <LiveIndicator status={liveStatus} onRefresh={onRefreshLive} />
           </div>
 
           <div className="flex items-center gap-1.5 shrink-0">

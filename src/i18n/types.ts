@@ -179,4 +179,14 @@ export interface Messages {
     decline: string;
     privacyLabel: string;
   };
+  modal: {
+    groupComplete: string;
+    groupCompleteDesc: string;
+    knockoutComplete: string;
+    knockoutCompleteDesc: string;
+    toKnockout: string;
+    toCard: string;
+    back: string;
+    close: string;
+  };
 }

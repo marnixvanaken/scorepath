@@ -181,4 +181,14 @@ export const NL: Messages = {
     decline: 'Weigeren',
     privacyLabel: 'Meer info',
   },
+  modal: {
+    groupComplete: 'Groepsfase voltooid!',
+    groupCompleteDesc: 'Alle groepen zijn ingevuld. Ga door naar de knockoutfase.',
+    knockoutComplete: 'Wereldkampioen!',
+    knockoutCompleteDesc: 'Jouw simulatie is klaar. Bekijk je gepersonaliseerde kaart.',
+    toKnockout: 'Knockoutfase',
+    toCard: 'Mijn kaart',
+    back: 'Terug',
+    close: 'Sluiten',
+  },
 };

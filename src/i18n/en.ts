@@ -181,4 +181,14 @@ export const EN: Messages = {
     decline: 'Decline',
     privacyLabel: 'Learn more',
   },
+  modal: {
+    groupComplete: 'Group Stage Complete!',
+    groupCompleteDesc: 'All groups are filled in. Continue to the knockout stage.',
+    knockoutComplete: 'World Champion!',
+    knockoutCompleteDesc: 'Your simulation is done. View your personalised card.',
+    toKnockout: 'Knockout Stage',
+    toCard: 'My Card',
+    back: 'Back',
+    close: 'Close',
+  },
 };

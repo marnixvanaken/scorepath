@@ -181,4 +181,14 @@ export const ES: Messages = {
     decline: 'Rechazar',
     privacyLabel: 'Más info',
   },
+  modal: {
+    groupComplete: '¡Fase de grupos completa!',
+    groupCompleteDesc: 'Todos los grupos están completados. Continúa a la fase eliminatoria.',
+    knockoutComplete: '¡Campeón del mundo!',
+    knockoutCompleteDesc: 'Tu simulación está lista. Mira tu tarjeta personalizada.',
+    toKnockout: 'Fase eliminatoria',
+    toCard: 'Mi tarjeta',
+    back: 'Volver',
+    close: 'Cerrar',
+  },
 };

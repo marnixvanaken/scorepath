@@ -1,13 +1,15 @@
 'use client';
 
-import { useMemo, useState, useCallback } from 'react';
+import { useMemo, useState, useCallback, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import { useParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useSimulatorState, type InputMode } from '@/hooks/useSimulatorState';
 import { useKnockoutState } from '@/hooks/useKnockoutState';
 import { useTiebreakState } from '@/hooks/useTiebreakState';
-import { computeAllGroups, rankThirdPlaced, getQualifiers } from '@/lib/standings';
+import { computeAllGroups, rankThirdPlaced, getQualifiers, isGroupComplete } from '@/lib/standings';
 import { encodeResults } from '@/lib/serialization';
-import { encodeKnockout } from '@/lib/bracket';
+import { encodeKnockout, buildBracket } from '@/lib/bracket';
 import { prefillResults } from '@/lib/prefill';
 import { GROUP_IDS, groupFixtures, teamById } from '@/data/worldcup2026';
 import type { GroupId, Qualifiers, ThirdPlaceRank } from '@/lib/types';
@@ -18,6 +20,7 @@ import { SimulatorHeader } from '@/components/SimulatorHeader';
 import { BracketView } from '@/components/BracketView';
 import { EmptyState } from '@/components/EmptyState';
 import { TeamPickerButton } from '@/components/TeamPickerButton';
+import { CompletionModal } from '@/components/CompletionModal';
 
 type View = 'groepsfase' | 'knockout';
 
@@ -39,11 +42,20 @@ function getDragQualifiers(
 
 export default function SimulatorClient({ initialMode, initialView = 'groepsfase' }: { initialMode: InputMode; initialView?: 'groepsfase' | 'knockout' }) {
   const t = useMessages();
+  const params = useParams();
+  const lang = typeof params?.lang === 'string' ? params.lang : 'nl';
+  const router = useRouter();
   const { results, inputMode, liveStatus, setResult, setInputMode, reset, prefill, refreshLive } = useSimulatorState(initialMode);
   const { kr, pick, resetKnockout, prefillKnockout } = useKnockoutState();
   const [tbState, tbActions] = useTiebreakState();
   const [view, setView] = useState<View>(initialView);
   const [confirmReset, setConfirmReset] = useState(false);
+
+  // Popup state
+  const [showGroupModal, setShowGroupModal] = useState(false);
+  const [showKnockoutModal, setShowKnockoutModal] = useState(false);
+  const groupModalFired = useRef(false);
+  const knockoutModalFired = useRef(false);
 
   // dragOrders start empty; filled as user clicks teams in Volgorde mode
   const [groupDragOrders, setGroupDragOrders] = useState<Record<GroupId, string[]>>(
@@ -76,6 +88,10 @@ export default function SimulatorClient({ initialMode, initialView = 'groepsfase
     resetKnockout();
     setGroupDragOrders(Object.fromEntries(GROUP_IDS.map((g) => [g, [] as string[]])) as Record<GroupId, string[]>);
     setConfirmReset(false);
+    groupModalFired.current = false;
+    knockoutModalFired.current = false;
+    setShowGroupModal(false);
+    setShowKnockoutModal(false);
   }
 
   const manualOrder = useMemo(
@@ -103,6 +119,40 @@ export default function SimulatorClient({ initialMode, initialView = 'groepsfase
 
   const encodedS = useMemo(() => encodeResults(results), [results]);
   const encodedK = useMemo(() => encodeKnockout(kr), [kr]);
+
+  // Groepsfase voltooid?
+  const groupStageComplete = useMemo(() => {
+    if (inputMode === 'drag') return GROUP_IDS.every((g) => (groupDragOrders[g]?.length ?? 0) === 4);
+    return GROUP_IDS.every((g) => isGroupComplete(results, g));
+  }, [inputMode, groupDragOrders, results]);
+
+  // Knockout-winnaar
+  const knockoutWinner = useMemo(() => {
+    const { final: fm } = buildBracket(qualifiers, kr);
+    const slot = kr[fm.id];
+    if (!slot) return null;
+    return (slot === 1 ? fm.slot1.teamId : fm.slot2.teamId) ?? null;
+  }, [qualifiers, kr]);
+
+  // Trigger groepsfase-popup
+  useEffect(() => {
+    if (view === 'groepsfase' && groupStageComplete && !groupModalFired.current) {
+      groupModalFired.current = true;
+      setShowGroupModal(true);
+    } else if (!groupStageComplete) {
+      groupModalFired.current = false;
+    }
+  }, [groupStageComplete, view]);
+
+  // Trigger knockout-popup
+  useEffect(() => {
+    if (view === 'knockout' && knockoutWinner && !knockoutModalFired.current) {
+      knockoutModalFired.current = true;
+      setShowKnockoutModal(true);
+    } else if (!knockoutWinner) {
+      knockoutModalFired.current = false;
+    }
+  }, [knockoutWinner, view]);
 
   return (
     <div className="min-h-dvh bg-themed c-fg">
@@ -252,6 +302,37 @@ export default function SimulatorClient({ initialMode, initialView = 'groepsfase
           </div>
         )}
       </main>
+
+      {/* Groepsfase voltooid */}
+      <CompletionModal
+        visible={showGroupModal}
+        title={t.modal.groupComplete}
+        description={t.modal.groupCompleteDesc}
+        primaryLabel={t.modal.toKnockout}
+        secondaryLabel={t.modal.back}
+        onPrimary={() => {
+          setShowGroupModal(false);
+          setView('knockout');
+          window.scrollTo({ top: 0, behavior: 'instant' });
+        }}
+        onClose={() => setShowGroupModal(false)}
+      />
+
+      {/* Knockout-winnaar */}
+      <CompletionModal
+        visible={showKnockoutModal}
+        title={t.modal.knockoutComplete}
+        description={t.modal.knockoutCompleteDesc}
+        primaryLabel={t.modal.toCard}
+        secondaryLabel={t.modal.back}
+        teamId={knockoutWinner}
+        onPrimary={() => {
+          if (!knockoutWinner) return;
+          const cardHref = `/${lang}/wk-2026/card?team=${knockoutWinner}&s=${encodedS}${encodedK ? `&k=${encodedK}` : ''}`;
+          router.push(cardHref);
+        }}
+        onClose={() => setShowKnockoutModal(false)}
+      />
     </div>
   );
 }

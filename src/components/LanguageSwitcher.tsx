@@ -76,7 +76,10 @@ export function LanguageSwitcher() {
                   href={hrefFor(lang)}
                   role="option"
                   aria-selected={isActive}
-                  onClick={() => setOpen(false)}
+                  onClick={() => {
+                    document.cookie = `locale-pref=${lang};path=/;max-age=${60 * 60 * 24 * 365};SameSite=Lax`;
+                    setOpen(false);
+                  }}
                   className={`flex items-center gap-2.5 px-4 py-2.5 text-[11px] font-bold transition-opacity hover:opacity-70 ${
                     isActive ? 'c-fg' : 'c-fg-subtle'
                   }`}

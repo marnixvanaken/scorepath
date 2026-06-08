@@ -175,4 +175,10 @@ export const EN: Messages = {
     myCard: 'MY CARD',
     shareLink: 'SHARE LINK',
   },
+  cookie: {
+    text: 'We use anonymous analytics cookies to improve this site.',
+    accept: 'Accept',
+    decline: 'Decline',
+    privacyLabel: 'Learn more',
+  },
 };

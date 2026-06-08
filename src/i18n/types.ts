@@ -173,4 +173,10 @@ export interface Messages {
     myCard: string;
     shareLink: string;
   };
+  cookie: {
+    text: string;
+    accept: string;
+    decline: string;
+    privacyLabel: string;
+  };
 }

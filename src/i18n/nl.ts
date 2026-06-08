@@ -175,4 +175,10 @@ export const NL: Messages = {
     myCard: 'MIJN KAART',
     shareLink: 'DEEL LINK',
   },
+  cookie: {
+    text: 'We gebruiken cookies voor anonieme statistieken om de site te verbeteren.',
+    accept: 'Accepteren',
+    decline: 'Weigeren',
+    privacyLabel: 'Meer info',
+  },
 };

@@ -4,6 +4,7 @@ import Script from 'next/script';
 import '../globals.css';
 import { SITE_URL, SITE_NAME } from '@/lib/siteConfig';
 import { Toaster } from '@/components/Toaster';
+import { CookieBanner } from '@/components/CookieBanner';
 import { LOCALES, DEFAULT_LOCALE, isLocale, getHtmlLang } from '@/i18n';
 
 const bebasNeue = Bebas_Neue({
@@ -106,6 +107,7 @@ export default async function LocaleLayout({
         />
         {children}
         <Toaster />
+        <CookieBanner />
         <Script
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1392037508470232"
           crossOrigin="anonymous"
@@ -119,7 +121,7 @@ export default async function LocaleLayout({
           id="ga4-init"
           strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
-            __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});gtag('js',new Date());gtag('config','G-XMHT2LS1P6');`,
+            __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}var _cc=null;try{_cc=localStorage.getItem('cookie-consent');}catch(e){}gtag('consent','default',{'analytics_storage':_cc==='granted'?'granted':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':_cc?0:800});gtag('js',new Date());gtag('config','G-XMHT2LS1P6');`,
           }}
         />
       </body>

@@ -3,8 +3,10 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'motion/react';
-import { TEAMS } from '@/data/worldcup2026';
+import { TEAMS, getTeamName } from '@/data/worldcup2026';
+import { useParams } from 'next/navigation';
 import { Flag } from './Flag';
+import { useMessages } from '@/hooks/useMessages';
 
 interface Props {
   s: string;
@@ -12,6 +14,9 @@ interface Props {
 }
 
 export function TeamPickerButton({ s, k }: Props) {
+  const msg = useMessages();
+  const params = useParams();
+  const lang = typeof params?.lang === 'string' ? params.lang : 'nl';
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState('');
   const panelRef = useRef<HTMLDivElement>(null);
@@ -34,8 +39,9 @@ export function TeamPickerButton({ s, k }: Props) {
   }, [open]);
 
   const filtered = TEAMS.filter((t) =>
-    t.name.toLowerCase().includes(query.toLowerCase()) ||
+    getTeamName(t, lang).toLowerCase().includes(query.toLowerCase()) ||
     t.nameEn.toLowerCase().includes(query.toLowerCase()) ||
+    t.name.toLowerCase().includes(query.toLowerCase()) ||
     t.id.toLowerCase().includes(query.toLowerCase())
   ).slice(0, 12);
 
@@ -63,7 +69,7 @@ export function TeamPickerButton({ s, k }: Props) {
           <line x1="2" y1="17" x2="7" y2="17" /><line x1="17" y1="17" x2="22" y2="17" />
           <line x1="17" y1="7" x2="22" y2="7" />
         </svg>
-        Mijn kaart
+        {msg.teamPicker.myCard}
       </motion.button>
 
       <AnimatePresence>
@@ -78,12 +84,12 @@ export function TeamPickerButton({ s, k }: Props) {
           >
             <div className="p-3" style={{ borderBottom: '1px solid var(--border)' }}>
               <p className="text-[10px] font-bold tracking-widest uppercase mb-2" style={{ color: 'var(--fg-subtle)' }}>
-                Kies jouw land
+                {msg.teamPicker.chooseCountry}
               </p>
               <input
                 autoFocus
                 type="text"
-                placeholder="Zoek een land..."
+                placeholder={msg.teamPicker.searchPlaceholder}
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 className="w-full text-xs px-3 py-2 rounded-md outline-none"
@@ -107,13 +113,13 @@ export function TeamPickerButton({ s, k }: Props) {
                   }}
                 >
                   <Flag teamId={team.id} size={20} />
-                  <span>{team.name}</span>
+                  <span>{getTeamName(team, lang)}</span>
                   <span className="ml-auto opacity-30 font-mono text-[10px]">{team.id}</span>
                 </button>
               ))}
               {filtered.length === 0 && (
                 <p className="px-4 py-6 text-xs text-center" style={{ color: 'var(--fg-subtle)' }}>
-                  Geen team gevonden
+                  {msg.teamPicker.noTeamFound}
                 </p>
               )}
             </div>

@@ -1,8 +1,10 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useMessages } from '@/hooks/useMessages';
 
 export function ThemeToggle() {
+  const msg = useMessages();
   const [mounted, setMounted] = useState(false);
   const [theme, setTheme] = useState<'dark' | 'light'>('dark');
 
@@ -31,7 +33,7 @@ export function ThemeToggle() {
     <button
       onClick={toggle}
       className="c-fg-muted min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg transition-opacity hover:opacity-70"
-      aria-label={theme === 'dark' ? 'Schakel naar licht thema' : 'Schakel naar donker thema'}
+      aria-label={theme === 'dark' ? msg.theme.toLight : msg.theme.toDark}
     >
       {theme === 'dark' ? (
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>

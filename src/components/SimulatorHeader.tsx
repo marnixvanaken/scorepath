@@ -2,17 +2,18 @@
 
 import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
+import { useParams } from 'next/navigation';
 import { motion, AnimatePresence } from 'motion/react';
 import { ShareButton } from './ShareButton';
 import { Logo } from './Logo';
 import { ThemeToggle } from './ThemeToggle';
+import { LanguageSwitcher } from './LanguageSwitcher';
 import { type InputMode, type LiveStatus } from '@/hooks/useSimulatorState';
-import { NL } from '@/i18n/nl';
+import { useMessages } from '@/hooks/useMessages';
 
 type View = 'groepsfase' | 'knockout';
 
 interface Props {
-  inputMode: InputMode;
   liveStatus: LiveStatus;
   view: View;
   onViewChange: (v: View) => void;
@@ -23,13 +24,14 @@ interface Props {
 }
 
 function LiveIndicator({ status, onRefresh }: { status: LiveStatus; onRefresh: () => void }) {
+  const msg = useMessages();
   if (status === 'loading') {
     return (
       <span className="c-fg-subtle flex items-center gap-1.5 text-[11px]">
         <svg className="animate-spin shrink-0" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" aria-hidden="true">
           <path d="M21 12a9 9 0 1 1-6.219-8.56" />
         </svg>
-        {NL.header.liveLoading}
+        {msg.header.liveLoading}
       </span>
     );
   }
@@ -40,7 +42,7 @@ function LiveIndicator({ status, onRefresh }: { status: LiveStatus; onRefresh: (
         className="c-gold flex items-center gap-1 text-[11px] min-h-[44px] transition-opacity hover:opacity-70"
       >
         <span className="w-1.5 h-1.5 rounded-full bg-[var(--gold)]" />
-        {NL.header.liveError} — {NL.header.liveRefresh}
+        {msg.header.liveError} — {msg.header.liveRefresh}
       </button>
     );
   }
@@ -48,9 +50,12 @@ function LiveIndicator({ status, onRefresh }: { status: LiveStatus; onRefresh: (
 }
 
 export function SimulatorHeader({
-  inputMode, liveStatus, view,
+  liveStatus, view,
   onViewChange, onReset, onPrefill, onPrefillKnockout, onRefreshLive,
 }: Props) {
+  const msg = useMessages();
+  const params = useParams();
+  const lang = typeof params?.lang === 'string' ? params.lang : 'nl';
   const [moreOpen, setMoreOpen] = useState(false);
   const moreRef = useRef<HTMLDivElement>(null);
 
@@ -70,10 +75,10 @@ export function SimulatorHeader({
     };
   }, [moreOpen]);
 
-  const prefillBtn = view === 'groepsfase' && inputMode !== 'drag'
-    ? { label: NL.header.prefill, action: onPrefill }
+  const prefillBtn = view === 'groepsfase'
+    ? { label: msg.header.prefill, action: onPrefill }
     : view === 'knockout'
-    ? { label: NL.header.prefillKnockout, action: onPrefillKnockout }
+    ? { label: msg.header.prefillKnockout, action: onPrefillKnockout }
     : null;
 
   return (
@@ -87,9 +92,9 @@ export function SimulatorHeader({
         <div className="flex items-center justify-between pt-3 pb-1">
           <div className="flex items-center gap-2.5 min-w-0">
             <Link
-              href="/"
+              href={`/${lang}`}
               className="shrink-0 hover:opacity-70 transition-opacity min-h-[44px] flex items-center"
-              aria-label="Terug naar home"
+              aria-label={msg.header.backToHome}
             >
               <Logo size="sm" />
             </Link>
@@ -102,6 +107,7 @@ export function SimulatorHeader({
           </div>
 
           <div className="flex items-center gap-1.5 shrink-0">
+            <LanguageSwitcher />
             <ShareButton />
             <ThemeToggle />
           </div>
@@ -114,7 +120,7 @@ export function SimulatorHeader({
           <div
             className="view-toggle flex rounded-lg p-0.5 gap-0.5 flex-1 sm:flex-none"
             role="group"
-            aria-label="Weergave"
+            aria-label={msg.header.viewLabel}
           >
             {(['groepsfase', 'knockout'] as View[]).map((v) => (
               <motion.button
@@ -132,7 +138,7 @@ export function SimulatorHeader({
                     transition={{ type: 'spring', stiffness: 400, damping: 35 }}
                   />
                 )}
-                <span className="relative">{v === 'groepsfase' ? 'GROEPSFASE' : 'KNOCK-OUT'}</span>
+                <span className="relative">{v === 'groepsfase' ? msg.header.groupPhase : msg.header.knockout}</span>
               </motion.button>
             ))}
           </div>
@@ -150,9 +156,9 @@ export function SimulatorHeader({
           <motion.button
             whileTap={{ scale: 0.95 }}
             onClick={onReset}
-            className="ctrl-btn c-fg-subtle hidden sm:flex items-center px-2.5 min-h-[44px] text-xs font-semibold rounded-lg transition-colors shrink-0"
+            className="hidden sm:flex items-center px-2.5 min-h-[44px] text-xs font-semibold rounded-lg transition-colors shrink-0 text-white bg-red-700 hover:bg-red-600"
           >
-            {NL.header.reset}
+            {msg.header.reset}
           </motion.button>
 
           {/* ⋯ dropdown — mobiel only */}
@@ -161,7 +167,7 @@ export function SimulatorHeader({
               whileTap={{ scale: 0.95 }}
               onClick={() => setMoreOpen((v) => !v)}
               className="ctrl-btn c-fg-muted min-w-[44px] min-h-[44px] flex items-center justify-center text-sm font-bold rounded-lg transition-colors"
-              aria-label="Meer opties"
+              aria-label={msg.header.moreOptions}
             >
               ⋯
             </motion.button>
@@ -184,9 +190,9 @@ export function SimulatorHeader({
                   )}
                   <button
                     onClick={() => { onReset(); setMoreOpen(false); }}
-                    className={`c-fg-subtle w-full text-left px-4 py-3 text-xs font-semibold transition-colors hover:opacity-70 ${prefillBtn ? 'dropdown-item-border' : ''}`}
+                    className={`w-full text-left px-4 py-3 text-xs font-semibold transition-colors hover:opacity-70 text-red-400 ${prefillBtn ? 'dropdown-item-border' : ''}`}
                   >
-                    {NL.header.reset}
+                    {msg.header.reset}
                   </button>
                 </motion.div>
               )}

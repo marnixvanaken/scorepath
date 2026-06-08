@@ -2,10 +2,11 @@
 
 import { motion } from 'motion/react';
 import type { MatchResult, GroupId } from '@/lib/types';
-import { teamById, GROUP_COLORS } from '@/data/worldcup2026';
+import { teamById, GROUP_COLORS, getTeamName } from '@/data/worldcup2026';
 import { getResultForMatch, type InputMode } from '@/hooks/useSimulatorState';
+import { useParams } from 'next/navigation';
 import { Flag } from './Flag';
-import { NL } from '@/i18n/nl';
+import { useMessages } from '@/hooks/useMessages';
 
 interface Props {
   group: GroupId;
@@ -29,6 +30,9 @@ const ROW_GRID = 'grid items-center gap-x-2 py-2 px-2';
 const GRID_COLS = { gridTemplateColumns: '10px 24px 1fr auto 1fr 24px' };
 
 export function MatchInputRow({ group, homeId, awayId, results, inputMode, onResult }: Props) {
+  const msg = useMessages();
+  const params = useParams();
+  const lang = typeof params?.lang === 'string' ? params.lang : 'nl';
   const home = teamById(homeId)!;
   const away = teamById(awayId)!;
   const current = getResultForMatch(results, group, homeId, awayId);
@@ -49,8 +53,8 @@ export function MatchInputRow({ group, homeId, awayId, results, inputMode, onRes
   const nameCls = (id: string) =>
     `text-[13px] font-semibold uppercase tracking-wide truncate ${isNed(id) ? 'text-orange-400' : 'text-slate-200'}`;
 
-  const homeName = <span className={`${nameCls(homeId)} text-right`}>{home.name}</span>;
-  const awayName = <span className={nameCls(awayId)}>{away.name}</span>;
+  const homeName = <span className={`${nameCls(homeId)} text-right`}>{getTeamName(home, lang)}</span>;
+  const awayName = <span className={nameCls(awayId)}>{getTeamName(away, lang)}</span>;
 
   if (current?.locked) {
     return (
@@ -92,7 +96,7 @@ export function MatchInputRow({ group, homeId, awayId, results, inputMode, onRes
         onFocus={(e) => { e.currentTarget.style.borderColor = groupColor; e.currentTarget.select(); }}
         onBlur={(e) => { e.currentTarget.style.borderColor = ''; }}
         onWheel={(e) => e.currentTarget.blur()}
-        aria-label={`${home.name} doelpunten`}
+        aria-label={`${getTeamName(home, lang)} ${msg.table.goalsLabel}`}
       />
       <span className="text-slate-600 text-[10px]">–</span>
       <input
@@ -105,7 +109,7 @@ export function MatchInputRow({ group, homeId, awayId, results, inputMode, onRes
         onFocus={(e) => { e.currentTarget.style.borderColor = groupColor; e.currentTarget.select(); }}
         onBlur={(e) => { e.currentTarget.style.borderColor = ''; }}
         onWheel={(e) => e.currentTarget.blur()}
-        aria-label={`${away.name} doelpunten`}
+        aria-label={`${getTeamName(away, lang)} ${msg.table.goalsLabel}`}
       />
     </div>
   ) : (

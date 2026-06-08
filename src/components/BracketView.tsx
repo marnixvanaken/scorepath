@@ -2,12 +2,14 @@
 
 import { useMemo } from 'react';
 import Link from 'next/link';
+import { useParams } from 'next/navigation';
 import { motion, AnimatePresence } from 'motion/react';
 import type { BracketMatch, KnockoutResults } from '@/lib/bracket';
 import type { Qualifiers } from '@/lib/types';
 import { buildBracket } from '@/lib/bracket';
-import { teamById } from '@/data/worldcup2026';
+import { teamById, getTeamName } from '@/data/worldcup2026';
 import { Flag } from './Flag';
+import { useMessages } from '@/hooks/useMessages';
 
 interface SlotProps {
   slot: BracketMatch['slot1'];
@@ -19,6 +21,8 @@ interface SlotProps {
 
 function TeamSlot({ slot, slotNum, matchId, winner, onPick }: SlotProps) {
   const team = slot.teamId ? teamById(slot.teamId) : null;
+  const params = useParams();
+  const lang = typeof params?.lang === 'string' ? params.lang : 'nl';
   const isNed = slot.teamId === 'NED';
   const isWinner = winner === slotNum;
   const isLoser = winner !== undefined && winner !== slotNum;
@@ -48,7 +52,7 @@ function TeamSlot({ slot, slotNum, matchId, winner, onPick }: SlotProps) {
           <span className={`text-[12px] font-semibold uppercase tracking-wide truncate leading-none flex-1 ${
             isNed ? 'text-orange-400' : isWinner ? 'text-emerald-300' : 'text-slate-200'
           }`}>
-            {team?.name ?? slot.teamId}
+            {team ? getTeamName(team, lang) : slot.teamId}
           </span>
           {isWinner && (
             <svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor" className="text-emerald-400 shrink-0" aria-hidden>
@@ -147,8 +151,11 @@ const WC_TITLES: Record<string, number> = {
 
 function WinnerBanner({ teamId, encodedS, encodedK }: { teamId: string; encodedS: string; encodedK: string }) {
   const team = teamById(teamId);
+  const msg = useMessages();
+  const params = useParams();
+  const lang = typeof params?.lang === 'string' ? params.lang : 'nl';
   const stars = (WC_TITLES[teamId] ?? 0) + 1;
-  const cardHref = `/wk-2026/card?team=${teamId}&s=${encodedS}${encodedK ? `&k=${encodedK}` : ''}`;
+  const cardHref = `/${lang}/wk-2026/card?team=${teamId}&s=${encodedS}${encodedK ? `&k=${encodedK}` : ''}`;
 
   function handleShare() {
     if (typeof navigator !== 'undefined' && navigator.share) {
@@ -175,7 +182,7 @@ function WinnerBanner({ teamId, encodedS, encodedK }: { teamId: string; encodedS
       </div>
       <Flag teamId={teamId} size={120} />
       <p className="text-lg font-bold uppercase tracking-widest text-slate-100 text-center">
-        {team?.name ?? teamId}
+        {team ? getTeamName(team, lang) : teamId}
       </p>
       <div className="w-full flex flex-col gap-2.5">
         <Link
@@ -183,14 +190,14 @@ function WinnerBanner({ teamId, encodedS, encodedK }: { teamId: string; encodedS
           className="w-full py-3.5 text-center font-bold text-sm uppercase tracking-widest text-white transition-opacity hover:opacity-90"
           style={{ backgroundColor: '#D93B1F', borderRadius: '0 10px 0 10px' }}
         >
-          MIJN KAART
+          {msg.bracket.myCard}
         </Link>
         <button
           onClick={handleShare}
           className="w-full py-3.5 font-bold text-sm uppercase tracking-widest transition-colors hover:bg-[#D93B1F]/10"
           style={{ border: '2px solid #D93B1F', color: '#D93B1F', borderRadius: '0 10px 0 10px', background: 'transparent' }}
         >
-          DEEL LINK
+          {msg.bracket.shareLink}
         </button>
       </div>
     </motion.div>
@@ -221,7 +228,7 @@ function BG({ a, b, right, gap = 6 }: {
   );
 }
 
-const ROUNDS = ['Ronde van 32', '1/16e finale', 'Kwartfinale', 'Halve finale', 'Finale'];
+// Round labels are localized via useMessages() in BracketView
 const COL_W = 176;
 const CONN_W = 10;
 
@@ -234,6 +241,8 @@ interface Props {
 }
 
 export function BracketView({ qualifiers, kr, onPick, encodedS, encodedK }: Props) {
+  const msg = useMessages();
+  const rounds = [msg.bracket.r32, msg.bracket.r16, msg.bracket.qf, msg.bracket.sf, msg.bracket.final];
   const { r32, r16, qf, sf, final } = useMemo(
     () => buildBracket(qualifiers, kr),
     [qualifiers, kr],
@@ -254,7 +263,7 @@ export function BracketView({ qualifiers, kr, onPick, encodedS, encodedK }: Prop
     );
   }
 
-  const colOffsets = ROUNDS.map((_, ri) => ri * (COL_W + CONN_W));
+  const colOffsets = rounds.map((_, ri) => ri * (COL_W + CONN_W));
 
   const finalWinnerSlot = kr[final.id];
   const finalWinnerId = finalWinnerSlot
@@ -265,11 +274,11 @@ export function BracketView({ qualifiers, kr, onPick, encodedS, encodedK }: Prop
     <>
       {/* ── Mobile (< 640px): verticale scroll per ronde ── */}
       <div className="sm:hidden flex flex-col gap-4 py-2">
-        <MobileRound label="Ronde van 32"   matches={r32}    kr={kr} onPick={onPick} />
-        <MobileRound label="1/16e finale"   matches={r16}    kr={kr} onPick={onPick} />
-        <MobileRound label="Kwartfinale"    matches={qf}     kr={kr} onPick={onPick} />
-        <MobileRound label="Halve finale"   matches={sf}     kr={kr} onPick={onPick} />
-        <MobileRound label="Finale"         matches={[final]} kr={kr} onPick={onPick} single />
+        <MobileRound label={rounds[0]} matches={r32}     kr={kr} onPick={onPick} />
+        <MobileRound label={rounds[1]} matches={r16}     kr={kr} onPick={onPick} />
+        <MobileRound label={rounds[2]} matches={qf}      kr={kr} onPick={onPick} />
+        <MobileRound label={rounds[3]} matches={sf}      kr={kr} onPick={onPick} />
+        <MobileRound label={rounds[4]} matches={[final]} kr={kr} onPick={onPick} single />
         <AnimatePresence>
           {finalWinnerId && <WinnerBanner key={finalWinnerId} teamId={finalWinnerId} encodedS={encodedS} encodedK={encodedK} />}
         </AnimatePresence>
@@ -278,7 +287,7 @@ export function BracketView({ qualifiers, kr, onPick, encodedS, encodedK }: Prop
       {/* ── Desktop (≥ 640px): horizontale boom ── */}
       <div className="hidden sm:block overflow-x-auto pb-2">
         <div className="relative h-5 mb-2 min-w-max" style={{ paddingLeft: 12 }}>
-          {ROUNDS.map((label, ri) => (
+          {rounds.map((label, ri) => (
             <span
               key={label}
               className="absolute text-[11px] font-bold text-slate-400 uppercase tracking-widest whitespace-nowrap"

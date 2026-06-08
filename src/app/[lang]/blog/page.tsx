@@ -1,0 +1,162 @@
+import type { Metadata } from 'next';
+import Link from 'next/link';
+import { notFound } from 'next/navigation';
+import { Logo } from '@/components/Logo';
+import { getPublishedBlogs } from '@/data/blogs';
+import { getLocalizedBlogMeta } from '@/data/blogTranslations';
+import { getDynamicBlogs } from '@/lib/supabase';
+import { isLocale, DEFAULT_LOCALE, getMessages, getDateLocale } from '@/i18n';
+import { SITE_URL, SITE_NAME } from '@/lib/siteConfig';
+
+export const revalidate = 3600;
+
+export async function generateMetadata(props: PageProps<'/[lang]/blog'>): Promise<Metadata> {
+  const { lang } = await props.params;
+  const locale = isLocale(lang) ? lang : DEFAULT_LOCALE;
+  const msg = getMessages(locale);
+  return {
+    title: msg.blog.pageTitle,
+    description: msg.blog.pageDescription,
+    alternates: {
+      canonical: `${SITE_URL}/${locale}/blog`,
+      languages: {
+        'nl-NL': `${SITE_URL}/nl/blog`,
+        'en-US': `${SITE_URL}/en/blog`,
+        'es-ES': `${SITE_URL}/es/blog`,
+      },
+    },
+  };
+}
+
+export default async function BlogPage(props: PageProps<'/[lang]/blog'>) {
+  const { lang } = await props.params;
+  if (!isLocale(lang)) notFound();
+  const msg = getMessages(lang);
+  const dateLocale = getDateLocale(lang);
+
+  const [staticPosts, dynamicPosts] = await Promise.all([
+    Promise.resolve(getPublishedBlogs()),
+    getDynamicBlogs().catch(() => []),
+  ]);
+
+  const dynamicSlugs = new Set(dynamicPosts.map((p) => p.slug));
+
+  const combined = [
+    ...dynamicPosts.map((p) => ({
+      slug: p.slug,
+      title: p.title,
+      description: p.description,
+      date: p.date,
+      readTime: p.read_time,
+      category: p.category,
+    })),
+    ...staticPosts
+      .filter((p) => !dynamicSlugs.has(p.slug))
+      .map((p) => {
+        const localized = getLocalizedBlogMeta(p.slug, lang);
+        return {
+          slug: p.slug,
+          title: localized?.title ?? p.title,
+          description: localized?.description ?? p.description,
+          date: p.date,
+          readTime: p.readTime,
+          category: localized?.category ?? p.category,
+        };
+      }),
+  ];
+
+  return (
+    <div className="min-h-dvh bg-panel text-slate-100 flex flex-col">
+
+      <nav className="px-6 py-4 border-b border-[#141414]">
+        <div className="max-w-5xl mx-auto flex items-center justify-between">
+          <Logo size="sm" />
+          <div className="flex items-center gap-6">
+            <Link href={`/${lang}/blog`} className="text-xs font-bold text-white tracking-wide uppercase">
+              {msg.nav.blog}
+            </Link>
+            <Link href={`/${lang}/wk-2026`} className="text-xs font-bold text-orange-500 hover:text-orange-400 transition-colors tracking-wide uppercase">
+              {msg.blog.openSimulator}
+            </Link>
+          </div>
+        </div>
+      </nav>
+
+      <main className="flex-1">
+        <section className="px-6 pt-16 pb-10">
+          <div className="max-w-5xl mx-auto">
+            <p className="text-xs font-bold text-slate-600 uppercase tracking-widest mb-3">
+              {SITE_NAME} Blog
+            </p>
+            <h1 className="font-display text-5xl sm:text-6xl text-white mb-4">
+              {msg.blog.pageTitle}
+            </h1>
+            <p className="text-slate-400 text-lg max-w-xl leading-relaxed">
+              {msg.blog.pageDescription}
+            </p>
+          </div>
+        </section>
+
+        <section className="px-6 pb-20">
+          <div className="max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              {combined.map((post) => (
+                <Link
+                  key={post.slug}
+                  href={`/${lang}/blog/${post.slug}`}
+                  className="group block bg-[#0d0d0d] border border-[#1a1a1a] hover:border-orange-500/30 rounded-2xl overflow-hidden transition-all duration-200"
+                >
+                  <div className="p-7">
+                    <div className="flex items-center gap-3 mb-5">
+                      <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-orange-500/10 text-orange-400 border border-orange-500/20 uppercase tracking-widest">
+                        {post.category}
+                      </span>
+                      <span className="text-xs text-slate-600">
+                        {post.readTime} {msg.blog.minRead}
+                      </span>
+                    </div>
+
+                    <h2 className="font-bold text-white text-xl leading-snug mb-3 group-hover:text-orange-400 transition-colors">
+                      {post.title}
+                    </h2>
+
+                    <p className="text-slate-500 text-sm leading-relaxed mb-5 line-clamp-3">
+                      {post.description}
+                    </p>
+
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs text-slate-700">
+                        {new Date(post.date).toLocaleDateString(dateLocale, {
+                          day: 'numeric',
+                          month: 'long',
+                          year: 'numeric',
+                        })}
+                      </span>
+                      <span className="text-xs font-bold text-orange-500 group-hover:text-orange-400 transition-colors flex items-center gap-1">
+                        {msg.blog.readArticle}
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="group-hover:translate-x-0.5 transition-transform">
+                          <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                      </span>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer className="border-t border-[#141414] px-6 py-6">
+        <div className="max-w-5xl mx-auto flex items-center justify-between">
+          <Logo size="sm" />
+          <div className="flex items-center gap-3 text-xs text-slate-700">
+            <span>{msg.blog.footerText}</span>
+            <span>·</span>
+            <Link href={`/${lang}/privacy`} className="hover:opacity-70 transition-opacity">{msg.nav.privacy}</Link>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}

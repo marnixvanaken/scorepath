@@ -1,7 +1,10 @@
 'use client';
 
+import { useMemo } from 'react';
 import type { GroupId, MatchResult, Standing } from '@/lib/types';
-import { groupFixtures, GROUP_COLORS, teamById } from '@/data/worldcup2026';
+import { groupFixtures, GROUP_COLORS, teamById, getTeamName } from '@/data/worldcup2026';
+import { useMessages } from '@/hooks/useMessages';
+import { useParams } from 'next/navigation';
 import { MatchInputRow } from './MatchInputRow';
 import { StandingsTable } from './StandingsTable';
 import { TiebreakPanel } from './TiebreakPanel';
@@ -40,7 +43,7 @@ function DragHandle({ controls }: { controls: ReturnType<typeof useDragControls>
   );
 }
 
-function GroupDragItem({ teamId, idx }: { teamId: string; idx: number }) {
+function RankDragItem({ teamId, idx, lang }: { teamId: string; idx: number; lang: string }) {
   const controls = useDragControls();
   const team = teamById(teamId);
   const through = idx <= 1;
@@ -57,7 +60,7 @@ function GroupDragItem({ teamId, idx }: { teamId: string; idx: number }) {
       </span>
       <Flag teamId={teamId} size={16} />
       <span className={`text-[13px] font-semibold uppercase tracking-wide flex-1 truncate ${through ? 'text-slate-200' : 'text-slate-500'}`}>
-        {team?.name ?? teamId}
+        {team ? getTeamName(team, lang) : teamId}
       </span>
       <DragHandle controls={controls} />
     </Reorder.Item>
@@ -69,6 +72,9 @@ export function GroupCard({
   manualOrders, onSetManualOrder, onClearManual,
   dragOrder, onDragOrderChange,
 }: Props) {
+  const msg = useMessages();
+  const params = useParams();
+  const lang = typeof params?.lang === 'string' ? params.lang : 'nl';
   const fixtures = groupFixtures(group);
   const groupResults = results.filter((r) => r.group === group);
   const complete = isGroupComplete(results, group);
@@ -81,6 +87,27 @@ export function GroupCard({
   const totalFixtures = fixtures.length;
 
   const isDrag = inputMode === 'drag';
+
+  // All 4 teams in this group, derived from fixtures
+  const allTeams = useMemo(() => {
+    const seen = new Set<string>();
+    const result: string[] = [];
+    for (const { homeId, awayId } of fixtures) {
+      if (!seen.has(homeId)) { seen.add(homeId); result.push(homeId); }
+      if (!seen.has(awayId)) { seen.add(awayId); result.push(awayId); }
+    }
+    return result;
+  }, [fixtures]);
+
+  const allPicked = dragOrder.length === allTeams.length && allTeams.length > 0;
+
+  function handlePickTeam(teamId: string) {
+    if (dragOrder.includes(teamId)) {
+      onDragOrderChange(dragOrder.filter((id) => id !== teamId));
+    } else {
+      onDragOrderChange([...dragOrder, teamId]);
+    }
+  }
 
   return (
     <div
@@ -109,19 +136,83 @@ export function GroupCard({
       {/* Kaartinhoud */}
       <div className="flex-1 bg-card flex flex-col min-w-0">
         {isDrag ? (
-          /* ── Drag mode: versleep teams naar positie 1-4 ── */
+          /* ── Volgorde mode ── */
           <>
-            <p className="text-[10px] text-slate-500 px-3 pt-2 pb-0">Sleep via het ⠿ icoon</p>
-          <Reorder.Group
-            axis="y"
-            values={dragOrder}
-            onReorder={onDragOrderChange}
-            className="flex flex-col py-1"
-          >
-            {dragOrder.map((teamId, idx) => (
-              <GroupDragItem key={teamId} teamId={teamId} idx={idx} />
-            ))}
-          </Reorder.Group>
+            {/* Team tiles: klik in volgorde */}
+            <div className="flex gap-1.5 px-2 pt-2 pb-1.5">
+              {allTeams.map((teamId) => {
+                const rank = dragOrder.indexOf(teamId);
+                const isPicked = rank >= 0;
+                return (
+                  <button
+                    key={teamId}
+                    onClick={() => handlePickTeam(teamId)}
+                    className={`relative flex-1 min-w-0 flex flex-col items-center gap-1 py-2 rounded-lg transition-all select-none active:scale-95 ${
+                      isPicked ? 'opacity-35' : 'bg-white/10 hover:bg-white/15'
+                    }`}
+                  >
+                    {isPicked && (
+                      <span className="absolute top-0.5 left-0.5 w-4 h-4 flex items-center justify-center rounded-sm text-[9px] font-black text-black" style={{ backgroundColor: '#C9A843' }}>
+                        {rank + 1}
+                      </span>
+                    )}
+                    <Flag teamId={teamId} size={26} />
+                    <span className="text-[8px] font-bold text-slate-400 tracking-wide uppercase leading-none">
+                      {teamId}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+
+            <div className="border-t border-white/5 mx-2" />
+
+            {/* Ranglijst */}
+            {allPicked ? (
+              <Reorder.Group
+                axis="y"
+                values={dragOrder}
+                onReorder={onDragOrderChange}
+                className="flex flex-col py-1"
+              >
+                {dragOrder.map((teamId, idx) => (
+                  <RankDragItem key={teamId} teamId={teamId} idx={idx} lang={lang} />
+                ))}
+              </Reorder.Group>
+            ) : (
+              <div className="flex flex-col py-1">
+                {[0, 1, 2, 3].map((i) => {
+                  const teamId = dragOrder[i];
+                  const through = i <= 1;
+                  return (
+                    <div
+                      key={i}
+                      className={`flex items-center gap-2 px-3 py-2.5 ${i > 0 ? 'border-t border-white/5' : ''}`}
+                    >
+                      <span className={`text-[11px] font-black w-3 shrink-0 tabular-nums ${through && teamId ? 'text-[#C9A843]' : 'text-slate-600'}`}>
+                        {i + 1}
+                      </span>
+                      {teamId ? (
+                        <>
+                          <Flag teamId={teamId} size={16} />
+                          <span className={`text-[13px] font-semibold uppercase tracking-wide flex-1 truncate ${through ? 'text-slate-200' : 'text-slate-500'}`}>
+                            {(() => { const t = teamById(teamId); return t ? getTeamName(t, lang) : teamId; })()}
+                          </span>
+                        </>
+                      ) : (
+                        <div className="h-px flex-1 bg-white/10" />
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+
+            <p className="text-[10px] text-slate-500 px-3 pb-2 pt-1">
+              {allPicked
+                ? msg.simulator.dragHint
+                : `${msg.simulator.dragClickOrder} (${dragOrder.length}/4)`}
+            </p>
           </>
         ) : (
           /* ── Exact / Winnaar mode ── */

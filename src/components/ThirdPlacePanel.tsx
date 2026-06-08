@@ -4,11 +4,12 @@ import { AnimatePresence, motion } from 'motion/react';
 import { Reorder, useDragControls } from 'motion/react';
 import type { ThirdPlaceRank, GroupId } from '@/lib/types';
 import type { MatchResult } from '@/lib/types';
-import { teamById } from '@/data/worldcup2026';
+import { teamById, getTeamName } from '@/data/worldcup2026';
+import { useParams } from 'next/navigation';
 import { isGroupComplete } from '@/lib/standings';
 import { tieGroupKey } from '@/hooks/useTiebreakState';
 import { Flag } from './Flag';
-import { NL } from '@/i18n/nl';
+import { useMessages } from '@/hooks/useMessages';
 import type { InputMode } from '@/hooks/useSimulatorState';
 
 interface Props {
@@ -57,6 +58,8 @@ function ThirdsDragItem({
   dragOrders: Record<GroupId, string[]>;
 }) {
   const controls = useDragControls();
+  const params = useParams();
+  const lang = typeof params?.lang === 'string' ? params.lang : 'nl';
   const teamId = dragOrders[groupId]?.[2];
   const team = teamId ? teamById(teamId) : null;
   const through = idx < 8;
@@ -74,7 +77,7 @@ function ThirdsDragItem({
       <span className={`text-[11px] font-bold w-4 shrink-0 ${through ? 'text-[#C9A843]' : 'text-slate-600'}`}>{groupId}</span>
       {teamId && <Flag teamId={teamId} size={13} />}
       <span className={`text-[12px] font-semibold uppercase tracking-wide flex-1 truncate ${through ? 'text-[#E2C46A]' : 'text-slate-500'}`}>
-        {team?.name ?? teamId ?? '—'}
+        {team ? getTeamName(team, lang) : (teamId ?? '—')}
       </span>
       <div
         onPointerDown={(e) => { e.preventDefault(); controls.start(e); }}
@@ -94,6 +97,9 @@ export function ThirdPlacePanel({
   thirds, results, inputMode, manualOrders, onSetManualOrder, onClearManual,
   dragOrders, thirdsDragOrder, onThirdsDragChange,
 }: Props) {
+  const msg = useMessages();
+  const params = useParams();
+  const lang = typeof params?.lang === 'string' ? params.lang : 'nl';
   const sorted = [...thirds].sort((a, b) => a.rank - b.rank);
   const boundary = findBoundaryTie(sorted, results);
 
@@ -104,14 +110,14 @@ export function ThirdPlacePanel({
     >
       {/* Header */}
       <div className="flex items-baseline gap-3 px-3 py-2.5" style={{ borderBottom: '1px solid rgba(201,168,67,0.2)' }}>
-        <h2 className="text-sm font-black text-white">{NL.thirds.title}</h2>
-        <span className="text-[10px] text-slate-500">{NL.thirds.subtitle}</span>
+        <h2 className="text-sm font-black text-white">{msg.thirds.title}</h2>
+        <span className="text-[10px] text-slate-500">{msg.thirds.subtitle}</span>
       </div>
 
       {/* Drag mode: versleep groepen om top 8 te kiezen */}
       {inputMode === 'drag' ? (
         <>
-          <p className="text-[10px] text-slate-500 px-3 pt-2 pb-1">Sleep de groepen om de volgorde te bepalen — top 8 gaat door.</p>
+          <p className="text-[10px] text-slate-500 px-3 pt-2 pb-1">{msg.thirds.dragNote}</p>
           <Reorder.Group
             axis="y"
             values={thirdsDragOrder}
@@ -138,15 +144,15 @@ export function ThirdPlacePanel({
       <div className="grid grid-cols-[1.5rem_1.5rem_1fr_repeat(8,_1.75rem)] gap-x-0.5 px-3 py-1 bg-panel text-xs font-semibold text-slate-600 uppercase tracking-wider">
         <span className="text-center">#</span>
         <span>Gr</span>
-        <span>{NL.table.club}</span>
-        <span className="text-center">{NL.table.played}</span>
-        <span className="text-center">{NL.table.won}</span>
-        <span className="text-center">{NL.table.drawn}</span>
-        <span className="text-center">{NL.table.lost}</span>
-        <span className="text-center">{NL.table.gf}</span>
-        <span className="text-center">{NL.table.ga}</span>
-        <span className="text-center">{NL.table.gd}</span>
-        <span className="text-center font-bold text-slate-500">{NL.table.points}</span>
+        <span>{msg.table.club}</span>
+        <span className="text-center">{msg.table.played}</span>
+        <span className="text-center">{msg.table.won}</span>
+        <span className="text-center">{msg.table.drawn}</span>
+        <span className="text-center">{msg.table.lost}</span>
+        <span className="text-center">{msg.table.gf}</span>
+        <span className="text-center">{msg.table.ga}</span>
+        <span className="text-center">{msg.table.gd}</span>
+        <span className="text-center font-bold text-slate-500">{msg.table.points}</span>
       </div>
 
       {/* Rows */}
@@ -190,7 +196,7 @@ export function ThirdPlacePanel({
                 <span className={`font-bold ${isLast8 ? 'text-[#C9A843]' : 'text-slate-700'}`}>{t.group}</span>
                 <span className={`flex items-center gap-1 font-semibold min-w-0 ${nameCls}`}>
                   <Flag teamId={t.teamId} size={14} />
-                  <span className="truncate uppercase tracking-wide">{team?.name ?? t.teamId}</span>
+                  <span className="truncate uppercase tracking-wide">{team ? getTeamName(team, lang) : t.teamId}</span>
                 </span>
                 <span className="text-center tabular-nums text-slate-500">{t.played}</span>
                 <span className="text-center tabular-nums text-slate-500">{t.won}</span>
@@ -235,14 +241,14 @@ export function ThirdPlacePanel({
             <div className="flex items-center justify-between mb-2">
               <span className="text-[10px] font-bold text-[#E2C46A] flex items-center gap-1.5">
                 <span className="text-[#C9A843]">⚠</span>
-                Gelijkstand op de grens — kies wie doorgaat
+                {msg.thirds.boundaryTie}
               </span>
               {manualOrders[key] && (
                 <button
                   onClick={() => onClearManual(key)}
                   className="text-[10px] text-slate-600 hover:text-slate-400 transition-colors"
                 >
-                  Wissen
+                  {msg.tiebreak.clear}
                 </button>
               )}
             </div>
@@ -259,10 +265,10 @@ export function ThirdPlacePanel({
                     <div className={`flex items-center gap-1.5 flex-1 rounded px-2 py-1 min-w-0 ${isThrough ? 'bg-[#C9A843]/10' : 'bg-slate-800/40'}`}>
                       <Flag teamId={teamId} size={13} />
                       <span className={`text-[11px] font-semibold uppercase tracking-wide truncate ${isThrough ? 'text-[#E2C46A]' : 'text-slate-500'}`}>
-                        {team?.name ?? teamId}
+                        {team ? getTeamName(team, lang) : teamId}
                       </span>
                       <span className="text-[10px] text-slate-600 ml-auto shrink-0">
-                        {isThrough ? '✓ door' : '✗ uit'}
+                        {isThrough ? msg.thirds.through : msg.thirds.out}
                       </span>
                     </div>
                     <div className="flex gap-0.5 shrink-0">
@@ -270,13 +276,13 @@ export function ThirdPlacePanel({
                         onClick={() => moveUp(idx)}
                         disabled={idx === 0}
                         className="w-5 h-5 rounded bg-slate-700 disabled:opacity-20 hover:bg-slate-600 text-slate-300 flex items-center justify-center text-[10px] transition-colors"
-                        aria-label="Omhoog"
+                        aria-label={msg.tiebreak.up}
                       >▲</button>
                       <button
                         onClick={() => moveDown(idx)}
                         disabled={idx === currentOrder.length - 1}
                         className="w-5 h-5 rounded bg-slate-700 disabled:opacity-20 hover:bg-slate-600 text-slate-300 flex items-center justify-center text-[10px] transition-colors"
-                        aria-label="Omlaag"
+                        aria-label={msg.tiebreak.down}
                       >▼</button>
                     </div>
                   </div>
@@ -291,10 +297,10 @@ export function ThirdPlacePanel({
       <div className="flex items-center gap-4 px-3 py-2 text-[10px] text-slate-600" style={{ borderTop: '1px solid rgba(201,168,67,0.2)' }}>
         <span className="flex items-center gap-1.5">
           <span className="w-2 h-2 rounded-sm bg-[#C9A843] shrink-0" />
-          Beste 8 door naar R32
+          {msg.thirds.best8}
         </span>
-        <span className="text-slate-700">– – –  cutoff</span>
-        <span className="text-slate-700 ml-auto">Tiebreak: Ptn → +/- → DV | Fair play niet meegenomen</span>
+        <span className="text-slate-700">{msg.thirds.cutoff}</span>
+        <span className="text-slate-700 ml-auto">{msg.thirds.tiebreakNote}</span>
       </div>
       </>
       )}

@@ -10,8 +10,10 @@ export interface Team {
   id: string;
   /** Weergavenaam (NL-first). */
   name: string;
-  /** Engelse naam — voor de latere EN-flip (SEO). */
+  /** Engelse naam. */
   nameEn: string;
+  /** Spaanse naam. */
+  nameEs: string;
   group: GroupId;
   isHost?: boolean;
   /**

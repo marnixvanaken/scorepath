@@ -1,10 +1,12 @@
 'use client';
 
 import { motion } from 'motion/react';
-import { NL } from '@/i18n/nl';
+import { useMessages } from '@/hooks/useMessages';
 import { toast } from '@/lib/toast';
 
 export function ShareButton() {
+  const msg = useMessages();
+
   async function handleShare() {
     try {
       await navigator.clipboard.writeText(window.location.href);
@@ -16,7 +18,7 @@ export function ShareButton() {
       document.execCommand('copy');
       document.body.removeChild(input);
     }
-    toast(NL.header.copied);
+    toast(msg.header.copied);
   }
 
   return (
@@ -25,10 +27,10 @@ export function ShareButton() {
       onClick={handleShare}
       className="flex items-center gap-2 px-3 min-h-[44px] bg-[#D93B1F] hover:bg-[#C42F15] text-white text-xs font-bold tracking-wide transition-colors"
       style={{ borderRadius: '0 8px 0 8px' }}
-      aria-label={NL.header.share}
+      aria-label={msg.header.share}
     >
       <ShareIcon />
-      {NL.header.share}
+      {msg.header.share}
     </motion.button>
   );
 }

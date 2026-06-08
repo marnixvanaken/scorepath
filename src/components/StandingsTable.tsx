@@ -2,10 +2,11 @@
 
 import { AnimatePresence, motion } from 'motion/react';
 import type { Standing } from '@/lib/types';
-import { teamById } from '@/data/worldcup2026';
+import { teamById, getTeamName } from '@/data/worldcup2026';
+import { useParams } from 'next/navigation';
 import { Flag } from './Flag';
 import { Tooltip } from './Tooltip';
-import { NL } from '@/i18n/nl';
+import { useMessages } from '@/hooks/useMessages';
 
 interface Props {
   standings: Standing[];
@@ -14,6 +15,9 @@ interface Props {
 }
 
 export function StandingsTable({ standings, bestThirdIds, groupColor }: Props) {
+  const msg = useMessages();
+  const params = useParams();
+  const lang = typeof params?.lang === 'string' ? params.lang : 'nl';
   const groupComplete = standings.length === 4 && standings.every((s) => s.played === 3);
 
   return (
@@ -21,12 +25,12 @@ export function StandingsTable({ standings, bestThirdIds, groupColor }: Props) {
       {/* Header */}
       <div className="grid grid-cols-[1rem_1fr_repeat(5,_1.5rem)] px-1.5 py-1 bg-panel/80 text-xs font-semibold text-slate-600 uppercase tracking-wider">
         <span />
-        <span>{NL.table.club}</span>
-        <Tooltip text="Gespeeld" className="text-center">{NL.table.played}</Tooltip>
-        <Tooltip text="Gewonnen" className="text-center">{NL.table.won}</Tooltip>
-        <Tooltip text="Verloren" className="text-center">{NL.table.lost}</Tooltip>
-        <Tooltip text="Doelsaldo" className="text-center">{NL.table.gd}</Tooltip>
-        <Tooltip text="Punten" className="text-center font-bold text-slate-500">{NL.table.points}</Tooltip>
+        <span>{msg.table.club}</span>
+        <Tooltip text={msg.table.playedFull} className="text-center">{msg.table.played}</Tooltip>
+        <Tooltip text={msg.table.wonFull} className="text-center">{msg.table.won}</Tooltip>
+        <Tooltip text={msg.table.lostFull} className="text-center">{msg.table.lost}</Tooltip>
+        <Tooltip text={msg.table.gdFull} className="text-center">{msg.table.gd}</Tooltip>
+        <Tooltip text={msg.table.pointsFull} className="text-center font-bold text-slate-500">{msg.table.points}</Tooltip>
       </div>
 
       <AnimatePresence mode="popLayout" initial={false}>
@@ -62,7 +66,7 @@ export function StandingsTable({ standings, bestThirdIds, groupColor }: Props) {
               </span>
               <span className={`flex items-center gap-1.5 font-semibold min-w-0 ${nameCls}`}>
                 <Flag teamId={s.teamId} size={18} />
-                <span className="truncate uppercase text-[12px] tracking-wide">{team?.name ?? s.teamId}</span>
+                <span className="truncate uppercase text-[12px] tracking-wide">{team ? getTeamName(team, lang) : s.teamId}</span>
                 {groupComplete && (
                   <span className={`shrink-0 text-[10px] font-bold px-1 py-0.5 rounded leading-none ${
                     i < 2

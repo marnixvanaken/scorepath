@@ -2,6 +2,7 @@
 
 import { motion } from 'motion/react';
 import { toast } from '@/lib/toast';
+import { useMessages } from '@/hooks/useMessages';
 
 interface Props {
   ogUrl: string;
@@ -29,13 +30,14 @@ async function shareFile(url: string, filename: string, title: string) {
 }
 
 export function CardActions({ ogUrl, bracketUrl, teamName }: Props) {
+  const msg = useMessages();
   const slug = teamName.toLowerCase().replace(/\s+/g, '-');
 
   async function downloadRoute() {
     try {
       await shareFile(ogUrl, `scorepath-${slug}-route-wk2026.png`, `${teamName} · Route WK 2026`);
     } catch {
-      toast('Download mislukt — probeer de afbeelding lang indrukken om op te slaan.');
+      toast(msg.card.downloadFailed);
     }
   }
 
@@ -43,7 +45,7 @@ export function CardActions({ ogUrl, bracketUrl, teamName }: Props) {
     try {
       await shareFile(bracketUrl, `scorepath-bracket-wk2026.png`, 'WK 2026 Bracket');
     } catch {
-      toast('Download mislukt — probeer de afbeelding lang indrukken om op te slaan.');
+      toast(msg.card.downloadFailed);
     }
   }
 
@@ -63,7 +65,7 @@ export function CardActions({ ogUrl, bracketUrl, teamName }: Props) {
       document.execCommand('copy');
       document.body.removeChild(input);
     }
-    toast('Link gekopieerd!');
+    toast(msg.card.linkCopied);
   }
 
   return (
@@ -74,7 +76,7 @@ export function CardActions({ ogUrl, bracketUrl, teamName }: Props) {
         className="px-5 py-3 text-sm font-bold tracking-widest uppercase text-white transition-opacity hover:opacity-90"
         style={{ background: 'var(--cta)', borderRadius: '0 8px 0 8px' }}
       >
-        ↓ ROUTE KAART
+        {msg.card.downloadRouteCard}
       </motion.button>
       <motion.button
         whileTap={{ scale: 0.95 }}
@@ -82,7 +84,7 @@ export function CardActions({ ogUrl, bracketUrl, teamName }: Props) {
         className="px-5 py-3 text-sm font-bold tracking-widest uppercase text-white transition-opacity hover:opacity-90"
         style={{ background: '#1e3a5f', borderRadius: '0 8px 0 8px' }}
       >
-        ↓ BRACKET
+        {msg.card.downloadBracket}
       </motion.button>
       <motion.button
         whileTap={{ scale: 0.95 }}
@@ -90,7 +92,7 @@ export function CardActions({ ogUrl, bracketUrl, teamName }: Props) {
         className="px-5 py-3 text-sm font-bold tracking-widest uppercase transition-opacity hover:opacity-70"
         style={{ border: '1px solid var(--border)', color: 'var(--fg)', borderRadius: '0 8px 0 8px' }}
       >
-        DEEL LINK
+        {msg.card.shareLink}
       </motion.button>
     </>
   );

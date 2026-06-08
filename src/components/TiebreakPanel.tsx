@@ -2,9 +2,11 @@
 
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
+import { useMessages } from '@/hooks/useMessages';
 import type { TiedGroup } from '@/lib/tiebreak';
 import { tieGroupKey } from '@/hooks/useTiebreakState';
-import { teamById } from '@/data/worldcup2026';
+import { teamById, getTeamName } from '@/data/worldcup2026';
+import { useParams } from 'next/navigation';
 import { Flag } from './Flag';
 
 interface Props {
@@ -14,10 +16,13 @@ interface Props {
   onClearManual: (groupKey: string) => void;
 }
 
-const POSITION_LABELS = ['1e', '2e', '3e', '4e'];
+// Position labels are locale-aware — accessed via msg.tiebreak.positions
 const POSITION_COLORS = ['text-emerald-400', 'text-emerald-400', 'text-[#C9A843]', 'text-slate-500'];
 
 export function TiebreakPanel({ tiedGroups, manualOrders, onSetManualOrder, onClearManual }: Props) {
+  const msg = useMessages();
+  const params = useParams();
+  const lang = typeof params?.lang === 'string' ? params.lang : 'nl';
   const [open, setOpen] = useState(true);
   const relevant = tiedGroups.filter((g) => g.affectsQualification);
   if (relevant.length === 0) return null;
@@ -30,7 +35,7 @@ export function TiebreakPanel({ tiedGroups, manualOrders, onSetManualOrder, onCl
       >
         <span className="text-[#C9A843] text-[11px]">⚠</span>
         <span className="text-xs font-bold text-[#E2C46A] flex-1 uppercase tracking-wide">
-          Gelijkstand — kies volgorde
+          {msg.tiebreak.title}
         </span>
         <span className="text-slate-500 text-[10px]">{open ? '▲' : '▼'}</span>
       </button>
@@ -65,11 +70,13 @@ export function TiebreakPanel({ tiedGroups, manualOrders, onSetManualOrder, onCl
                   <div key={key}>
                     <div className="flex items-center justify-between mb-2">
                       <span className="text-[11px] text-slate-400">
-                        Positie {group.positions.map((p) => POSITION_LABELS[p]).join(' & ')} gelijk —{' '}
+                        {msg.tiebreak.positionPrefix}{' '}
+                        {group.positions.map((p) => msg.tiebreak.positions[p] ?? (p + 1)).join(' & ')}{' '}
+                        {msg.tiebreak.positionSuffix}{' '}
                         <span className="text-[#C9A843]">
                           {group.positions.some((p) => p >= 2)
-                            ? 'bepaalt wie naar nummers 3 gaat'
-                            : 'bepaalt bracketpositie'}
+                            ? msg.tiebreak.affectsThirds
+                            : msg.tiebreak.affectsBracket}
                         </span>
                       </span>
                       {manualOrders[key] && (
@@ -77,7 +84,7 @@ export function TiebreakPanel({ tiedGroups, manualOrders, onSetManualOrder, onCl
                           onClick={() => onClearManual(key)}
                           className="text-[11px] text-slate-500 hover:text-slate-300 transition-colors ml-2 shrink-0"
                         >
-                          Wissen
+                          {msg.tiebreak.clear}
                         </button>
                       )}
                     </div>
@@ -89,12 +96,12 @@ export function TiebreakPanel({ tiedGroups, manualOrders, onSetManualOrder, onCl
                         return (
                           <div key={teamId} className="flex items-center gap-2">
                             <span className={`text-[11px] font-bold w-4 text-right tabular-nums shrink-0 ${POSITION_COLORS[pos]}`}>
-                              {POSITION_LABELS[pos]}
+                              {msg.tiebreak.positions[pos]}
                             </span>
                             <div className="flex items-center gap-1.5 flex-1 bg-card rounded px-2 py-1.5 min-w-0">
                               <Flag teamId={teamId} size={14} />
                               <span className="text-[11px] font-semibold text-slate-200 uppercase tracking-wide truncate">
-                                {team?.name ?? teamId}
+                                {team ? getTeamName(team, lang) : teamId}
                               </span>
                             </div>
                             <div className="flex gap-0.5 shrink-0">
@@ -102,13 +109,13 @@ export function TiebreakPanel({ tiedGroups, manualOrders, onSetManualOrder, onCl
                                 onClick={() => moveUp(idx)}
                                 disabled={idx === 0}
                                 className="w-6 h-6 rounded bg-slate-700/80 disabled:opacity-20 hover:bg-slate-600 text-slate-300 flex items-center justify-center text-[10px] transition-colors"
-                                aria-label="Omhoog"
+                                aria-label={msg.tiebreak.up}
                               >▲</button>
                               <button
                                 onClick={() => moveDown(idx)}
                                 disabled={idx === currentOrder.length - 1}
                                 className="w-6 h-6 rounded bg-slate-700/80 disabled:opacity-20 hover:bg-slate-600 text-slate-300 flex items-center justify-center text-[10px] transition-colors"
-                                aria-label="Omlaag"
+                                aria-label={msg.tiebreak.down}
                               >▼</button>
                             </div>
                           </div>

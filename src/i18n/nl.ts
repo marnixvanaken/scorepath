@@ -1,72 +1,27 @@
-export interface Messages {
-  header: {
-    title: string;
-    subtitle: string;
-    share: string;
-    reset: string;
-    prefill: string;
-    prefillKnockout: string;
-    copied: string;
-    liveLoading: string;
-    liveError: string;
-    liveRefresh: string;
-  };
-  modes: {
-    exact: string;
-    winner: string;
-    drag: string;
-  };
-  table: {
-    club: string;
-    played: string;
-    won: string;
-    drawn: string;
-    lost: string;
-    gf: string;
-    ga: string;
-    gd: string;
-    points: string;
-  };
-  status: {
-    qualified: string;
-    maybeQualified: string;
-    eliminated: string;
-  };
-  thirds: {
-    title: string;
-    subtitle: string;
-    group: string;
-    qualified: string;
-    notQualified: string;
-  };
-  match: {
-    vs: string;
-    home: string;
-    away: string;
-    win: string;
-    draw: string;
-    loss: string;
-  };
-  group: string;
-}
+import type { Messages } from './types';
 
 export const NL: Messages = {
   header: {
     title: 'WK 2026 Simulator',
     subtitle: 'Vul de groepsuitslagen in en zie live wie doorgaat',
     share: 'DEEL LINK',
-    reset: 'Reset',
-    prefill: 'Vul alles in',
-    prefillKnockout: 'Simuleer',
+    reset: 'RESET',
+    prefill: 'SIMULEER',
+    prefillKnockout: 'SIMULEER',
     copied: 'Link gekopieerd!',
     liveLoading: 'Live data laden...',
     liveError: 'Live data niet beschikbaar',
     liveRefresh: 'Ververs',
+    groupPhase: 'GROEPSFASE',
+    knockout: 'KNOCK-OUT',
+    viewLabel: 'Weergave',
+    moreOptions: 'Meer opties',
+    backToHome: 'Terug naar home',
   },
   modes: {
-    exact: 'Exact',
+    exact: 'EXACT',
     winner: '1X2',
-    drag: 'Sleep',
+    drag: 'VOLGORDE',
   },
   table: {
     club: 'Team',
@@ -78,6 +33,12 @@ export const NL: Messages = {
     ga: 'DT',
     gd: '+/-',
     points: 'Ptn',
+    playedFull: 'Gespeeld',
+    wonFull: 'Gewonnen',
+    lostFull: 'Verloren',
+    gdFull: 'Doelsaldo',
+    pointsFull: 'Punten',
+    goalsLabel: 'doelpunten',
   },
   status: {
     qualified: 'Door',
@@ -88,8 +49,16 @@ export const NL: Messages = {
     title: 'Beste nummers 3',
     subtitle: 'De 8 beste nummers 3 gaan door naar de Round of 32',
     group: 'Groep',
+    groupAbbr: 'Gr',
     qualified: 'Gekwalificeerd',
     notQualified: 'Niet door',
+    dragNote: 'Sleep de groepen om de volgorde te bepalen — top 8 gaat door.',
+    boundaryTie: 'Gelijkstand op de grens — kies wie doorgaat',
+    through: '✓ door',
+    out: '✗ uit',
+    best8: 'Beste 8 door naar R32',
+    cutoff: '– – –  cutoff',
+    tiebreakNote: 'Tiebreak: Ptn → +/- → DV | Fair play niet meegenomen',
   },
   match: {
     vs: 'vs',
@@ -100,4 +69,110 @@ export const NL: Messages = {
     loss: 'V',
   },
   group: 'Groep',
+  tiebreak: {
+    title: 'Gelijkstand — kies volgorde',
+    affectsThirds: 'bepaalt wie naar nummers 3 gaat',
+    affectsBracket: 'bepaalt bracketpositie',
+    clear: 'Wissen',
+    up: 'Omhoog',
+    down: 'Omlaag',
+    positions: ['1e', '2e', '3e', '4e'],
+    positionPrefix: 'Positie',
+    positionSuffix: 'gelijk —',
+  },
+  emptyState: {
+    title: 'Begin met invullen',
+    description: 'Vul uitslagen per groep in en zie live wie doorgaat naar de knockoutronde.',
+  },
+  theme: {
+    toLight: 'Schakel naar licht thema',
+    toDark: 'Schakel naar donker thema',
+  },
+  teamPicker: {
+    myCard: 'Mijn kaart',
+    chooseCountry: 'Kies jouw land',
+    searchPlaceholder: 'Zoek een land...',
+    noTeamFound: 'Geen team gevonden',
+  },
+  card: {
+    back: 'TERUG',
+    downloadFailed: 'Download mislukt — probeer de afbeelding lang indrukken om op te slaan.',
+    linkCopied: 'Link gekopieerd!',
+    downloadRouteCard: '↓ ROUTE KAART',
+    downloadBracket: '↓ BRACKET',
+    shareLink: 'DEEL LINK',
+  },
+  home: {
+    tagline1: 'Vul de uitslagen in.',
+    tagline2: 'Zie wie doorgaat naar de knockout-fase.',
+    description: '104 wedstrijden. 48 teams. 12 groepen, exacte FIFA-regels. Deel je scenario via één link.',
+    openSimulator: 'OPEN SIMULATOR',
+    step01Label: 'INVULLEN',
+    step01Sub: 'Vul uitslagen in per groep',
+    step02Label: 'SIMULEREN',
+    step02Sub: 'Zie wie doorgaat in de bracket',
+    step03Label: 'DELEN',
+    step03Sub: 'Deel je scenario via één link',
+  },
+  start: {
+    step1Label: 'Stap 1 van 2',
+    chooseTournament: 'Kies toernooi',
+    wc2026Name: 'FIFA World Cup 2026',
+    wc2026Sub: '48 teams · 12 groepen · USA / Canada / Mexico',
+    select: 'Selecteer',
+    comingSoon: 'Binnenkort beschikbaar',
+    step2Label: 'Stap 2 van 2',
+    howToFill: 'Hoe wil je invullen?',
+    quickTitle: 'Snel invullen',
+    quickDesc: 'Kies per wedstrijd win, gelijk of verlies. Snel en makkelijk op mobiel.',
+    exactTitle: 'Exacte uitslagen',
+    exactDesc: 'Vul per wedstrijd de exacte score in. Nauwkeurigere doelpuntenstanden.',
+    switchNote: 'Je kunt dit later altijd wisselen via de knop bovenaan',
+    backTournament: 'Toernooi',
+    stepOf: 'van',
+  },
+  blog: {
+    back: 'Terug naar blog',
+    readTime: 'min lezen',
+    publishedOn: 'Gepubliceerd op',
+    allArticles: 'Alle artikelen',
+    youMightAlsoLike: 'Misschien vind je deze ook leuk',
+    readArticle: 'Lees artikel',
+    pageTitle: 'Blog',
+    pageDescription: 'Analyses, statistieken en verhalen over het WK 2026.',
+    footerText: 'WK 2026 · 48 teams · 12 groepen',
+    openSimulator: 'Open simulator',
+    minRead: 'min lezen',
+  },
+  nav: {
+    blog: 'Blog',
+    privacy: 'Privacy',
+    simulator: 'Simulator',
+  },
+  privacy: {
+    pageTitle: 'Privacyverklaring',
+    pageDescription: 'Privacyverklaring van ScorePath — hoe wij omgaan met persoonsgegevens en cookies.',
+  },
+  simulator: {
+    modeLabel: 'Modus',
+    inputModeLabel: 'Invoermodus',
+    dragHint: 'Sleep om te herschikken · klik vlag om te verwijderen',
+    dragClickOrder: 'Klik teams in jouw volgorde',
+    confirmTitle: 'Alle ingevoerde data wissen?',
+    cancel: 'Annuleer',
+    clear: 'Wissen',
+    knockoutPhase: 'KNOCK-OUT FASE',
+    knockoutHint: 'Klik op een team om het door te laten gaan — klik opnieuw om te wissen.',
+    prefillAutomatic: 'vult automatisch in.',
+    resetClearsAll: 'wist alle keuzes.',
+  },
+  bracket: {
+    r32: 'Ronde van 32',
+    r16: '1/16e finale',
+    qf: 'Kwartfinale',
+    sf: 'Halve finale',
+    final: 'Finale',
+    myCard: 'MIJN KAART',
+    shareLink: 'DEEL LINK',
+  },
 };

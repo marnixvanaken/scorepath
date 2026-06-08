@@ -25,9 +25,9 @@ export default function PrivacyPage() {
 
           <h2>1. Verantwoordelijke</h2>
           <p>
-            Deze website, <strong>{SITE_NAME}</strong> ({SITE_URL}), wordt beheerd door Marnix van Aken.
+            Deze website, <strong>{SITE_NAME}</strong> ({SITE_URL}), wordt beheerd door ScorePath.
             Voor vragen over privacy kun je contact opnemen via{' '}
-            <a href="mailto:marnixvanaken@gmail.com">marnixvanaken@gmail.com</a>.
+            <a href="mailto:admin@scorepath.nl">admin@scorepath.nl</a>.
           </p>
 
           <h2>2. Welke gegevens verzamelen wij?</h2>
@@ -74,7 +74,7 @@ export default function PrivacyPage() {
             <li>Recht om bezwaar te maken</li>
             <li>Recht om een klacht in te dienen bij de <a href="https://www.autoriteitpersoonsgegevens.nl" target="_blank" rel="noopener">Autoriteit Persoonsgegevens</a></li>
           </ul>
-          <p>Stuur een verzoek naar <a href="mailto:marnixvanaken@gmail.com">marnixvanaken@gmail.com</a>.</p>
+          <p>Stuur een verzoek naar <a href="mailto:admin@scorepath.nl">admin@scorepath.nl</a>.</p>
 
           <h2>8. Wijzigingen</h2>
           <p>

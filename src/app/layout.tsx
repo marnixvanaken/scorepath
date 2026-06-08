@@ -62,11 +62,13 @@ export default function RootLayout({
         />
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-XMHT2LS1P6"
-          strategy="afterInteractive"
+          strategy="beforeInteractive"
         />
-        <Script id="ga4-init" strategy="afterInteractive">
-          {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XMHT2LS1P6');`}
-        </Script>
+        <Script
+          id="ga4-init"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{ __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XMHT2LS1P6');` }}
+        />
       </body>
     </html>
   );

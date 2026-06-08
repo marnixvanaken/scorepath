@@ -9,9 +9,19 @@ export function ThemeToggle() {
   const [theme, setTheme] = useState<'dark' | 'light'>('dark');
 
   useEffect(() => {
+    let resolved: 'dark' | 'light' = 'dark';
+    try {
+      const stored = localStorage.getItem('theme');
+      if (stored === 'light') resolved = 'light';
+      else if (!stored && window.matchMedia('(prefers-color-scheme: light)').matches) resolved = 'light';
+    } catch { /* ignore */ }
+    setTheme(resolved);
+    if (resolved === 'light') {
+      document.documentElement.dataset.theme = 'light';
+    } else {
+      delete document.documentElement.dataset.theme;
+    }
     setMounted(true);
-    const current = document.documentElement.dataset.theme as 'dark' | 'light' | undefined;
-    setTheme(current === 'light' ? 'light' : 'dark');
   }, []);
 
   function toggle() {

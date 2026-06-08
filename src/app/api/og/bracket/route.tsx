@@ -2,7 +2,7 @@ import { ImageResponse } from 'next/og';
 import { decodeResults } from '@/lib/serialization';
 import { decodeKnockout, buildBracket, type BracketMatch, type BracketSlot, type KnockoutResults } from '@/lib/bracket';
 import { computeAllGroups, getQualifiers } from '@/lib/standings';
-import { flagUrl } from '@/data/flags';
+import { FLAG_CODE, flagUrl } from '@/data/flags';
 import type { NextRequest } from 'next/server';
 
 export const runtime = 'edge';
@@ -10,25 +10,29 @@ export const runtime = 'edge';
 // Instagram Stories: 1080×1920
 const W       = 1080;
 const H_CARD  = 1920;
-const H       = 53;        // one team slot; 32×53 = 1696 bracket area
-const COL_W   = 160;       // narrower columns
+const H       = 53;
+const COL_W   = 160;
 const COL_GAP = 10;
-// PAD_X = (1080 - 5×160 - 4×10) / 2 = 120
-const PAD_X   = 120;
+const PAD_X   = 120;   // (1080 - 5×160 - 4×10) / 2
 const HEADER  = 115;
 const COL_LBL = 48;
-const FOOTER  = 61;        // 115+48+1696+61 = 1920 ✓
+const FOOTER  = 61;    // 115+48+1696+61 = 1920 ✓
 
-const BG     = '#F2EDE4';
-const INK    = '#0D0D0D';
-const MUTED  = '#9B8E82';
-const BORDER = '#E0D8CC';
-const PANEL  = '#EDE8DF';
-const WIN_BG = '#14532d';
-const WIN_FG = '#86efac';
-const LOS_FG = '#999990';
-const TBD_BG = '#FFFFFF';
-const GOLD   = '#A8852A';
+const BG           = '#F2EDE4';
+const INK          = '#0D0D0D';
+const MUTED        = '#9B8E82';
+const BORDER       = '#E0D8CC';
+const PANEL        = '#EDE8DF';
+const MATCH_BORDER = '#9B8E82';  // darker border so pairs are clearly grouped
+const WIN_BG       = '#14532d';
+const WIN_FG       = '#86efac';
+const LOS_FG       = '#999990';
+const TBD_BG       = '#FFFFFF';
+const GOLD         = '#A8852A';
+
+const WC_TITLES: Record<string, number> = {
+  BRA: 5, GER: 4, ARG: 3, FRA: 2, URU: 2, ENG: 1, ESP: 1,
+};
 
 async function loadFont(family: string, weight: number): Promise<ArrayBuffer | null> {
   try {
@@ -44,12 +48,23 @@ async function loadFont(family: string, weight: number): Promise<ArrayBuffer | n
   }
 }
 
-// Short 3-letter identifier: teamId (already ISO-3) or derived from TBD label
 function shortId(s: BracketSlot): string {
   if (s.teamId) return s.teamId;
   const m = s.label.match(/([12])e.*?([A-L])/);
-  if (m) return m[1] + m[2]; // "1A", "2B"
+  if (m) return m[1] + m[2];
   return '?';
+}
+
+function StarRow({ count, size }: { count: number; size: number }) {
+  return (
+    <div style={{ display: 'flex', gap: size * 0.3, justifyContent: 'center' }}>
+      {Array.from({ length: count }).map((_, i) => (
+        <svg key={i} width={size} height={size} viewBox="0 0 24 24" fill={GOLD}>
+          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+        </svg>
+      ))}
+    </div>
+  );
 }
 
 function renderColumn(
@@ -57,9 +72,14 @@ function renderColumn(
   kr: KnockoutResults,
   roundIdx: number,
   BODY: string,
+  winnerId?: string | null,
 ) {
-  // Height that each match group occupies — must fill the full bracket height
-  const groupH = Math.pow(2, roundIdx + 1) * H; // 2×H, 4×H, 8×H, …
+  const groupH  = Math.pow(2, roundIdx + 1) * H;
+  const isFinal = roundIdx === 4;
+  const winnerStars = winnerId ? (WC_TITLES[winnerId] ?? 0) + 1 : 0;
+  const winnerFlag  = winnerId
+    ? (FLAG_CODE[winnerId] ? `https://flagcdn.com/w160/${FLAG_CODE[winnerId]}.png` : null)
+    : null;
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', width: COL_W }}>
@@ -90,8 +110,7 @@ function renderColumn(
                 <div style={{ width: 20, height: 14, background: BORDER, borderRadius: 2, flexShrink: 0 }} />
               )}
               <span style={{
-                fontSize: 12,
-                fontWeight: 700,
+                fontSize: 12, fontWeight: 700,
                 color: won ? WIN_FG : lost ? LOS_FG : INK,
                 fontFamily: BODY,
               }}>
@@ -101,9 +120,62 @@ function renderColumn(
           );
         };
 
+        // ── Final column: winner display above match pair ──
+        if (isFinal) {
+          return (
+            <div
+              key={`${match.id}-${mi}`}
+              style={{ height: groupH, display: 'flex', flexDirection: 'column' }}
+            >
+              {/* Top: winner trophy section */}
+              <div style={{
+                flex: 1,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: 10,
+              }}>
+                {winnerFlag ? (
+                  <>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={winnerFlag}
+                      alt=""
+                      width={COL_W - 24}
+                      height={Math.round((COL_W - 24) * 0.67)}
+                      style={{ borderRadius: '0 10px 0 10px', border: `2px solid ${GOLD}` }}
+                    />
+                    <StarRow count={winnerStars} size={14} />
+                    <span style={{ fontSize: 11, fontWeight: 700, color: GOLD, letterSpacing: '0.15em', fontFamily: BODY }}>
+                      WINNAAR
+                    </span>
+                  </>
+                ) : (
+                  <span style={{ fontSize: 11, color: MUTED, fontFamily: BODY }}>Finale</span>
+                )}
+              </div>
+
+              {/* Match pair */}
+              <div style={{
+                border: `2px solid ${MATCH_BORDER}`,
+                overflow: 'hidden',
+                display: 'flex',
+                flexDirection: 'column',
+              }}>
+                {renderSlot(1)}
+                <div style={{ height: 1, background: MATCH_BORDER }} />
+                {renderSlot(2)}
+              </div>
+
+              {/* Bottom spacer */}
+              <div style={{ flex: 1 }} />
+            </div>
+          );
+        }
+
+        // ── All other rounds: centered tight pairs ──
         return (
-          // justifyContent: 'center' keeps the 2 slots of each match tight together,
-          // centered in the group area — fixes the "teams too far apart" issue
           <div
             key={`${match.id}-${mi}`}
             style={{
@@ -113,15 +185,14 @@ function renderColumn(
               justifyContent: 'center',
             }}
           >
-            {/* Match box with border */}
             <div style={{
+              border: `2px solid ${MATCH_BORDER}`,
+              overflow: 'hidden',
               display: 'flex',
               flexDirection: 'column',
-              border: `1px solid ${BORDER}`,
-              overflow: 'hidden',
             }}>
               {renderSlot(1)}
-              <div style={{ height: 1, background: BORDER }} />
+              <div style={{ height: 1, background: MATCH_BORDER }} />
               {renderSlot(2)}
             </div>
           </div>
@@ -158,9 +229,12 @@ export async function GET(req: NextRequest) {
   const BODY    = barlowFont ? 'Barlow, sans-serif' : 'sans-serif';
 
   const finalWinnerSlot = kr[bracket.final.id];
-  const finalWinner = finalWinnerSlot
-    ? shortId(finalWinnerSlot === 1 ? bracket.final.slot1 : bracket.final.slot2)
+  const finalWinnerId   = finalWinnerSlot
+    ? ((finalWinnerSlot === 1 ? bracket.final.slot1 : bracket.final.slot2).teamId ?? null)
     : null;
+  const finalWinnerCode = finalWinnerId ?? (finalWinnerSlot
+    ? shortId(finalWinnerSlot === 1 ? bracket.final.slot1 : bracket.final.slot2)
+    : null);
 
   const rounds: { label: string; matches: BracketMatch[]; idx: number }[] = [
     { label: 'R32',  matches: bracket.r32,     idx: 0 },
@@ -173,19 +247,13 @@ export async function GET(req: NextRequest) {
   const img = new ImageResponse(
     (
       <div style={{
-        width: W,
-        height: H_CARD,
-        background: BG,
-        display: 'flex',
-        flexDirection: 'column',
-        fontFamily: BODY,
+        width: W, height: H_CARD, background: BG,
+        display: 'flex', flexDirection: 'column', fontFamily: BODY,
       }}>
         {/* ── Header ── */}
         <div style={{
           height: HEADER,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
           padding: `0 ${PAD_X}px`,
           borderBottom: `1px solid ${BORDER}`,
         }}>
@@ -197,13 +265,13 @@ export async function GET(req: NextRequest) {
               KNOCK-OUT BRACKET
             </span>
           </div>
-          {finalWinner ? (
+          {finalWinnerCode ? (
             <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill={GOLD}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill={GOLD}>
                 <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
               </svg>
-              <span style={{ fontSize: 16, fontWeight: 700, color: GOLD, fontFamily: BODY, letterSpacing: '0.08em' }}>
-                {finalWinner}
+              <span style={{ fontSize: 14, fontWeight: 700, color: GOLD, fontFamily: BODY, letterSpacing: '0.08em' }}>
+                {finalWinnerCode}
               </span>
             </div>
           ) : (
@@ -214,10 +282,8 @@ export async function GET(req: NextRequest) {
         {/* ── Column labels ── */}
         <div style={{
           height: COL_LBL,
-          display: 'flex',
-          alignItems: 'center',
-          padding: `0 ${PAD_X}px`,
-          gap: COL_GAP,
+          display: 'flex', alignItems: 'center',
+          padding: `0 ${PAD_X}px`, gap: COL_GAP,
           background: PANEL,
           borderBottom: `1px solid ${BORDER}`,
         }}>
@@ -231,21 +297,13 @@ export async function GET(req: NextRequest) {
         </div>
 
         {/* ── Bracket columns ── */}
-        <div style={{
-          height: H * 32,
-          display: 'flex',
-          padding: `0 ${PAD_X}px`,
-          gap: COL_GAP,
-        }}>
-          {rounds.map((r) => renderColumn(r.matches, kr, r.idx, BODY))}
+        <div style={{ height: H * 32, display: 'flex', padding: `0 ${PAD_X}px`, gap: COL_GAP }}>
+          {rounds.map((r) => renderColumn(r.matches, kr, r.idx, BODY, r.idx === 4 ? finalWinnerId : undefined))}
         </div>
 
         {/* ── Footer ── */}
         <div style={{
-          flex: 1,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
+          flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center',
           borderTop: `1px solid ${BORDER}`,
         }}>
           <span style={{ fontSize: 11, fontWeight: 700, color: MUTED, letterSpacing: '0.2em', textTransform: 'uppercase', fontFamily: BODY }}>
@@ -259,9 +317,6 @@ export async function GET(req: NextRequest) {
   );
 
   return new Response(img.body, {
-    headers: {
-      'Content-Type': 'image/png',
-      'Cache-Control': 'no-store',
-    },
+    headers: { 'Content-Type': 'image/png', 'Cache-Control': 'no-store' },
   });
 }

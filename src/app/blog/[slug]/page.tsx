@@ -256,9 +256,11 @@ export default async function BlogPostPage(
       <footer className="border-t border-[#141414] px-6 py-6">
         <div className="max-w-5xl mx-auto flex items-center justify-between">
           <Logo size="sm" />
-          <p className="text-[11px] text-slate-700">
-            WK 2026 · 48 teams · 12 groepen
-          </p>
+          <div className="flex items-center gap-3 text-[11px] text-slate-700">
+            <span>WK 2026 · 48 teams · 12 groepen</span>
+            <span>·</span>
+            <Link href="/privacy" className="hover:opacity-70 transition-opacity">Privacy</Link>
+          </div>
         </div>
       </footer>
     </div>

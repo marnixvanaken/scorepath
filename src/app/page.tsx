@@ -111,6 +111,8 @@ export default async function HomePage({
             <Link href="/blog" className="hover:opacity-70 transition-opacity">Blog</Link>
             <span>·</span>
             <Link href="/wk-2026" className="hover:opacity-70 transition-opacity">Simulator</Link>
+            <span>·</span>
+            <Link href="/privacy" className="hover:opacity-70 transition-opacity">Privacy</Link>
           </div>
         </div>
       </footer>

@@ -127,7 +127,7 @@ function renderColumn(
               key={`${match.id}-${mi}`}
               style={{ height: groupH, display: 'flex', flexDirection: 'column' }}
             >
-              {/* Top: winner trophy section */}
+              {/* Top: winner trophy */}
               <div style={{
                 flex: 1,
                 display: 'flex',
@@ -168,8 +168,32 @@ function renderColumn(
                 {renderSlot(2)}
               </div>
 
-              {/* Bottom spacer */}
-              <div style={{ flex: 1 }} />
+              {/* Bottom: winner trophy (mirror) */}
+              <div style={{
+                flex: 1,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: 10,
+              }}>
+                {winnerFlag ? (
+                  <>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={winnerFlag}
+                      alt=""
+                      width={COL_W - 24}
+                      height={Math.round((COL_W - 24) * 0.67)}
+                      style={{ borderRadius: '0 10px 0 10px', border: `2px solid ${GOLD}` }}
+                    />
+                    <StarRow count={winnerStars} size={14} />
+                    <span style={{ fontSize: 11, fontWeight: 700, color: GOLD, letterSpacing: '0.15em', fontFamily: BODY }}>
+                      WINNAAR
+                    </span>
+                  </>
+                ) : null}
+              </div>
             </div>
           );
         }

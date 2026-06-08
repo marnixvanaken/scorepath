@@ -25,6 +25,11 @@ export default async function CardPage({
   if (k) ogParams.set('k', k);
   const ogUrl = `/api/og?${ogParams.toString()}`;
 
+  const bracketParams = new URLSearchParams();
+  bracketParams.set('s', s);
+  if (k) bracketParams.set('k', k);
+  const bracketUrl = `/api/og/bracket?${bracketParams.toString()}`;
+
   const backUrl = `/wk-2026?s=${s}${k ? `&k=${k}` : ''}`;
 
   return (
@@ -57,7 +62,7 @@ export default async function CardPage({
 
         {/* Actions */}
         <div className="flex flex-wrap gap-3 mt-8 justify-center">
-          <CardActions ogUrl={ogUrl} teamName={team.name} />
+          <CardActions ogUrl={ogUrl} bracketUrl={bracketUrl} teamName={team.name} />
           <Link
             href={backUrl}
             className="px-6 py-3 text-sm font-bold tracking-widest uppercase transition-opacity hover:opacity-70"

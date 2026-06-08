@@ -52,7 +52,7 @@ export async function GET(req: NextRequest) {
   const isChampion = route.result === 'kampioen';
 
   const flagCode = FLAG_CODE[teamId];
-  const flagSrc = flagCode ? `https://flagcdn.com/w160/${flagCode}.png` : null;
+  const flagSrc = flagCode ? `https://flagcdn.com/w320/${flagCode}.png` : null;
 
   const [bebasFont, barlowFont] = await Promise.all([
     loadFont('Bebas Neue', 400),
@@ -85,32 +85,32 @@ export async function GET(req: NextRequest) {
     (
       <div
         style={{
-          width: 1200,
-          height: 1800,
+          width: 1800,
+          height: 2700,
           background: BG,
           display: 'flex',
           flexDirection: 'column',
           fontFamily: BODY,
-          padding: '80px 96px 64px',
+          padding: '120px 144px 96px',
         }}
       >
         {/* ── Header ── */}
-        <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 64 }}>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-            <span style={{ fontSize: 20, fontWeight: 700, color: MUTED, letterSpacing: '0.25em', textTransform: 'uppercase', fontFamily: BODY }}>
+        <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 96 }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+            <span style={{ fontSize: 30, fontWeight: 700, color: MUTED, letterSpacing: '0.25em', textTransform: 'uppercase', fontFamily: BODY }}>
               SCOREPATH · WK 2026
             </span>
             {route.qualifiedFrom && (
-              <span style={{ fontSize: 24, color: MUTED, fontFamily: BODY }}>
+              <span style={{ fontSize: 36, color: MUTED, fontFamily: BODY }}>
                 {route.qualifiedFrom}
               </span>
             )}
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 16 }}>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 24 }}>
             {stars > 0 && (
-              <div style={{ display: 'flex', gap: 8, width: 128, justifyContent: 'center' }}>
+              <div style={{ display: 'flex', gap: 12, width: 192, justifyContent: 'center' }}>
                 {Array.from({ length: stars }).map((_, i) => (
-                  <svg key={i} width="28" height="28" viewBox="0 0 24 24" fill={GOLD}>
+                  <svg key={i} width="42" height="42" viewBox="0 0 24 24" fill={GOLD}>
                     <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
                   </svg>
                 ))}
@@ -118,27 +118,27 @@ export async function GET(req: NextRequest) {
             )}
             {flagSrc && (
               // eslint-disable-next-line @next/next/no-img-element
-              <img src={flagSrc} alt="" width={128} height={86} style={{ borderRadius: '0 12px 0 12px', border: `2px solid ${BORDER}` }} />
+              <img src={flagSrc} alt="" width={192} height={129} style={{ borderRadius: '0 18px 0 18px', border: `3px solid ${BORDER}` }} />
             )}
           </div>
         </div>
 
         {/* ── Team name ── */}
-        <div style={{ display: 'flex', marginBottom: 8 }}>
-          <span style={{ fontSize: 112, fontWeight: 900, color: INK, lineHeight: 1, letterSpacing: '-1px', fontFamily: DISPLAY }}>
+        <div style={{ display: 'flex', marginBottom: 12 }}>
+          <span style={{ fontSize: 168, fontWeight: 900, color: INK, lineHeight: 1, letterSpacing: '-1.5px', fontFamily: DISPLAY }}>
             {team.name.toUpperCase()}
           </span>
         </div>
 
         {/* ── Result label ── */}
-        <div style={{ display: 'flex', marginBottom: 56 }}>
-          <span style={{ fontSize: 152, fontWeight: 900, color: isChampion ? GOLD : RED, lineHeight: 1, fontFamily: DISPLAY }}>
+        <div style={{ display: 'flex', marginBottom: 84 }}>
+          <span style={{ fontSize: 228, fontWeight: 900, color: isChampion ? GOLD : RED, lineHeight: 1, fontFamily: DISPLAY }}>
             {label.toUpperCase()}
           </span>
         </div>
 
         {/* ── Divider ── */}
-        <div style={{ width: '100%', height: 2, background: BORDER, marginBottom: 40 }} />
+        <div style={{ width: '100%', height: 3, background: BORDER, marginBottom: 60 }} />
 
         {/* ── Route rows ── */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 0, flex: 1 }}>
@@ -146,6 +146,7 @@ export async function GET(req: NextRequest) {
             const { won, draw, score } = round;
             const pending = won === null && !draw;
             const isGroup = round.round === 'groep';
+            const oppFlagSrc = round.opponentId ? flagUrl(round.opponentId, 160) : '';
 
             return (
               <div
@@ -154,48 +155,45 @@ export async function GET(req: NextRequest) {
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'space-between',
-                  padding: '22px 32px',
+                  padding: '33px 48px',
                   background: isGroup ? PANEL : CARD,
-                  borderBottom: `2px solid ${BORDER}`,
+                  borderBottom: `3px solid ${BORDER}`,
                   opacity: pending ? 0.45 : 1,
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: 28 }}>
-                  <span style={{ fontSize: 18, fontWeight: 700, color: MUTED, letterSpacing: '0.15em', width: 96, fontFamily: BODY }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 42 }}>
+                  <span style={{ fontSize: 27, fontWeight: 700, color: MUTED, letterSpacing: '0.15em', width: 144, fontFamily: BODY }}>
                     {ROUND_SHORT[round.round] ?? round.round.toUpperCase()}
                   </span>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-                    {round.opponentId && (() => {
-                      const oppFlag = flagUrl(round.opponentId, 40);
-                      return oppFlag ? (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img
-                          src={oppFlag}
-                          alt=""
-                          width={44}
-                          height={30}
-                          style={{ borderRadius: '0 6px 0 6px', border: `2px solid ${BORDER}` }}
-                        />
-                      ) : null;
-                    })()}
-                    <span style={{ fontSize: 26, fontWeight: 700, color: INK, fontFamily: BODY }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 24 }}>
+                    {round.opponentId && oppFlagSrc && (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        src={oppFlagSrc}
+                        alt=""
+                        width={66}
+                        height={45}
+                        style={{ borderRadius: '0 9px 0 9px', border: `3px solid ${BORDER}` }}
+                      />
+                    )}
+                    <span style={{ fontSize: 39, fontWeight: 700, color: INK, fontFamily: BODY }}>
                       VS {round.opponentLabel.toUpperCase()}
                     </span>
                   </div>
                   {score && (
-                    <span style={{ fontSize: 22, color: MUTED, fontFamily: BODY }}>
+                    <span style={{ fontSize: 33, color: MUTED, fontFamily: BODY }}>
                       {score}
                     </span>
                   )}
                 </div>
                 {pending ? (
-                  <span style={{ fontSize: 32, color: MUTED, fontFamily: BODY }}>—</span>
+                  <span style={{ fontSize: 48, color: MUTED, fontFamily: BODY }}>—</span>
                 ) : (
                   <div style={{
-                    width: 56, height: 56, borderRadius: 8,
+                    width: 84, height: 84, borderRadius: 12,
                     background: draw ? '#475569' : won ? '#166534' : RED,
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    color: 'white', fontSize: 26, fontWeight: 700, fontFamily: BODY,
+                    color: 'white', fontSize: 39, fontWeight: 700, fontFamily: BODY,
                   }}>
                     {draw ? 'X' : won ? 'W' : 'L'}
                   </div>
@@ -206,18 +204,18 @@ export async function GET(req: NextRequest) {
         </div>
 
         {/* ── Footer ── */}
-        <div style={{ display: 'flex', marginTop: 40, paddingTop: 32, borderTop: `2px solid ${BORDER}`, alignItems: 'center', justifyContent: 'space-between' }}>
-          <span style={{ fontSize: 20, fontWeight: 700, color: MUTED, letterSpacing: '0.12em', textTransform: 'uppercase', fontFamily: BODY }}>
+        <div style={{ display: 'flex', marginTop: 60, paddingTop: 48, borderTop: `3px solid ${BORDER}`, alignItems: 'center', justifyContent: 'space-between' }}>
+          <span style={{ fontSize: 30, fontWeight: 700, color: MUTED, letterSpacing: '0.12em', textTransform: 'uppercase', fontFamily: BODY }}>
             scorepath.nl
           </span>
-          <span style={{ fontSize: 20, color: MUTED, fontFamily: BODY }}>
+          <span style={{ fontSize: 30, color: MUTED, fontFamily: BODY }}>
             Maak jouw scenario op scorepath.nl
           </span>
         </div>
       </div>
     ),
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    { width: 1200, height: 1800, fonts } as any,
+    { width: 1800, height: 2700, fonts } as any,
   );
 
   return new Response(img.body, {

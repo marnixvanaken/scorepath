@@ -5,20 +5,43 @@ import { toast } from '@/lib/toast';
 
 interface Props {
   ogUrl: string;
+  bracketUrl: string;
   teamName: string;
 }
 
-export function CardActions({ ogUrl, teamName }: Props) {
-  async function downloadImage() {
+async function shareFile(url: string, filename: string, title: string) {
+  const res = await fetch(url);
+  const blob = await res.blob();
+  const file = new File([blob], filename, { type: 'image/png' });
+
+  if (navigator.canShare?.({ files: [file] })) {
+    await navigator.share({ files: [file], title });
+    return;
+  }
+
+  // Desktop fallback: trigger download
+  const objUrl = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = objUrl;
+  a.download = filename;
+  a.click();
+  URL.revokeObjectURL(objUrl);
+}
+
+export function CardActions({ ogUrl, bracketUrl, teamName }: Props) {
+  const slug = teamName.toLowerCase().replace(/\s+/g, '-');
+
+  async function downloadRoute() {
     try {
-      const res = await fetch(ogUrl);
-      const blob = await res.blob();
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `scorepath-${teamName.toLowerCase().replace(/\s+/g, '-')}-wk2026.png`;
-      a.click();
-      URL.revokeObjectURL(url);
+      await shareFile(ogUrl, `scorepath-${slug}-route-wk2026.png`, `${teamName} · Route WK 2026`);
+    } catch {
+      toast('Download mislukt — probeer de afbeelding lang indrukken om op te slaan.');
+    }
+  }
+
+  async function downloadBracket() {
+    try {
+      await shareFile(bracketUrl, `scorepath-bracket-wk2026.png`, 'WK 2026 Bracket');
     } catch {
       toast('Download mislukt — probeer de afbeelding lang indrukken om op te slaan.');
     }
@@ -47,17 +70,25 @@ export function CardActions({ ogUrl, teamName }: Props) {
     <>
       <motion.button
         whileTap={{ scale: 0.95 }}
-        onClick={downloadImage}
-        className="px-6 py-3 text-sm font-bold tracking-widest uppercase text-white transition-opacity hover:opacity-90"
+        onClick={downloadRoute}
+        className="px-5 py-3 text-sm font-bold tracking-widest uppercase text-white transition-opacity hover:opacity-90"
         style={{ background: 'var(--cta)', borderRadius: '0 8px 0 8px' }}
       >
-        DOWNLOAD AFBEELDING
+        ↓ ROUTE KAART
+      </motion.button>
+      <motion.button
+        whileTap={{ scale: 0.95 }}
+        onClick={downloadBracket}
+        className="px-5 py-3 text-sm font-bold tracking-widest uppercase text-white transition-opacity hover:opacity-90"
+        style={{ background: '#1e3a5f', borderRadius: '0 8px 0 8px' }}
+      >
+        ↓ BRACKET
       </motion.button>
       <motion.button
         whileTap={{ scale: 0.95 }}
         onClick={shareLink}
-        className="px-6 py-3 text-sm font-bold tracking-widest uppercase text-white transition-opacity hover:opacity-90"
-        style={{ background: '#D93B1F', borderRadius: '0 8px 0 8px' }}
+        className="px-5 py-3 text-sm font-bold tracking-widest uppercase transition-opacity hover:opacity-70"
+        style={{ border: '1px solid var(--border)', color: 'var(--fg)', borderRadius: '0 8px 0 8px' }}
       >
         DEEL LINK
       </motion.button>

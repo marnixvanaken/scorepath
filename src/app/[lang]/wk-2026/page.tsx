@@ -3,8 +3,10 @@ import type { Metadata } from 'next';
 import SimulatorClient from '@/app/wk-2026/SimulatorClient';
 import type { InputMode } from '@/hooks/useSimulatorState';
 import { isLocale, DEFAULT_LOCALE } from '@/i18n';
-import { SITE_NAME } from '@/lib/siteConfig';
+import { SITE_NAME, SITE_URL } from '@/lib/siteConfig';
 import { alternatesFor, ogLocaleFields, ogImages, simulatorPath } from '@/lib/routes';
+import { FaqSection } from '@/components/FaqSection';
+import { getFaq } from '@/data/faq';
 
 export async function generateMetadata(props: PageProps<'/[lang]/wk-2026'>): Promise<Metadata> {
   const { lang } = await props.params;
@@ -64,5 +66,26 @@ export default async function SimulatorPage(
   const rawView = Array.isArray(params.view) ? params.view[0] : params.view;
   const initialView = rawView === 'knockout' ? 'knockout' : 'groepsfase';
 
-  return <SimulatorClient initialMode={initialMode} initialView={initialView} />;
+  const faqJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    inLanguage: lang,
+    url: `${SITE_URL}${simulatorPath(lang)}`,
+    mainEntity: getFaq(lang).map((item) => ({
+      '@type': 'Question',
+      name: item.q,
+      acceptedAnswer: { '@type': 'Answer', text: item.a },
+    })),
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd).replace(/</g, '\\u003c') }}
+      />
+      <SimulatorClient initialMode={initialMode} initialView={initialView} />
+      <FaqSection lang={lang} />
+    </>
+  );
 }

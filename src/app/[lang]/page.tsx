@@ -5,7 +5,7 @@ import { ThemeToggle } from '@/components/ThemeToggle';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { SITE_NAME } from '@/lib/siteConfig';
+import { SITE_NAME, SITE_URL } from '@/lib/siteConfig';
 import { isLocale, DEFAULT_LOCALE, getMessages } from '@/i18n';
 import { alternatesFor, ogLocaleFields, ogImages, simulatorPath } from '@/lib/routes';
 
@@ -58,8 +58,27 @@ export default async function HomePage(props: PageProps<'/[lang]'> & {
 
   const msg = getMessages(lang);
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: SITE_NAME,
+    url: `${SITE_URL}/${lang}`,
+    inLanguage: lang,
+    description: msg.home.description,
+    publisher: {
+      '@type': 'Organization',
+      name: SITE_NAME,
+      url: SITE_URL,
+      logo: { '@type': 'ImageObject', url: `${SITE_URL}/icon.svg` },
+    },
+  };
+
   return (
     <div className="min-h-dvh flex flex-col bg-themed">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}
+      />
 
       <nav className="px-6 sm:px-10 py-5 border-b border-themed">
         <div className="max-w-5xl mx-auto flex items-center justify-between">

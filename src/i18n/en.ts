@@ -148,10 +148,22 @@ export const EN: Messages = {
     blog: 'Blog',
     privacy: 'Privacy',
     simulator: 'Simulator',
+    about: 'About',
   },
   privacy: {
     pageTitle: 'Privacy Policy',
     pageDescription: 'Privacy policy of ScorePath — how we handle personal data and cookies.',
+  },
+  about: {
+    pageTitle: 'About ScorePath',
+    pageDescription: 'About ScorePath: a free, independent 2026 World Cup simulator using the real FIFA rules, plus analysis and stories around the tournament.',
+    intro: 'ScorePath is a free, independent simulator for the 2026 World Cup. Fill in the results and instantly see, with the real FIFA rules, who advances to the knockout stage — including the ranking of the best third-placed teams and every tiebreaker.',
+    howTitle: 'What we do',
+    how: 'We build tools that let football fans play out the tournament themselves: 104 matches, 48 teams and 12 groups, from the group stage to the final. Share your scenario with a single link. We also publish short analysis, records and stories around the World Cup.',
+    editorialTitle: 'Who is behind it',
+    editorial: 'Articles are published under the name ScorePath Editorial — a small team that maintains the simulator and writes the blog. We are not affiliated with FIFA or any official organisation.',
+    contactTitle: 'Contact',
+    contact: 'Questions, found a mistake or have a suggestion? Email us at admin@scorepath.nl.',
   },
   simulator: {
     modeLabel: 'Mode',

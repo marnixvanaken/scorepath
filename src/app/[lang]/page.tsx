@@ -148,6 +148,8 @@ export default async function HomePage(props: PageProps<'/[lang]'> & {
             <span>·</span>
             <Link href={simulatorPath(lang)} className="hover:opacity-70 transition-opacity">{msg.nav.simulator}</Link>
             <span>·</span>
+            <Link href={`/${lang}/about`} className="hover:opacity-70 transition-opacity">{msg.nav.about}</Link>
+            <span>·</span>
             <Link href={`/${lang}/privacy`} className="hover:opacity-70 transition-opacity">{msg.nav.privacy}</Link>
           </div>
         </div>

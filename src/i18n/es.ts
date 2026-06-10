@@ -148,10 +148,22 @@ export const ES: Messages = {
     blog: 'Blog',
     privacy: 'Privacidad',
     simulator: 'Simulador',
+    about: 'Acerca de',
   },
   privacy: {
     pageTitle: 'Política de privacidad',
     pageDescription: 'Política de privacidad de ScorePath — cómo gestionamos los datos personales y las cookies.',
+  },
+  about: {
+    pageTitle: 'Acerca de ScorePath',
+    pageDescription: 'Acerca de ScorePath: un simulador gratuito e independiente del Mundial 2026 con las reglas reales de la FIFA, además de análisis e historias del torneo.',
+    intro: 'ScorePath es un simulador gratuito e independiente del Mundial 2026. Rellena los resultados y ve al instante, con las reglas reales de la FIFA, quién avanza a la fase eliminatoria — incluida la clasificación de los mejores terceros y todos los desempates.',
+    howTitle: 'Qué hacemos',
+    how: 'Creamos herramientas para que los aficionados jueguen el torneo por sí mismos: 104 partidos, 48 selecciones y 12 grupos, desde la fase de grupos hasta la final. Comparte tu escenario con un solo enlace. También publicamos análisis breves, récords e historias sobre el Mundial.',
+    editorialTitle: 'Quién está detrás',
+    editorial: 'Los artículos se publican bajo el nombre Redacción ScorePath — un pequeño equipo que mantiene el simulador y escribe el blog. No estamos afiliados a la FIFA ni a ninguna organización oficial.',
+    contactTitle: 'Contacto',
+    contact: '¿Preguntas, has encontrado un error o tienes una sugerencia? Escríbenos a admin@scorepath.nl.',
   },
   simulator: {
     modeLabel: 'Modo',

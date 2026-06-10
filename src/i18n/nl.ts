@@ -148,10 +148,22 @@ export const NL: Messages = {
     blog: 'Blog',
     privacy: 'Privacy',
     simulator: 'Simulator',
+    about: 'Over ons',
   },
   privacy: {
     pageTitle: 'Privacyverklaring',
     pageDescription: 'Privacyverklaring van ScorePath — hoe wij omgaan met persoonsgegevens en cookies.',
+  },
+  about: {
+    pageTitle: 'Over ScorePath',
+    pageDescription: 'Over ScorePath: een gratis, onafhankelijke WK 2026 simulator met de echte FIFA-regels, plus analyses en verhalen rond het toernooi.',
+    intro: 'ScorePath is een gratis, onafhankelijke simulator voor het WK 2026. Vul de uitslagen in en zie direct, met de échte FIFA-regels, wie doorgaat naar de knockout-fase — inclusief de ranglijst van de beste nummers drie en alle tiebreakers.',
+    howTitle: 'Wat we doen',
+    how: 'We bouwen tools waarmee voetbalfans het toernooi zelf kunnen naspelen: 104 wedstrijden, 48 teams en 12 groepen, van de groepsfase tot de finale. Je scenario deel je met één link. Daarnaast publiceren we korte analyses, records en verhalen rond het WK.',
+    editorialTitle: 'Wie zit erachter',
+    editorial: 'De artikelen verschijnen onder de naam ScorePath Redactie — een kleine redactie die de simulator onderhoudt en de blog schrijft. We zijn niet verbonden aan de FIFA of een officiële organisatie.',
+    contactTitle: 'Contact',
+    contact: 'Vragen, fouten gevonden of een suggestie? Mail ons via admin@scorepath.nl.',
   },
   simulator: {
     modeLabel: 'Modus',

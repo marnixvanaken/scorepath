@@ -118,7 +118,11 @@ export const blogs: BlogPost[] = [
     tags: ['Tim Payne', 'Viral', 'WK 2026', 'Social media'],
     related: ['vs-iran-wk-2026', 'drie-legendes-wk-2026', 'oudste-coach-wk-2026'],
     author: 'ScorePath Redactie',
-    published: true,
+    // Gedepubliceerd: publicatiedatum 15-06-2026 ligt in de toekomst en het artikel
+    // claimt gebeurtenissen (viral worden tijdens het toernooi) die nog niet hebben
+    // plaatsgevonden — het WK start pas 11-06-2026. Zet pas weer op true na herschrijven
+    // met correcte, actuele feiten en een publicatiedatum in het verleden.
+    published: false,
   },
 ];
 

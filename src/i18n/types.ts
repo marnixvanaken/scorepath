@@ -146,10 +146,22 @@ export interface Messages {
     blog: string;
     privacy: string;
     simulator: string;
+    about: string;
   };
   privacy: {
     pageTitle: string;
     pageDescription: string;
+  };
+  about: {
+    pageTitle: string;
+    pageDescription: string;
+    intro: string;
+    howTitle: string;
+    how: string;
+    editorialTitle: string;
+    editorial: string;
+    contactTitle: string;
+    contact: string;
   };
   simulator: {
     modeLabel: string;

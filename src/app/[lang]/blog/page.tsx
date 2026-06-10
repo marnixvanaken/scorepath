@@ -165,6 +165,8 @@ export default async function BlogPage(props: PageProps<'/[lang]/blog'>) {
           <div className="flex items-center gap-3 text-xs text-slate-700">
             <span>{msg.blog.footerText}</span>
             <span>·</span>
+            <Link href={`/${lang}/about`} className="hover:opacity-70 transition-opacity">{msg.nav.about}</Link>
+            <span>·</span>
             <Link href={`/${lang}/privacy`} className="hover:opacity-70 transition-opacity">{msg.nav.privacy}</Link>
           </div>
         </div>

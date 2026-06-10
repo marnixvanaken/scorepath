@@ -103,7 +103,7 @@ export const ES: Messages = {
     shareLink: 'COMPARTIR',
   },
   home: {
-    tagline1: 'Rellena los resultados.',
+    tagline1: 'Predice el Mundial 2026.',
     tagline2: 'Ve quién avanza a la fase eliminatoria.',
     description: '104 partidos. 48 equipos. 12 grupos, reglas FIFA exactas. Comparte tu escenario con un enlace.',
     openSimulator: 'ABRIR SIMULADOR',

@@ -103,7 +103,7 @@ export const NL: Messages = {
     shareLink: 'DEEL LINK',
   },
   home: {
-    tagline1: 'Vul de uitslagen in.',
+    tagline1: 'Voorspel het WK 2026.',
     tagline2: 'Zie wie doorgaat naar de knockout-fase.',
     description: '104 wedstrijden. 48 teams. 12 groepen, exacte FIFA-regels. Deel je scenario via één link.',
     openSimulator: 'OPEN SIMULATOR',

@@ -103,7 +103,7 @@ export const EN: Messages = {
     shareLink: 'SHARE LINK',
   },
   home: {
-    tagline1: 'Fill in the results.',
+    tagline1: 'Predict the 2026 World Cup.',
     tagline2: 'See who advances to the knockout stage.',
     description: '104 matches. 48 teams. 12 groups, exact FIFA rules. Share your scenario via one link.',
     openSimulator: 'OPEN SIMULATOR',

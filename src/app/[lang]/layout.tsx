@@ -88,6 +88,9 @@ export default async function LocaleLayout({
       suppressHydrationWarning
     >
       <body className="min-h-full font-ui">
+        {/* Vlaggen laden van flagcdn.com — verbinding vast opzetten voor snellere LCP */}
+        <link rel="preconnect" href="https://flagcdn.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://flagcdn.com" />
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(){try{var t=localStorage.getItem('theme');if(t==='light'){document.documentElement.dataset.theme='light';}else if(!t&&window.matchMedia('(prefers-color-scheme: light)').matches){document.documentElement.dataset.theme='light';}}catch(e){}})();`,

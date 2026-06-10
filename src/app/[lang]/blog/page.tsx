@@ -6,7 +6,8 @@ import { getPublishedBlogs } from '@/data/blogs';
 import { getLocalizedBlogMeta } from '@/data/blogTranslations';
 import { getDynamicBlogs } from '@/lib/supabase';
 import { isLocale, DEFAULT_LOCALE, getMessages, getDateLocale } from '@/i18n';
-import { SITE_URL, SITE_NAME } from '@/lib/siteConfig';
+import { SITE_NAME } from '@/lib/siteConfig';
+import { alternatesFor, ogLocaleFields, ogImages, blogPath, simulatorPath } from '@/lib/routes';
 
 export const revalidate = 3600;
 
@@ -14,16 +15,27 @@ export async function generateMetadata(props: PageProps<'/[lang]/blog'>): Promis
   const { lang } = await props.params;
   const locale = isLocale(lang) ? lang : DEFAULT_LOCALE;
   const msg = getMessages(locale);
+  const title = msg.blog.pageTitle;
+  const description = msg.blog.pageDescription;
+  const alternates = alternatesFor((l) => `/${l}/blog`, locale);
   return {
-    title: msg.blog.pageTitle,
-    description: msg.blog.pageDescription,
-    alternates: {
-      canonical: `${SITE_URL}/${locale}/blog`,
-      languages: {
-        'nl-NL': `${SITE_URL}/nl/blog`,
-        'en-US': `${SITE_URL}/en/blog`,
-        'es-ES': `${SITE_URL}/es/blog`,
-      },
+    title,
+    description,
+    alternates,
+    openGraph: {
+      title: `${SITE_NAME} ${title}`,
+      description,
+      ...ogLocaleFields(locale),
+      type: 'website',
+      url: alternates.canonical,
+      siteName: SITE_NAME,
+      images: ogImages(locale),
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${SITE_NAME} ${title}`,
+      description,
+      images: ogImages(locale).map((i) => i.url),
     },
   };
 }
@@ -75,7 +87,7 @@ export default async function BlogPage(props: PageProps<'/[lang]/blog'>) {
             <Link href={`/${lang}/blog`} className="text-xs font-bold text-white tracking-wide uppercase">
               {msg.nav.blog}
             </Link>
-            <Link href={`/${lang}/wk-2026`} className="text-xs font-bold text-orange-500 hover:text-orange-400 transition-colors tracking-wide uppercase">
+            <Link href={simulatorPath(lang)} className="text-xs font-bold text-orange-500 hover:text-orange-400 transition-colors tracking-wide uppercase">
               {msg.blog.openSimulator}
             </Link>
           </div>
@@ -103,7 +115,7 @@ export default async function BlogPage(props: PageProps<'/[lang]/blog'>) {
               {combined.map((post) => (
                 <Link
                   key={post.slug}
-                  href={`/${lang}/blog/${post.slug}`}
+                  href={blogPath(lang, post.slug)}
                   className="group block bg-[#0d0d0d] border border-[#1a1a1a] hover:border-orange-500/30 rounded-2xl overflow-hidden transition-all duration-200"
                 >
                   <div className="p-7">

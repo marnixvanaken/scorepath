@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { Logo } from '@/components/Logo';
 import { SITE_URL, SITE_NAME } from '@/lib/siteConfig';
 import { isLocale, DEFAULT_LOCALE, getMessages } from '@/i18n';
+import { alternatesFor } from '@/lib/routes';
 
 export async function generateMetadata(props: PageProps<'/[lang]/privacy'>): Promise<Metadata> {
   const { lang } = await props.params;
@@ -12,14 +13,7 @@ export async function generateMetadata(props: PageProps<'/[lang]/privacy'>): Pro
   return {
     title: msg.privacy.pageTitle,
     description: msg.privacy.pageDescription,
-    alternates: {
-      canonical: `${SITE_URL}/${locale}/privacy`,
-      languages: {
-        'nl-NL': `${SITE_URL}/nl/privacy`,
-        'en-US': `${SITE_URL}/en/privacy`,
-        'es-ES': `${SITE_URL}/es/privacy`,
-      },
-    },
+    alternates: alternatesFor((l) => `/${l}/privacy`, locale),
   };
 }
 

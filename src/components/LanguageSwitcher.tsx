@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useParams, usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'motion/react';
 import { LOCALES } from '@/i18n';
+import { translatePath } from '@/lib/routes';
 
 const LOCALE_META: Record<string, { flag: string; label: string }> = {
   nl: { flag: '🇳🇱', label: 'NL' },
@@ -35,8 +36,7 @@ export function LanguageSwitcher() {
 
   function hrefFor(lang: string) {
     if (!pathname) return `/${lang}`;
-    const withoutLang = pathname.replace(/^\/(nl|en|es)(\/|$)/, '/');
-    return `/${lang}${withoutLang === '/' ? '' : withoutLang}`;
+    return translatePath(pathname, lang);
   }
 
   const current = LOCALE_META[currentLang] ?? LOCALE_META.nl;

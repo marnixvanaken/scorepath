@@ -7,6 +7,7 @@ import { TEAMS } from '@/data/worldcup2026';
 import { CardActions } from '@/app/wk-2026/card/CardActions';
 import { isLocale, getMessages } from '@/i18n';
 import { SITE_NAME } from '@/lib/siteConfig';
+import { simulatorPath } from '@/lib/routes';
 
 export default async function CardPage(
   props: PageProps<'/[lang]/wk-2026/card'> & {
@@ -22,9 +23,9 @@ export default async function CardPage(
   const s = Array.isArray(params.s) ? params.s[0] : params.s;
   const k = Array.isArray(params.k) ? params.k[0] : params.k;
 
-  if (!teamId || !s) redirect(`/${lang}/wk-2026`);
+  if (!teamId || !s) redirect(simulatorPath(lang));
   const team = TEAMS.find((t) => t.id === teamId);
-  if (!team) redirect(`/${lang}/wk-2026`);
+  if (!team) redirect(simulatorPath(lang));
 
   const ogParams = new URLSearchParams();
   ogParams.set('team', teamId);
@@ -37,7 +38,7 @@ export default async function CardPage(
   if (k) bracketParams.set('k', k);
   const bracketUrl = `/api/og/bracket?${bracketParams.toString()}`;
 
-  const backUrl = `/${lang}/wk-2026?s=${s}${k ? `&k=${k}` : ''}`;
+  const backUrl = `${simulatorPath(lang)}?s=${s}${k ? `&k=${k}` : ''}`;
 
   return (
     <div className="min-h-dvh flex flex-col" style={{ background: 'var(--bg)', color: 'var(--fg)' }}>

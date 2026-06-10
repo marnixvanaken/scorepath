@@ -5,24 +5,41 @@ import { ThemeToggle } from '@/components/ThemeToggle';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { SITE_URL, SITE_NAME } from '@/lib/siteConfig';
+import { SITE_NAME } from '@/lib/siteConfig';
 import { isLocale, DEFAULT_LOCALE, getMessages } from '@/i18n';
+import { alternatesFor, ogLocaleFields, ogImages, simulatorPath } from '@/lib/routes';
 
 export async function generateMetadata(props: PageProps<'/[lang]'>): Promise<Metadata> {
   const { lang } = await props.params;
   const locale = isLocale(lang) ? lang : DEFAULT_LOCALE;
   const msg = getMessages(locale);
+
+  const descriptions: Record<string, string> = {
+    nl: 'Gratis WK 2026 simulator: speel alle 104 wedstrijden, 48 teams en 12 groepen na met de échte FIFA-regels en deel je scenario via één link.',
+    en: 'Free 2026 World Cup simulator: play out all 104 matches, 48 teams and 12 groups with the real FIFA rules and share your scenario via one link.',
+    es: 'Simulador gratuito del Mundial 2026: juega los 104 partidos, 48 selecciones y 12 grupos con las reglas reales de la FIFA y comparte tu escenario con un enlace.',
+  };
+  const description = descriptions[locale] ?? descriptions.nl;
+
   return {
-    title: msg.header.title,
-    description: msg.home.description,
-    alternates: {
-      canonical: `${SITE_URL}/${locale}`,
-      languages: {
-        'nl-NL': `${SITE_URL}/nl`,
-        'en-US': `${SITE_URL}/en`,
-        'es-ES': `${SITE_URL}/es`,
-      },
+    title: { absolute: `${msg.header.title} · ${SITE_NAME}` },
+    description,
+    openGraph: {
+      title: `${SITE_NAME} — ${msg.header.title}`,
+      description,
+      ...ogLocaleFields(locale),
+      type: 'website',
+      siteName: SITE_NAME,
+      url: alternatesFor((l) => `/${l}`, locale).canonical,
+      images: ogImages(locale),
     },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${SITE_NAME} — ${msg.header.title}`,
+      description,
+      images: ogImages(locale).map((i) => i.url),
+    },
+    alternates: alternatesFor((l) => `/${l}`, locale),
   };
 }
 
@@ -36,7 +53,7 @@ export default async function HomePage(props: PageProps<'/[lang]'> & {
   const s = params.s;
   if (s) {
     const encoded = Array.isArray(s) ? s[0] : s;
-    redirect(`/${lang}/wk-2026?s=${encoded}`);
+    redirect(`${simulatorPath(lang)}?s=${encoded}`);
   }
 
   const msg = getMessages(lang);
@@ -93,7 +110,7 @@ export default async function HomePage(props: PageProps<'/[lang]'> & {
             {msg.home.description}
           </p>
 
-          <CTALink href={`/${lang}/wk-2026`} label={msg.home.openSimulator} />
+          <CTALink href={simulatorPath(lang)} label={msg.home.openSimulator} />
         </div>
       </section>
 
@@ -129,7 +146,7 @@ export default async function HomePage(props: PageProps<'/[lang]'> & {
           <div className="c-fg-subtle flex items-center gap-4 text-xs font-bold tracking-widest uppercase">
             <Link href={`/${lang}/blog`} className="hover:opacity-70 transition-opacity">{msg.nav.blog}</Link>
             <span>·</span>
-            <Link href={`/${lang}/wk-2026`} className="hover:opacity-70 transition-opacity">{msg.nav.simulator}</Link>
+            <Link href={simulatorPath(lang)} className="hover:opacity-70 transition-opacity">{msg.nav.simulator}</Link>
             <span>·</span>
             <Link href={`/${lang}/privacy`} className="hover:opacity-70 transition-opacity">{msg.nav.privacy}</Link>
           </div>

@@ -100,8 +100,13 @@ export function SimulatorHeader({
             </Link>
             <span className="c-fg text-xs opacity-20" aria-hidden="true">/</span>
             <h1 className="font-display text-xl leading-none tracking-wider shrink-0 c-fg">
-              <span className="c-gold">WK</span>
-              {' '}2026
+              {lang === 'en' ? (
+                <><span className="c-gold">World Cup</span>{' '}2026</>
+              ) : lang === 'es' ? (
+                <><span className="c-gold">Mundial</span>{' '}2026</>
+              ) : (
+                <><span className="c-gold">WK</span>{' '}2026</>
+              )}
             </h1>
           </div>
 

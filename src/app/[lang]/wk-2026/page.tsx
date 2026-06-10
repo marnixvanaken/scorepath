@@ -2,36 +2,47 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import SimulatorClient from '@/app/wk-2026/SimulatorClient';
 import type { InputMode } from '@/hooks/useSimulatorState';
-import { isLocale, DEFAULT_LOCALE, getMessages } from '@/i18n';
-import { SITE_URL, SITE_NAME } from '@/lib/siteConfig';
+import { isLocale, DEFAULT_LOCALE } from '@/i18n';
+import { SITE_NAME } from '@/lib/siteConfig';
+import { alternatesFor, ogLocaleFields, ogImages, simulatorPath } from '@/lib/routes';
 
 export async function generateMetadata(props: PageProps<'/[lang]/wk-2026'>): Promise<Metadata> {
   const { lang } = await props.params;
   const locale = isLocale(lang) ? lang : DEFAULT_LOCALE;
-  const msg = getMessages(locale);
 
   const titles: Record<string, string> = {
     nl: 'WK 2026 Simulator',
     en: 'World Cup 2026 Simulator',
     es: 'Simulador Mundial 2026',
   };
+  // Volledige, unieke descriptions per taal (≤ ~155 tekens) met de USP's.
+  const descriptions: Record<string, string> = {
+    nl: 'Speel het WK 2026 na: vul 104 wedstrijden van 48 teams in, zie live met de FIFA-tiebreakers wie doorgaat en deel je bracket via één link. Gratis.',
+    en: 'Simulate the 2026 World Cup: enter 104 matches across 48 teams, see live who advances with FIFA tiebreakers and share your bracket via one link. Free.',
+    es: 'Simula el Mundial 2026: rellena 104 partidos de 48 selecciones, ve en directo quién avanza con los desempates FIFA y comparte tu cuadro con un enlace. Gratis.',
+  };
+  const title = titles[locale] ?? titles.nl;
+  const description = descriptions[locale] ?? descriptions.nl;
+  const alternates = alternatesFor(simulatorPath, locale);
 
   return {
-    title: titles[locale] ?? titles.nl,
-    description: msg.header.subtitle,
-    alternates: {
-      canonical: `${SITE_URL}/${locale}/wk-2026`,
-      languages: {
-        'nl-NL': `${SITE_URL}/nl/wk-2026`,
-        'en-US': `${SITE_URL}/en/wk-2026`,
-        'es-ES': `${SITE_URL}/es/wk-2026`,
-      },
-    },
+    title,
+    description,
+    alternates,
     openGraph: {
-      title: `${SITE_NAME} — ${titles[locale] ?? titles.nl}`,
-      description: msg.header.subtitle,
-      url: `${SITE_URL}/${locale}/wk-2026`,
+      title: `${SITE_NAME} — ${title}`,
+      description,
+      ...ogLocaleFields(locale),
+      type: 'website',
+      url: alternates.canonical,
       siteName: SITE_NAME,
+      images: ogImages(locale),
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${SITE_NAME} — ${title}`,
+      description,
+      images: ogImages(locale).map((i) => i.url),
     },
   };
 }

@@ -112,6 +112,19 @@ export function alternatesFor(
   return { canonical: `${SITE_URL}${pathFor(toLocale(currentLocale))}`, languages };
 }
 
+// Fallback OG-image per taal (de file-convention image op /[lang]/opengraph-image).
+// Moet expliciet per pagina meegegeven worden omdat een eigen openGraph-object in
+// generateMetadata de geërfde file-convention image overschrijft (shallow merge).
+export function ogImages(locale: string): { url: string; width: number; height: number; alt: string }[] {
+  const l = toLocale(locale);
+  return [{
+    url: `${SITE_URL}/${l}/opengraph-image`,
+    width: 1200,
+    height: 630,
+    alt: 'ScorePath — World Cup 2026 Simulator',
+  }];
+}
+
 // og:locale + og:locale:alternate velden voor openGraph.
 export function ogLocaleFields(locale: string): { locale: string; alternateLocale: string[] } {
   const l = toLocale(locale);

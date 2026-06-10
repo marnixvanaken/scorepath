@@ -6,6 +6,7 @@ import { SITE_URL, SITE_NAME } from '@/lib/siteConfig';
 import { Toaster } from '@/components/Toaster';
 import { CookieBanner } from '@/components/CookieBanner';
 import { LOCALES, DEFAULT_LOCALE, isLocale, getHtmlLang } from '@/i18n';
+import { alternatesFor, ogLocaleFields, ogImages } from '@/lib/routes';
 
 const bebasNeue = Bebas_Neue({
   weight: '400',
@@ -30,7 +31,6 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const { lang } = await props.params;
   const locale = isLocale(lang) ? lang : DEFAULT_LOCALE;
-  const ogLocale = locale === 'nl' ? 'nl_NL' : locale === 'es' ? 'es_ES' : 'en_US';
 
   const descriptions: Record<string, string> = {
     nl: 'Vul de groepsuitslagen in en zie live wie doorgaat naar de knockout-fase van het WK 2026.',
@@ -46,12 +46,6 @@ export async function generateMetadata(
   };
   const ogTitle = titles[locale] ?? titles.nl;
 
-  const alternateLocales: Record<string, string> = {
-    nl: 'nl_NL',
-    en: 'en_US',
-    es: 'es_ES',
-  };
-
   return {
     metadataBase: new URL(SITE_URL),
     title: { default: SITE_NAME, template: `%s · ${SITE_NAME}` },
@@ -63,25 +57,19 @@ export async function generateMetadata(
     openGraph: {
       title: `${SITE_NAME} — ${ogTitle}`,
       description,
-      locale: ogLocale,
-      alternateLocale: Object.entries(alternateLocales)
-        .filter(([l]) => l !== locale)
-        .map(([, v]) => v),
+      ...ogLocaleFields(locale),
       type: 'website',
       siteName: SITE_NAME,
       url: `${SITE_URL}/${locale}`,
+      images: ogImages(locale),
     },
     twitter: {
       card: 'summary_large_image',
       title: `${SITE_NAME} — ${ogTitle}`,
       description,
+      images: ogImages(locale).map((i) => i.url),
     },
-    alternates: {
-      canonical: `${SITE_URL}/${locale}`,
-      languages: Object.fromEntries(
-        LOCALES.map((l) => [l === 'nl' ? 'nl-NL' : l === 'en' ? 'en-US' : 'es-ES', `${SITE_URL}/${l}`])
-      ),
-    },
+    alternates: alternatesFor((l) => `/${l}`, locale),
   };
 }
 

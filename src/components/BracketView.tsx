@@ -10,6 +10,7 @@ import { buildBracket } from '@/lib/bracket';
 import { teamById, getTeamName } from '@/data/worldcup2026';
 import { Flag } from './Flag';
 import { useMessages } from '@/hooks/useMessages';
+import { simulatorPath } from '@/lib/routes';
 
 interface SlotProps {
   slot: BracketMatch['slot1'];
@@ -155,7 +156,7 @@ function WinnerBanner({ teamId, encodedS, encodedK }: { teamId: string; encodedS
   const params = useParams();
   const lang = typeof params?.lang === 'string' ? params.lang : 'nl';
   const stars = (WC_TITLES[teamId] ?? 0) + 1;
-  const cardHref = `/${lang}/wk-2026/card?team=${teamId}&s=${encodedS}${encodedK ? `&k=${encodedK}` : ''}`;
+  const cardHref = `${simulatorPath(lang)}/card?team=${teamId}&s=${encodedS}${encodedK ? `&k=${encodedK}` : ''}`;
 
   function handleShare() {
     if (typeof navigator !== 'undefined' && navigator.share) {

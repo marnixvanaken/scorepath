@@ -8,6 +8,7 @@ import { getLocalizedBlogMeta } from '@/data/blogTranslations';
 import { getDynamicBlogBySlug } from '@/lib/supabase';
 import { isLocale, DEFAULT_LOCALE, getMessages, getDateLocale, LOCALES } from '@/i18n';
 import { SITE_URL, SITE_NAME } from '@/lib/siteConfig';
+import { alternatesFor, ogLocaleFields, ogImages, blogPath, localizedBlogSlug, resolveBlogSlug, simulatorPath } from '@/lib/routes';
 import { DrieLegendesContent } from '@/app/blog/[slug]/drie-legendes';
 import { VsIranContent } from '@/app/blog/[slug]/vs-iran';
 import { MbappeKloseContent } from '@/app/blog/[slug]/mbappe-klose';
@@ -22,7 +23,10 @@ export const revalidate = 3600;
 
 export function generateStaticParams() {
   const slugs = getPublishedBlogs().map((post) => post.slug);
-  return LOCALES.flatMap((lang) => slugs.map((slug) => ({ lang, slug })));
+  // Per taal de GELOKALISEERDE slug pregenereren (en bv. world-cup, es mundial).
+  return LOCALES.flatMap((lang) =>
+    slugs.map((canonical) => ({ lang, slug: localizedBlogSlug(canonical, lang) })),
+  );
 }
 
 export async function generateMetadata(
@@ -30,31 +34,24 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const { lang, slug } = await props.params;
   const locale = isLocale(lang) ? lang : DEFAULT_LOCALE;
-  const dynamic = await getDynamicBlogBySlug(slug).catch(() => null);
-  const staticPost = getBlogBySlug(slug);
+  const canonical = resolveBlogSlug(locale, slug);
+  const dynamic = await getDynamicBlogBySlug(canonical).catch(() => null);
+  const staticPost = getBlogBySlug(canonical);
   if (!dynamic && !staticPost) return {};
 
   const basePost = dynamic ?? staticPost!;
-  const localized = getLocalizedBlogMeta(slug, locale);
+  const localized = getLocalizedBlogMeta(canonical, locale);
   const title = localized?.title ?? basePost.title;
   const description = localized?.description ?? basePost.description;
   const author = 'author' in basePost ? basePost.author : SITE_NAME;
   const tags = 'tags' in basePost ? basePost.tags : [];
-  const canonicalUrl = `${SITE_URL}/${locale}/blog/${slug}`;
-  const ogLocale = locale === 'nl' ? 'nl_NL' : locale === 'en' ? 'en_US' : 'es_ES';
+  const alternates = alternatesFor((l) => blogPath(l, canonical), locale);
 
   return {
     title,
     description,
     authors: [{ name: author, url: SITE_URL }],
-    alternates: {
-      canonical: canonicalUrl,
-      languages: {
-        'nl-NL': `${SITE_URL}/nl/blog/${slug}`,
-        'en-US': `${SITE_URL}/en/blog/${slug}`,
-        'es-ES': `${SITE_URL}/es/blog/${slug}`,
-      },
-    },
+    alternates,
     openGraph: {
       title,
       description,
@@ -62,14 +59,16 @@ export async function generateMetadata(
       publishedTime: basePost.date,
       authors: [author],
       tags,
-      url: canonicalUrl,
+      url: alternates.canonical,
       siteName: SITE_NAME,
-      locale: ogLocale,
+      ...ogLocaleFields(locale),
+      images: ogImages(locale),
     },
     twitter: {
       card: 'summary_large_image',
       title,
       description,
+      images: ogImages(locale).map((i) => i.url),
     },
   };
 }
@@ -94,14 +93,15 @@ export default async function BlogPostPage(props: PageProps<'/[lang]/blog/[slug]
   if (!isLocale(lang)) notFound();
   const msg = getMessages(lang);
   const dateLocale = getDateLocale(lang);
+  const canonical = resolveBlogSlug(lang, slug);
 
-  const dynamicPost = await getDynamicBlogBySlug(slug).catch(() => null);
-  const staticPost = getBlogBySlug(slug);
+  const dynamicPost = await getDynamicBlogBySlug(canonical).catch(() => null);
+  const staticPost = getBlogBySlug(canonical);
 
   if (!dynamicPost && (!staticPost || !staticPost.published)) notFound();
 
   const post = dynamicPost ?? staticPost!;
-  const localized = getLocalizedBlogMeta(slug, lang);
+  const localized = getLocalizedBlogMeta(canonical, lang);
   const displayTitle = localized?.title ?? post.title;
   const displayDescription = localized?.description ?? post.description;
   const displayCategory = localized?.category ?? post.category;
@@ -109,13 +109,14 @@ export default async function BlogPostPage(props: PageProps<'/[lang]/blog/[slug]
   const readTime = 'read_time' in post ? post.read_time : (staticPost?.readTime ?? 5);
   const related = staticPost && 'related' in staticPost ? (staticPost as { related?: string[] }).related ?? [] : [];
   const author = 'author' in post ? post.author : (staticPost?.author ?? SITE_NAME);
-  const canonicalUrl = `${SITE_URL}/${lang}/blog/${slug}`;
+  const canonicalUrl = `${SITE_URL}${blogPath(lang, canonical)}`;
 
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
     headline: displayTitle,
     description: displayDescription,
+    image: [`${SITE_URL}/${lang}/opengraph-image`],
     datePublished: post.date,
     dateModified: post.date,
     inLanguage: lang,
@@ -150,7 +151,7 @@ export default async function BlogPostPage(props: PageProps<'/[lang]/blog/[slug]
               {msg.nav.blog}
             </Link>
             <Link
-              href={`/${lang}/wk-2026`}
+              href={simulatorPath(lang)}
               className="text-xs font-bold text-orange-500 hover:text-orange-400 transition-colors tracking-wide uppercase"
             >
               {msg.blog.openSimulator}
@@ -212,7 +213,7 @@ export default async function BlogPostPage(props: PageProps<'/[lang]/blog/[slug]
                 <ReactMarkdown>{dynamicPost.content}</ReactMarkdown>
               </div>
             ) : (
-              <StaticBlogContent slug={slug} lang={lang} />
+              <StaticBlogContent slug={canonical} lang={lang} />
             )}
           </div>
 
@@ -248,7 +249,7 @@ export default async function BlogPostPage(props: PageProps<'/[lang]/blog/[slug]
                     return (
                       <Link
                         key={rel.slug}
-                        href={`/${lang}/blog/${rel.slug}`}
+                        href={blogPath(lang, rel.slug)}
                         className="group block bg-[#0d0d0d] border border-[#1a1a1a] hover:border-orange-500/30 rounded-xl overflow-hidden transition-all duration-200"
                       >
                         <div className="p-5">

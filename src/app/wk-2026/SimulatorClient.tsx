@@ -21,6 +21,7 @@ import { BracketView } from '@/components/BracketView';
 import { EmptyState } from '@/components/EmptyState';
 import { TeamPickerButton } from '@/components/TeamPickerButton';
 import { CompletionModal } from '@/components/CompletionModal';
+import { simulatorPath } from '@/lib/routes';
 
 type View = 'groepsfase' | 'knockout';
 
@@ -328,7 +329,7 @@ export default function SimulatorClient({ initialMode, initialView = 'groepsfase
         teamId={knockoutWinner}
         onPrimary={() => {
           if (!knockoutWinner) return;
-          const cardHref = `/${lang}/wk-2026/card?team=${knockoutWinner}&s=${encodedS}${encodedK ? `&k=${encodedK}` : ''}`;
+          const cardHref = `${simulatorPath(lang)}/card?team=${knockoutWinner}&s=${encodedS}${encodedK ? `&k=${encodedK}` : ''}`;
           router.push(cardHref);
         }}
         onClose={() => setShowKnockoutModal(false)}

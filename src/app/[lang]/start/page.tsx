@@ -7,6 +7,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Logo } from '@/components/Logo';
 import { getMessages } from '@/i18n';
+import { simulatorPath } from '@/lib/routes';
 
 type Step = 1 | 2;
 type Direction = 1 | -1;
@@ -46,7 +47,7 @@ export default function StartPage() {
   }
 
   function startSimulator(mode: 'quick' | 'exact') {
-    router.push(`/${lang}/wk-2026?mode=${mode}`);
+    router.push(`${simulatorPath(lang)}?mode=${mode}`);
   }
 
   return (

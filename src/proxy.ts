@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { LOCALES, DEFAULT_LOCALE, isLocale } from '@/i18n';
+import { LOCALES, DEFAULT_LOCALE, isLocale, type Locale } from '@/i18n';
+import { SIMULATOR_SLUG, SIMULATOR_PHYSICAL_SLUG, BLOG_SLUGS } from '@/lib/routes';
 
 const NL_COUNTRIES = new Set(['NL', 'BE', 'SR']);
 const ES_COUNTRIES = new Set([
@@ -33,13 +34,52 @@ function getPreferredLocale(request: NextRequest): string {
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Check if the path already starts with a supported locale
-  const pathnameHasLocale = LOCALES.some(
-    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
-  );
-  if (pathnameHasLocale) return;
+  // ── Host-consistentie: 301 apex (scorepath.nl) -> www.scorepath.nl ──
+  // Definitieve canonieke redirect hoort op DNS/hosting-niveau te staan; dit is
+  // een defensieve fallback zodat de canonieke host altijd www is.
+  const host = request.headers.get('host') ?? '';
+  if (host === 'scorepath.nl') {
+    const url = request.nextUrl.clone();
+    url.host = 'www.scorepath.nl';
+    url.port = '';
+    return NextResponse.redirect(url, { status: 301 });
+  }
 
-  // Redirect old /wk-2026 URLs to /nl/wk-2026 (preserve query params)
+  const segs = pathname.split('/').filter(Boolean);
+  const maybeLang = segs[0];
+
+  // ── Reeds gelokaliseerde paden: slug-redirects/rewrites ──
+  if (isLocale(maybeLang)) {
+    const lang = maybeLang as Locale;
+    const rest = segs.slice(1);
+
+    // Simulator: oude/foute slug -> 301 naar gelokaliseerde slug
+    if (rest[0] === SIMULATOR_PHYSICAL_SLUG && lang !== 'nl') {
+      const url = request.nextUrl.clone();
+      url.pathname = `/${lang}/${SIMULATOR_SLUG[lang]}${rest.length > 1 ? '/' + rest.slice(1).join('/') : ''}`;
+      return NextResponse.redirect(url, { status: 301 });
+    }
+    // Simulator: gelokaliseerde slug -> intern rewrite naar fysieke route
+    if (lang !== 'nl' && rest[0] === SIMULATOR_SLUG[lang]) {
+      const url = request.nextUrl.clone();
+      url.pathname = `/${lang}/${SIMULATOR_PHYSICAL_SLUG}${rest.length > 1 ? '/' + rest.slice(1).join('/') : ''}`;
+      return NextResponse.rewrite(url);
+    }
+
+    // Blog: oude (canonieke nl-)slug onder en/es -> 301 naar gelokaliseerde slug
+    if (rest[0] === 'blog' && rest[1]) {
+      const localized = BLOG_SLUGS[rest[1]]?.[lang];
+      if (localized && localized !== rest[1]) {
+        const url = request.nextUrl.clone();
+        url.pathname = `/${lang}/blog/${localized}`;
+        return NextResponse.redirect(url, { status: 301 });
+      }
+    }
+
+    return;
+  }
+
+  // Redirect oude /wk-2026 URLs naar /nl/wk-2026 (querystring behouden)
   const legacyPaths = ['/wk-2026', '/blog', '/privacy', '/start'];
   const matchesLegacy = legacyPaths.some(
     (p) => pathname === p || pathname.startsWith(`${p}/`)
@@ -49,7 +89,7 @@ export function proxy(request: NextRequest) {
     return NextResponse.redirect(request.nextUrl, { status: 301 });
   }
 
-  // Redirect root to preferred locale
+  // Redirect root naar voorkeurstaal
   if (pathname === '/') {
     const locale = getPreferredLocale(request);
     request.nextUrl.pathname = `/${locale}`;

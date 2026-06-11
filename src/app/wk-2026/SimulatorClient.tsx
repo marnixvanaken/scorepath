@@ -11,6 +11,7 @@ import { computeAllGroups, rankThirdPlaced, getQualifiers, isGroupComplete } fro
 import { encodeResults } from '@/lib/serialization';
 import { encodeKnockout, buildBracket } from '@/lib/bracket';
 import { prefillResults } from '@/lib/prefill';
+import { synthesizeDragResults } from '@/lib/dragResults';
 import { GROUP_IDS, groupFixtures, teamById } from '@/data/worldcup2026';
 import type { GroupId, Qualifiers, ThirdPlaceRank } from '@/lib/types';
 import { useMessages } from '@/hooks/useMessages';
@@ -118,7 +119,16 @@ export default function SimulatorClient({ initialMode, initialView = 'groepsfase
     return getQualifiers(results, {}, manualOrder);
   }, [inputMode, results, manualOrder, groupDragOrders, thirdsDragOrder]);
 
-  const encodedS = useMemo(() => encodeResults(results), [results]);
+  // In Volgorde-modus bevat `results` geen scores; leid uitslagen af uit de
+  // gesleepte volgorde zodat de gedeelde kaart-URL dezelfde gekwalificeerden
+  // (en dus dezelfde knockout-winnaar) reproduceert. Zie synthesizeDragResults.
+  const shareResults = useMemo(
+    () => (inputMode === 'drag'
+      ? synthesizeDragResults(groupDragOrders, thirdsDragOrder)
+      : results),
+    [inputMode, groupDragOrders, thirdsDragOrder, results],
+  );
+  const encodedS = useMemo(() => encodeResults(shareResults), [shareResults]);
   const encodedK = useMemo(() => encodeKnockout(kr), [kr]);
 
   // Groepsfase voltooid?

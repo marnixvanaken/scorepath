@@ -147,17 +147,17 @@ export function GroupCard({
                   <button
                     key={teamId}
                     onClick={() => handlePickTeam(teamId)}
-                    className={`relative flex-1 min-w-0 flex flex-col items-center gap-1 py-2 rounded-lg transition-all select-none active:scale-95 ${
+                    className={`relative flex-1 min-w-0 flex flex-col items-center gap-1 py-3 rounded-lg transition-all select-none active:scale-95 ${
                       isPicked ? 'opacity-35' : 'bg-white/10 hover:bg-white/15'
                     }`}
                   >
                     {isPicked && (
-                      <span className="absolute top-0.5 left-0.5 w-4 h-4 flex items-center justify-center rounded-sm text-[9px] font-black text-black" style={{ backgroundColor: '#C9A843' }}>
+                      <span className="absolute top-0.5 left-0.5 w-5 h-5 flex items-center justify-center rounded-sm text-[10px] font-black text-black" style={{ backgroundColor: '#C9A843' }}>
                         {rank + 1}
                       </span>
                     )}
-                    <Flag teamId={teamId} size={26} />
-                    <span className="text-[8px] font-bold text-slate-400 tracking-wide uppercase leading-none">
+                    <Flag teamId={teamId} size={40} />
+                    <span className="text-[10px] font-bold text-slate-400 tracking-wide uppercase leading-none">
                       {teamId}
                     </span>
                   </button>

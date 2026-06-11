@@ -111,8 +111,8 @@ describe('serialization round-trip', () => {
     const { encodeResults, decodeResults } = await import('../serialization');
     const results: MatchResult[] = [
       m('A', 'MEX', 'KOR', 2, 1),
-      m('A', 'RSA', 'CZE', 0, 0),
-      { group: 'B', homeId: 'CAN', awayId: 'SUI', outcome: 'A' },
+      m('A', 'CZE', 'RSA', 0, 0),
+      { group: 'B', homeId: 'CAN', awayId: 'BIH', outcome: 'A' },
     ];
     const encoded = encodeResults(results);
     const decoded = decodeResults(encoded);
@@ -124,11 +124,11 @@ describe('serialization round-trip', () => {
     expect(mex.homeGoals).toBe(2);
     expect(mex.awayGoals).toBe(1);
 
-    const rsa = find(decoded, 'A', 'RSA', 'CZE')!;
-    expect(rsa.homeGoals).toBe(0);
-    expect(rsa.awayGoals).toBe(0);
+    const cze = find(decoded, 'A', 'CZE', 'RSA')!;
+    expect(cze.homeGoals).toBe(0);
+    expect(cze.awayGoals).toBe(0);
 
-    const can = find(decoded, 'B', 'CAN', 'SUI')!;
+    const can = find(decoded, 'B', 'CAN', 'BIH')!;
     expect(can.outcome).toBe('A');
     expect(can.homeGoals).toBeUndefined();
   });

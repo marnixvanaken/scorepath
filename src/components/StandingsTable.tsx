@@ -23,7 +23,7 @@ export function StandingsTable({ standings, bestThirdIds, groupColor }: Props) {
   return (
     <div className="mt-3 rounded-lg overflow-hidden">
       {/* Header */}
-      <div className="grid grid-cols-[1rem_1fr_repeat(5,_1.5rem)] px-1.5 py-1 bg-panel/80 text-xs font-semibold text-slate-600 uppercase tracking-wider">
+      <div className="grid grid-cols-[1.25rem_1fr_repeat(5,_1.5rem)] px-1.5 py-1 bg-panel/80 text-xs font-semibold text-slate-600 uppercase tracking-wider">
         <span />
         <span>{msg.table.club}</span>
         <Tooltip text={msg.table.playedFull} className="text-center">{msg.table.played}</Tooltip>
@@ -53,11 +53,11 @@ export function StandingsTable({ standings, bestThirdIds, groupColor }: Props) {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ type: 'spring', stiffness: 420, damping: 36 }}
-              className={`grid grid-cols-[1rem_1fr_repeat(5,_1.5rem)] px-2 py-2 items-center text-[12px] ${statusBar} ${i > 0 ? 'border-t border-white/5' : ''}`}
+              className={`grid grid-cols-[1.25rem_1fr_repeat(5,_1.5rem)] px-2 py-2 items-center text-[13px] ${statusBar} ${i > 0 ? 'border-t border-white/5' : ''}`}
               style={statusBarStyle}
             >
               <span
-                className={`w-4 h-4 rounded-full flex items-center justify-center text-[10px] font-bold tabular-nums shrink-0 ${
+                className={`w-5 h-5 rounded-full flex items-center justify-center text-[11px] font-bold tabular-nums shrink-0 ${
                   i < 2 ? 'text-white' : i === 2 ? 'bg-amber-500/20 text-amber-400' : 'text-slate-600'
                 }`}
                 style={i < 2 ? { backgroundColor: groupColor ?? '#22c55e' } : undefined}
@@ -65,10 +65,10 @@ export function StandingsTable({ standings, bestThirdIds, groupColor }: Props) {
                 {i + 1}
               </span>
               <span className={`flex items-center gap-1.5 font-semibold min-w-0 ${nameCls}`}>
-                <Flag teamId={s.teamId} size={18} />
-                <span className="truncate uppercase text-[12px] tracking-wide">{team ? getTeamName(team, lang) : s.teamId}</span>
+                <Flag teamId={s.teamId} size={26} />
+                <span className="truncate uppercase text-[13px] tracking-wide">{team ? getTeamName(team, lang) : s.teamId}</span>
                 {groupComplete && (
-                  <span className={`shrink-0 text-[10px] font-bold px-1 py-0.5 rounded leading-none ${
+                  <span className={`shrink-0 text-[11px] font-bold px-1 py-0.5 rounded leading-none ${
                     i < 2
                       ? 'bg-emerald-500/15 text-emerald-400'
                       : i === 2
@@ -82,7 +82,7 @@ export function StandingsTable({ standings, bestThirdIds, groupColor }: Props) {
               <span className="text-center tabular-nums text-slate-500">{s.played}</span>
               <span className="text-center tabular-nums text-slate-500">{s.won}</span>
               <span className="text-center tabular-nums text-slate-500">{s.lost}</span>
-              <span className={`text-center tabular-nums text-[10px] ${s.gd > 0 ? 'text-emerald-500' : s.gd < 0 ? 'text-red-500' : 'text-slate-600'}`}>
+              <span className={`text-center tabular-nums text-[11px] ${s.gd > 0 ? 'text-emerald-500' : s.gd < 0 ? 'text-red-500' : 'text-slate-600'}`}>
                 {s.played > 0 ? (s.gd > 0 ? `+${s.gd}` : s.gd) : '–'}
               </span>
               <span className={`text-center tabular-nums font-bold ${ptsCls}`}>{s.points}</span>

@@ -17,7 +17,8 @@ export function Flag({ teamId, size = 20 }: Props) {
   // Betekenisvolle alt-tekst: de landnaam in de huidige taal i.p.v. de afkorting.
   const label = team ? getTeamName(team, lang) : teamId;
 
-  const cdnWidth = size > 48 ? 160 : 40;
+  // Hogere bron-resolutie dan de weergavegrootte: scherp op retina-mobiel.
+  const cdnWidth = size > 48 ? 160 : 80;
   const src = flagUrl(teamId, cdnWidth);
   if (!src) {
     return (

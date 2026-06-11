@@ -5,29 +5,29 @@ import { GROUP_IDS, groupFixtures } from '../data/worldcup2026';
 // groepen A–F, en teamkwaliteit/ranking voor de overige 62 wedstrijden.
 // Sleutel = "homeId:awayId" zoals gegenereerd door groupFixtures().
 const PREDICTIONS: Record<string, [number, number]> = {
-  // ── Groep A: MEX KOR RSA CZE ──────────────────────────────────────────────
-  'MEX:KOR': [2, 1], // MEX gastland, iets sterker
-  'RSA:CZE': [0, 2], // CZE duidelijk beter
-  'MEX:RSA': [2, 0], // odds MEX 1.47 (native-stats)
-  'CZE:KOR': [1, 1], // odds KOR-CZE 2.63/3.17/2.68 — nagenoeg gelijk
+  // ── Groep A: MEX RSA KOR CZE ──────────────────────────────────────────────
+  'MEX:RSA': [2, 0], // MEX gastland, wint van RSA
+  'KOR:CZE': [1, 1], // nagenoeg gelijk
+  'MEX:KOR': [2, 1], // MEX iets sterker
+  'CZE:RSA': [2, 0], // CZE duidelijk beter
   'CZE:MEX': [0, 2], // MEX wint
-  'KOR:RSA': [2, 0], // KOR klasse boven RSA
+  'RSA:KOR': [0, 2], // KOR klasse boven RSA
 
-  // ── Groep B: CAN SUI QAT BIH ──────────────────────────────────────────────
-  'CAN:SUI': [1, 2], // SUI veel sterker
-  'QAT:BIH': [0, 1], // QAT odds 10.42 = zwak; BIH wint
+  // ── Groep B: CAN BIH QAT SUI ──────────────────────────────────────────────
+  'CAN:BIH': [1, 0], // CAN wint thuis
+  'QAT:SUI': [0, 3], // SUI veel sterker
   'CAN:QAT': [2, 0], // CAN wint makkelijk
-  'BIH:SUI': [0, 2], // SUI wint
-  'BIH:CAN': [0, 1], // odds CAN 1.78 (native-stats); CAN wint
-  'SUI:QAT': [3, 0], // odds SUI 1.28 / QAT 10.42 (native-stats)
+  'SUI:BIH': [2, 0], // SUI wint
+  'SUI:CAN': [2, 1], // SUI sterker
+  'BIH:QAT': [1, 0], // BIH wint
 
-  // ── Groep C: BRA MAR SCO HAI ──────────────────────────────────────────────
+  // ── Groep C: BRA MAR HAI SCO ──────────────────────────────────────────────
   'BRA:MAR': [2, 0], // odds BRA 1.59 (native-stats)
-  'SCO:HAI': [2, 0], // odds SCO 1.41 als uitploeg (native-stats: HAI thuis); SCO wint
-  'BRA:SCO': [2, 0], // BRA dominant
-  'HAI:MAR': [0, 2], // MAR wint
-  'HAI:BRA': [0, 4], // BRA klasse
-  'MAR:SCO': [2, 1], // MAR sterk op eigen kracht
+  'HAI:SCO': [0, 2], // SCO wint
+  'BRA:HAI': [4, 0], // BRA klasse
+  'SCO:MAR': [1, 2], // MAR sterk
+  'SCO:BRA': [0, 2], // BRA dominant
+  'MAR:HAI': [2, 0], // MAR wint
 
   // ── Groep D: USA PAR AUS TUR ──────────────────────────────────────────────
   'USA:PAR': [1, 0], // odds USA 1.96 (native-stats); nipt
@@ -37,69 +37,69 @@ const PREDICTIONS: Record<string, [number, number]> = {
   'TUR:USA': [0, 1], // USA wint in slotfase
   'PAR:AUS': [1, 1], // gelijkspel
 
-  // ── Groep E: GER ECU CIV CUW ──────────────────────────────────────────────
-  'GER:ECU': [3, 1], // GER klasse
-  'CIV:CUW': [3, 0], // CIV veel sterker
+  // ── Groep E: GER CUW CIV ECU ──────────────────────────────────────────────
+  'GER:CUW': [4, 0], // odds GER 1.03 / CUW 43.67 (native-stats)
+  'CIV:ECU': [1, 1], // gelijkspel
   'GER:CIV': [2, 0], // GER wint
-  'CUW:ECU': [0, 2], // ECU wint
-  'CUW:GER': [0, 4], // odds GER 1.03 / CUW 43.67 (native-stats)
-  'ECU:CIV': [1, 1], // gelijkspel
+  'ECU:CUW': [2, 0], // ECU wint
+  'ECU:GER': [1, 3], // GER klasse
+  'CUW:CIV': [0, 3], // CIV veel sterker
 
-  // ── Groep F: NED JPN TUN SWE ──────────────────────────────────────────────
+  // ── Groep F: NED JPN SWE TUN ──────────────────────────────────────────────
   'NED:JPN': [2, 1], // odds NED 1.98 / JPN 3.54 (native-stats)
-  'TUN:SWE': [0, 2], // SWE sterker
-  'NED:TUN': [3, 0], // NED dominant
-  'SWE:JPN': [1, 1], // gelijkspel
-  'SWE:NED': [0, 2], // NED wint
-  'JPN:TUN': [2, 0], // JPN wint
+  'SWE:TUN': [2, 0], // SWE sterker
+  'NED:SWE': [2, 0], // NED wint
+  'TUN:JPN': [0, 2], // JPN wint
+  'TUN:NED': [0, 3], // NED dominant
+  'JPN:SWE': [1, 1], // gelijkspel
 
-  // ── Groep G: BEL IRN EGY NZL ──────────────────────────────────────────────
-  'BEL:IRN': [2, 0],
-  'EGY:NZL': [2, 0],
+  // ── Groep G: BEL EGY IRN NZL ──────────────────────────────────────────────
   'BEL:EGY': [2, 0],
-  'NZL:IRN': [0, 1],
+  'IRN:NZL': [1, 0],
+  'BEL:IRN': [2, 0],
+  'NZL:EGY': [0, 2],
   'NZL:BEL': [0, 3],
-  'IRN:EGY': [1, 1],
+  'EGY:IRN': [1, 1],
 
-  // ── Groep H: ESP URU KSA CPV ──────────────────────────────────────────────
-  'ESP:URU': [2, 1], // ESP wereldklasse
-  'KSA:CPV': [2, 1],
+  // ── Groep H: ESP CPV KSA URU ──────────────────────────────────────────────
+  'ESP:CPV': [4, 0],
+  'KSA:URU': [0, 2],
   'ESP:KSA': [4, 0],
-  'CPV:URU': [0, 3],
-  'CPV:ESP': [0, 4],
-  'URU:KSA': [2, 0],
+  'URU:CPV': [3, 0],
+  'URU:ESP': [1, 2], // ESP wereldklasse
+  'CPV:KSA': [1, 2],
 
-  // ── Groep I: FRA SEN NOR IRQ ──────────────────────────────────────────────
+  // ── Groep I: FRA SEN IRQ NOR ──────────────────────────────────────────────
   'FRA:SEN': [2, 0],
-  'NOR:IRQ': [3, 0], // Haaland
-  'FRA:NOR': [2, 1], // NOR sterk maar FRA beter
-  'IRQ:SEN': [0, 2],
-  'IRQ:FRA': [0, 4],
-  'SEN:NOR': [1, 2], // NOR wint
+  'IRQ:NOR': [0, 3], // Haaland
+  'FRA:IRQ': [4, 0],
+  'NOR:SEN': [2, 1], // NOR wint
+  'NOR:FRA': [1, 2], // NOR sterk maar FRA beter
+  'SEN:IRQ': [2, 0],
 
-  // ── Groep J: ARG AUT ALG JOR ──────────────────────────────────────────────
-  'ARG:AUT': [2, 0], // ARG wereldkampioen
-  'ALG:JOR': [2, 0],
+  // ── Groep J: ARG ALG AUT JOR ──────────────────────────────────────────────
   'ARG:ALG': [2, 0],
-  'JOR:AUT': [0, 2],
+  'AUT:JOR': [2, 0],
+  'ARG:AUT': [2, 0], // ARG wereldkampioen
+  'JOR:ALG': [0, 2],
   'JOR:ARG': [0, 3],
-  'AUT:ALG': [1, 0],
+  'ALG:AUT': [0, 1],
 
-  // ── Groep K: POR COL UZB COD ──────────────────────────────────────────────
-  'POR:COL': [2, 1],
-  'UZB:COD': [1, 1],
+  // ── Groep K: POR COD UZB COL ──────────────────────────────────────────────
+  'POR:COD': [3, 0],
+  'UZB:COL': [0, 2],
   'POR:UZB': [3, 0],
-  'COD:COL': [0, 2],
-  'COD:POR': [0, 3],
-  'COL:UZB': [2, 0],
+  'COL:COD': [2, 0],
+  'COL:POR': [1, 2],
+  'COD:UZB': [1, 1],
 
-  // ── Groep L: ENG CRO PAN GHA ──────────────────────────────────────────────
+  // ── Groep L: ENG CRO GHA PAN ──────────────────────────────────────────────
   'ENG:CRO': [2, 0],
-  'PAN:GHA': [0, 1],
-  'ENG:PAN': [3, 0],
-  'GHA:CRO': [0, 1],
-  'GHA:ENG': [0, 2],
-  'CRO:PAN': [2, 0],
+  'GHA:PAN': [1, 0],
+  'ENG:GHA': [2, 0],
+  'PAN:CRO': [0, 2],
+  'PAN:ENG': [0, 3],
+  'CRO:GHA': [1, 0],
 };
 
 export function prefillResults(): MatchResult[] {

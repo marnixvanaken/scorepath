@@ -27,7 +27,7 @@ function LockIcon() {
 
 // Vaste grid: [slot(10px)] [vlag] [naam flex-1] [score/inputs] [naam flex-1] [vlag]
 const ROW_GRID = 'grid items-center gap-x-2 py-2 px-2';
-const GRID_COLS = { gridTemplateColumns: '10px 24px 1fr auto 1fr 24px' };
+const GRID_COLS = { gridTemplateColumns: '10px 32px 1fr auto 1fr 32px' };
 
 export function MatchInputRow({ group, homeId, awayId, results, inputMode, onResult }: Props) {
   const msg = useMessages();
@@ -51,7 +51,7 @@ export function MatchInputRow({ group, homeId, awayId, results, inputMode, onRes
   }
 
   const nameCls = (id: string) =>
-    `text-[13px] font-semibold uppercase tracking-wide truncate ${isNed(id) ? 'text-orange-400' : 'text-slate-200'}`;
+    `text-[14px] font-semibold uppercase tracking-wide truncate ${isNed(id) ? 'text-orange-400' : 'text-slate-200'}`;
 
   const homeName = <span className={`${nameCls(homeId)} text-right`}>{getTeamName(home, lang)}</span>;
   const awayName = <span className={nameCls(awayId)}>{getTeamName(away, lang)}</span>;
@@ -60,7 +60,7 @@ export function MatchInputRow({ group, homeId, awayId, results, inputMode, onRes
     return (
       <div className={`${ROW_GRID} opacity-75`} style={GRID_COLS}>
         <LockIcon />
-        <Flag teamId={homeId} size={24} />
+        <Flag teamId={homeId} size={32} />
         {homeName}
         <div className="flex items-center gap-1">
           <span className="w-7 h-7 flex items-center justify-center text-xs font-bold tabular-nums text-slate-300 bg-panel rounded border border-themed">
@@ -72,7 +72,7 @@ export function MatchInputRow({ group, homeId, awayId, results, inputMode, onRes
           </span>
         </div>
         {awayName}
-        <Flag teamId={awayId} size={24} />
+        <Flag teamId={awayId} size={32} />
       </div>
     );
   }
@@ -82,7 +82,7 @@ export function MatchInputRow({ group, homeId, awayId, results, inputMode, onRes
   const outcome = current?.outcome;
 
   // Exact: numeric score inputs — font-size 1rem (16px) prevents iOS auto-zoom
-  const inputCls = 'w-9 h-9 bg-panel border border-themed rounded text-center font-bold tabular-nums text-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-1 focus-visible:ring-offset-transparent transition-colors';
+  const inputCls = 'w-11 h-11 bg-panel border border-themed rounded text-center font-bold tabular-nums text-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-1 focus-visible:ring-offset-transparent transition-colors';
 
   const scoreArea = inputMode === 'exact' ? (
     <div className="flex items-center gap-1">
@@ -123,7 +123,7 @@ export function MatchInputRow({ group, homeId, awayId, results, inputMode, onRes
             key={o} whileTap={{ scale: 0.9 }}
             onClick={() => handleOutcome(o)}
             aria-pressed={active}
-            className={`w-10 h-10 rounded text-[11px] font-bold transition-all ${
+            className={`w-11 h-11 rounded text-[13px] font-bold transition-all ${
               active ? 'text-white' : 'bg-panel text-slate-500 hover:text-slate-200'
             }`}
             style={active ? { backgroundColor: o === 'H' ? groupColor : o === 'D' ? '#475569' : '#7f1d1d' } : {}}
@@ -138,11 +138,11 @@ export function MatchInputRow({ group, homeId, awayId, results, inputMode, onRes
   return (
     <div className={ROW_GRID} style={GRID_COLS}>
       <span />
-      <Flag teamId={homeId} size={24} />
+      <Flag teamId={homeId} size={32} />
       {homeName}
       {scoreArea}
       {awayName}
-      <Flag teamId={awayId} size={24} />
+      <Flag teamId={awayId} size={32} />
     </div>
   );
 }

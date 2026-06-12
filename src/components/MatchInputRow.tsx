@@ -63,11 +63,11 @@ export function MatchInputRow({ group, homeId, awayId, results, inputMode, onRes
         <Flag teamId={homeId} size={32} />
         {homeName}
         <div className="flex items-center gap-1">
-          <span className="w-7 h-7 flex items-center justify-center text-xs font-bold tabular-nums text-slate-300 bg-panel rounded border border-themed">
+          <span className="w-11 h-11 flex items-center justify-center text-base font-bold tabular-nums text-slate-300 bg-panel rounded border border-themed">
             {current.homeGoals}
           </span>
           <span className="text-slate-600 text-[10px]">–</span>
-          <span className="w-7 h-7 flex items-center justify-center text-xs font-bold tabular-nums text-slate-300 bg-panel rounded border border-themed">
+          <span className="w-11 h-11 flex items-center justify-center text-base font-bold tabular-nums text-slate-300 bg-panel rounded border border-themed">
             {current.awayGoals}
           </span>
         </div>

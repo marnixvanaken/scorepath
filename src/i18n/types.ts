@@ -201,4 +201,63 @@ export interface Messages {
     back: string;
     close: string;
   };
+  ogCard: {
+    /** Gedeelde footer onderaan elke gegenereerde kaart. */
+    footer: string;
+    wc: {
+      /** Header-merkregel, bijv. "WK 2026". */
+      header: string;
+      /** Grote uitkomstlabel onder de teamnaam. */
+      result: {
+        champion: string;
+        final: string;
+        sf: string;
+        qf: string;
+        r16: string;
+        r32: string;
+        group: string;
+      };
+      /** Korte ronde-labels in de routerijen. */
+      round: {
+        group: string;
+        r32: string;
+        r16: string;
+        qf: string;
+        sf: string;
+        final: string;
+      };
+      /** Kwalificatie-ondertitel, met {group} placeholder voor de groepsletter. */
+      qualified: {
+        winner: string;
+        runnerUp: string;
+        third: string;
+      };
+    };
+    bracket: {
+      header: string;
+      subtitle: string;
+      round: {
+        r32: string;
+        r16: string;
+        qf: string;
+        sf: string;
+        final: string;
+      };
+    };
+    ucl: {
+      champion: string;
+      round: {
+        q1: string;
+        q2: string;
+        q3: string;
+        po: string;
+        lp: string;
+        kopo: string;
+        r16: string;
+        qf: string;
+        sf: string;
+        final: string;
+      };
+    };
+  };
 }

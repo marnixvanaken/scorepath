@@ -25,6 +25,7 @@ export default async function UCLCardPage(props: {
   const ogParams = new URLSearchParams();
   ogParams.set('team', teamId);
   if (m) ogParams.set('m', m);
+  ogParams.set('lang', lang);
   const ogUrl = `/api/og/ucl?${ogParams.toString()}`;
 
   return (

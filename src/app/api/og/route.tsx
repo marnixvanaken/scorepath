@@ -1,22 +1,38 @@
 import { ImageResponse } from 'next/og';
 import { decodeResults } from '@/lib/serialization';
 import { decodeKnockout } from '@/lib/bracket';
-import { computeAllGroups, getQualifiers } from '@/lib/standings';
-import { traceRoute, resultLabel } from '@/lib/route';
-import { TEAMS } from '@/data/worldcup2026';
+import { getQualifiers } from '@/lib/standings';
+import { traceRoute, type TeamRoute, type QualifiedPosition } from '@/lib/route';
+import { TEAMS, teamById, getTeamName } from '@/data/worldcup2026';
 import { FLAG_CODE, flagUrl } from '@/data/flags';
+import { getMessages } from '@/i18n';
+import type { Messages } from '@/i18n';
 import type { NextRequest } from 'next/server';
 
 export const runtime = 'edge';
 
-const ROUND_SHORT: Record<string, string> = {
-  groep: 'GROEP',
-  r32:   'R32',
-  r16:   'R16',
-  qf:    'KW',
-  sf:    'HF',
-  final: 'FINALE',
-};
+/** Gelokaliseerd groot uitkomstlabel op basis van route.result. */
+function resultText(result: TeamRoute['result'], r: Messages['ogCard']['wc']['result']): string {
+  switch (result) {
+    case 'kampioen': return r.champion;
+    case 'final':    return r.final;
+    case 'sf':       return r.sf;
+    case 'qf':       return r.qf;
+    case 'r16':      return r.r16;
+    case 'r32':      return r.r32;
+    default:         return r.group; // 'groep' of 'niet-gekwalificeerd'
+  }
+}
+
+/** Gelokaliseerde kwalificatie-ondertitel ("1e in poule E"). */
+function qualifiedText(
+  position: QualifiedPosition,
+  group: string,
+  q: Messages['ogCard']['wc']['qualified'],
+): string {
+  const tpl = position === 'winner' ? q.winner : position === 'runnerUp' ? q.runnerUp : q.third;
+  return tpl.replace('{group}', group);
+}
 
 async function loadFont(family: string, weight: number): Promise<ArrayBuffer | null> {
   try {
@@ -37,6 +53,9 @@ export async function GET(req: NextRequest) {
   const teamId = searchParams.get('team') ?? '';
   const s = searchParams.get('s') ?? '';
   const k = searchParams.get('k') ?? '';
+  const lang = searchParams.get('lang') ?? 'nl';
+  const msg = getMessages(lang);
+  const oc = msg.ogCard;
 
   const team = TEAMS.find((t) => t.id === teamId);
   if (!team || !s) {
@@ -45,11 +64,20 @@ export async function GET(req: NextRequest) {
 
   const results = decodeResults(s);
   const kr = k ? decodeKnockout(k) : {};
-  const allGroups = computeAllGroups(results, {}, {});
   const qualifiers = getQualifiers(results, {}, {});
   const route = traceRoute(teamId, qualifiers, kr, results);
-  const label = resultLabel(route.result);
+  const label = resultText(route.result, oc.wc.result);
   const isChampion = route.result === 'kampioen';
+
+  const ROUND_SHORT: Record<string, string> = {
+    groep: oc.wc.round.group,
+    r32:   oc.wc.round.r32,
+    r16:   oc.wc.round.r16,
+    qf:    oc.wc.round.qf,
+    sf:    oc.wc.round.sf,
+    final: oc.wc.round.final,
+  };
+  const vsLabel = msg.match.vs.toUpperCase();
 
   const flagCode = FLAG_CODE[teamId];
   const flagSrc = flagCode ? `https://flagcdn.com/w320/${flagCode}.png` : null;
@@ -98,11 +126,11 @@ export async function GET(req: NextRequest) {
         <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 96 }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
             <span style={{ fontSize: 30, fontWeight: 700, color: MUTED, letterSpacing: '0.25em', textTransform: 'uppercase', fontFamily: BODY }}>
-              SCOREPATH · WK 2026
+              SCOREPATH · {oc.wc.header}
             </span>
-            {route.qualifiedFrom && (
+            {route.qualifiedPosition && route.qualifiedGroup && (
               <span style={{ fontSize: 36, color: MUTED, fontFamily: BODY }}>
-                {route.qualifiedFrom}
+                {qualifiedText(route.qualifiedPosition, route.qualifiedGroup, oc.wc.qualified)}
               </span>
             )}
           </div>
@@ -126,7 +154,7 @@ export async function GET(req: NextRequest) {
         {/* ── Team name ── */}
         <div style={{ display: 'flex', marginBottom: 12 }}>
           <span style={{ fontSize: 168, fontWeight: 900, color: INK, lineHeight: 1, letterSpacing: '-1.5px', fontFamily: DISPLAY }}>
-            {team.name.toUpperCase()}
+            {getTeamName(team, lang).toUpperCase()}
           </span>
         </div>
 
@@ -147,6 +175,8 @@ export async function GET(req: NextRequest) {
             const pending = won === null && !draw;
             const isGroup = round.round === 'groep';
             const oppFlagSrc = round.opponentId ? flagUrl(round.opponentId, 160) : '';
+            const oppTeam = round.opponentId ? teamById(round.opponentId) : undefined;
+            const oppName = oppTeam ? getTeamName(oppTeam, lang) : round.opponentLabel;
 
             return (
               <div
@@ -177,7 +207,7 @@ export async function GET(req: NextRequest) {
                       />
                     )}
                     <span style={{ fontSize: 39, fontWeight: 700, color: INK, fontFamily: BODY }}>
-                      VS {round.opponentLabel.toUpperCase()}
+                      {vsLabel} {oppName.toUpperCase()}
                     </span>
                   </div>
                   {score && (
@@ -209,7 +239,7 @@ export async function GET(req: NextRequest) {
             scorepath.nl
           </span>
           <span style={{ fontSize: 30, color: MUTED, fontFamily: BODY }}>
-            Maak jouw scenario op scorepath.nl
+            {oc.footer}
           </span>
         </div>
       </div>

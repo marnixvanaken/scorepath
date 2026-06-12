@@ -3,6 +3,7 @@ import { decodeResults } from '@/lib/serialization';
 import { decodeKnockout, buildBracket, type BracketMatch, type BracketSlot, type KnockoutResults } from '@/lib/bracket';
 import { computeAllGroups, getQualifiers } from '@/lib/standings';
 import { FLAG_CODE, flagUrl } from '@/data/flags';
+import { getMessages } from '@/i18n';
 import type { NextRequest } from 'next/server';
 
 export const runtime = 'edge';
@@ -72,6 +73,8 @@ function renderColumn(
   kr: KnockoutResults,
   roundIdx: number,
   BODY: string,
+  winnerLabel: string,
+  finalLabel: string,
   winnerId?: string | null,
 ) {
   const groupH  = Math.pow(2, roundIdx + 1) * H;
@@ -148,11 +151,11 @@ function renderColumn(
                     />
                     <StarRow count={winnerStars} size={14} />
                     <span style={{ fontSize: 11, fontWeight: 700, color: GOLD, letterSpacing: '0.15em', fontFamily: BODY }}>
-                      WINNAAR
+                      {winnerLabel}
                     </span>
                   </>
                 ) : (
-                  <span style={{ fontSize: 11, color: MUTED, fontFamily: BODY }}>Finale</span>
+                  <span style={{ fontSize: 11, color: MUTED, fontFamily: BODY }}>{finalLabel}</span>
                 )}
               </div>
 
@@ -189,7 +192,7 @@ function renderColumn(
                     />
                     <StarRow count={winnerStars} size={14} />
                     <span style={{ fontSize: 11, fontWeight: 700, color: GOLD, letterSpacing: '0.15em', fontFamily: BODY }}>
-                      WINNAAR
+                      {winnerLabel}
                     </span>
                   </>
                 ) : null}
@@ -230,6 +233,7 @@ export async function GET(req: NextRequest) {
   const { searchParams } = req.nextUrl;
   const s = searchParams.get('s') ?? '';
   const k = searchParams.get('k') ?? '';
+  const oc = getMessages(searchParams.get('lang') ?? 'nl').ogCard;
 
   if (!s) return new Response('Not found', { status: 404 });
 
@@ -261,11 +265,11 @@ export async function GET(req: NextRequest) {
     : null);
 
   const rounds: { label: string; matches: BracketMatch[]; idx: number }[] = [
-    { label: 'R32',  matches: bracket.r32,     idx: 0 },
-    { label: 'R16',  matches: bracket.r16,     idx: 1 },
-    { label: 'KW',   matches: bracket.qf,      idx: 2 },
-    { label: 'HF',   matches: bracket.sf,      idx: 3 },
-    { label: 'FIN',  matches: [bracket.final], idx: 4 },
+    { label: oc.bracket.round.r32,   matches: bracket.r32,     idx: 0 },
+    { label: oc.bracket.round.r16,   matches: bracket.r16,     idx: 1 },
+    { label: oc.bracket.round.qf,    matches: bracket.qf,      idx: 2 },
+    { label: oc.bracket.round.sf,    matches: bracket.sf,      idx: 3 },
+    { label: oc.bracket.round.final, matches: [bracket.final], idx: 4 },
   ];
 
   const img = new ImageResponse(
@@ -283,10 +287,10 @@ export async function GET(req: NextRequest) {
         }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
             <span style={{ fontSize: 26, fontWeight: 900, color: INK, letterSpacing: '0.05em', fontFamily: DISPLAY }}>
-              WK 2026
+              {oc.bracket.header}
             </span>
             <span style={{ fontSize: 11, fontWeight: 700, color: MUTED, letterSpacing: '0.2em', textTransform: 'uppercase', fontFamily: BODY }}>
-              KNOCK-OUT BRACKET
+              {oc.bracket.subtitle}
             </span>
           </div>
           {finalWinnerCode ? (
@@ -322,7 +326,12 @@ export async function GET(req: NextRequest) {
 
         {/* ── Bracket columns ── */}
         <div style={{ height: H * 32, display: 'flex', padding: `0 ${PAD_X}px`, gap: COL_GAP }}>
-          {rounds.map((r) => renderColumn(r.matches, kr, r.idx, BODY, r.idx === 4 ? finalWinnerId : undefined))}
+          {rounds.map((r) => renderColumn(
+            r.matches, kr, r.idx, BODY,
+            oc.wc.result.champion.toUpperCase(),
+            oc.wc.result.final,
+            r.idx === 4 ? finalWinnerId : undefined,
+          ))}
         </div>
 
         {/* ── Footer ── */}
@@ -331,7 +340,7 @@ export async function GET(req: NextRequest) {
           borderTop: `1px solid ${BORDER}`,
         }}>
           <span style={{ fontSize: 11, fontWeight: 700, color: MUTED, letterSpacing: '0.2em', textTransform: 'uppercase', fontFamily: BODY }}>
-            scorepath.nl · WK 2026
+            scorepath.nl · {oc.bracket.header}
           </span>
         </div>
       </div>

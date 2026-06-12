@@ -14,9 +14,13 @@ export interface RouteRound {
   score?: string;
 }
 
+export type QualifiedPosition = 'winner' | 'runnerUp' | 'third';
+
 export interface TeamRoute {
   teamId: string;
-  qualifiedFrom: string | null; // "1e in poule A" etc.
+  qualifiedFrom: string | null; // "1e in poule A" etc. (NL, voor legacy gebruik)
+  qualifiedPosition: QualifiedPosition | null; // gestructureerd, voor lokalisatie
+  qualifiedGroup: GroupId | null;
   rounds: RouteRound[];
   result: RoundKey | 'kampioen' | 'niet-gekwalificeerd';
 }
@@ -43,12 +47,13 @@ export function traceRoute(
   const t = qualifiers.bestThirds.find((x) => x.teamId === teamId);
 
   let qualifiedFrom: string | null = null;
+  let qualifiedPosition: QualifiedPosition | null = null;
   let group: GroupId | null = null;
 
-  if (w)      { qualifiedFrom = `1e in poule ${w.group}`; group = w.group; }
-  else if (r) { qualifiedFrom = `2e in poule ${r.group}`; group = r.group; }
-  else if (t) { qualifiedFrom = `3e in poule ${t.group}`; group = t.group; }
-  else        { return { teamId, qualifiedFrom: null, rounds: [], result: 'niet-gekwalificeerd' }; }
+  if (w)      { qualifiedFrom = `1e in poule ${w.group}`; qualifiedPosition = 'winner';   group = w.group; }
+  else if (r) { qualifiedFrom = `2e in poule ${r.group}`; qualifiedPosition = 'runnerUp'; group = r.group; }
+  else if (t) { qualifiedFrom = `3e in poule ${t.group}`; qualifiedPosition = 'third';    group = t.group; }
+  else        { return { teamId, qualifiedFrom: null, qualifiedPosition: null, qualifiedGroup: null, rounds: [], result: 'niet-gekwalificeerd' }; }
 
   const rounds: RouteRound[] = [];
 
@@ -143,7 +148,7 @@ export function traceRoute(
     }
   }
 
-  return { teamId, qualifiedFrom, rounds, result };
+  return { teamId, qualifiedFrom, qualifiedPosition, qualifiedGroup: group, rounds, result };
 }
 
 export function resultLabel(result: TeamRoute['result']): string {

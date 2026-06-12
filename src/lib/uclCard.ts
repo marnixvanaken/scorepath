@@ -9,18 +9,9 @@ export interface CardMatch {
   res: string; // "2-1" | "W" | "L"
 }
 
-export const CARD_ROUND_LABEL: Record<string, string> = {
-  q1: 'Q1',
-  q2: 'Q2',
-  q3: 'Q3',
-  po: 'Play-off',
-  lp: 'League phase',
-  kopo: 'KO play-off',
-  r16: 'Achtste finale',
-  qf: 'Kwartfinale',
-  sf: 'Halve finale',
-  final: 'Finale',
-};
+// Ronde-labels voor de kaart staan in i18n (Messages.ogCard.ucl.round), zodat
+// ze per taal vertaald kunnen worden. De sleutels hier (q1..final) corresponderen
+// met die vertaalsleutels.
 
 export function encodeCard(matches: CardMatch[]): string {
   return matches.map((m) => `${m.round}.${m.oppId}.${m.res}`).join('_');

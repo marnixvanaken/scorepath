@@ -31,11 +31,13 @@ export default async function CardPage(
   ogParams.set('team', teamId);
   ogParams.set('s', s);
   if (k) ogParams.set('k', k);
+  ogParams.set('lang', lang);
   const ogUrl = `/api/og?${ogParams.toString()}`;
 
   const bracketParams = new URLSearchParams();
   bracketParams.set('s', s);
   if (k) bracketParams.set('k', k);
+  bracketParams.set('lang', lang);
   const bracketUrl = `/api/og/bracket?${bracketParams.toString()}`;
 
   const backUrl = `${simulatorPath(lang)}?s=${s}${k ? `&k=${k}` : ''}`;

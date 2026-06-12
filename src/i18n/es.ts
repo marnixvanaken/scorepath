@@ -203,4 +203,58 @@ export const ES: Messages = {
     back: 'Volver',
     close: 'Cerrar',
   },
+  ogCard: {
+    footer: 'Crea tu escenario en scorepath.nl',
+    wc: {
+      header: 'MUNDIAL 2026',
+      result: {
+        champion: 'Campeón',
+        final: 'Final',
+        sf: 'Semifinal',
+        qf: 'Cuartos de final',
+        r16: 'Octavos de final',
+        r32: 'Dieciseisavos',
+        group: 'Fase de grupos',
+      },
+      round: {
+        group: 'GRUPO',
+        r32: 'R32',
+        r16: 'R16',
+        qf: 'CF',
+        sf: 'SF',
+        final: 'FINAL',
+      },
+      qualified: {
+        winner: '1º en el grupo {group}',
+        runnerUp: '2º en el grupo {group}',
+        third: '3º en el grupo {group}',
+      },
+    },
+    bracket: {
+      header: 'MUNDIAL 2026',
+      subtitle: 'CUADRO ELIMINATORIO',
+      round: {
+        r32: 'R32',
+        r16: 'R16',
+        qf: 'CF',
+        sf: 'SF',
+        final: 'FIN',
+      },
+    },
+    ucl: {
+      champion: 'Campeón',
+      round: {
+        q1: 'Q1',
+        q2: 'Q2',
+        q3: 'Q3',
+        po: 'Play-off',
+        lp: 'Fase de liga',
+        kopo: 'Play-off KO',
+        r16: 'Octavos de final',
+        qf: 'Cuartos de final',
+        sf: 'Semifinal',
+        final: 'Final',
+      },
+    },
+  },
 };

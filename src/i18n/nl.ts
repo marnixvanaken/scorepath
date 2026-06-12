@@ -203,4 +203,58 @@ export const NL: Messages = {
     back: 'Terug',
     close: 'Sluiten',
   },
+  ogCard: {
+    footer: 'Maak jouw scenario op scorepath.nl',
+    wc: {
+      header: 'WK 2026',
+      result: {
+        champion: 'Winnaar',
+        final: 'Finale',
+        sf: 'Halve finale',
+        qf: 'Kwartfinale',
+        r16: 'Laatste 16',
+        r32: 'Ronde van 32',
+        group: 'Groepsfase',
+      },
+      round: {
+        group: 'GROEP',
+        r32: 'R32',
+        r16: 'R16',
+        qf: 'KW',
+        sf: 'HF',
+        final: 'FINALE',
+      },
+      qualified: {
+        winner: '1e in poule {group}',
+        runnerUp: '2e in poule {group}',
+        third: '3e in poule {group}',
+      },
+    },
+    bracket: {
+      header: 'WK 2026',
+      subtitle: 'KNOCK-OUT BRACKET',
+      round: {
+        r32: 'R32',
+        r16: 'R16',
+        qf: 'KW',
+        sf: 'HF',
+        final: 'FIN',
+      },
+    },
+    ucl: {
+      champion: 'Kampioen',
+      round: {
+        q1: 'Q1',
+        q2: 'Q2',
+        q3: 'Q3',
+        po: 'Play-off',
+        lp: 'Competitiefase',
+        kopo: 'KO play-off',
+        r16: 'Achtste finale',
+        qf: 'Kwartfinale',
+        sf: 'Halve finale',
+        final: 'Finale',
+      },
+    },
+  },
 };

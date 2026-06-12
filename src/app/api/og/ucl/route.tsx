@@ -1,6 +1,7 @@
 import { ImageResponse } from 'next/og';
 import { clubById, titlesOf } from '@/data/ucl2027';
-import { decodeCard, cardOutcome, cardIsChampion, CARD_ROUND_LABEL } from '@/lib/uclCard';
+import { decodeCard, cardOutcome, cardIsChampion } from '@/lib/uclCard';
+import { getMessages } from '@/i18n';
 import type { NextRequest } from 'next/server';
 
 export const runtime = 'edge';
@@ -25,6 +26,10 @@ export async function GET(req: NextRequest) {
   const { searchParams } = req.nextUrl;
   const teamId = searchParams.get('team') ?? '';
   const m = searchParams.get('m') ?? '';
+  const msg = getMessages(searchParams.get('lang') ?? 'nl');
+  const oc = msg.ogCard;
+  const roundLabel = (round: string) =>
+    (oc.ucl.round as Record<string, string>)[round] ?? round;
 
   const club = clubById(teamId);
   if (!club) return new Response('Not found', { status: 404 });
@@ -53,7 +58,7 @@ export async function GET(req: NextRequest) {
   const CARD = '#FFFFFF';
   const BORDER = '#E0D8CC';
 
-  const label = champion ? 'KAMPIOEN' : (CARD_ROUND_LABEL[lastRound] ?? '').toUpperCase();
+  const label = champion ? oc.ucl.champion.toUpperCase() : (lastRound ? roundLabel(lastRound).toUpperCase() : '');
 
   // Dynamische rijhoogte: de rijen krijgen een vast verticaal budget en schalen
   // mee met het aantal duels, zodat de kaart nooit langer wordt dan het canvas
@@ -122,7 +127,7 @@ export async function GET(req: NextRequest) {
               <div key={i} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: rowH, padding: `0 40px`, background: CARD, borderBottom: `${Math.max(2, Math.round(3 * s))}px solid ${BORDER}` }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 36 * s }}>
                   <span style={{ fontSize: 26 * s, fontWeight: 700, color: MUTED, letterSpacing: '0.12em', width: 280 * s }}>
-                    {(CARD_ROUND_LABEL[mt.round] ?? mt.round).toUpperCase()}
+                    {roundLabel(mt.round).toUpperCase()}
                   </span>
                   {opp && (
                     // eslint-disable-next-line @next/next/no-img-element
@@ -144,7 +149,7 @@ export async function GET(req: NextRequest) {
         {/* Footer */}
         <div style={{ display: 'flex', marginTop: 48, paddingTop: 40, borderTop: `3px solid ${BORDER}`, alignItems: 'center', justifyContent: 'space-between' }}>
           <span style={{ fontSize: 30, fontWeight: 700, color: MUTED, letterSpacing: '0.12em', textTransform: 'uppercase' }}>scorepath.nl</span>
-          <span style={{ fontSize: 30, color: MUTED }}>Maak jouw scenario op scorepath.nl</span>
+          <span style={{ fontSize: 30, color: MUTED }}>{oc.footer}</span>
         </div>
       </div>
     ),

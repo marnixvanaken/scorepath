@@ -201,6 +201,31 @@ export interface Messages {
     back: string;
     close: string;
   };
+  birthplace: {
+    title: string;
+    subtitle: string;
+    inputLabel: string;
+    inputPlaceholder: string;
+    searching: string;
+    noResults: string;
+    nearest: string;
+    top5: string;
+    distanceKm: string;
+    showTop5: string;
+    hideTop5: string;
+    posGK: string;
+    posDF: string;
+    posMF: string;
+    posFW: string;
+    emptyHint: string;
+    error: string;
+    loadingMap: string;
+    osmAttrib: string;
+    cardBirthplace: string;
+    cardDistance: string;
+    cardTeam: string;
+    cardPosition: string;
+  };
   ogCard: {
     /** Gedeelde footer onderaan elke gegenereerde kaart. */
     footer: string;

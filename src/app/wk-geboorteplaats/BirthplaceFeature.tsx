@@ -9,7 +9,11 @@ import { Flag } from '@/components/Flag';
 
 const PlayerMap = dynamic(() => import('./PlayerMap'), {
   ssr: false,
-  loading: () => <MapPlaceholder />,
+  loading: () => (
+    <div className="h-full w-full flex items-center justify-center bg-white/3 text-[--fg]/50 text-sm">
+      <Spinner />
+    </div>
+  ),
 });
 
 interface GeocodeSuggestion {
@@ -28,11 +32,12 @@ interface PlayerWithDistance extends Player {
   distance: number;
 }
 
-function MapPlaceholder() {
+function Spinner() {
   return (
-    <div className="h-full w-full flex items-center justify-center bg-[--bg] text-[--fg] opacity-60 text-sm">
-      Kaart laden…
-    </div>
+    <span
+      className="inline-block w-5 h-5 rounded-full border-2 border-white/20 border-t-[--cta] animate-spin"
+      aria-hidden="true"
+    />
   );
 }
 
@@ -67,10 +72,7 @@ export default function BirthplaceFeature({ players, m }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   const fetchSuggestions = useCallback(async (q: string) => {
-    if (q.length < 2) {
-      setSuggestions([]);
-      return;
-    }
+    if (q.length < 2) { setSuggestions([]); return; }
     setIsLoading(true);
     setError(false);
     try {
@@ -95,9 +97,7 @@ export default function BirthplaceFeature({ players, m }: Props) {
       return;
     }
     debounceRef.current = setTimeout(() => fetchSuggestions(query), 300);
-    return () => {
-      if (debounceRef.current) clearTimeout(debounceRef.current);
-    };
+    return () => { if (debounceRef.current) clearTimeout(debounceRef.current); };
   }, [query, fetchSuggestions]);
 
   useEffect(() => {
@@ -114,6 +114,7 @@ export default function BirthplaceFeature({ players, m }: Props) {
     setQuery(s.name);
     setShowSuggestions(false);
     setSuggestions([]);
+    inputRef.current?.blur(); // dismiss keyboard on mobile
 
     const pos: UserPos = { lat: s.lat, lon: s.lon, name: s.name };
     setUserPos(pos);
@@ -126,50 +127,94 @@ export default function BirthplaceFeature({ players, m }: Props) {
     setResults(ranked);
   }
 
+  function clearInput() {
+    setQuery('');
+    setSuggestions([]);
+    setShowSuggestions(false);
+    setUserPos(null);
+    setResults([]);
+    setHighlightedIdx(null);
+    setError(false);
+    inputRef.current?.focus();
+  }
+
   const nearest = results[0] ?? null;
 
   return (
-    <div className="max-w-2xl mx-auto px-4 py-8 space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold text-[--fg] leading-tight">{m.title}</h1>
-        <p className="mt-2 text-[--fg] opacity-70 text-sm">{m.subtitle}</p>
+    <div className="max-w-2xl mx-auto px-4 pt-6 pb-12 space-y-6">
+
+      {/* Header */}
+      <div className="space-y-1">
+        <h1 className="text-2xl font-bold text-[--fg] leading-snug">{m.title}</h1>
+        <p className="text-[--fg]/60 text-sm leading-relaxed">{m.subtitle}</p>
       </div>
 
       {/* Search input */}
       <div ref={containerRef} className="relative">
-        <label className="block text-xs font-semibold text-[--fg] opacity-60 uppercase tracking-wide mb-1">
+        <label className="block text-xs font-semibold text-[--fg]/50 uppercase tracking-widest mb-2">
           {m.inputLabel}
         </label>
-        <input
-          ref={inputRef}
-          type="text"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          onFocus={() => suggestions.length > 0 && setShowSuggestions(true)}
-          placeholder={m.inputPlaceholder}
-          className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-[--fg] placeholder:text-[--fg]/40 focus:outline-none focus:border-[--cta]/60 transition-colors text-sm"
-          autoComplete="off"
-          spellCheck={false}
-        />
-        {isLoading && (
-          <span className="absolute right-3 top-1/2 translate-y-1 text-xs text-[--fg]/50">
-            {m.searching}
-          </span>
-        )}
 
+        <div className="relative">
+          {/* Search icon */}
+          <svg
+            className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[--fg]/40 pointer-events-none"
+            fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"
+          >
+            <circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" />
+          </svg>
+
+          <input
+            ref={inputRef}
+            type="search"
+            inputMode="search"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            onFocus={() => suggestions.length > 0 && setShowSuggestions(true)}
+            placeholder={m.inputPlaceholder}
+            // text-base = 16px — voorkomt iOS Safari auto-zoom
+            className="w-full bg-white/5 border border-white/10 rounded-xl pl-11 pr-12 py-3.5 text-base text-[--fg] placeholder:text-[--fg]/30 focus:outline-none focus:border-[--cta]/50 focus:bg-white/8 transition-all"
+            autoComplete="off"
+            autoCorrect="off"
+            autoCapitalize="off"
+            spellCheck={false}
+          />
+
+          {/* Right side: spinner or clear button */}
+          <div className="absolute right-3 top-1/2 -translate-y-1/2">
+            {isLoading ? (
+              <Spinner />
+            ) : query.length > 0 ? (
+              <button
+                type="button"
+                onClick={clearInput}
+                aria-label="Wis zoekopdracht"
+                className="w-7 h-7 flex items-center justify-center rounded-full text-[--fg]/50 hover:text-[--fg] hover:bg-white/10 transition-colors"
+              >
+                <svg fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" className="w-4 h-4">
+                  <path d="M18 6 6 18M6 6l12 12" />
+                </svg>
+              </button>
+            ) : null}
+          </div>
+        </div>
+
+        {/* Suggestions dropdown */}
         {showSuggestions && suggestions.length > 0 && (
-          <ul className="absolute z-50 left-0 right-0 mt-1 bg-[#1a1f2e] border border-white/10 rounded-lg shadow-xl overflow-hidden">
+          <ul className="absolute z-50 left-0 right-0 mt-1.5 bg-[#16192a] border border-white/15 rounded-xl shadow-2xl overflow-hidden">
             {suggestions.map((s, i) => (
-              <li key={i}>
+              <li key={i} className={i > 0 ? 'border-t border-white/5' : ''}>
                 <button
                   type="button"
-                  className="w-full text-left px-4 py-2.5 text-sm text-[--fg] hover:bg-white/10 transition-colors"
-                  onMouseDown={(e) => {
-                    e.preventDefault();
-                    selectSuggestion(s);
-                  }}
+                  // py-4 = minimaal 44px aanraakvlak op mobiel
+                  className="w-full text-left px-4 py-4 text-base text-[--fg] hover:bg-white/10 active:bg-white/15 transition-colors flex items-center gap-3"
+                  onMouseDown={(e) => { e.preventDefault(); selectSuggestion(s); }}
+                  onTouchEnd={(e) => { e.preventDefault(); selectSuggestion(s); }}
                 >
-                  {s.name}
+                  <svg className="w-3.5 h-3.5 text-[--fg]/30 shrink-0" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                    <path d="M12 21s-8-5.5-8-11a8 8 0 0 1 16 0c0 5.5-8 11-8 11z"/><circle cx="12" cy="10" r="2.5"/>
+                  </svg>
+                  <span className="truncate">{s.name}</span>
                 </button>
               </li>
             ))}
@@ -177,7 +222,7 @@ export default function BirthplaceFeature({ players, m }: Props) {
         )}
 
         {!isLoading && query.length >= 2 && suggestions.length === 0 && !showSuggestions && (
-          <p className="mt-1 text-xs text-[--fg]/50">{m.noResults}</p>
+          <p className="mt-2 text-sm text-[--fg]/40">{m.noResults}</p>
         )}
       </div>
 
@@ -187,57 +232,99 @@ export default function BirthplaceFeature({ players, m }: Props) {
 
       {/* Empty state */}
       {!userPos && !error && (
-        <p className="text-[--fg]/50 text-sm">{m.emptyHint}</p>
+        <div className="flex items-start gap-3 text-[--fg]/40 text-sm py-2">
+          <svg className="w-4 h-4 mt-0.5 shrink-0" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10"/><path d="M12 16v-4m0-4h.01"/>
+          </svg>
+          {m.emptyHint}
+        </div>
       )}
 
-      {/* Result: nearest player card */}
+      {/* Nearest player — hero card */}
       {nearest && userPos && (
         <div>
-          <h2 className="text-xs font-semibold text-[--fg] opacity-60 uppercase tracking-wide mb-2">
-            {m.nearest}
-          </h2>
-          <div
-            className="flex items-center gap-4 bg-white/5 border border-white/10 rounded-xl p-4 cursor-pointer hover:border-[--cta]/40 transition-colors"
+          <p className="text-xs font-semibold text-[--fg]/50 uppercase tracking-widest mb-3">{m.nearest}</p>
+          <button
+            type="button"
             onClick={() => setHighlightedIdx(0)}
+            className="w-full text-left bg-gradient-to-br from-white/8 to-white/3 border border-white/15 hover:border-[--cta]/50 rounded-2xl p-5 transition-all group"
           >
-            <Flag teamId={nearest.teamCode} size={40} />
-            <div className="flex-1 min-w-0">
-              <div className="flex items-center justify-between gap-2">
-                <span className="font-bold text-[--fg] truncate">{nearest.name}</span>
-                <span className="text-[--cta] font-mono font-bold text-sm shrink-0">
-                  {Math.round(nearest.distance).toLocaleString()} {m.distanceKm}
-                </span>
+            <div className="flex items-center gap-4">
+              <div className="shrink-0">
+                <Flag teamId={nearest.teamCode} size={52} />
               </div>
-              <div className="flex items-center gap-3 mt-1 text-xs text-[--fg]/60">
-                <span>{m.cardTeam}: <span className="text-[--fg]/90">{nearest.team}</span></span>
-                <span>·</span>
-                <span>{m.cardPosition}: <span className="text-[--fg]/90">{positionLabel(nearest.position, m)}</span></span>
-              </div>
-              <div className="mt-0.5 text-xs text-[--fg]/60">
-                {m.cardBirthplace}: <span className="text-[--fg]/80">{nearest.birthplace}</span>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-start justify-between gap-2">
+                  <span className="font-bold text-lg text-[--fg] leading-tight truncate">{nearest.name}</span>
+                  <span className="text-[--cta] font-mono font-bold text-base shrink-0 tabular-nums">
+                    {Math.round(nearest.distance).toLocaleString()} {m.distanceKm}
+                  </span>
+                </div>
+                <div className="mt-1.5 flex flex-wrap gap-x-3 gap-y-0.5 text-sm text-[--fg]/60">
+                  <span>{nearest.team}</span>
+                  <span>·</span>
+                  <span>{positionLabel(nearest.position, m)}</span>
+                </div>
+                <div className="mt-1 text-sm text-[--fg]/50 truncate">
+                  {nearest.birthplace}
+                </div>
               </div>
             </div>
-          </div>
+          </button>
+        </div>
+      )}
+
+      {/* Top 5 list */}
+      {results.length > 0 && (
+        <div>
+          <p className="text-xs font-semibold text-[--fg]/50 uppercase tracking-widest mb-3">{m.top5}</p>
+          <ol className="space-y-1.5">
+            {results.map((p, i) => (
+              <li key={p.id}>
+                <button
+                  type="button"
+                  onClick={() => setHighlightedIdx(i === highlightedIdx ? null : i)}
+                  className={`w-full flex items-center gap-3 rounded-xl px-3 py-3.5 text-left transition-all border ${
+                    highlightedIdx === i
+                      ? 'border-[--cta]/50 bg-[--cta]/10'
+                      : 'border-transparent bg-white/5 hover:bg-white/10 active:bg-white/15'
+                  }`}
+                >
+                  <span
+                    className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold shrink-0 tabular-nums"
+                    style={{ background: i === 0 ? '#10b981' : '#1e2535', color: i === 0 ? 'white' : 'rgba(255,255,255,0.5)' }}
+                  >
+                    {i + 1}
+                  </span>
+                  <Flag teamId={p.teamCode} size={22} />
+                  <span className="flex-1 text-sm text-[--fg] font-medium truncate">{p.name}</span>
+                  <span className="text-xs text-[--fg]/50 shrink-0 hidden sm:block">
+                    {positionLabel(p.position, m)}
+                  </span>
+                  <span className="text-sm text-[--cta] font-mono font-semibold shrink-0 tabular-nums">
+                    {Math.round(p.distance).toLocaleString()} {m.distanceKm}
+                  </span>
+                </button>
+              </li>
+            ))}
+          </ol>
         </div>
       )}
 
       {/* Map */}
       {userPos && results.length > 0 && (
         <div>
-          <div className="flex items-center justify-between mb-2">
-            <h2 className="text-xs font-semibold text-[--fg] opacity-60 uppercase tracking-wide">
-              {m.top5}
-            </h2>
+          <div className="flex items-center justify-between mb-3">
+            <p className="text-xs font-semibold text-[--fg]/50 uppercase tracking-widest">Kaart</p>
             <button
               type="button"
               onClick={() => setShowAllOnMap((v) => !v)}
-              className="text-xs text-[--cta] hover:underline transition"
+              className="text-xs text-[--cta]/80 hover:text-[--cta] transition-colors"
             >
               {showAllOnMap ? m.hideTop5 : m.showTop5}
             </button>
           </div>
-
-          <div className="rounded-xl overflow-hidden border border-white/10" style={{ height: 300 }}>
+          <div className="rounded-2xl overflow-hidden border border-white/10" style={{ height: 280 }}>
             <PlayerMap
               userPos={userPos}
               results={showAllOnMap ? results : [results[0]]}
@@ -249,52 +336,14 @@ export default function BirthplaceFeature({ players, m }: Props) {
         </div>
       )}
 
-      {/* Top 5 list */}
-      {results.length > 0 && (
-        <div>
-          <h2 className="text-xs font-semibold text-[--fg] opacity-60 uppercase tracking-wide mb-2">
-            {m.top5}
-          </h2>
-          <ol className="space-y-2">
-            {results.map((p, i) => (
-              <li key={p.id}>
-                <button
-                  type="button"
-                  onClick={() => setHighlightedIdx(i === highlightedIdx ? null : i)}
-                  className={`w-full flex items-center gap-3 rounded-lg px-3 py-2.5 text-left transition-colors border ${
-                    highlightedIdx === i
-                      ? 'border-[--cta]/60 bg-[--cta]/10'
-                      : 'border-white/5 bg-white/5 hover:bg-white/10 hover:border-white/20'
-                  }`}
-                >
-                  <span
-                    className="w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shrink-0"
-                    style={{ background: i === 0 ? '#10b981' : '#374151', color: 'white' }}
-                  >
-                    {i + 1}
-                  </span>
-                  <Flag teamId={p.teamCode} size={20} />
-                  <span className="flex-1 text-sm text-[--fg] font-medium truncate">{p.name}</span>
-                  <span className="text-xs text-[--fg]/60 shrink-0">
-                    {positionLabel(p.position, m)}
-                  </span>
-                  <span className="text-xs text-[--cta] font-mono font-semibold shrink-0">
-                    {Math.round(p.distance).toLocaleString()} {m.distanceKm}
-                  </span>
-                </button>
-              </li>
-            ))}
-          </ol>
-        </div>
-      )}
-
-      {/* OSM attribution footer */}
-      <footer className="text-center text-xs text-[--fg]/30 pt-4 border-t border-white/5">
-        {m.osmAttrib} · <a
+      {/* OSM attribution */}
+      <footer className="text-center text-xs text-[--fg]/25 pt-2">
+        {m.osmAttrib} ·{' '}
+        <a
           href="https://www.openstreetmap.org/copyright"
           target="_blank"
           rel="noopener noreferrer"
-          className="underline hover:text-[--fg]/60 transition-colors"
+          className="underline hover:text-[--fg]/50 transition-colors"
         >
           openstreetmap.org
         </a>

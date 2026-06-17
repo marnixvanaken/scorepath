@@ -111,6 +111,9 @@ export interface Messages {
     step02Sub: string;
     step03Label: string;
     step03Sub: string;
+    birthplaceTitle: string;
+    birthplaceDesc: string;
+    openBirthplace: string;
   };
   start: {
     step1Label: string;
@@ -220,6 +223,9 @@ export interface Messages {
     emptyHint: string;
     error: string;
     loadingMap: string;
+    myCard: string;
+    downloadCard: string;
+    cardTagline: string;
     osmAttrib: string;
     cardBirthplace: string;
     cardDistance: string;

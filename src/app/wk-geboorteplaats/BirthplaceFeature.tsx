@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import { useState, useEffect, useRef, useCallback } from 'react';
 import type { Player } from '@/data/players';
@@ -85,9 +86,10 @@ function positionLabel(pos: string, m: Messages['birthplace']): string {
 interface Props {
   players: Player[];
   m: Messages['birthplace'];
+  locale: string;
 }
 
-export default function BirthplaceFeature({ players, m }: Props) {
+export default function BirthplaceFeature({ players, m, locale }: Props) {
   const [query, setQuery] = useState('');
   const [suggestions, setSuggestions] = useState<GeocodeSuggestion[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -170,6 +172,10 @@ export default function BirthplaceFeature({ players, m }: Props) {
   }
 
   const nearest = results[0] ?? null;
+
+  const cardUrl = results.length > 0
+    ? `/${locale}/wk-geboorteplaats/card?${results.slice(0, 5).map((p, i) => `p${i + 1}=${encodeURIComponent(p.id)}&d${i + 1}=${Math.round(p.distance)}`).join('&')}`
+    : null;
 
   return (
     <div className="max-w-2xl mx-auto px-4 pt-6 pb-12 space-y-6">
@@ -294,6 +300,21 @@ export default function BirthplaceFeature({ players, m }: Props) {
               </div>
             </div>
           </button>
+        </div>
+      )}
+
+      {cardUrl && (
+        <div className="flex justify-center">
+          <Link
+            href={cardUrl}
+            className="inline-flex items-center gap-3 px-6 py-3 text-sm font-bold tracking-widest uppercase text-white transition-opacity hover:opacity-90"
+            style={{ background: 'var(--cta)', borderRadius: '0 8px 0 8px' }}
+          >
+            {m.myCard}
+            <svg fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24" className="w-4 h-4">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </Link>
         </div>
       )}
 

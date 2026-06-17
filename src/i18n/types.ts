@@ -158,6 +158,10 @@ export interface Messages {
     intro: string;
     howTitle: string;
     how: string;
+    whyTitle: string;
+    why: string;
+    accuracyTitle: string;
+    accuracy: string;
     editorialTitle: string;
     editorial: string;
     contactTitle: string;

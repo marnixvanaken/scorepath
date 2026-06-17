@@ -72,6 +72,12 @@ export default async function AboutPage(props: PageProps<'/[lang]/about'>) {
           <h2 className="font-bold text-lg c-fg mb-2">{msg.about.howTitle}</h2>
           <p className="c-fg-muted leading-relaxed mb-8">{msg.about.how}</p>
 
+          <h2 className="font-bold text-lg c-fg mb-2">{msg.about.whyTitle}</h2>
+          <p className="c-fg-muted leading-relaxed mb-8">{msg.about.why}</p>
+
+          <h2 className="font-bold text-lg c-fg mb-2">{msg.about.accuracyTitle}</h2>
+          <p className="c-fg-muted leading-relaxed mb-8">{msg.about.accuracy}</p>
+
           <h2 className="font-bold text-lg c-fg mb-2">{msg.about.editorialTitle}</h2>
           <p className="c-fg-muted leading-relaxed mb-8">{msg.about.editorial}</p>
 

@@ -6116,6 +6116,17 @@
     "lon": 4.6681
   },
   {
+    "id": "NED-guus_til",
+    "name": "Guus Til",
+    "team": "Netherlands",
+    "teamCode": "NED",
+    "position": "MF",
+    "birthplace": "Lusaka",
+    "country": "Zambia",
+    "lat": -15.4166,
+    "lon": 28.2833
+  },
+  {
     "id": "JPN-zion_suzuki",
     "name": "Zion Suzuki",
     "team": "Japan",

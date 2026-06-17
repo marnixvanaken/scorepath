@@ -206,9 +206,17 @@ export default function BirthplaceFeature({ players, m, locale }: Props) {
             inputMode="search"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            onFocus={() => suggestions.length > 0 && setShowSuggestions(true)}
+            onFocus={(e) => {
+              e.currentTarget.style.borderColor = 'var(--cta)';
+              if (suggestions.length > 0) setShowSuggestions(true);
+            }}
+            onBlur={(e) => { e.currentTarget.style.borderColor = 'var(--border-strong)'; }}
             placeholder={m.inputPlaceholder}
-            className="w-full bg-white/5 border border-white/10 rounded-xl pl-11 pr-12 py-3.5 text-base text-[--fg] placeholder:text-[--fg]/30 focus:outline-none focus:border-[--cta]/50 focus:bg-white/8 transition-all"
+            className="w-full rounded-xl pl-11 pr-12 py-3.5 text-base text-[--fg] placeholder:text-[--fg]/40 focus:outline-none transition-all"
+            style={{
+              background: 'var(--bg-card)',
+              border: '2px solid var(--border-strong)',
+            }}
             autoComplete="off"
             autoCorrect="off"
             autoCapitalize="off"
@@ -235,12 +243,18 @@ export default function BirthplaceFeature({ players, m, locale }: Props) {
 
         {/* Suggestions dropdown */}
         {showSuggestions && suggestions.length > 0 && (
-          <ul className="absolute z-50 left-0 right-0 mt-1.5 bg-[#16192a] border border-white/15 rounded-xl shadow-2xl overflow-hidden">
+          <ul
+            className="absolute z-50 left-0 right-0 mt-1.5 rounded-xl shadow-2xl overflow-hidden"
+            style={{ background: 'var(--bg-card)', border: '2px solid var(--border-strong)' }}
+          >
             {suggestions.map((s, i) => (
-              <li key={i} className={i > 0 ? 'border-t border-white/5' : ''}>
+              <li key={i} style={i > 0 ? { borderTop: '1px solid var(--border)' } : undefined}>
                 <button
                   type="button"
-                  className="w-full text-left px-4 py-4 text-base text-[--fg] hover:bg-white/10 active:bg-white/15 transition-colors flex items-center gap-3"
+                  className="w-full text-left px-4 py-4 text-base text-[--fg] transition-colors flex items-center gap-3"
+                  style={{ background: 'transparent' }}
+                  onMouseEnter={(e) => { e.currentTarget.style.background = 'var(--bg-panel)'; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; }}
                   onMouseDown={(e) => { e.preventDefault(); selectSuggestion(s); }}
                   onTouchEnd={(e) => { e.preventDefault(); selectSuggestion(s); }}
                 >

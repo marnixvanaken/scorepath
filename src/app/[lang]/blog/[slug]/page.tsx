@@ -18,6 +18,9 @@ import { OudsteCoachContent } from '@/app/blog/[slug]/oudste-coach';
 import { CourtoisCleanSheetsContent } from '@/app/blog/[slug]/courtois-clean-sheets';
 import { MessiRivelinoContent } from '@/app/blog/[slug]/messi-rivelino';
 import { TimPayneContent } from '@/app/blog/[slug]/tim-payne';
+import { Wk2026FormatContent } from '@/app/blog/[slug]/wk-2026-format';
+import { NederlandWk2026Content } from '@/app/blog/[slug]/nederland-wk-2026';
+import { VijfWkStuntsContent } from '@/app/blog/[slug]/vijf-wk-stunts';
 
 export const revalidate = 3600;
 
@@ -75,10 +78,13 @@ export async function generateMetadata(
 
 function StaticBlogContent({ slug, lang }: { slug: string; lang: string }) {
   switch (slug) {
+    case 'wk-2026-format':               return <Wk2026FormatContent lang={lang} />;
     case 'drie-legendes-wk-2026':        return <DrieLegendesContent lang={lang} />;
     case 'vs-iran-wk-2026':              return <VsIranContent lang={lang} />;
     case 'mbappe-jaagt-klose':           return <MbappeKloseContent lang={lang} />;
+    case 'nederland-wk-2026':            return <NederlandWk2026Content lang={lang} />;
     case 'messi-meeste-wk-wedstrijden':  return <MessiWedstrijdenContent lang={lang} />;
+    case 'vijf-wk-stunts':               return <VijfWkStuntsContent lang={lang} />;
     case 'yamal-euro-wk-dubbel':         return <YamalDubbelContent lang={lang} />;
     case 'oudste-coach-wk-2026':         return <OudsteCoachContent lang={lang} />;
     case 'courtois-clean-sheets':        return <CourtoisCleanSheetsContent lang={lang} />;

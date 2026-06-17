@@ -10,6 +10,42 @@ type BlogTranslations = Record<string, {
 }>;
 
 export const BLOG_TRANSLATIONS: BlogTranslations = {
+  'wk-2026-format': {
+    en: {
+      title: '48 teams, a round of 32 and new rules: the 2026 World Cup format explained',
+      description: 'The 2026 World Cup has a new format: 48 teams, 12 groups and a brand new round of 32. Everything you need to know about how the tournament works.',
+      category: 'Guide',
+    },
+    es: {
+      title: '48 equipos, la ronda de 32 y nuevas reglas: así funciona el Mundial 2026',
+      description: 'El Mundial 2026 tiene un nuevo formato: 48 equipos, 12 grupos y una nueva ronda de 32. Todo lo que necesitas saber sobre cómo funciona el torneo.',
+      category: 'Guía',
+    },
+  },
+  'nederland-wk-2026': {
+    en: {
+      title: 'The Netherlands at World Cup 2026: how far can they go?',
+      description: 'The Netherlands missed 2018 and reached the quarter-finals in 2022. Now, with Van Dijk and Simons leading a new generation, how realistic is the Dutch World Cup dream?',
+      category: 'Analysis',
+    },
+    es: {
+      title: 'Países Bajos en el Mundial 2026: ¿hasta dónde pueden llegar?',
+      description: 'Países Bajos no estuvo en 2018 y llegó a cuartos en 2022. Ahora, con Van Dijk y Simons liderando una nueva generación, ¿cómo de realista es el sueño mundialista de la Naranja?',
+      category: 'Análisis',
+    },
+  },
+  'vijf-wk-stunts': {
+    en: {
+      title: 'The five biggest World Cup upsets ever',
+      description: 'From North Korea beating Italy in 1966 to Germany\'s historic 7-1 against Brazil in 2014: these are the five most unexpected moments in World Cup history.',
+      category: 'Stories',
+    },
+    es: {
+      title: 'Los cinco mayores batacazos de la historia del Mundial',
+      description: 'Desde Corea del Norte venciendo a Italia en 1966 hasta el histórico 7-1 de Alemania a Brasil en 2014: estos son los cinco momentos más inesperados de la historia del Mundial.',
+      category: 'Historias',
+    },
+  },
   'drie-legendes-wk-2026': {
     en: {
       title: 'Messi, Ronaldo and Ochoa: three legends at their sixth World Cup',

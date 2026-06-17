@@ -33,6 +33,22 @@ const FAQ: Record<string, FaqItem[]> = {
       q: 'Wat is het verschil tussen de modi EXACT, 1X2 en VOLGORDE?',
       a: 'EXACT: vul de precieze uitslag per wedstrijd in (bijv. 2-1) voor het nauwkeurigste doelsaldo. 1X2: kies alleen winst, gelijk of verlies — snel op mobiel. VOLGORDE: sleep of tik de teams in je eindstand per groep, zonder scores. In alle modi zie je live wie doorgaat.',
     },
+    {
+      q: 'Hoeveel wedstrijden telt het WK 2026?',
+      a: 'Het WK 2026 telt in totaal 104 wedstrijden: 72 in de groepsfase (12 groepen × 6 wedstrijden) en 32 in de knock-outfase (ronde van 32, ronde van 16, kwartfinale, halve finale, troostfinale en finale).',
+    },
+    {
+      q: 'Kan ik mijn simulatie opslaan?',
+      a: 'Jouw invulling wordt automatisch bewaard via de URL. Klik op "Deel link" om een link te kopiëren die jouw volledige scenario bevat — inclusief alle groepsuitslagen en knock-outkeuzes. Die link kun je later zelf weer openen of met anderen delen.',
+    },
+    {
+      q: 'Welke 48 landen doen mee aan het WK 2026?',
+      a: 'De 48 deelnemers zijn verdeeld over 12 groepen. De gastlanden VS, Canada en Mexico zijn direct geplaatst. De overige 45 plekken zijn verdeeld via de continentale kwalificatiereeksen van UEFA (Europa), CONMEBOL (Zuid-Amerika), CAF (Afrika), AFC (Azië), CONCACAF en OFC.',
+    },
+    {
+      q: 'Waar wordt het WK 2026 gespeeld?',
+      a: 'Het WK 2026 wordt gespeeld in drie gastlanden: de VS, Canada en Mexico. De stadions liggen onder andere in New York/New Jersey, Los Angeles, Dallas, Miami, Atlanta, Seattle, Boston, San Francisco, Guadalajara, Mexico-Stad en Toronto. De finale is op 19 juli 2026 in het MetLife Stadium in New Jersey.',
+    },
   ],
   en: [
     {
@@ -59,6 +75,22 @@ const FAQ: Record<string, FaqItem[]> = {
       q: 'What is the difference between EXACT, 1X2 and ORDER modes?',
       a: 'EXACT: enter the precise score per match (e.g. 2-1) for the most accurate goal difference. 1X2: just pick win, draw or loss — fast on mobile. ORDER: drag or tap the teams into your final standing per group, without scores. In every mode you see live who advances.',
     },
+    {
+      q: 'How many matches does the 2026 World Cup have?',
+      a: 'The 2026 World Cup has 104 matches in total: 72 in the group stage (12 groups × 6 matches) and 32 in the knockout phase (round of 32, round of 16, quarter-finals, semi-finals, third-place match and final).',
+    },
+    {
+      q: 'Can I save my simulation?',
+      a: 'Your bracket is automatically saved in the URL. Click "Share link" to copy a link that contains your complete scenario — including all group results and knockout choices. You can reopen that link yourself later or share it with others.',
+    },
+    {
+      q: 'Which 48 countries are in the 2026 World Cup?',
+      a: 'The 48 participants are split across 12 groups. Host nations USA, Canada and Mexico qualify automatically. The remaining 45 spots are distributed through continental qualifying from UEFA (Europe), CONMEBOL (South America), CAF (Africa), AFC (Asia), CONCACAF and OFC.',
+    },
+    {
+      q: 'Where is the 2026 World Cup played?',
+      a: 'The 2026 World Cup is played across three host nations: the USA, Canada and Mexico. Venues include New York/New Jersey, Los Angeles, Dallas, Miami, Atlanta, Seattle, Boston, San Francisco, Guadalajara, Mexico City and Toronto. The final is on 19 July 2026 at MetLife Stadium in New Jersey.',
+    },
   ],
   es: [
     {
@@ -84,6 +116,22 @@ const FAQ: Record<string, FaqItem[]> = {
     {
       q: '¿Qué diferencia hay entre los modos EXACTO, 1X2 y ORDEN?',
       a: 'EXACTO: introduce el marcador exacto por partido (p. ej. 2-1) para la diferencia de goles más precisa. 1X2: elige solo victoria, empate o derrota — rápido en el móvil. ORDEN: arrastra o toca los equipos en tu clasificación final por grupo, sin marcadores. En todos los modos ves en directo quién avanza.',
+    },
+    {
+      q: '¿Cuántos partidos tiene el Mundial 2026?',
+      a: 'El Mundial 2026 tiene un total de 104 partidos: 72 en la fase de grupos (12 grupos × 6 partidos) y 32 en la fase eliminatoria (ronda de 32, octavos de final, cuartos de final, semifinales, partido por el tercer puesto y final).',
+    },
+    {
+      q: '¿Puedo guardar mi simulación?',
+      a: 'Tu cuadro se guarda automáticamente en la URL. Haz clic en "Compartir enlace" para copiar un enlace que contiene tu escenario completo — con todos los resultados de grupo y las elecciones eliminatorias. Puedes volver a abrirlo más tarde o compartirlo con otros.',
+    },
+    {
+      q: '¿Qué 48 países participan en el Mundial 2026?',
+      a: 'Los 48 participantes están divididos en 12 grupos. Los países anfitriones EE.UU., Canadá y México se clasifican automáticamente. Los 45 puestos restantes se reparten mediante la clasificación continental de UEFA (Europa), CONMEBOL (Sudamérica), CAF (África), AFC (Asia), CONCACAF y OFC.',
+    },
+    {
+      q: '¿Dónde se juega el Mundial 2026?',
+      a: 'El Mundial 2026 se disputa en tres países anfitriones: EE.UU., Canadá y México. Las sedes incluyen Nueva York/Nueva Jersey, Los Ángeles, Dallas, Miami, Atlanta, Seattle, Boston, San Francisco, Guadalajara, Ciudad de México y Toronto. La final es el 19 de julio de 2026 en el MetLife Stadium de Nueva Jersey.',
     },
   ],
 };

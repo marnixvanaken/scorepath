@@ -4,13 +4,13 @@ import dynamic from 'next/dynamic';
 import { useState, useEffect, useRef, useCallback } from 'react';
 import type { Player } from '@/data/players';
 import { haversine } from '@/lib/haversine';
+import { flagUrl } from '@/data/flags';
 import type { Messages } from '@/i18n/types';
-import { Flag } from '@/components/Flag';
 
 const PlayerMap = dynamic(() => import('./PlayerMap'), {
   ssr: false,
   loading: () => (
-    <div className="h-full w-full flex items-center justify-center bg-white/3 text-[--fg]/50 text-sm">
+    <div className="h-full w-full flex items-center justify-center bg-white/5">
       <Spinner />
     </div>
   ),
@@ -38,6 +38,37 @@ function Spinner() {
       className="inline-block w-5 h-5 rounded-full border-2 border-white/20 border-t-[--cta] animate-spin"
       aria-hidden="true"
     />
+  );
+}
+
+// Directe <img> rendering — geen next/image of useParams nodig
+function FlagImg({ teamCode, size = 24 }: { teamCode: string; size?: number }) {
+  const cdnWidth = size > 48 ? 160 : 80;
+  const src = flagUrl(teamCode, cdnWidth);
+  const h = Math.round(size * 0.67);
+  if (!src) {
+    return (
+      <span
+        className="inline-block shrink-0 bg-slate-700"
+        style={{ width: size, height: h, borderRadius: '0 4px 0 4px' }}
+      />
+    );
+  }
+  return (
+    <span
+      className="inline-block shrink-0 overflow-hidden border border-white/20"
+      style={{ width: size, height: h, borderRadius: '0 4px 0 4px' }}
+    >
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={src}
+        alt={teamCode}
+        width={size}
+        height={h}
+        loading="lazy"
+        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+      />
+    </span>
   );
 }
 
@@ -114,7 +145,7 @@ export default function BirthplaceFeature({ players, m }: Props) {
     setQuery(s.name);
     setShowSuggestions(false);
     setSuggestions([]);
-    inputRef.current?.blur(); // dismiss keyboard on mobile
+    inputRef.current?.blur();
 
     const pos: UserPos = { lat: s.lat, lon: s.lon, name: s.name };
     setUserPos(pos);
@@ -123,7 +154,7 @@ export default function BirthplaceFeature({ players, m }: Props) {
     const ranked = players
       .map((p) => ({ ...p, distance: haversine(s.lat, s.lon, p.lat, p.lon) }))
       .sort((a, b) => a.distance - b.distance)
-      .slice(0, 5);
+      .slice(0, 10);
     setResults(ranked);
   }
 
@@ -156,7 +187,6 @@ export default function BirthplaceFeature({ players, m }: Props) {
         </label>
 
         <div className="relative">
-          {/* Search icon */}
           <svg
             className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[--fg]/40 pointer-events-none"
             fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"
@@ -172,7 +202,6 @@ export default function BirthplaceFeature({ players, m }: Props) {
             onChange={(e) => setQuery(e.target.value)}
             onFocus={() => suggestions.length > 0 && setShowSuggestions(true)}
             placeholder={m.inputPlaceholder}
-            // text-base = 16px — voorkomt iOS Safari auto-zoom
             className="w-full bg-white/5 border border-white/10 rounded-xl pl-11 pr-12 py-3.5 text-base text-[--fg] placeholder:text-[--fg]/30 focus:outline-none focus:border-[--cta]/50 focus:bg-white/8 transition-all"
             autoComplete="off"
             autoCorrect="off"
@@ -180,7 +209,6 @@ export default function BirthplaceFeature({ players, m }: Props) {
             spellCheck={false}
           />
 
-          {/* Right side: spinner or clear button */}
           <div className="absolute right-3 top-1/2 -translate-y-1/2">
             {isLoading ? (
               <Spinner />
@@ -206,7 +234,6 @@ export default function BirthplaceFeature({ players, m }: Props) {
               <li key={i} className={i > 0 ? 'border-t border-white/5' : ''}>
                 <button
                   type="button"
-                  // py-4 = minimaal 44px aanraakvlak op mobiel
                   className="w-full text-left px-4 py-4 text-base text-[--fg] hover:bg-white/10 active:bg-white/15 transition-colors flex items-center gap-3"
                   onMouseDown={(e) => { e.preventDefault(); selectSuggestion(s); }}
                   onTouchEnd={(e) => { e.preventDefault(); selectSuggestion(s); }}
@@ -226,9 +253,7 @@ export default function BirthplaceFeature({ players, m }: Props) {
         )}
       </div>
 
-      {error && (
-        <p className="text-red-400 text-sm">{m.error}</p>
-      )}
+      {error && <p className="text-red-400 text-sm">{m.error}</p>}
 
       {/* Empty state */}
       {!userPos && !error && (
@@ -240,22 +265,20 @@ export default function BirthplaceFeature({ players, m }: Props) {
         </div>
       )}
 
-      {/* Nearest player — hero card */}
+      {/* #1 hero card */}
       {nearest && userPos && (
         <div>
           <p className="text-xs font-semibold text-[--fg]/50 uppercase tracking-widest mb-3">{m.nearest}</p>
           <button
             type="button"
             onClick={() => setHighlightedIdx(0)}
-            className="w-full text-left bg-gradient-to-br from-white/8 to-white/3 border border-white/15 hover:border-[--cta]/50 rounded-2xl p-5 transition-all group"
+            className="w-full text-left bg-gradient-to-br from-white/8 to-white/3 border border-white/15 hover:border-[--cta]/50 rounded-2xl p-5 transition-all"
           >
             <div className="flex items-center gap-4">
-              <div className="shrink-0">
-                <Flag teamId={nearest.teamCode} size={52} />
-              </div>
+              <FlagImg teamCode={nearest.teamCode} size={52} />
               <div className="flex-1 min-w-0">
                 <div className="flex items-start justify-between gap-2">
-                  <span className="font-bold text-lg text-[--fg] leading-tight truncate">{nearest.name}</span>
+                  <span className="font-bold text-lg text-[--fg] leading-tight">{nearest.name}</span>
                   <span className="text-[--cta] font-mono font-bold text-base shrink-0 tabular-nums">
                     {Math.round(nearest.distance).toLocaleString()} {m.distanceKm}
                   </span>
@@ -274,7 +297,7 @@ export default function BirthplaceFeature({ players, m }: Props) {
         </div>
       )}
 
-      {/* Top 5 list */}
+      {/* Top 10 list */}
       {results.length > 0 && (
         <div>
           <p className="text-xs font-semibold text-[--fg]/50 uppercase tracking-widest mb-3">{m.top5}</p>
@@ -284,26 +307,44 @@ export default function BirthplaceFeature({ players, m }: Props) {
                 <button
                   type="button"
                   onClick={() => setHighlightedIdx(i === highlightedIdx ? null : i)}
-                  className={`w-full flex items-center gap-3 rounded-xl px-3 py-3.5 text-left transition-all border ${
+                  className={`w-full flex items-start gap-3 rounded-xl px-3 py-3 text-left transition-all border ${
                     highlightedIdx === i
                       ? 'border-[--cta]/50 bg-[--cta]/10'
                       : 'border-transparent bg-white/5 hover:bg-white/10 active:bg-white/15'
                   }`}
                 >
+                  {/* Rank badge */}
                   <span
-                    className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold shrink-0 tabular-nums"
-                    style={{ background: i === 0 ? '#10b981' : '#1e2535', color: i === 0 ? 'white' : 'rgba(255,255,255,0.5)' }}
+                    className="w-7 h-7 mt-0.5 rounded-full flex items-center justify-center text-xs font-bold shrink-0 tabular-nums"
+                    style={{
+                      background: i === 0 ? '#10b981' : '#1e2535',
+                      color: i === 0 ? 'white' : 'rgba(255,255,255,0.45)',
+                    }}
                   >
                     {i + 1}
                   </span>
-                  <Flag teamId={p.teamCode} size={22} />
-                  <span className="flex-1 text-sm text-[--fg] font-medium truncate">{p.name}</span>
-                  <span className="text-xs text-[--fg]/50 shrink-0 hidden sm:block">
-                    {positionLabel(p.position, m)}
+
+                  {/* Flag */}
+                  <span className="mt-1 shrink-0">
+                    <FlagImg teamCode={p.teamCode} size={24} />
                   </span>
-                  <span className="text-sm text-[--cta] font-mono font-semibold shrink-0 tabular-nums">
-                    {Math.round(p.distance).toLocaleString()} {m.distanceKm}
-                  </span>
+
+                  {/* Name + meta */}
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="text-sm font-semibold text-[--fg] truncate">{p.name}</span>
+                      <span className="text-sm text-[--cta] font-mono font-semibold shrink-0 tabular-nums">
+                        {Math.round(p.distance).toLocaleString()} {m.distanceKm}
+                      </span>
+                    </div>
+                    <div className="mt-0.5 text-xs text-[--fg]/50 flex gap-2 flex-wrap">
+                      <span>{p.team}</span>
+                      <span>·</span>
+                      <span>{positionLabel(p.position, m)}</span>
+                      <span>·</span>
+                      <span className="truncate">{p.birthplace}</span>
+                    </div>
+                  </div>
                 </button>
               </li>
             ))}

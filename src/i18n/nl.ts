@@ -211,7 +211,7 @@ export const NL: Messages = {
     searching: 'Zoeken...',
     noResults: 'Geen resultaten',
     nearest: 'Dichtstbijzijnde speler',
-    top5: 'Top 5 dichtstbijzijnde spelers',
+    top5: 'Top 10 dichtstbijzijnde spelers',
     distanceKm: 'km',
     showTop5: 'Toon top 5 op kaart',
     hideTop5: 'Verberg top 5',

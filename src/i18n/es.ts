@@ -211,7 +211,7 @@ export const ES: Messages = {
     searching: 'Buscando...',
     noResults: 'Sin resultados',
     nearest: 'Jugador más cercano',
-    top5: 'Los 5 jugadores más cercanos',
+    top5: 'Los 10 jugadores más cercanos',
     distanceKm: 'km',
     showTop5: 'Mostrar top 5 en mapa',
     hideTop5: 'Ocultar top 5',

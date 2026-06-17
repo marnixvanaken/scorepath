@@ -6,7 +6,7 @@ const FD_URL = 'https://api.football-data.org/v4/competitions/WC/matches?season=
 export async function GET() {
   const apiKey = process.env.FOOTBALL_DATA_API_KEY;
   if (!apiKey) {
-    return NextResponse.json({ error: 'API key niet geconfigureerd' }, { status: 500 });
+    return NextResponse.json({ results: [], hasActiveMatch: false });
   }
 
   let data: { matches?: unknown[] };

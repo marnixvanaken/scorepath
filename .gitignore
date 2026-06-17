@@ -42,3 +42,6 @@ next-env.d.ts
 
 # stray next build output under src/
 /src/.next/
+
+# build-players.ts API response cache (safe to delete; re-run script to rebuild)
+/.cache/

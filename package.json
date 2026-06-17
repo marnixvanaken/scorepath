@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "build-players": "npx tsx scripts/build-players.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.100.1",

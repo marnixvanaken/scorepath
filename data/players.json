@@ -148,10 +148,10 @@
     "team": "Algeria",
     "teamCode": "ALG",
     "position": "MF",
-    "birthplace": "Algeria",
+    "birthplace": "M'Sila",
     "country": "Algeria",
-    "lat": 28,
-    "lon": 1
+    "lat": 35.7056,
+    "lon": 4.5439
   },
   {
     "id": "ALG-riyad_mahrez",
@@ -1006,10 +1006,10 @@
     "team": "Austria",
     "teamCode": "AUT",
     "position": "MF",
-    "birthplace": "Austria",
+    "birthplace": "Kuchl",
     "country": "Austria",
-    "lat": 48,
-    "lon": 14
+    "lat": 47.6126,
+    "lon": 13.1423
   },
   {
     "id": "AUT-marcel_sabitzer",
@@ -2222,15 +2222,15 @@
     "lon": 7.4914
   },
   {
-    "id": "CAN-al_e_jones",
-    "name": "Al e Jones",
+    "id": "CAN-alfie_jones",
+    "name": "Alfie Jones",
     "team": "Canada",
     "teamCode": "CAN",
     "position": "DF",
-    "birthplace": "Canada",
-    "country": "Canada",
-    "lat": 56.1304,
-    "lon": -106.3468
+    "birthplace": "Bristol",
+    "country": "England",
+    "lat": 51.4545,
+    "lon": -2.5879
   },
   {
     "id": "CAN-stephen_eustaquio",
@@ -2249,10 +2249,10 @@
     "team": "Canada",
     "teamCode": "CAN",
     "position": "MF",
-    "birthplace": "Canada",
+    "birthplace": "Kentville",
     "country": "Canada",
-    "lat": 56.1304,
-    "lon": -106.3468
+    "lat": 45.0773,
+    "lon": -64.4958
   },
   {
     "id": "CAN-alphonso_davies",
@@ -2266,15 +2266,15 @@
     "lon": -0.2333
   },
   {
-    "id": "CAN-jonathan_david_new",
-    "name": "Jonathan David",
+    "id": "CAN-promise_david",
+    "name": "Promise David",
     "team": "Canada",
     "teamCode": "CAN",
     "position": "FW",
-    "birthplace": "Brooklyn",
-    "country": "United States",
-    "lat": 40.6782,
-    "lon": -73.9442
+    "birthplace": "Brampton",
+    "country": "Canada",
+    "lat": 43.6833,
+    "lon": -79.7667
   },
   {
     "id": "CAN-jayden_nelson",
@@ -3657,10 +3657,10 @@
     "team": "Croatia",
     "teamCode": "CRO",
     "position": "FW",
-    "birthplace": "Germany",
+    "birthplace": "Hamburg",
     "country": "Germany",
-    "lat": 51,
-    "lon": 10
+    "lat": 53.5753,
+    "lon": 10.0153
   },
   {
     "id": "CRO-marco_pasalic",
@@ -5725,10 +5725,10 @@
     "team": "Ghana",
     "teamCode": "GHA",
     "position": "GK",
-    "birthplace": "Ghana",
+    "birthplace": "Tamale",
     "country": "Ghana",
-    "lat": 7.9465,
-    "lon": -1.0232
+    "lat": 9.4035,
+    "lon": -0.8393
   },
   {
     "id": "GHA-joseph_anang",
@@ -5923,10 +5923,10 @@
     "team": "Ghana",
     "teamCode": "GHA",
     "position": "FW",
-    "birthplace": "Ghana",
+    "birthplace": "Techiman",
     "country": "Ghana",
-    "lat": 7.9465,
-    "lon": -1.0232
+    "lat": 7.5897,
+    "lon": -1.9358
   },
   {
     "id": "GHA-inaki_williams",
@@ -8838,10 +8838,10 @@
     "team": "Netherlands",
     "teamCode": "NED",
     "position": "GK",
-    "birthplace": "Netherlands",
+    "birthplace": "Heeswijk",
     "country": "Netherlands",
-    "lat": 52.1326,
-    "lon": 5.2913
+    "lat": 51.65,
+    "lon": 5.4667
   },
   {
     "id": "NED-frenkie_de_jong",
@@ -9146,10 +9146,10 @@
     "team": "Norway",
     "teamCode": "NOR",
     "position": "DF",
-    "birthplace": "Norway",
+    "birthplace": "Namsos",
     "country": "Norway",
-    "lat": 60.472,
-    "lon": 8.4689
+    "lat": 64.4663,
+    "lon": 11.4964
   },
   {
     "id": "NZL-max_crocombe",
@@ -9949,10 +9949,10 @@
     "team": "Paraguay",
     "teamCode": "PAR",
     "position": "FW",
-    "birthplace": "Paraguay",
+    "birthplace": "Caaguazú",
     "country": "Paraguay",
-    "lat": -23.5,
-    "lon": -58
+    "lat": -25.4657,
+    "lon": -56.0191
   },
   {
     "id": "PAR-gabriel_avalos",
@@ -11357,10 +11357,10 @@
     "team": "Senegal",
     "teamCode": "SEN",
     "position": "FW",
-    "birthplace": "Senegal",
+    "birthplace": "Djibonker",
     "country": "Senegal",
-    "lat": 14.3667,
-    "lon": -14.2833
+    "lat": 12.5,
+    "lon": -16.5
   },
   {
     "id": "SEN-cherif_ndiaye",
@@ -11632,10 +11632,10 @@
     "team": "Switzerland",
     "teamCode": "SUI",
     "position": "MF",
-    "birthplace": "Switzerland",
+    "birthplace": "Fribourg",
     "country": "Switzerland",
-    "lat": 46.7986,
-    "lon": 8.232
+    "lat": 46.8065,
+    "lon": 7.162
   },
   {
     "id": "SUI-fabian_rieder",
@@ -11687,10 +11687,10 @@
     "team": "Switzerland",
     "teamCode": "SUI",
     "position": "FW",
-    "birthplace": "Switzerland",
+    "birthplace": "Binningen",
     "country": "Switzerland",
-    "lat": 46.7986,
-    "lon": 8.232
+    "lat": 47.5253,
+    "lon": 7.5736
   },
   {
     "id": "SUI-christian_fassnacht",
@@ -11841,10 +11841,10 @@
     "team": "Sweden",
     "teamCode": "SWE",
     "position": "MF",
-    "birthplace": "Sweden",
-    "country": "Unknown",
-    "lat": 61,
-    "lon": 15
+    "birthplace": "Solna",
+    "country": "Sweden",
+    "lat": 59.3608,
+    "lon": 17.9875
   },
   {
     "id": "SWE-mattias_svanberg",
@@ -11874,10 +11874,10 @@
     "team": "Sweden",
     "teamCode": "SWE",
     "position": "FW",
-    "birthplace": "Sweden",
-    "country": "Unknown",
-    "lat": 61,
-    "lon": 15
+    "birthplace": "Falkenberg",
+    "country": "Sweden",
+    "lat": 56.9065,
+    "lon": 12.4963
   },
   {
     "id": "SWE-benjamin_nygren",
@@ -11962,10 +11962,10 @@
     "team": "Sweden",
     "teamCode": "SWE",
     "position": "GK",
-    "birthplace": "Sweden",
+    "birthplace": "Stockholm",
     "country": "Sweden",
-    "lat": 60.1282,
-    "lon": 18.6435
+    "lat": 59.3293,
+    "lon": 18.0686
   },
   {
     "id": "SWE-ken_sema",

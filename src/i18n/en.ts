@@ -231,7 +231,7 @@ export const EN: Messages = {
     loadingMap: 'Loading map...',
     myCard: 'MY CARD',
     downloadCard: '↓ DOWNLOAD CARD',
-    cardTagline: 'Top 5 nearest World Cup players',
+    cardTagline: 'Top 10 nearest World Cup players',
     osmAttrib: 'Map data © OpenStreetMap contributors',
     cardBirthplace: 'Birthplace',
     cardDistance: 'Distance',

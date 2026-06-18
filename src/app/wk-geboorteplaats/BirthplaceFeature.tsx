@@ -180,7 +180,7 @@ export default function BirthplaceFeature({ players, m, locale }: Props) {
   const nearest = results[0] ?? null;
 
   const cardUrl = results.length > 0
-    ? `/${locale}/wk-geboorteplaats/card?${results.slice(0, 5).map((p, i) => `p${i + 1}=${encodeURIComponent(p.id)}&d${i + 1}=${Math.round(p.distance)}`).join('&')}`
+    ? `/${locale}/wk-geboorteplaats/card?${results.slice(0, 10).map((p, i) => `p${i + 1}=${encodeURIComponent(p.id)}&d${i + 1}=${Math.round(p.distance)}`).join('&')}`
     : null;
 
   return (

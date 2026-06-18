@@ -24,15 +24,14 @@ export async function GET(req: NextRequest) {
   const msg = getMessages(lang);
   const m = msg.birthplace;
 
-  // Build player+distance pairs
-  const rows: { name: string; team: string; position: string; teamCode: string; distance: number }[] = [];
-  for (let i = 1; i <= 5; i++) {
+  const rows: { name: string; team: string; position: string; teamCode: string; distance: number; birthplace: string }[] = [];
+  for (let i = 1; i <= 10; i++) {
     const id = sp.get(`p${i}`);
     const d = parseInt(sp.get(`d${i}`) ?? '0', 10);
     if (!id) continue;
     const player = allPlayers.find((p) => p.id === id);
     if (!player) continue;
-    rows.push({ name: player.name, team: player.team, position: player.position, teamCode: player.teamCode, distance: d });
+    rows.push({ name: player.name, team: player.team, position: player.position, teamCode: player.teamCode, distance: d, birthplace: player.birthplace });
   }
 
   if (rows.length === 0) return new Response('Not found', { status: 404 });
@@ -73,21 +72,21 @@ export async function GET(req: NextRequest) {
 
   const img = new ImageResponse(
     (
-      <div style={{ width: W, height: H, background: BG, display: 'flex', flexDirection: 'column', fontFamily: BODY, padding: '72px 80px 60px' }}>
+      <div style={{ width: W, height: H, background: BG, display: 'flex', flexDirection: 'column', fontFamily: BODY, padding: '60px 72px 52px' }}>
         {/* Header */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 32 }}>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-            <span style={{ fontSize: 26, fontWeight: 700, color: MUTED, letterSpacing: '0.22em', textTransform: 'uppercase', fontFamily: BODY }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 20 }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+            <span style={{ fontSize: 22, fontWeight: 700, color: MUTED, letterSpacing: '0.22em', textTransform: 'uppercase', fontFamily: BODY }}>
               SCOREPATH · {lang === 'nl' ? 'WK 2026' : lang === 'es' ? 'MUNDIAL 2026' : 'WORLD CUP 2026'}
             </span>
-            <span style={{ fontSize: 56, fontWeight: 900, color: INK, fontFamily: DISPLAY, lineHeight: 1, letterSpacing: '0.02em' }}>
+            <span style={{ fontSize: 46, fontWeight: 900, color: INK, fontFamily: DISPLAY, lineHeight: 1, letterSpacing: '0.02em' }}>
               {m.cardTagline.toUpperCase()}
             </span>
           </div>
         </div>
 
         {/* Divider */}
-        <div style={{ width: '100%', height: 3, background: BORDER, marginBottom: 32 }} />
+        <div style={{ width: '100%', height: 3, background: BORDER, marginBottom: 20 }} />
 
         {/* Player rows */}
         <div style={{ display: 'flex', flexDirection: 'column', flex: 1, gap: 0 }}>
@@ -101,41 +100,44 @@ export async function GET(req: NextRequest) {
                 style={{
                   display: 'flex',
                   alignItems: 'center',
-                  gap: 28,
-                  padding: '28px 32px',
+                  gap: 20,
+                  padding: '14px 20px',
                   background: isFirst ? PANEL : BG,
-                  borderBottom: `2px solid ${BORDER}`,
+                  borderBottom: `1.5px solid ${BORDER}`,
                 }}
               >
                 {/* Rank */}
                 <div style={{
-                  width: 52, height: 52, borderRadius: '50%',
+                  width: 40, height: 40, borderRadius: '50%',
                   background: isFirst ? GOLD : BORDER,
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   color: isFirst ? 'white' : MUTED,
-                  fontSize: 24, fontWeight: 700, fontFamily: BODY, flexShrink: 0,
+                  fontSize: 20, fontWeight: 700, fontFamily: BODY, flexShrink: 0,
                 }}>
                   {i + 1}
                 </div>
 
                 {/* Flag */}
-                {flagSrc && (
+                {flagSrc ? (
                   // eslint-disable-next-line @next/next/no-img-element
-                  <img src={flagSrc} alt="" width={72} height={48} style={{ borderRadius: '0 8px 0 8px', border: `2px solid ${BORDER}`, flexShrink: 0 }} />
+                  <img src={flagSrc} alt="" width={60} height={40} style={{ borderRadius: '0 6px 0 6px', border: `1.5px solid ${BORDER}`, flexShrink: 0 }} />
+                ) : (
+                  <div style={{ width: 60, height: 40, flexShrink: 0, background: BORDER, borderRadius: '0 6px 0 6px' }} />
                 )}
 
                 {/* Name + meta */}
-                <div style={{ display: 'flex', flexDirection: 'column', flex: 1, gap: 4 }}>
-                  <span style={{ fontSize: 36, fontWeight: 700, color: INK, fontFamily: BODY, lineHeight: 1 }}>{row.name}</span>
-                  <span style={{ fontSize: 22, color: MUTED, fontFamily: BODY }}>{row.team} · {posLabel(row.position)}</span>
+                <div style={{ display: 'flex', flexDirection: 'column', flex: 1, gap: 2 }}>
+                  <span style={{ fontSize: 28, fontWeight: 700, color: INK, fontFamily: BODY, lineHeight: 1 }}>{row.name}</span>
+                  <span style={{ fontSize: 17, color: MUTED, fontFamily: BODY, lineHeight: 1 }}>{row.team} · {posLabel(row.position)}</span>
+                  <span style={{ fontSize: 15, color: MUTED, fontFamily: BODY, lineHeight: 1, opacity: 0.75 }}>{row.birthplace}</span>
                 </div>
 
                 {/* Distance */}
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', flexShrink: 0 }}>
-                  <span style={{ fontSize: 40, fontWeight: 700, color: isFirst ? RED : INK, fontFamily: DISPLAY, lineHeight: 1 }}>
+                  <span style={{ fontSize: 32, fontWeight: 700, color: isFirst ? RED : INK, fontFamily: DISPLAY, lineHeight: 1 }}>
                     {row.distance.toLocaleString()}
                   </span>
-                  <span style={{ fontSize: 20, color: MUTED, fontFamily: BODY }}>{m.distanceKm}</span>
+                  <span style={{ fontSize: 17, color: MUTED, fontFamily: BODY }}>{m.distanceKm}</span>
                 </div>
               </div>
             );
@@ -143,9 +145,9 @@ export async function GET(req: NextRequest) {
         </div>
 
         {/* Footer */}
-        <div style={{ display: 'flex', marginTop: 32, paddingTop: 28, borderTop: `2px solid ${BORDER}`, alignItems: 'center', justifyContent: 'space-between' }}>
-          <span style={{ fontSize: 26, fontWeight: 700, color: MUTED, letterSpacing: '0.12em', fontFamily: BODY }}>scorepath.nl</span>
-          <span style={{ fontSize: 24, color: MUTED, fontFamily: BODY }}>{msg.ogCard.footer}</span>
+        <div style={{ display: 'flex', marginTop: 20, paddingTop: 20, borderTop: `2px solid ${BORDER}`, alignItems: 'center', justifyContent: 'space-between' }}>
+          <span style={{ fontSize: 22, fontWeight: 700, color: MUTED, letterSpacing: '0.12em', fontFamily: BODY }}>scorepath.nl</span>
+          <span style={{ fontSize: 20, color: MUTED, fontFamily: BODY }}>{msg.ogCard.footer}</span>
         </div>
       </div>
     ),

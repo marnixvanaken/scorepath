@@ -231,7 +231,7 @@ export const ES: Messages = {
     loadingMap: 'Cargando mapa...',
     myCard: 'MI TARJETA',
     downloadCard: '↓ DESCARGAR TARJETA',
-    cardTagline: 'Los 5 jugadores del Mundial más cercanos',
+    cardTagline: 'Los 10 jugadores del Mundial más cercanos',
     osmAttrib: 'Datos del mapa © colaboradores de OpenStreetMap',
     cardBirthplace: 'Lugar de nacimiento',
     cardDistance: 'Distancia',

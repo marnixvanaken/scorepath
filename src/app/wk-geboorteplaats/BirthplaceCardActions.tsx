@@ -36,14 +36,33 @@ export function BirthplaceCardActions({ ogUrl }: Props) {
     }
   }
 
+  async function copyLink() {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      toast(msg.card.linkCopied);
+    } catch {
+      toast(msg.card.downloadFailed);
+    }
+  }
+
   return (
-    <motion.button
-      whileTap={{ scale: 0.95 }}
-      onClick={download}
-      className="px-5 py-3 text-sm font-bold tracking-widest uppercase text-white transition-opacity hover:opacity-90"
-      style={{ background: 'var(--cta)', borderRadius: '0 8px 0 8px' }}
-    >
-      {m.downloadCard}
-    </motion.button>
+    <>
+      <motion.button
+        whileTap={{ scale: 0.95 }}
+        onClick={download}
+        className="px-5 py-3 text-sm font-bold tracking-widest uppercase text-white transition-opacity hover:opacity-90"
+        style={{ background: 'var(--cta)', borderRadius: '0 8px 0 8px' }}
+      >
+        {m.downloadCard}
+      </motion.button>
+      <motion.button
+        whileTap={{ scale: 0.95 }}
+        onClick={copyLink}
+        className="px-5 py-3 text-sm font-bold tracking-widest uppercase transition-opacity hover:opacity-70"
+        style={{ border: '1px solid var(--border)', color: 'var(--fg)', borderRadius: '0 8px 0 8px' }}
+      >
+        {msg.card.shareLink}
+      </motion.button>
+    </>
   );
 }

@@ -231,7 +231,7 @@ export const NL: Messages = {
     loadingMap: 'Kaart laden...',
     myCard: 'MIJN KAART',
     downloadCard: '↓ DOWNLOAD KAART',
-    cardTagline: 'Top 5 dichtstbijzijnde WK-spelers',
+    cardTagline: 'Top 10 dichtstbijzijnde WK-spelers',
     osmAttrib: 'Kaartdata © OpenStreetMap bijdragers',
     cardBirthplace: 'Geboorteplaats',
     cardDistance: 'Afstand',

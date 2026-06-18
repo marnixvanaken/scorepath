@@ -6770,10 +6770,10 @@
     "team": "Iraq",
     "teamCode": "IRQ",
     "position": "MF",
-    "birthplace": "Iraq",
+    "birthplace": "Baghdad",
     "country": "Iraq",
-    "lat": 33,
-    "lon": 43
+    "lat": 33.3152,
+    "lon": 44.3661
   },
   {
     "id": "IRQ-zaid_ismail",
@@ -6825,10 +6825,10 @@
     "team": "Iraq",
     "teamCode": "IRQ",
     "position": "FW",
-    "birthplace": "Iraq",
+    "birthplace": "Baghdad",
     "country": "Iraq",
-    "lat": 33,
-    "lon": 43
+    "lat": 33.3152,
+    "lon": 44.3661
   },
   {
     "id": "IRQ-ahmed_qasem",
@@ -6913,10 +6913,10 @@
     "team": "Jordan",
     "teamCode": "JOR",
     "position": "DF",
-    "birthplace": "Jordan",
+    "birthplace": "Amman",
     "country": "Jordan",
-    "lat": 31.2,
-    "lon": 36.5
+    "lat": 31.9454,
+    "lon": 35.9284
   },
   {
     "id": "JOR-salim_obaid",
@@ -6979,10 +6979,10 @@
     "team": "Jordan",
     "teamCode": "JOR",
     "position": "MF",
-    "birthplace": "Jordan",
+    "birthplace": "Amman",
     "country": "Jordan",
-    "lat": 31.2,
-    "lon": 36.5
+    "lat": 31.9454,
+    "lon": 35.9284
   },
   {
     "id": "JOR-mohammad_al_dawoud",
@@ -7045,10 +7045,10 @@
     "team": "Jordan",
     "teamCode": "JOR",
     "position": "FW",
-    "birthplace": "Germany",
+    "birthplace": "Berlin",
     "country": "Germany",
-    "lat": 51.1657,
-    "lon": 10.4515
+    "lat": 52.52,
+    "lon": 13.405
   },
   {
     "id": "JOR-ali_olwan",
@@ -7144,10 +7144,10 @@
     "team": "Jordan",
     "teamCode": "JOR",
     "position": "MF",
-    "birthplace": "Jordan",
+    "birthplace": "Amman",
     "country": "Jordan",
-    "lat": 30.5852,
-    "lon": 36.2384
+    "lat": 31.9454,
+    "lon": 35.9284
   },
   {
     "id": "JPN-zion_suzuki",
@@ -7496,10 +7496,10 @@
     "team": "South Korea",
     "teamCode": "KOR",
     "position": "DF",
-    "birthplace": "South Korea",
+    "birthplace": "Seoul",
     "country": "South Korea",
-    "lat": 36,
-    "lon": 128
+    "lat": 37.5665,
+    "lon": 126.978
   },
   {
     "id": "KOR-cho_yu_min",
@@ -7507,10 +7507,10 @@
     "team": "South Korea",
     "teamCode": "KOR",
     "position": "DF",
-    "birthplace": "South Korea",
+    "birthplace": "Seoul",
     "country": "South Korea",
-    "lat": 36,
-    "lon": 128
+    "lat": 37.5665,
+    "lon": 126.978
   },
   {
     "id": "KOR-kim_moon_hwan",
@@ -7540,10 +7540,10 @@
     "team": "South Korea",
     "teamCode": "KOR",
     "position": "DF",
-    "birthplace": "South Korea",
+    "birthplace": "Seoul",
     "country": "South Korea",
-    "lat": 36,
-    "lon": 128
+    "lat": 37.5665,
+    "lon": 126.978
   },
   {
     "id": "KOR-paik_seung_ho",
@@ -7584,10 +7584,10 @@
     "team": "South Korea",
     "teamCode": "KOR",
     "position": "MF",
-    "birthplace": "South Korea",
+    "birthplace": "Seoul",
     "country": "South Korea",
-    "lat": 36,
-    "lon": 128
+    "lat": 37.5665,
+    "lon": 126.978
   },
   {
     "id": "KOR-eom_ji_sung",
@@ -7683,10 +7683,10 @@
     "team": "South Korea",
     "teamCode": "KOR",
     "position": "MF",
-    "birthplace": "South Korea",
+    "birthplace": "Seoul",
     "country": "South Korea",
-    "lat": 35.9078,
-    "lon": 127.7669
+    "lat": 37.5665,
+    "lon": 126.978
   },
   {
     "id": "KOR-jens_castrop",
@@ -10389,10 +10389,10 @@
     "team": "Qatar",
     "teamCode": "QAT",
     "position": "DF",
-    "birthplace": "Qatar",
+    "birthplace": "Doha",
     "country": "Qatar",
-    "lat": 25.2695,
-    "lon": 51.2128
+    "lat": 25.2854,
+    "lon": 51.531
   },
   {
     "id": "QAT-boualem_khoukhi",

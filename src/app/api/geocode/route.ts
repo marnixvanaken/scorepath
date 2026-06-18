@@ -15,13 +15,15 @@ export async function GET(req: NextRequest) {
   }
 
   const lang = req.nextUrl.searchParams.get('lang') ?? 'en';
-  const cacheKey = `${lang}:${q.toLowerCase()}`;
+  const PHOTON_LANG: Record<string, string> = { en: 'en', de: 'de', fr: 'fr', it: 'it' };
+  const photonLang = PHOTON_LANG[lang] ?? 'en';
+  const cacheKey = `${photonLang}:${q.toLowerCase()}`;
   if (cache.has(cacheKey)) {
     return Response.json(cache.get(cacheKey));
   }
 
   try {
-    const url = `https://photon.komoot.io/api/?q=${encodeURIComponent(q)}&limit=5&lang=${lang}`;
+    const url = `https://photon.komoot.io/api/?q=${encodeURIComponent(q)}&limit=5&lang=${photonLang}`;
     const res = await fetch(url, {
       headers: { 'User-Agent': 'ScorePath/1.0 (https://scorepath.nl)' },
       signal: AbortSignal.timeout(5000),

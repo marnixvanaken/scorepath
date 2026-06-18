@@ -237,6 +237,7 @@ export const NL: Messages = {
     cardDistance: 'Afstand',
     cardTeam: 'Land',
     cardPosition: 'Positie',
+    mapLabel: 'Kaart',
   },
   ogCard: {
     footer: 'Maak jouw scenario op scorepath.nl',

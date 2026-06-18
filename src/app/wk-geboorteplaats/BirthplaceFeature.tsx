@@ -397,7 +397,7 @@ export default function BirthplaceFeature({ players, m, locale }: Props) {
       {userPos && results.length > 0 && (
         <div>
           <div className="flex items-center justify-between mb-3">
-            <p className="text-xs font-semibold text-[--fg]/50 uppercase tracking-widest">Kaart</p>
+            <p className="text-xs font-semibold text-[--fg]/50 uppercase tracking-widest">{m.mapLabel}</p>
             <button
               type="button"
               onClick={() => setShowAllOnMap((v) => !v)}

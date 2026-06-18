@@ -235,6 +235,7 @@ export interface Messages {
     cardDistance: string;
     cardTeam: string;
     cardPosition: string;
+    mapLabel: string;
   };
   ogCard: {
     /** Gedeelde footer onderaan elke gegenereerde kaart. */

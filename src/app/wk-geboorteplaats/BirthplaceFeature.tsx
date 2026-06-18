@@ -110,7 +110,7 @@ export default function BirthplaceFeature({ players, m, locale }: Props) {
     setIsLoading(true);
     setError(false);
     try {
-      const res = await fetch(`/api/geocode?q=${encodeURIComponent(q)}`);
+      const res = await fetch(`/api/geocode?q=${encodeURIComponent(q)}&lang=${locale}`);
       if (!res.ok) throw new Error();
       const data: GeocodeSuggestion[] = await res.json();
       setSuggestions(data);

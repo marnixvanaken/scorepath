@@ -14,13 +14,14 @@ export async function GET(req: NextRequest) {
     return Response.json([]);
   }
 
-  const cacheKey = q.toLowerCase();
+  const lang = req.nextUrl.searchParams.get('lang') ?? 'en';
+  const cacheKey = `${lang}:${q.toLowerCase()}`;
   if (cache.has(cacheKey)) {
     return Response.json(cache.get(cacheKey));
   }
 
   try {
-    const url = `https://photon.komoot.io/api/?q=${encodeURIComponent(q)}&limit=5`;
+    const url = `https://photon.komoot.io/api/?q=${encodeURIComponent(q)}&limit=5&lang=${lang}`;
     const res = await fetch(url, {
       headers: { 'User-Agent': 'ScorePath/1.0 (https://scorepath.nl)' },
       signal: AbortSignal.timeout(5000),

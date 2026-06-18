@@ -7,7 +7,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { SITE_NAME, SITE_URL } from '@/lib/siteConfig';
 import { isLocale, DEFAULT_LOCALE, getMessages } from '@/i18n';
-import { alternatesFor, ogLocaleFields, ogImages, simulatorPath } from '@/lib/routes';
+import { alternatesFor, ogLocaleFields, ogImages, simulatorPath, birthplacePath } from '@/lib/routes';
 
 export async function generateMetadata(props: PageProps<'/[lang]'>): Promise<Metadata> {
   const { lang } = await props.params;
@@ -159,6 +159,27 @@ export default async function HomePage(props: PageProps<'/[lang]'> & {
         </div>
       </section>
 
+      <section className="border-t border-themed px-6 sm:px-10 py-14 sm:py-20">
+        <div className="max-w-5xl mx-auto">
+          <p className="c-cta text-xs font-bold tracking-[0.25em] uppercase mb-4">
+            {lang === 'nl' ? 'Nieuw' : lang === 'es' ? 'Nuevo' : 'New'}
+          </p>
+          <h2
+            className="c-fg font-bold leading-snug mb-4 max-w-xl"
+            style={{ fontSize: 'clamp(1.25rem, 2.5vw, 1.75rem)' }}
+          >
+            {msg.home.birthplaceTitle}
+          </h2>
+          <p
+            className="c-fg-muted mb-8 max-w-lg leading-relaxed"
+            style={{ fontSize: 'clamp(0.9rem, 1.3vw, 1rem)' }}
+          >
+            {msg.home.birthplaceDesc}
+          </p>
+          <SecondaryLink href={birthplacePath(lang)} label={msg.home.openBirthplace} />
+        </div>
+      </section>
+
       <footer className="px-6 sm:px-10 py-5">
         <div className="max-w-5xl mx-auto flex items-center justify-between">
           <Logo size="sm" />
@@ -175,6 +196,30 @@ export default async function HomePage(props: PageProps<'/[lang]'> & {
       </footer>
 
     </div>
+  );
+}
+
+function SecondaryLink({ href, label }: { href: string; label: string }) {
+  return (
+    <Link
+      href={href}
+      className="inline-flex items-center gap-4 font-display tracking-widest transition-colors hover:opacity-80"
+      style={{
+        fontSize: 'clamp(1rem, 2vw, 1.4rem)',
+        padding: 'clamp(0.8rem, 1.5vw, 1.1rem) clamp(1.2rem, 3vw, 2.4rem)',
+        borderRadius: '0 12px 0 12px',
+        border: '2px solid var(--cta)',
+        color: 'var(--cta)',
+      }}
+    >
+      {label}
+      <svg
+        style={{ width: 'clamp(16px, 2vw, 22px)', height: 'clamp(16px, 2vw, 22px)' }}
+        viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden
+      >
+        <path d="M5 12h14M12 5l7 7-7 7" />
+      </svg>
+    </Link>
   );
 }
 

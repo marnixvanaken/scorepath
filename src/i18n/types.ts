@@ -111,6 +111,9 @@ export interface Messages {
     step02Sub: string;
     step03Label: string;
     step03Sub: string;
+    birthplaceTitle: string;
+    birthplaceDesc: string;
+    openBirthplace: string;
   };
   start: {
     step1Label: string;
@@ -204,6 +207,34 @@ export interface Messages {
     toCard: string;
     back: string;
     close: string;
+  };
+  birthplace: {
+    title: string;
+    subtitle: string;
+    inputLabel: string;
+    inputPlaceholder: string;
+    searching: string;
+    noResults: string;
+    nearest: string;
+    top5: string;
+    distanceKm: string;
+    showTop5: string;
+    hideTop5: string;
+    posGK: string;
+    posDF: string;
+    posMF: string;
+    posFW: string;
+    emptyHint: string;
+    error: string;
+    loadingMap: string;
+    myCard: string;
+    downloadCard: string;
+    cardTagline: string;
+    osmAttrib: string;
+    cardBirthplace: string;
+    cardDistance: string;
+    cardTeam: string;
+    cardPosition: string;
   };
   ogCard: {
     /** Gedeelde footer onderaan elke gegenereerde kaart. */

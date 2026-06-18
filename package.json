@@ -7,16 +7,20 @@
     "build": "next build",
     "start": "next start",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "build-players": "npx tsx scripts/build-players.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.100.1",
     "@supabase/supabase-js": "^2.106.2",
     "@tailwindcss/typography": "^0.5.19",
+    "@types/leaflet": "^1.9.21",
+    "leaflet": "^1.9.4",
     "motion": "^12.40.0",
     "next": "16.2.6",
     "react": "19.2.4",
     "react-dom": "19.2.4",
+    "react-leaflet": "^5.0.0",
     "react-markdown": "^10.1.0"
   },
   "devDependencies": {

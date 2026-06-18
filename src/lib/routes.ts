@@ -13,6 +13,15 @@ export const SIMULATOR_SLUG: Record<Locale, string> = {
 // en/es worden via de proxy gerewrite naar dit segment.
 export const SIMULATOR_PHYSICAL_SLUG = SIMULATOR_SLUG.nl;
 
+// ── Geboorteplaats-functie ────────────────────────────────────────────
+export const BIRTHPLACE_SLUG: Record<Locale, string> = {
+  nl: 'wk-geboorteplaats',
+  en: 'wk-geboorteplaats',
+  es: 'wk-geboorteplaats',
+};
+
+export const BIRTHPLACE_PHYSICAL_SLUG = BIRTHPLACE_SLUG.nl;
+
 // Blog: canonieke slug (= nl-slug, tevens content-key) -> gelokaliseerde slug per taal.
 export const BLOG_SLUGS: Record<string, Record<Locale, string>> = {
   'drie-legendes-wk-2026': {
@@ -70,6 +79,11 @@ function toLocale(value: string): Locale {
 export function simulatorPath(locale: string): string {
   const l = toLocale(locale);
   return `/${l}/${SIMULATOR_SLUG[l]}`;
+}
+
+export function birthplacePath(locale: string): string {
+  const l = toLocale(locale);
+  return `/${l}/${BIRTHPLACE_SLUG[l]}`;
 }
 
 export function localizedBlogSlug(canonical: string, locale: string): string {
@@ -146,6 +160,11 @@ export function translatePath(pathname: string, toLocaleValue: string): string {
   if (isLocale(fromLang) && rest[0] === SIMULATOR_SLUG[fromLang]) {
     const tail = rest.slice(1);
     return `/${to}/${SIMULATOR_SLUG[to]}${tail.length ? '/' + tail.join('/') : ''}`;
+  }
+
+  // Geboorteplaats
+  if (isLocale(fromLang) && rest[0] === BIRTHPLACE_SLUG[fromLang]) {
+    return `/${to}/${BIRTHPLACE_SLUG[to]}`;
   }
 
   // Blog-artikel

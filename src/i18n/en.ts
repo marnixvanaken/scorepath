@@ -232,6 +232,8 @@ export const EN: Messages = {
     myCard: 'MY CARD',
     downloadCard: '↓ DOWNLOAD CARD',
     cardTagline: 'Top 10 nearest World Cup players',
+    cardTitle: 'Your World Cup Card',
+    bornIn: 'Born in',
     osmAttrib: 'Map data © OpenStreetMap contributors',
     cardBirthplace: 'Birthplace',
     cardDistance: 'Distance',

@@ -230,6 +230,8 @@ export interface Messages {
     myCard: string;
     downloadCard: string;
     cardTagline: string;
+    cardTitle: string;
+    bornIn: string;
     osmAttrib: string;
     cardBirthplace: string;
     cardDistance: string;

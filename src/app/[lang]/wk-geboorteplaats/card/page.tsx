@@ -53,7 +53,10 @@ export default async function BirthplaceCardPage(
   const playerIds = Array.from({ length: 10 }, (_, i) => getParam(`p${i + 1}`)).filter(Boolean);
   if (playerIds.length === 0) redirect(birthplacePath(lang));
 
+  const from = getParam('from');
+
   const ogParams = new URLSearchParams();
+  if (from) ogParams.set('from', from);
   Array.from({ length: 10 }, (_, i) => i + 1).forEach((i) => {
     const pid = getParam(`p${i}`);
     const dist = getParam(`d${i}`);
@@ -83,16 +86,23 @@ export default async function BirthplaceCardPage(
       <section className="flex-1 flex flex-col items-center px-4 pt-10 pb-10">
         <div className="w-full max-w-lg">
 
-          {/* Tagline */}
-          <p className="text-xs font-bold tracking-[0.2em] uppercase mb-6 text-center" style={{ color: 'var(--fg-subtle)' }}>
-            {m.cardTagline}
-          </p>
+          {/* Header */}
+          <div className="mb-6 text-center">
+            <p className="text-xs font-bold tracking-[0.2em] uppercase mb-1" style={{ color: 'var(--fg-subtle)' }}>
+              {m.cardTitle}
+            </p>
+            {from && (
+              <p className="text-sm font-bold" style={{ color: 'var(--fg-subtle)' }}>
+                {m.bornIn} <span style={{ color: 'var(--cta)' }}>{from}</span>
+              </p>
+            )}
+          </div>
 
           {/* Card image */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={ogUrl}
-            alt={m.cardTagline}
+            alt={m.cardTitle}
             className="w-full rounded-xl shadow-2xl mb-6"
             style={{ border: '1px solid var(--border)' }}
           />
@@ -125,7 +135,6 @@ export default async function BirthplaceCardPage(
                       border: rank === 1 ? '1px solid var(--cta)' : '1px solid var(--border)',
                     }}
                   >
-                    {/* Rank */}
                     <span
                       className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold shrink-0"
                       style={{
@@ -135,11 +144,7 @@ export default async function BirthplaceCardPage(
                     >
                       {rank}
                     </span>
-
-                    {/* Flag */}
                     <span className="shrink-0"><FlagImg teamCode={player.teamCode} /></span>
-
-                    {/* Name + meta */}
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-bold leading-tight truncate" style={{ color: 'var(--fg)' }}>{player.name}</p>
                       <p className="text-xs mt-0.5 truncate" style={{ color: 'var(--fg-subtle)' }}>
@@ -149,13 +154,8 @@ export default async function BirthplaceCardPage(
                         {player.birthplace}
                       </p>
                     </div>
-
-                    {/* Distance */}
                     <div className="text-right shrink-0">
-                      <p
-                        className="text-base font-bold tabular-nums leading-tight"
-                        style={{ color: rank === 1 ? 'var(--cta)' : 'var(--fg)' }}
-                      >
+                      <p className="text-base font-bold tabular-nums leading-tight" style={{ color: rank === 1 ? 'var(--cta)' : 'var(--fg)' }}>
                         {distance.toLocaleString()}
                       </p>
                       <p className="text-xs" style={{ color: 'var(--fg-subtle)' }}>{m.distanceKm}</p>

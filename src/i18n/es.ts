@@ -232,6 +232,8 @@ export const ES: Messages = {
     myCard: 'MI TARJETA',
     downloadCard: '↓ DESCARGAR TARJETA',
     cardTagline: 'Los 10 jugadores del Mundial más cercanos',
+    cardTitle: 'Tu tarjeta del Mundial',
+    bornIn: 'Nacido en',
     osmAttrib: 'Datos del mapa © colaboradores de OpenStreetMap',
     cardBirthplace: 'Lugar de nacimiento',
     cardDistance: 'Distancia',

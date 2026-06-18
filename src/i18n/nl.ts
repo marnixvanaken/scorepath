@@ -232,6 +232,8 @@ export const NL: Messages = {
     myCard: 'MIJN KAART',
     downloadCard: '↓ DOWNLOAD KAART',
     cardTagline: 'Top 10 dichtstbijzijnde WK-spelers',
+    cardTitle: 'Jouw WK-kaart',
+    bornIn: 'Geboren in',
     osmAttrib: 'Kaartdata © OpenStreetMap bijdragers',
     cardBirthplace: 'Geboorteplaats',
     cardDistance: 'Afstand',

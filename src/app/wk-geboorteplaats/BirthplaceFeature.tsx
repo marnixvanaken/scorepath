@@ -101,6 +101,7 @@ export default function BirthplaceFeature({ players, m, locale }: Props) {
   const [error, setError] = useState(false);
 
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const justSelectedRef = useRef(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -129,6 +130,10 @@ export default function BirthplaceFeature({ players, m, locale }: Props) {
       setShowSuggestions(false);
       return;
     }
+    if (justSelectedRef.current) {
+      justSelectedRef.current = false;
+      return;
+    }
     debounceRef.current = setTimeout(() => fetchSuggestions(query), 300);
     return () => { if (debounceRef.current) clearTimeout(debounceRef.current); };
   }, [query, fetchSuggestions]);
@@ -144,6 +149,7 @@ export default function BirthplaceFeature({ players, m, locale }: Props) {
   }, []);
 
   function selectSuggestion(s: GeocodeSuggestion) {
+    justSelectedRef.current = true;
     setQuery(s.name);
     setShowSuggestions(false);
     setSuggestions([]);

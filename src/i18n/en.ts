@@ -152,6 +152,7 @@ export const EN: Messages = {
     privacy: 'Privacy',
     simulator: 'Simulator',
     about: 'About',
+    birthplace: 'Birthplace',
   },
   privacy: {
     pageTitle: 'Privacy Policy',

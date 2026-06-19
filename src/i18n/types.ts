@@ -150,6 +150,7 @@ export interface Messages {
     privacy: string;
     simulator: string;
     about: string;
+    birthplace: string;
   };
   privacy: {
     pageTitle: string;

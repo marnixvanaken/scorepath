@@ -152,6 +152,7 @@ export const NL: Messages = {
     privacy: 'Privacy',
     simulator: 'Simulator',
     about: 'Over ons',
+    birthplace: 'Geboorteplaats',
   },
   privacy: {
     pageTitle: 'Privacyverklaring',

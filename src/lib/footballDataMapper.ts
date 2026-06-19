@@ -38,6 +38,12 @@ export interface LiveResultsResponse {
   hasActiveMatch: boolean;
 }
 
+// Handmatig bevestigde uitslagen voor wedstrijden die de API niet teruggeeft
+const STATIC_PLAYED: Array<Omit<LiveMatchResult, 'locked'>> = [
+  { group: 'E', homeId: 'GER', awayId: 'CUW', homeGoals: 7, awayGoals: 1 },
+  { group: 'H', homeId: 'KSA', awayId: 'URU', homeGoals: 1, awayGoals: 1 },
+];
+
 export function mapFdResponse(data: { matches?: FdMatch[] }): LiveResultsResponse {
   const matches = data.matches ?? [];
   const results: LiveMatchResult[] = [];
@@ -62,6 +68,14 @@ export function mapFdResponse(data: { matches?: FdMatch[] }): LiveResultsRespons
       awayGoals: away,
       locked: m.status === 'FINISHED',
     });
+  }
+
+  // Voeg statische resultaten toe voor wedstrijden die de API mist
+  const apiKeys = new Set(results.map((r) => `${r.group}:${r.homeId}:${r.awayId}`));
+  for (const s of STATIC_PLAYED) {
+    if (!apiKeys.has(`${s.group}:${s.homeId}:${s.awayId}`)) {
+      results.push({ ...s, locked: true });
+    }
   }
 
   const hasActiveMatch = matches.some(

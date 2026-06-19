@@ -38,7 +38,7 @@ const PREDICTIONS: Record<string, [number, number]> = {
   'PAR:AUS': [1, 1], // gelijkspel
 
   // ── Groep E: GER CUW CIV ECU ──────────────────────────────────────────────
-  'GER:CUW': [4, 0], // odds GER 1.03 / CUW 43.67 (native-stats)
+  'GER:CUW': [7, 1], // gespeeld: 7-1
   'CIV:ECU': [1, 1], // gelijkspel
   'GER:CIV': [2, 0], // GER wint
   'ECU:CUW': [2, 0], // ECU wint
@@ -63,7 +63,7 @@ const PREDICTIONS: Record<string, [number, number]> = {
 
   // ── Groep H: ESP CPV KSA URU ──────────────────────────────────────────────
   'ESP:CPV': [4, 0],
-  'KSA:URU': [0, 2],
+  'KSA:URU': [1, 1], // gespeeld: 1-1
   'ESP:KSA': [4, 0],
   'URU:CPV': [3, 0],
   'URU:ESP': [1, 2], // ESP wereldklasse

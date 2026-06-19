@@ -8585,10 +8585,10 @@
     "team": "Netherlands",
     "teamCode": "NED",
     "position": "GK",
-    "birthplace": "Breda",
+    "birthplace": "Zwolle",
     "country": "Netherlands",
-    "lat": 51.5889,
-    "lon": 4.7758
+    "lat": 52.5167,
+    "lon": 6.1
   },
   {
     "id": "NED-mark_flekken",
@@ -8728,10 +8728,10 @@
     "team": "Netherlands",
     "teamCode": "NED",
     "position": "FW",
-    "birthplace": "Amsterdam",
+    "birthplace": "Borne",
     "country": "Netherlands",
-    "lat": 52.3667,
-    "lon": 4.8833
+    "lat": 52.2989,
+    "lon": 6.748
   },
   {
     "id": "NED-cody_gakpo",
@@ -8794,10 +8794,10 @@
     "team": "Netherlands",
     "teamCode": "NED",
     "position": "MF",
-    "birthplace": "Lusaka",
+    "birthplace": "Samfya",
     "country": "Zambia",
-    "lat": -15.4166,
-    "lon": 28.2833
+    "lat": -11.3694,
+    "lon": 29.5524
   },
   {
     "id": "NED-marten_de_roon",
@@ -8805,10 +8805,10 @@
     "team": "Netherlands",
     "teamCode": "NED",
     "position": "MF",
-    "birthplace": "Wierden",
+    "birthplace": "Zwijndrecht",
     "country": "Netherlands",
-    "lat": 52.356,
-    "lon": 6.5968
+    "lat": 51.8167,
+    "lon": 4.65
   },
   {
     "id": "NED-justin_kluivert",
@@ -8827,10 +8827,10 @@
     "team": "Netherlands",
     "teamCode": "NED",
     "position": "DF",
-    "birthplace": "Rotterdam",
+    "birthplace": "Borne",
     "country": "Netherlands",
-    "lat": 51.9244,
-    "lon": 4.4777
+    "lat": 52.2989,
+    "lon": 6.748
   },
   {
     "id": "NED-robin_roefs",
@@ -8838,7 +8838,7 @@
     "team": "Netherlands",
     "teamCode": "NED",
     "position": "GK",
-    "birthplace": "Heeswijk",
+    "birthplace": "Heeswijk-Dinther",
     "country": "Netherlands",
     "lat": 51.65,
     "lon": 5.4667

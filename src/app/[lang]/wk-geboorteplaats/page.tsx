@@ -3,7 +3,7 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import { isLocale, DEFAULT_LOCALE, getMessages } from '@/i18n';
 import { SITE_NAME } from '@/lib/siteConfig';
-import { alternatesFor, ogLocaleFields, ogImages, birthplacePath } from '@/lib/routes';
+import { alternatesFor, ogLocaleFields, ogImages, birthplacePath, simulatorPath } from '@/lib/routes';
 import { players } from '@/data/players';
 import { Logo } from '@/components/Logo';
 import { ThemeToggle } from '@/components/ThemeToggle';
@@ -42,7 +42,8 @@ export default async function BirthplacePage(props: PageProps<'/[lang]/wk-geboor
   const { lang } = await props.params;
   if (!isLocale(lang)) notFound();
 
-  const m = getMessages(lang).birthplace;
+  const msg = getMessages(lang);
+  const m = msg.birthplace;
 
   return (
     <div className="min-h-dvh flex flex-col" style={{ background: 'var(--bg)', color: 'var(--fg)' }}>
@@ -51,7 +52,14 @@ export default async function BirthplacePage(props: PageProps<'/[lang]/wk-geboor
           <Link href={`/${lang}`}>
             <Logo size="sm" />
           </Link>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-4">
+            <Link
+              href={simulatorPath(lang)}
+              className="text-sm font-bold tracking-widest uppercase transition-opacity opacity-40 hover:opacity-70"
+              style={{ color: 'var(--fg)' }}
+            >
+              {msg.nav.simulator}
+            </Link>
             <LanguageSwitcher />
             <ThemeToggle />
           </div>
@@ -65,9 +73,13 @@ export default async function BirthplacePage(props: PageProps<'/[lang]/wk-geboor
       <footer className="px-6 py-4" style={{ borderTop: '1px solid var(--border)' }}>
         <div className="max-w-2xl mx-auto flex items-center justify-between">
           <Logo size="sm" />
-          <p className="text-[10px] font-bold tracking-widest uppercase" style={{ color: 'var(--fg-subtle)' }}>
-            {SITE_NAME.toLowerCase()}.nl
-          </p>
+          <div className="flex items-center gap-4 text-[10px] font-bold tracking-widest uppercase" style={{ color: 'var(--fg-subtle)' }}>
+            <Link href={`/${lang}/blog`} className="transition-opacity hover:opacity-70">{msg.nav.blog}</Link>
+            <span>·</span>
+            <Link href={simulatorPath(lang)} className="transition-opacity hover:opacity-70">{msg.nav.simulator}</Link>
+            <span>·</span>
+            <Link href={`/${lang}/about`} className="transition-opacity hover:opacity-70">{msg.nav.about}</Link>
+          </div>
         </div>
       </footer>
     </div>

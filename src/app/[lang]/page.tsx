@@ -85,6 +85,12 @@ export default async function HomePage(props: PageProps<'/[lang]'> & {
           <Logo size="md" />
           <div className="flex items-center gap-4">
             <Link
+              href={birthplacePath(lang)}
+              className="c-fg text-sm font-bold tracking-widest uppercase transition-opacity opacity-40 hover:opacity-70"
+            >
+              {msg.nav.birthplace}
+            </Link>
+            <Link
               href={`/${lang}/blog`}
               className="c-fg text-sm font-bold tracking-widest uppercase transition-opacity opacity-40 hover:opacity-70"
             >

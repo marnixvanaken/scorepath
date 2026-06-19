@@ -4,7 +4,7 @@ import { Logo } from '@/components/Logo';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { isLocale, getMessages } from '@/i18n';
 import { SITE_NAME } from '@/lib/siteConfig';
-import { birthplacePath } from '@/lib/routes';
+import { birthplacePath, simulatorPath } from '@/lib/routes';
 import { BirthplaceCardActions } from '@/app/wk-geboorteplaats/BirthplaceCardActions';
 import { players as allPlayers } from '@/data/players';
 import { FLAG_CODE } from '@/data/flags';
@@ -165,6 +165,20 @@ export default async function BirthplaceCardPage(
               </ol>
             </div>
           )}
+
+          {/* Simulator cross-promo */}
+          <div className="mt-10 pt-6 text-center" style={{ borderTop: '1px solid var(--border)' }}>
+            <p className="text-xs font-bold tracking-[0.18em] uppercase mb-4" style={{ color: 'var(--fg-subtle)' }}>
+              {msg.home.tagline1}
+            </p>
+            <Link
+              href={simulatorPath(lang)}
+              className="inline-flex items-center gap-3 px-6 py-3 text-sm font-bold tracking-widest uppercase transition-opacity hover:opacity-80"
+              style={{ background: 'var(--cta)', color: 'white', borderRadius: '0 8px 0 8px' }}
+            >
+              {msg.home.openSimulator}
+            </Link>
+          </div>
         </div>
       </section>
 

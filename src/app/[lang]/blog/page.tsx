@@ -7,7 +7,7 @@ import { getLocalizedBlogMeta } from '@/data/blogTranslations';
 import { getDynamicBlogs } from '@/lib/supabase';
 import { isLocale, DEFAULT_LOCALE, getMessages, getDateLocale } from '@/i18n';
 import { SITE_NAME } from '@/lib/siteConfig';
-import { alternatesFor, ogLocaleFields, ogImages, blogPath, simulatorPath } from '@/lib/routes';
+import { alternatesFor, ogLocaleFields, ogImages, blogPath, simulatorPath, birthplacePath } from '@/lib/routes';
 
 export const revalidate = 3600;
 
@@ -86,6 +86,9 @@ export default async function BlogPage(props: PageProps<'/[lang]/blog'>) {
           <div className="flex items-center gap-6">
             <Link href={`/${lang}/blog`} className="text-xs font-bold text-white tracking-wide uppercase">
               {msg.nav.blog}
+            </Link>
+            <Link href={birthplacePath(lang)} className="text-xs font-bold text-slate-400 hover:text-white transition-colors tracking-wide uppercase">
+              {msg.nav.birthplace}
             </Link>
             <Link href={simulatorPath(lang)} className="text-xs font-bold text-orange-500 hover:text-orange-400 transition-colors tracking-wide uppercase">
               {msg.blog.openSimulator}

@@ -7,7 +7,7 @@ import { TEAMS } from '@/data/worldcup2026';
 import { CardActions } from '@/app/wk-2026/card/CardActions';
 import { isLocale, getMessages } from '@/i18n';
 import { SITE_NAME } from '@/lib/siteConfig';
-import { simulatorPath } from '@/lib/routes';
+import { simulatorPath, birthplacePath } from '@/lib/routes';
 
 export default async function CardPage(
   props: PageProps<'/[lang]/wk-2026/card'> & {
@@ -77,6 +77,20 @@ export default async function CardPage(
             {msg.card.back}
           </Link>
         </div>
+      </section>
+
+      {/* Birthplace cross-promo */}
+      <section className="px-6 py-8 text-center" style={{ borderTop: '1px solid var(--border)' }}>
+        <p className="text-xs font-bold tracking-[0.18em] uppercase mb-4" style={{ color: 'var(--fg-subtle)' }}>
+          {msg.home.birthplaceTitle}
+        </p>
+        <Link
+          href={birthplacePath(lang)}
+          className="inline-flex items-center gap-3 px-6 py-3 text-sm font-bold tracking-widest uppercase transition-opacity hover:opacity-80"
+          style={{ border: '1px solid var(--cta)', color: 'var(--cta)', borderRadius: '0 8px 0 8px' }}
+        >
+          {msg.home.openBirthplace}
+        </Link>
       </section>
 
       <footer className="px-6 py-4" style={{ borderTop: '1px solid var(--border)' }}>

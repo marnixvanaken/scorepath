@@ -1952,10 +1952,10 @@
     "team": "Brazil",
     "teamCode": "BRA",
     "position": "MF",
-    "birthplace": "Duque de Caxias",
+    "birthplace": "Rio de Janeiro",
     "country": "Brazil",
-    "lat": -22.7855,
-    "lon": -43.312
+    "lat": -22.9068,
+    "lon": -43.1729
   },
   {
     "id": "BRA-neymar_jr",
@@ -2480,10 +2480,10 @@
     "team": "Ivory Coast",
     "teamCode": "CIV",
     "position": "FW",
-    "birthplace": "Yamoussoukro",
+    "birthplace": "Abobo",
     "country": "Ivory Coast",
-    "lat": 6.8161,
-    "lon": -5.2742
+    "lat": 5.4053,
+    "lon": -4.0375
   },
   {
     "id": "CIV-evann_guessand",
@@ -2535,10 +2535,10 @@
     "team": "Ivory Coast",
     "teamCode": "CIV",
     "position": "FW",
-    "birthplace": "Guadeloupe",
+    "birthplace": "Aubervilliers",
     "country": "France",
-    "lat": 16.265,
-    "lon": -61.551
+    "lat": 48.9111,
+    "lon": 2.3825
   },
   {
     "id": "CIV-yan_diomande",
@@ -2612,10 +2612,10 @@
     "team": "DR Congo",
     "teamCode": "COD",
     "position": "DF",
-    "birthplace": "Kisangani",
+    "birthplace": "Kinshasa",
     "country": "Democratic Republic of the Congo",
-    "lat": 0.5153,
-    "lon": 25.1911
+    "lat": -4.3217,
+    "lon": 15.3222
   },
   {
     "id": "COD-arthur_masuaku",
@@ -2832,10 +2832,10 @@
     "team": "DR Congo",
     "teamCode": "COD",
     "position": "FW",
-    "birthplace": "Kinshasa",
-    "country": "Democratic Republic of the Congo",
-    "lat": -4.3217,
-    "lon": 15.3222
+    "birthplace": "Lille",
+    "country": "France",
+    "lat": 50.6319,
+    "lon": 3.0575
   },
   {
     "id": "COD-aaron_tshibola",
@@ -3151,10 +3151,10 @@
     "team": "Cape Verde",
     "teamCode": "CPV",
     "position": "GK",
-    "birthplace": "Praia",
+    "birthplace": "Mindelo",
     "country": "Cape Verde",
-    "lat": 14.9315,
-    "lon": -23.5138
+    "lat": 16.89,
+    "lon": -24.986
   },
   {
     "id": "CPV-marcio_rosa",
@@ -3261,10 +3261,10 @@
     "team": "Cape Verde",
     "teamCode": "CPV",
     "position": "MF",
-    "birthplace": "Praia",
-    "country": "Cape Verde",
-    "lat": 14.9315,
-    "lon": -23.5138
+    "birthplace": "Rotterdam",
+    "country": "Netherlands",
+    "lat": 51.92,
+    "lon": 4.48
   },
   {
     "id": "CPV-kevin_pina_lenini",
@@ -3294,10 +3294,10 @@
     "team": "Cape Verde",
     "teamCode": "CPV",
     "position": "MF",
-    "birthplace": "Praia",
-    "country": "Cape Verde",
-    "lat": 14.9315,
-    "lon": -23.5138
+    "birthplace": "Rotterdam",
+    "country": "Netherlands",
+    "lat": 51.92,
+    "lon": 4.48
   },
   {
     "id": "CPV-yannick_semedo",
@@ -3316,10 +3316,10 @@
     "team": "Cape Verde",
     "teamCode": "CPV",
     "position": "FW",
-    "birthplace": "Praia",
+    "birthplace": "Mindelo",
     "country": "Cape Verde",
-    "lat": 14.9315,
-    "lon": -23.5138
+    "lat": 16.89,
+    "lon": -24.986
   },
   {
     "id": "CPV-garry_rodrigues",
@@ -3327,10 +3327,10 @@
     "team": "Cape Verde",
     "teamCode": "CPV",
     "position": "FW",
-    "birthplace": "Praia",
-    "country": "Cape Verde",
-    "lat": 14.9315,
-    "lon": -23.5138
+    "birthplace": "Rotterdam",
+    "country": "Netherlands",
+    "lat": 51.92,
+    "lon": 4.48
   },
   {
     "id": "CPV-willy_semedo",
@@ -3338,10 +3338,10 @@
     "team": "Cape Verde",
     "teamCode": "CPV",
     "position": "FW",
-    "birthplace": "Praia",
-    "country": "Cape Verde",
-    "lat": 14.9315,
-    "lon": -23.5138
+    "birthplace": "Montfermeil",
+    "country": "France",
+    "lat": 48.8983,
+    "lon": 2.5647
   },
   {
     "id": "CPV-jovane_cabral",
@@ -3349,10 +3349,10 @@
     "team": "Cape Verde",
     "teamCode": "CPV",
     "position": "FW",
-    "birthplace": "Praia",
+    "birthplace": "Assomada",
     "country": "Cape Verde",
-    "lat": 14.9315,
-    "lon": -23.5138
+    "lat": 15.0953,
+    "lon": -23.6699
   },
   {
     "id": "CPV-dailon_livramento",
@@ -3393,10 +3393,10 @@
     "team": "Cape Verde",
     "teamCode": "CPV",
     "position": "DF",
-    "birthplace": "Praia",
-    "country": "Cape Verde",
-    "lat": 14.9315,
-    "lon": -23.5138
+    "birthplace": "Saint-Denis",
+    "country": "France",
+    "lat": 48.9362,
+    "lon": 2.3574
   },
   {
     "id": "CPV-gilson_benchimol",
@@ -3415,10 +3415,10 @@
     "team": "Cape Verde",
     "teamCode": "CPV",
     "position": "MF",
-    "birthplace": "Praia",
-    "country": "Cape Verde",
-    "lat": 14.9315,
-    "lon": -23.5138
+    "birthplace": "Rotterdam",
+    "country": "Netherlands",
+    "lat": 51.92,
+    "lon": 4.48
   },
   {
     "id": "CPV-helio_varela",
@@ -3426,10 +3426,10 @@
     "team": "Cape Verde",
     "teamCode": "CPV",
     "position": "MF",
-    "birthplace": "Praia",
-    "country": "Cape Verde",
-    "lat": 14.9315,
-    "lon": -23.5138
+    "birthplace": "Almada",
+    "country": "Portugal",
+    "lat": 38.6763,
+    "lon": -9.1574
   },
   {
     "id": "CRO-dominik_livakovic",
@@ -4867,10 +4867,10 @@
     "team": "Spain",
     "teamCode": "ESP",
     "position": "GK",
-    "birthplace": "Madrid",
+    "birthplace": "Barcelona",
     "country": "Spain",
-    "lat": 41.3156,
-    "lon": -3.7293
+    "lat": 41.3851,
+    "lon": 2.1734
   },
   {
     "id": "ESP-joan_garcia",
@@ -4878,10 +4878,10 @@
     "team": "Spain",
     "teamCode": "ESP",
     "position": "GK",
-    "birthplace": "Madrid",
+    "birthplace": "Sallent",
     "country": "Spain",
-    "lat": 39.9763,
-    "lon": -2.9492
+    "lat": 41.8219,
+    "lon": 1.8908
   },
   {
     "id": "ESP-unai_simon",
@@ -4889,10 +4889,10 @@
     "team": "Spain",
     "teamCode": "ESP",
     "position": "GK",
-    "birthplace": "Madrid",
+    "birthplace": "Vitoria-Gasteiz",
     "country": "Spain",
-    "lat": 41.3962,
-    "lon": -4.359
+    "lat": 42.8469,
+    "lon": -2.6728
   },
   {
     "id": "ESP-alex_grimaldo",
@@ -4900,10 +4900,10 @@
     "team": "Spain",
     "teamCode": "ESP",
     "position": "DF",
-    "birthplace": "Madrid",
+    "birthplace": "Valencia",
     "country": "Spain",
-    "lat": 40.9191,
-    "lon": -3.2374
+    "lat": 39.4699,
+    "lon": -0.3763
   },
   {
     "id": "ESP-pau_cubarsi",
@@ -4911,10 +4911,10 @@
     "team": "Spain",
     "teamCode": "ESP",
     "position": "DF",
-    "birthplace": "Madrid",
+    "birthplace": "Bescanó",
     "country": "Spain",
-    "lat": 41.2997,
-    "lon": -3.2066
+    "lat": 41.9956,
+    "lon": 2.7397
   },
   {
     "id": "ESP-marcos_llorente",
@@ -4933,10 +4933,10 @@
     "team": "Spain",
     "teamCode": "ESP",
     "position": "DF",
-    "birthplace": "Madrid",
+    "birthplace": "Don Benito",
     "country": "Spain",
-    "lat": 40.8792,
-    "lon": -4.4214
+    "lat": 38.9608,
+    "lon": -5.8617
   },
   {
     "id": "ESP-aymeric_laporte",
@@ -4944,10 +4944,10 @@
     "team": "Spain",
     "teamCode": "ESP",
     "position": "DF",
-    "birthplace": "Madrid",
-    "country": "Spain",
-    "lat": 40.5896,
-    "lon": -2.8407
+    "birthplace": "Agen",
+    "country": "France",
+    "lat": 44.2049,
+    "lon": 0.6195
   },
   {
     "id": "ESP-marc_cucurella",
@@ -4955,10 +4955,10 @@
     "team": "Spain",
     "teamCode": "ESP",
     "position": "DF",
-    "birthplace": "Madrid",
+    "birthplace": "Alella",
     "country": "Spain",
-    "lat": 40.7789,
-    "lon": -3.257
+    "lat": 41.4987,
+    "lon": 2.29
   },
   {
     "id": "ESP-dani_olmo",
@@ -4966,10 +4966,10 @@
     "team": "Spain",
     "teamCode": "ESP",
     "position": "MF",
-    "birthplace": "Madrid",
+    "birthplace": "Terrassa",
     "country": "Spain",
-    "lat": 39.9296,
-    "lon": -4.1985
+    "lat": 41.5623,
+    "lon": 2.0067
   },
   {
     "id": "ESP-rodri",
@@ -4999,10 +4999,10 @@
     "team": "Spain",
     "teamCode": "ESP",
     "position": "FW",
-    "birthplace": "Madrid",
+    "birthplace": "Foios",
     "country": "Spain",
-    "lat": 39.5385,
-    "lon": -3.0138
+    "lat": 39.5533,
+    "lon": -0.3489
   },
   {
     "id": "ESP-borja_iglesias",
@@ -5010,10 +5010,10 @@
     "team": "Spain",
     "teamCode": "ESP",
     "position": "FW",
-    "birthplace": "Madrid",
+    "birthplace": "Santiago de Compostela",
     "country": "Spain",
-    "lat": 41.3936,
-    "lon": -3.772
+    "lat": 42.8782,
+    "lon": -8.5448
   },
   {
     "id": "ESP-yeremy_pino",
@@ -5054,10 +5054,10 @@
     "team": "Spain",
     "teamCode": "ESP",
     "position": "FW",
-    "birthplace": "Madrid",
+    "birthplace": "Eibar",
     "country": "Spain",
-    "lat": 39.8491,
-    "lon": -4.5718
+    "lat": 43.1846,
+    "lon": -2.4726
   },
   {
     "id": "ESP-victor_munoz",
@@ -6154,10 +6154,10 @@
     "team": "Haiti",
     "teamCode": "HAI",
     "position": "MF",
-    "birthplace": "Port-au-Prince",
+    "birthplace": "Cité Soleil",
     "country": "Haiti",
-    "lat": 18.5469,
-    "lon": -72.3403
+    "lat": 18.5608,
+    "lon": -72.3347
   },
   {
     "id": "HAI-derrick_etienne_jr",
@@ -6231,10 +6231,10 @@
     "team": "Haiti",
     "teamCode": "HAI",
     "position": "FW",
-    "birthplace": "Port-au-Prince",
+    "birthplace": "Cap-Haïtien",
     "country": "Haiti",
-    "lat": 18.5469,
-    "lon": -72.3403
+    "lat": 19.7584,
+    "lon": -72.2028
   },
   {
     "id": "HAI-josue_casimir",
@@ -6297,10 +6297,10 @@
     "team": "Iran",
     "teamCode": "IRN",
     "position": "GK",
-    "birthplace": "Tehran",
+    "birthplace": "Sarab-e Yas",
     "country": "Iran",
-    "lat": 35.6892,
-    "lon": 51.389
+    "lat": 33.4876,
+    "lon": 48.3558
   },
   {
     "id": "IRN-payam_niazmand",
@@ -6341,10 +6341,10 @@
     "team": "Iran",
     "teamCode": "IRN",
     "position": "DF",
-    "birthplace": "Tehran",
+    "birthplace": "Kashan",
     "country": "Iran",
-    "lat": 35.6892,
-    "lon": 51.389
+    "lat": 33.9833,
+    "lon": 51.4333
   },
   {
     "id": "IRN-shojae_khalilzadeh",
@@ -6429,10 +6429,10 @@
     "team": "Iran",
     "teamCode": "IRN",
     "position": "MF",
-    "birthplace": "Tehran",
+    "birthplace": "Jirandeh",
     "country": "Iran",
-    "lat": 35.6892,
-    "lon": 51.389
+    "lat": 37.2654,
+    "lon": 49.9494
   },
   {
     "id": "IRN-mohammad_mohebi",
@@ -6451,10 +6451,10 @@
     "team": "Iran",
     "teamCode": "IRN",
     "position": "MF",
-    "birthplace": "Tehran",
-    "country": "Iran",
-    "lat": 35.6892,
-    "lon": 51.389
+    "birthplace": "Malmö",
+    "country": "Sweden",
+    "lat": 55.605,
+    "lon": 13.0038
   },
   {
     "id": "IRN-mahdi_torabi",
@@ -6484,10 +6484,10 @@
     "team": "Iran",
     "teamCode": "IRN",
     "position": "MF",
-    "birthplace": "Tehran",
+    "birthplace": "Bandar-e Anzali",
     "country": "Iran",
-    "lat": 35.6892,
-    "lon": 51.389
+    "lat": 37.4667,
+    "lon": 49.4667
   },
   {
     "id": "IRN-mehdi_taremi",
@@ -6495,10 +6495,10 @@
     "team": "Iran",
     "teamCode": "IRN",
     "position": "FW",
-    "birthplace": "Tehran",
+    "birthplace": "Bushehr",
     "country": "Iran",
-    "lat": 35.6892,
-    "lon": 51.389
+    "lat": 28.9684,
+    "lon": 50.8385
   },
   {
     "id": "IRN-mehdi_ghayedi",
@@ -6561,10 +6561,10 @@
     "team": "Iran",
     "teamCode": "IRN",
     "position": "FW",
-    "birthplace": "Hamburg",
+    "birthplace": "Bonn",
     "country": "Germany",
-    "lat": 53.5753,
-    "lon": 10.0153
+    "lat": 50.7374,
+    "lon": 7.0982
   },
   {
     "id": "IRN-danial_iri",

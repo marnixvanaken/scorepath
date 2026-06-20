@@ -18,8 +18,8 @@
     "position": "GK",
     "birthplace": "Algiers",
     "country": "Algeria",
-    "lat": 37.6062,
-    "lon": 3.0972
+    "lat": 36.7372,
+    "lon": 3.0867
   },
   {
     "id": "ALG-aissa_mandi",
@@ -84,8 +84,8 @@
     "position": "DF",
     "birthplace": "Algiers",
     "country": "Algeria",
-    "lat": 37.2119,
-    "lon": 3.6
+    "lat": 36.7372,
+    "lon": 3.0867
   },
   {
     "id": "ALG-ramiz_zerrouki",
@@ -227,8 +227,8 @@
     "position": "FW",
     "birthplace": "Algiers",
     "country": "Algeria",
-    "lat": 36.1121,
-    "lon": 3.6606
+    "lat": 36.7372,
+    "lon": 3.0867
   },
   {
     "id": "ALG-mohamed_tougai",
@@ -1173,8 +1173,8 @@
     "position": "DF",
     "birthplace": "Brussels",
     "country": "Belgium",
-    "lat": 50.0425,
-    "lon": 5.3483
+    "lat": 50.8503,
+    "lon": 4.3517
   },
   {
     "id": "BEL-brandon_mechele",
@@ -1195,8 +1195,8 @@
     "position": "DF",
     "birthplace": "Brussels",
     "country": "Belgium",
-    "lat": 50.3675,
-    "lon": 3.6078
+    "lat": 50.8503,
+    "lon": 4.3517
   },
   {
     "id": "BEL-thomas_meunier",
@@ -1217,8 +1217,8 @@
     "position": "DF",
     "birthplace": "Brussels",
     "country": "Belgium",
-    "lat": 51.7446,
-    "lon": 5.2368
+    "lat": 50.8503,
+    "lon": 4.3517
   },
   {
     "id": "BEL-joaquin_seys",
@@ -1228,8 +1228,8 @@
     "position": "DF",
     "birthplace": "Brussels",
     "country": "Belgium",
-    "lat": 50.6771,
-    "lon": 5.0258
+    "lat": 50.8503,
+    "lon": 4.3517
   },
   {
     "id": "BEL-nathan_ngoy",
@@ -1239,8 +1239,8 @@
     "position": "DF",
     "birthplace": "Brussels",
     "country": "Belgium",
-    "lat": 51.4371,
-    "lon": 3.681
+    "lat": 50.8503,
+    "lon": 4.3517
   },
   {
     "id": "BEL-timothy_castagne",
@@ -1294,8 +1294,8 @@
     "position": "MF",
     "birthplace": "Brussels",
     "country": "Belgium",
-    "lat": 50.3189,
-    "lon": 4.0315
+    "lat": 50.8503,
+    "lon": 4.3517
   },
   {
     "id": "BEL-nicolas_raskin",
@@ -1305,8 +1305,8 @@
     "position": "MF",
     "birthplace": "Brussels",
     "country": "Belgium",
-    "lat": 49.9397,
-    "lon": 4.8497
+    "lat": 50.8503,
+    "lon": 4.3517
   },
   {
     "id": "BEL-amadou_onana",
@@ -1316,8 +1316,8 @@
     "position": "MF",
     "birthplace": "Brussels",
     "country": "Belgium",
-    "lat": 51.295,
-    "lon": 4.6686
+    "lat": 50.8503,
+    "lon": 4.3517
   },
   {
     "id": "BEL-jeremy_doku",
@@ -1327,8 +1327,8 @@
     "position": "FW",
     "birthplace": "Brussels",
     "country": "Belgium",
-    "lat": 50.7402,
-    "lon": 5.1488
+    "lat": 50.8503,
+    "lon": 4.3517
   },
   {
     "id": "BEL-dodi_lukebakio",
@@ -1338,8 +1338,8 @@
     "position": "FW",
     "birthplace": "Brussels",
     "country": "Belgium",
-    "lat": 50.1733,
-    "lon": 5.3218
+    "lat": 50.8503,
+    "lon": 4.3517
   },
   {
     "id": "BEL-alexis_saelemaekers",
@@ -1349,8 +1349,8 @@
     "position": "FW",
     "birthplace": "Brussels",
     "country": "Belgium",
-    "lat": 50.1093,
-    "lon": 3.5103
+    "lat": 50.8503,
+    "lon": 4.3517
   },
   {
     "id": "BEL-thibaut_courtois",
@@ -2515,8 +2515,8 @@
     "position": "FW",
     "birthplace": "Abidjan",
     "country": "Ivory Coast",
-    "lat": 5.7744,
-    "lon": -4.5582
+    "lat": 5.3364,
+    "lon": -4.0267
   },
   {
     "id": "CIV-elye_wahi",
@@ -3153,8 +3153,8 @@
     "position": "GK",
     "birthplace": "Praia",
     "country": "Cape Verde",
-    "lat": 14.4915,
-    "lon": -23.6677
+    "lat": 14.9315,
+    "lon": -23.5138
   },
   {
     "id": "CPV-marcio_rosa",
@@ -3197,8 +3197,8 @@
     "position": "DF",
     "birthplace": "Praia",
     "country": "Cape Verde",
-    "lat": 14.1489,
-    "lon": -24.2896
+    "lat": 14.9315,
+    "lon": -23.5138
   },
   {
     "id": "CPV-steven_moreira",
@@ -3208,8 +3208,8 @@
     "position": "DF",
     "birthplace": "Praia",
     "country": "Cape Verde",
-    "lat": 15.3529,
-    "lon": -22.7211
+    "lat": 14.9315,
+    "lon": -23.5138
   },
   {
     "id": "CPV-wagner_pina",
@@ -3230,8 +3230,8 @@
     "position": "DF",
     "birthplace": "Praia",
     "country": "Cape Verde",
-    "lat": 14.6232,
-    "lon": -24.0198
+    "lat": 14.9315,
+    "lon": -23.5138
   },
   {
     "id": "CPV-kelvin_pires",
@@ -3263,8 +3263,8 @@
     "position": "MF",
     "birthplace": "Praia",
     "country": "Cape Verde",
-    "lat": 14.8481,
-    "lon": -23.1645
+    "lat": 14.9315,
+    "lon": -23.5138
   },
   {
     "id": "CPV-kevin_pina_lenini",
@@ -3296,8 +3296,8 @@
     "position": "MF",
     "birthplace": "Praia",
     "country": "Cape Verde",
-    "lat": 15.4122,
-    "lon": -23.7296
+    "lat": 14.9315,
+    "lon": -23.5138
   },
   {
     "id": "CPV-yannick_semedo",
@@ -3307,8 +3307,8 @@
     "position": "MF",
     "birthplace": "Praia",
     "country": "Cape Verde",
-    "lat": 15.6059,
-    "lon": -23.8168
+    "lat": 14.9315,
+    "lon": -23.5138
   },
   {
     "id": "CPV-ryan_mendes",
@@ -3318,8 +3318,8 @@
     "position": "FW",
     "birthplace": "Praia",
     "country": "Cape Verde",
-    "lat": 14.1389,
-    "lon": -24.3862
+    "lat": 14.9315,
+    "lon": -23.5138
   },
   {
     "id": "CPV-garry_rodrigues",
@@ -3329,8 +3329,8 @@
     "position": "FW",
     "birthplace": "Praia",
     "country": "Cape Verde",
-    "lat": 15.9248,
-    "lon": -22.9842
+    "lat": 14.9315,
+    "lon": -23.5138
   },
   {
     "id": "CPV-willy_semedo",
@@ -3340,8 +3340,8 @@
     "position": "FW",
     "birthplace": "Praia",
     "country": "Cape Verde",
-    "lat": 14.9044,
-    "lon": -23.1211
+    "lat": 14.9315,
+    "lon": -23.5138
   },
   {
     "id": "CPV-jovane_cabral",
@@ -3351,8 +3351,8 @@
     "position": "FW",
     "birthplace": "Praia",
     "country": "Cape Verde",
-    "lat": 15.4377,
-    "lon": -22.969
+    "lat": 14.9315,
+    "lon": -23.5138
   },
   {
     "id": "CPV-dailon_livramento",
@@ -3373,8 +3373,8 @@
     "position": "FW",
     "birthplace": "Praia",
     "country": "Cape Verde",
-    "lat": 15.9836,
-    "lon": -23.0218
+    "lat": 14.9315,
+    "lon": -23.5138
   },
   {
     "id": "CPV-ianique_stopira",
@@ -4297,8 +4297,8 @@
     "position": "GK",
     "birthplace": "Cairo",
     "country": "Egypt",
-    "lat": 30.7391,
-    "lon": 31.3951
+    "lat": 30.0444,
+    "lon": 31.2357
   },
   {
     "id": "EGY-el_mahdy_soliman",
@@ -4308,8 +4308,8 @@
     "position": "GK",
     "birthplace": "Cairo",
     "country": "Egypt",
-    "lat": 30.3312,
-    "lon": 30.5337
+    "lat": 30.0444,
+    "lon": 31.2357
   },
   {
     "id": "EGY-mostafa_shobeir",
@@ -4319,8 +4319,8 @@
     "position": "GK",
     "birthplace": "Cairo",
     "country": "Egypt",
-    "lat": 30.2355,
-    "lon": 31.1528
+    "lat": 30.0444,
+    "lon": 31.2357
   },
   {
     "id": "EGY-mohamed_alaa",
@@ -4330,8 +4330,8 @@
     "position": "GK",
     "birthplace": "Cairo",
     "country": "Egypt",
-    "lat": 30.9818,
-    "lon": 31.1721
+    "lat": 30.0444,
+    "lon": 31.2357
   },
   {
     "id": "EGY-yasser_ibrahim",
@@ -4341,8 +4341,8 @@
     "position": "DF",
     "birthplace": "Cairo",
     "country": "Egypt",
-    "lat": 30.6555,
-    "lon": 32.1382
+    "lat": 30.0444,
+    "lon": 31.2357
   },
   {
     "id": "EGY-mohamed_hany",
@@ -4352,8 +4352,8 @@
     "position": "DF",
     "birthplace": "Cairo",
     "country": "Egypt",
-    "lat": 29.0363,
-    "lon": 30.96
+    "lat": 30.0444,
+    "lon": 31.2357
   },
   {
     "id": "EGY-hossam_abdelmaguid",
@@ -4363,8 +4363,8 @@
     "position": "DF",
     "birthplace": "Cairo",
     "country": "Egypt",
-    "lat": 29.6786,
-    "lon": 31.5799
+    "lat": 30.0444,
+    "lon": 31.2357
   },
   {
     "id": "EGY-ramy_rabia",
@@ -4374,8 +4374,8 @@
     "position": "DF",
     "birthplace": "Cairo",
     "country": "Egypt",
-    "lat": 29.2797,
-    "lon": 30.9961
+    "lat": 30.0444,
+    "lon": 31.2357
   },
   {
     "id": "EGY-mohamed_abdelmonem",
@@ -4385,8 +4385,8 @@
     "position": "DF",
     "birthplace": "Cairo",
     "country": "Egypt",
-    "lat": 30.9732,
-    "lon": 31.5639
+    "lat": 30.0444,
+    "lon": 31.2357
   },
   {
     "id": "EGY-ahmed_abou_el_fotouh",
@@ -4396,8 +4396,8 @@
     "position": "DF",
     "birthplace": "Cairo",
     "country": "Egypt",
-    "lat": 29.835,
-    "lon": 30.8579
+    "lat": 30.0444,
+    "lon": 31.2357
   },
   {
     "id": "EGY-tarek_alaa",
@@ -4407,8 +4407,8 @@
     "position": "DF",
     "birthplace": "Cairo",
     "country": "Egypt",
-    "lat": 30.8464,
-    "lon": 31.0749
+    "lat": 30.0444,
+    "lon": 31.2357
   },
   {
     "id": "EGY-emam_ashour",
@@ -4418,8 +4418,8 @@
     "position": "MF",
     "birthplace": "Cairo",
     "country": "Egypt",
-    "lat": 30.2954,
-    "lon": 30.8245
+    "lat": 30.0444,
+    "lon": 31.2357
   },
   {
     "id": "EGY-hamdy_fathy",
@@ -4429,8 +4429,8 @@
     "position": "MF",
     "birthplace": "Cairo",
     "country": "Egypt",
-    "lat": 29.4508,
-    "lon": 30.4821
+    "lat": 30.0444,
+    "lon": 31.2357
   },
   {
     "id": "EGY-ahmed_nabil_koka",
@@ -4440,8 +4440,8 @@
     "position": "MF",
     "birthplace": "Cairo",
     "country": "Egypt",
-    "lat": 30.1654,
-    "lon": 30.601
+    "lat": 30.0444,
+    "lon": 31.2357
   },
   {
     "id": "EGY-mohanad_lasheen",
@@ -4451,8 +4451,8 @@
     "position": "MF",
     "birthplace": "Cairo",
     "country": "Egypt",
-    "lat": 29.57,
-    "lon": 30.3002
+    "lat": 30.0444,
+    "lon": 31.2357
   },
   {
     "id": "EGY-marwan_attia",
@@ -4462,8 +4462,8 @@
     "position": "MF",
     "birthplace": "Cairo",
     "country": "Egypt",
-    "lat": 29.7693,
-    "lon": 31.6594
+    "lat": 30.0444,
+    "lon": 31.2357
   },
   {
     "id": "EGY-mahmoud_saber",
@@ -4473,8 +4473,8 @@
     "position": "MF",
     "birthplace": "Cairo",
     "country": "Egypt",
-    "lat": 30.0103,
-    "lon": 30.934
+    "lat": 30.0444,
+    "lon": 31.2357
   },
   {
     "id": "EGY-trezeguet",
@@ -4484,8 +4484,8 @@
     "position": "FW",
     "birthplace": "Cairo",
     "country": "Egypt",
-    "lat": 30.8478,
-    "lon": 30.6317
+    "lat": 30.0444,
+    "lon": 31.2357
   },
   {
     "id": "EGY-mostafa_mohamed",
@@ -4495,8 +4495,8 @@
     "position": "FW",
     "birthplace": "Cairo",
     "country": "Egypt",
-    "lat": 29.5957,
-    "lon": 30.3017
+    "lat": 30.0444,
+    "lon": 31.2357
   },
   {
     "id": "EGY-haissem_hassan",
@@ -4506,8 +4506,8 @@
     "position": "FW",
     "birthplace": "Cairo",
     "country": "Egypt",
-    "lat": 29.7337,
-    "lon": 31.3286
+    "lat": 30.0444,
+    "lon": 31.2357
   },
   {
     "id": "EGY-ibrahim_adel",
@@ -4517,8 +4517,8 @@
     "position": "FW",
     "birthplace": "Cairo",
     "country": "Egypt",
-    "lat": 30.2755,
-    "lon": 31.7387
+    "lat": 30.0444,
+    "lon": 31.2357
   },
   {
     "id": "EGY-omar_marmoush",
@@ -4528,8 +4528,8 @@
     "position": "FW",
     "birthplace": "Cairo",
     "country": "Egypt",
-    "lat": 29.3828,
-    "lon": 32.0787
+    "lat": 30.0444,
+    "lon": 31.2357
   },
   {
     "id": "EGY-zizo",
@@ -4539,8 +4539,8 @@
     "position": "FW",
     "birthplace": "Cairo",
     "country": "Egypt",
-    "lat": 30.868,
-    "lon": 31.2236
+    "lat": 30.0444,
+    "lon": 31.2357
   },
   {
     "id": "EGY-hamza_abdelkarim",
@@ -5749,8 +5749,8 @@
     "position": "GK",
     "birthplace": "Accra",
     "country": "Ghana",
-    "lat": 5.5861,
-    "lon": -0.8306
+    "lat": 5.6037,
+    "lon": -0.187
   },
   {
     "id": "GHA-jonas_adjetey",
@@ -6156,8 +6156,8 @@
     "position": "MF",
     "birthplace": "Port-au-Prince",
     "country": "Haiti",
-    "lat": 19.0637,
-    "lon": -72.4838
+    "lat": 18.5469,
+    "lon": -72.3403
   },
   {
     "id": "HAI-derrick_etienne_jr",
@@ -6299,8 +6299,8 @@
     "position": "GK",
     "birthplace": "Tehran",
     "country": "Iran",
-    "lat": 34.7083,
-    "lon": 52.3205
+    "lat": 35.6892,
+    "lon": 51.389
   },
   {
     "id": "IRN-payam_niazmand",
@@ -6310,8 +6310,8 @@
     "position": "GK",
     "birthplace": "Tehran",
     "country": "Iran",
-    "lat": 36.1639,
-    "lon": 50.7957
+    "lat": 35.6892,
+    "lon": 51.389
   },
   {
     "id": "IRN-hossein_hosseini",
@@ -6321,8 +6321,8 @@
     "position": "GK",
     "birthplace": "Tehran",
     "country": "Iran",
-    "lat": 35.9002,
-    "lon": 51.612
+    "lat": 35.6892,
+    "lon": 51.389
   },
   {
     "id": "IRN-saleh_hardani",
@@ -6332,8 +6332,8 @@
     "position": "DF",
     "birthplace": "Tehran",
     "country": "Iran",
-    "lat": 35.2568,
-    "lon": 51.1731
+    "lat": 35.6892,
+    "lon": 51.389
   },
   {
     "id": "IRN-ehsan_hajsafi",
@@ -6343,8 +6343,8 @@
     "position": "DF",
     "birthplace": "Tehran",
     "country": "Iran",
-    "lat": 36.4182,
-    "lon": 51.1114
+    "lat": 35.6892,
+    "lon": 51.389
   },
   {
     "id": "IRN-shojae_khalilzadeh",
@@ -6354,8 +6354,8 @@
     "position": "DF",
     "birthplace": "Tehran",
     "country": "Iran",
-    "lat": 36.4946,
-    "lon": 50.6194
+    "lat": 35.6892,
+    "lon": 51.389
   },
   {
     "id": "IRN-milad_mohammadi",
@@ -6365,8 +6365,8 @@
     "position": "DF",
     "birthplace": "Tehran",
     "country": "Iran",
-    "lat": 35.0315,
-    "lon": 51.5303
+    "lat": 35.6892,
+    "lon": 51.389
   },
   {
     "id": "IRN-hossein_kanaanizadegan",
@@ -6376,8 +6376,8 @@
     "position": "DF",
     "birthplace": "Tehran",
     "country": "Iran",
-    "lat": 36.4391,
-    "lon": 51.767
+    "lat": 35.6892,
+    "lon": 51.389
   },
   {
     "id": "IRN-ali_nemati",
@@ -6387,8 +6387,8 @@
     "position": "DF",
     "birthplace": "Tehran",
     "country": "Iran",
-    "lat": 36.3372,
-    "lon": 51.7187
+    "lat": 35.6892,
+    "lon": 51.389
   },
   {
     "id": "IRN-ramin_rezaeian",
@@ -6398,8 +6398,8 @@
     "position": "DF",
     "birthplace": "Tehran",
     "country": "Iran",
-    "lat": 34.9237,
-    "lon": 52.2688
+    "lat": 35.6892,
+    "lon": 51.389
   },
   {
     "id": "IRN-aria_yousefi",
@@ -6420,8 +6420,8 @@
     "position": "MF",
     "birthplace": "Tehran",
     "country": "Iran",
-    "lat": 36.4614,
-    "lon": 50.6872
+    "lat": 35.6892,
+    "lon": 51.389
   },
   {
     "id": "IRN-alireza_jahanbakhsh",
@@ -6431,8 +6431,8 @@
     "position": "MF",
     "birthplace": "Tehran",
     "country": "Iran",
-    "lat": 35.3493,
-    "lon": 51.0823
+    "lat": 35.6892,
+    "lon": 51.389
   },
   {
     "id": "IRN-mohammad_mohebi",
@@ -6442,8 +6442,8 @@
     "position": "MF",
     "birthplace": "Tehran",
     "country": "Iran",
-    "lat": 36.443,
-    "lon": 51.7793
+    "lat": 35.6892,
+    "lon": 51.389
   },
   {
     "id": "IRN-saman_ghoddos",
@@ -6453,8 +6453,8 @@
     "position": "MF",
     "birthplace": "Tehran",
     "country": "Iran",
-    "lat": 35.042,
-    "lon": 51.5821
+    "lat": 35.6892,
+    "lon": 51.389
   },
   {
     "id": "IRN-mahdi_torabi",
@@ -6464,8 +6464,8 @@
     "position": "MF",
     "birthplace": "Tehran",
     "country": "Iran",
-    "lat": 35.3933,
-    "lon": 50.7477
+    "lat": 35.6892,
+    "lon": 51.389
   },
   {
     "id": "IRN-amirmohammad_razzaghinia",
@@ -6475,8 +6475,8 @@
     "position": "MF",
     "birthplace": "Tehran",
     "country": "Iran",
-    "lat": 34.9308,
-    "lon": 51.7716
+    "lat": 35.6892,
+    "lon": 51.389
   },
   {
     "id": "IRN-saeid_ezatolahi",
@@ -6486,8 +6486,8 @@
     "position": "MF",
     "birthplace": "Tehran",
     "country": "Iran",
-    "lat": 35.477,
-    "lon": 51.2298
+    "lat": 35.6892,
+    "lon": 51.389
   },
   {
     "id": "IRN-mehdi_taremi",
@@ -6497,8 +6497,8 @@
     "position": "FW",
     "birthplace": "Tehran",
     "country": "Iran",
-    "lat": 35.5231,
-    "lon": 50.5005
+    "lat": 35.6892,
+    "lon": 51.389
   },
   {
     "id": "IRN-mehdi_ghayedi",
@@ -6519,8 +6519,8 @@
     "position": "FW",
     "birthplace": "Tehran",
     "country": "Iran",
-    "lat": 36.1462,
-    "lon": 51.7378
+    "lat": 35.6892,
+    "lon": 51.389
   },
   {
     "id": "IRN-ali_alipour",
@@ -6596,8 +6596,8 @@
     "position": "GK",
     "birthplace": "Baghdad",
     "country": "Iraq",
-    "lat": 33.1316,
-    "lon": 43.7276
+    "lat": 33.3152,
+    "lon": 44.3661
   },
   {
     "id": "IRQ-rebin_sulaka",
@@ -6783,8 +6783,8 @@
     "position": "MF",
     "birthplace": "Baghdad",
     "country": "Iraq",
-    "lat": 32.9429,
-    "lon": 45.3259
+    "lat": 33.3152,
+    "lon": 44.3661
   },
   {
     "id": "IRQ-aymen_hussein",
@@ -7234,8 +7234,8 @@
     "position": "DF",
     "birthplace": "Tokyo",
     "country": "Japan",
-    "lat": 35.1934,
-    "lon": 140.6576
+    "lat": 35.6894,
+    "lon": 139.6917
   },
   {
     "id": "JPN-junnosuke_suzuki",
@@ -7388,8 +7388,8 @@
     "position": "FW",
     "birthplace": "Tokyo",
     "country": "Japan",
-    "lat": 35.8557,
-    "lon": 139.0268
+    "lat": 35.6894,
+    "lon": 139.6917
   },
   {
     "id": "JPN-ko_itakura",
@@ -7784,8 +7784,8 @@
     "position": "DF",
     "birthplace": "Riyadh",
     "country": "Saudi Arabia",
-    "lat": 25.2406,
-    "lon": 45.7464
+    "lat": 24.7136,
+    "lon": 46.6753
   },
   {
     "id": "KSA-nawaf_boushal",
@@ -7806,8 +7806,8 @@
     "position": "MF",
     "birthplace": "Riyadh",
     "country": "Saudi Arabia",
-    "lat": 24.8142,
-    "lon": 47.6945
+    "lat": 24.7136,
+    "lon": 46.6753
   },
   {
     "id": "KSA-musab_al_juwayr",
@@ -8499,8 +8499,8 @@
     "position": "FW",
     "birthplace": "Mexico City",
     "country": "Mexico",
-    "lat": 19.5454,
-    "lon": -98.4415
+    "lat": 19.4326,
+    "lon": -99.1332
   },
   {
     "id": "MEX-edson_alvarez",
@@ -8972,8 +8972,8 @@
     "position": "DF",
     "birthplace": "Oslo",
     "country": "Norway",
-    "lat": 60.4383,
-    "lon": 10.3719
+    "lat": 59.9133,
+    "lon": 10.7389
   },
   {
     "id": "NOR-morten_thorsby",
@@ -10358,8 +10358,8 @@
     "position": "DF",
     "birthplace": "Doha",
     "country": "Qatar",
-    "lat": 24.6449,
-    "lon": 51.296
+    "lat": 25.2854,
+    "lon": 51.531
   },
   {
     "id": "QAT-homam_ahmed",
@@ -10380,8 +10380,8 @@
     "position": "DF",
     "birthplace": "Doha",
     "country": "Qatar",
-    "lat": 25.5395,
-    "lon": 52.2246
+    "lat": 25.2854,
+    "lon": 51.531
   },
   {
     "id": "QAT-sultan_al_brake",
@@ -10611,8 +10611,8 @@
     "position": "GK",
     "birthplace": "Johannesburg",
     "country": "South Africa",
-    "lat": -26.6166,
-    "lon": 27.7395
+    "lat": -26.2041,
+    "lon": 28.0473
   },
   {
     "id": "RSA-thabang_matuludi",
@@ -10622,8 +10622,8 @@
     "position": "DF",
     "birthplace": "Johannesburg",
     "country": "South Africa",
-    "lat": -25.2114,
-    "lon": 27.2783
+    "lat": -26.2041,
+    "lon": 28.0473
   },
   {
     "id": "RSA-khulumani_ndamane",
@@ -10633,8 +10633,8 @@
     "position": "DF",
     "birthplace": "Johannesburg",
     "country": "South Africa",
-    "lat": -26.5228,
-    "lon": 28.3398
+    "lat": -26.2041,
+    "lon": 28.0473
   },
   {
     "id": "RSA-aubrey_modiba",
@@ -10666,8 +10666,8 @@
     "position": "DF",
     "birthplace": "Johannesburg",
     "country": "South Africa",
-    "lat": -26.6468,
-    "lon": 27.3509
+    "lat": -26.2041,
+    "lon": 28.0473
   },
   {
     "id": "RSA-nkosinathi_sibisi",
@@ -10710,8 +10710,8 @@
     "position": "DF",
     "birthplace": "Johannesburg",
     "country": "South Africa",
-    "lat": -26.5191,
-    "lon": 28.5441
+    "lat": -26.2041,
+    "lon": 28.0473
   },
   {
     "id": "RSA-teboho_mokoena",
@@ -10732,8 +10732,8 @@
     "position": "MF",
     "birthplace": "Johannesburg",
     "country": "South Africa",
-    "lat": -25.7319,
-    "lon": 27.3437
+    "lat": -26.2041,
+    "lon": 28.0473
   },
   {
     "id": "RSA-themba_zwane",
@@ -10820,8 +10820,8 @@
     "position": "FW",
     "birthplace": "Johannesburg",
     "country": "South Africa",
-    "lat": -26.0236,
-    "lon": 28.6255
+    "lat": -26.2041,
+    "lon": 28.0473
   },
   {
     "id": "RSA-iqraam_rayners",
@@ -11788,8 +11788,8 @@
     "position": "DF",
     "birthplace": "Stockholm",
     "country": "Sweden",
-    "lat": 59.8061,
-    "lon": 18.1391
+    "lat": 59.3294,
+    "lon": 18.0686
   },
   {
     "id": "SWE-carl_starfelt",
@@ -11865,8 +11865,8 @@
     "position": "MF",
     "birthplace": "Stockholm",
     "country": "Sweden",
-    "lat": 58.5965,
-    "lon": 18.1864
+    "lat": 59.3294,
+    "lon": 18.0686
   },
   {
     "id": "SWE-gustaf_nilsson",
@@ -11887,8 +11887,8 @@
     "position": "FW",
     "birthplace": "Stockholm",
     "country": "Sweden",
-    "lat": 58.9138,
-    "lon": 17.1832
+    "lat": 59.3294,
+    "lon": 18.0686
   },
   {
     "id": "SWE-anthony_elanga",
@@ -11898,8 +11898,8 @@
     "position": "FW",
     "birthplace": "Stockholm",
     "country": "Sweden",
-    "lat": 59.3092,
-    "lon": 17.695
+    "lat": 59.3294,
+    "lon": 18.0686
   },
   {
     "id": "SWE-viktor_gyokeres",
@@ -11909,8 +11909,8 @@
     "position": "FW",
     "birthplace": "Stockholm",
     "country": "Sweden",
-    "lat": 59.2473,
-    "lon": 17.1189
+    "lat": 59.3294,
+    "lon": 18.0686
   },
   {
     "id": "SWE-taha_ali",
@@ -11920,8 +11920,8 @@
     "position": "FW",
     "birthplace": "Stockholm",
     "country": "Sweden",
-    "lat": 59.399,
-    "lon": 17.5831
+    "lat": 59.3294,
+    "lon": 18.0686
   },
   {
     "id": "SWE-jacob_widell_zetterstom",
@@ -12019,8 +12019,8 @@
     "position": "GK",
     "birthplace": "Tunis",
     "country": "Tunisia",
-    "lat": 37.0451,
-    "lon": 10.0445
+    "lat": 36.8065,
+    "lon": 10.1815
   },
   {
     "id": "TUN-mouhib_chamakh",
@@ -12030,8 +12030,8 @@
     "position": "GK",
     "birthplace": "Tunis",
     "country": "Tunisia",
-    "lat": 37.0149,
-    "lon": 11.1899
+    "lat": 36.8065,
+    "lon": 10.1815
   },
   {
     "id": "TUN-sabri_ben_hessen",
@@ -12041,8 +12041,8 @@
     "position": "GK",
     "birthplace": "Tunis",
     "country": "Tunisia",
-    "lat": 36.2105,
-    "lon": 9.5031
+    "lat": 36.8065,
+    "lon": 10.1815
   },
   {
     "id": "TUN-ali_abdi",
@@ -12052,8 +12052,8 @@
     "position": "DF",
     "birthplace": "Tunis",
     "country": "Tunisia",
-    "lat": 36.9877,
-    "lon": 11.0038
+    "lat": 36.8065,
+    "lon": 10.1815
   },
   {
     "id": "TUN-omar_rekik",
@@ -12063,8 +12063,8 @@
     "position": "DF",
     "birthplace": "Tunis",
     "country": "Tunisia",
-    "lat": 35.8217,
-    "lon": 9.5118
+    "lat": 36.8065,
+    "lon": 10.1815
   },
   {
     "id": "TUN-adem_arous",
@@ -12074,8 +12074,8 @@
     "position": "DF",
     "birthplace": "Tunis",
     "country": "Tunisia",
-    "lat": 36.4955,
-    "lon": 9.3439
+    "lat": 36.8065,
+    "lon": 10.1815
   },
   {
     "id": "TUN-moutaz_neffati",
@@ -12085,8 +12085,8 @@
     "position": "DF",
     "birthplace": "Tunis",
     "country": "Tunisia",
-    "lat": 35.8495,
-    "lon": 11.1724
+    "lat": 36.8065,
+    "lon": 10.1815
   },
   {
     "id": "TUN-raed_chikhaoui",
@@ -12096,8 +12096,8 @@
     "position": "DF",
     "birthplace": "Tunis",
     "country": "Tunisia",
-    "lat": 37.3195,
-    "lon": 10.1607
+    "lat": 36.8065,
+    "lon": 10.1815
   },
   {
     "id": "TUN-rani_khedira",
@@ -12118,8 +12118,8 @@
     "position": "MF",
     "birthplace": "Tunis",
     "country": "Tunisia",
-    "lat": 37.3186,
-    "lon": 10.7493
+    "lat": 36.8065,
+    "lon": 10.1815
   },
   {
     "id": "TUN-ellyes_skhiri",
@@ -12129,8 +12129,8 @@
     "position": "MF",
     "birthplace": "Tunis",
     "country": "Tunisia",
-    "lat": 36.76,
-    "lon": 9.6137
+    "lat": 36.8065,
+    "lon": 10.1815
   },
   {
     "id": "TUN-anis_ben_slimane",
@@ -12140,8 +12140,8 @@
     "position": "MF",
     "birthplace": "Tunis",
     "country": "Tunisia",
-    "lat": 36.4058,
-    "lon": 11.174
+    "lat": 36.8065,
+    "lon": 10.1815
   },
   {
     "id": "TUN-khalil_ayari",
@@ -12151,8 +12151,8 @@
     "position": "FW",
     "birthplace": "Tunis",
     "country": "Tunisia",
-    "lat": 36.3967,
-    "lon": 9.3388
+    "lat": 36.8065,
+    "lon": 10.1815
   },
   {
     "id": "TUN-elias_saad",
@@ -12162,8 +12162,8 @@
     "position": "FW",
     "birthplace": "Tunis",
     "country": "Tunisia",
-    "lat": 36.9437,
-    "lon": 9.2883
+    "lat": 36.8065,
+    "lon": 10.1815
   },
   {
     "id": "TUN-hazem_mastouri",
@@ -12173,8 +12173,8 @@
     "position": "FW",
     "birthplace": "Tunis",
     "country": "Tunisia",
-    "lat": 37.0782,
-    "lon": 11.0049
+    "lat": 36.8065,
+    "lon": 10.1815
   },
   {
     "id": "TUN-ismael_gharbi",
@@ -12184,8 +12184,8 @@
     "position": "FW",
     "birthplace": "Tunis",
     "country": "Tunisia",
-    "lat": 36.8004,
-    "lon": 10.6239
+    "lat": 36.8065,
+    "lon": 10.1815
   },
   {
     "id": "TUN-mortadha_ben_ouanes",
@@ -12195,8 +12195,8 @@
     "position": "FW",
     "birthplace": "Tunis",
     "country": "Tunisia",
-    "lat": 37.2023,
-    "lon": 10.9288
+    "lat": 36.8065,
+    "lon": 10.1815
   },
   {
     "id": "TUN-firas_chaouat",
@@ -12217,8 +12217,8 @@
     "position": "FW",
     "birthplace": "Tunis",
     "country": "Tunisia",
-    "lat": 37.55,
-    "lon": 10.0314
+    "lat": 36.8065,
+    "lon": 10.1815
   },
   {
     "id": "TUN-rayan_elloumi",
@@ -12228,8 +12228,8 @@
     "position": "FW",
     "birthplace": "Tunis",
     "country": "Tunisia",
-    "lat": 36.4251,
-    "lon": 9.4526
+    "lat": 36.8065,
+    "lon": 10.1815
   },
   {
     "id": "TUN-montassar_talbi",
@@ -13262,8 +13262,8 @@
     "position": "DF",
     "birthplace": "Tashkent",
     "country": "Uzbekistan",
-    "lat": 40.7093,
-    "lon": 68.8515
+    "lat": 41.2995,
+    "lon": 69.2401
   },
   {
     "id": "UZB-jakhongir_urozov",
@@ -13526,8 +13526,8 @@
     "position": "DF",
     "birthplace": "Willemstad",
     "country": "Curaçao",
-    "lat": 11.2116,
-    "lon": -69.1019
+    "lat": 12.108,
+    "lon": -68.935
   },
   {
     "id": "CUW-armando_obispo",
@@ -13625,8 +13625,8 @@
     "position": "MF",
     "birthplace": "Willemstad",
     "country": "Curaçao",
-    "lat": 12.8261,
-    "lon": -69.3441
+    "lat": 12.108,
+    "lon": -68.935
   },
   {
     "id": "CUW-kevin_felida",

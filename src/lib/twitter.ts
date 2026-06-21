@@ -10,8 +10,8 @@ function getClient(account: XAccount): TwitterApi {
   let accessSecret: string | undefined;
 
   if (account === 'laasteman') {
-    accessToken = process.env.AccessToken_LaatsteMan;
-    accessSecret = process.env.AccessTokenSecret_LaatsteMan;
+    accessToken = process.env.AccessToken;
+    accessSecret = process.env.AccessTokenSecret;
   } else {
     accessToken = process.env.AccessToken_Scorepath;
     accessSecret = process.env.AccessTokenSecret_Scorepath;

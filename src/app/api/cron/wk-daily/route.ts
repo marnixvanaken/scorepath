@@ -76,23 +76,27 @@ export async function GET(req: NextRequest) {
     skipped.push('laasteman:recap: geen wedstrijden vandaag');
   }
 
-  // ── @ScorepathEN (English) ───────────────────────────────────────────────
-  try {
-    const id = await postTweet(birthplaceSpotlightEn(), 'scorepath');
-    posted.push(`scorepath:birthplace:${id}`);
-  } catch (err) {
-    skipped.push(`scorepath:birthplace: ${err instanceof Error ? err.message : String(err)}`);
-  }
-
-  if (matches.length > 0) {
+  // ── @ScorepathEN (English) — activeer zodra AccessToken_Scorepath in Vercel staat ──
+  if (process.env.AccessToken_Scorepath) {
     try {
-      const id = await postTweet(matchDayRecapEn(matches, todayLabelEn()), 'scorepath');
-      posted.push(`scorepath:recap:${id}`);
+      const id = await postTweet(birthplaceSpotlightEn(), 'scorepath');
+      posted.push(`scorepath:birthplace:${id}`);
     } catch (err) {
-      skipped.push(`scorepath:recap: ${err instanceof Error ? err.message : String(err)}`);
+      skipped.push(`scorepath:birthplace: ${err instanceof Error ? err.message : String(err)}`);
+    }
+
+    if (matches.length > 0) {
+      try {
+        const id = await postTweet(matchDayRecapEn(matches, todayLabelEn()), 'scorepath');
+        posted.push(`scorepath:recap:${id}`);
+      } catch (err) {
+        skipped.push(`scorepath:recap: ${err instanceof Error ? err.message : String(err)}`);
+      }
+    } else {
+      skipped.push('scorepath:recap: no matches today');
     }
   } else {
-    skipped.push('scorepath:recap: no matches today');
+    skipped.push('scorepath: credentials not configured');
   }
 
   return NextResponse.json({ posted, skipped });

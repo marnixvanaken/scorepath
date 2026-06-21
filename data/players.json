@@ -82,10 +82,10 @@
     "team": "Algeria",
     "teamCode": "ALG",
     "position": "DF",
-    "birthplace": "Algiers",
+    "birthplace": "Touggourt",
     "country": "Algeria",
-    "lat": 36.7372,
-    "lon": 3.0867
+    "lat": 33.0956,
+    "lon": 6.0678
   },
   {
     "id": "ALG-ramiz_zerrouki",
@@ -6310,8 +6310,8 @@
     "position": "GK",
     "birthplace": "Tehran",
     "country": "Iran",
-    "lat": 36.1639,
-    "lon": 50.7957
+    "lat": 35.6892,
+    "lon": 51.389
   },
   {
     "id": "IRN-hossein_hosseini",
@@ -6319,10 +6319,10 @@
     "team": "Iran",
     "teamCode": "IRN",
     "position": "GK",
-    "birthplace": "Tehran",
+    "birthplace": "Shiraz",
     "country": "Iran",
-    "lat": 35.9002,
-    "lon": 51.612
+    "lat": 29.5918,
+    "lon": 52.5837
   },
   {
     "id": "IRN-saleh_hardani",
@@ -6330,10 +6330,10 @@
     "team": "Iran",
     "teamCode": "IRN",
     "position": "DF",
-    "birthplace": "Tehran",
+    "birthplace": "Bahmaei",
     "country": "Iran",
-    "lat": 35.2568,
-    "lon": 51.1731
+    "lat": 30.8667,
+    "lon": 50.6639
   },
   {
     "id": "IRN-ehsan_hajsafi",
@@ -6352,10 +6352,10 @@
     "team": "Iran",
     "teamCode": "IRN",
     "position": "DF",
-    "birthplace": "Tehran",
+    "birthplace": "Babolsar",
     "country": "Iran",
-    "lat": 36.4946,
-    "lon": 50.6194
+    "lat": 36.7045,
+    "lon": 52.6589
   },
   {
     "id": "IRN-milad_mohammadi",
@@ -6365,8 +6365,8 @@
     "position": "DF",
     "birthplace": "Tehran",
     "country": "Iran",
-    "lat": 35.0315,
-    "lon": 51.5303
+    "lat": 35.6892,
+    "lon": 51.389
   },
   {
     "id": "IRN-hossein_kanaanizadegan",
@@ -6374,10 +6374,10 @@
     "team": "Iran",
     "teamCode": "IRN",
     "position": "DF",
-    "birthplace": "Tehran",
+    "birthplace": "Bandar-e Mahshahr",
     "country": "Iran",
-    "lat": 36.4391,
-    "lon": 51.767
+    "lat": 30.4623,
+    "lon": 49.1797
   },
   {
     "id": "IRN-ali_nemati",
@@ -6385,10 +6385,10 @@
     "team": "Iran",
     "teamCode": "IRN",
     "position": "DF",
-    "birthplace": "Tehran",
+    "birthplace": "Nishapur",
     "country": "Iran",
-    "lat": 36.3372,
-    "lon": 51.7187
+    "lat": 36.2138,
+    "lon": 58.7958
   },
   {
     "id": "IRN-ramin_rezaeian",
@@ -6396,10 +6396,10 @@
     "team": "Iran",
     "teamCode": "IRN",
     "position": "DF",
-    "birthplace": "Tehran",
+    "birthplace": "Sari",
     "country": "Iran",
-    "lat": 34.9237,
-    "lon": 52.2688
+    "lat": 36.5656,
+    "lon": 53.06
   },
   {
     "id": "IRN-aria_yousefi",
@@ -6407,10 +6407,10 @@
     "team": "Iran",
     "teamCode": "IRN",
     "position": "DF",
-    "birthplace": "Tehran",
+    "birthplace": "Bandar-e Mahshahr",
     "country": "Iran",
-    "lat": 35.5168,
-    "lon": 51.3514
+    "lat": 30.4623,
+    "lon": 49.1797
   },
   {
     "id": "IRN-mohammad_ghorbani",
@@ -6418,10 +6418,10 @@
     "team": "Iran",
     "teamCode": "IRN",
     "position": "MF",
-    "birthplace": "Tehran",
+    "birthplace": "Arak",
     "country": "Iran",
-    "lat": 36.4614,
-    "lon": 50.6872
+    "lat": 34.0954,
+    "lon": 49.6889
   },
   {
     "id": "IRN-alireza_jahanbakhsh",
@@ -6440,10 +6440,10 @@
     "team": "Iran",
     "teamCode": "IRN",
     "position": "MF",
-    "birthplace": "Tehran",
+    "birthplace": "Bushehr",
     "country": "Iran",
-    "lat": 36.443,
-    "lon": 51.7793
+    "lat": 28.9688,
+    "lon": 50.8385
   },
   {
     "id": "IRN-saman_ghoddos",
@@ -6462,10 +6462,10 @@
     "team": "Iran",
     "teamCode": "IRN",
     "position": "MF",
-    "birthplace": "Tehran",
+    "birthplace": "Karaj",
     "country": "Iran",
-    "lat": 35.3933,
-    "lon": 50.7477
+    "lat": 35.8327,
+    "lon": 50.9654
   },
   {
     "id": "IRN-amirmohammad_razzaghinia",
@@ -6473,10 +6473,10 @@
     "team": "Iran",
     "teamCode": "IRN",
     "position": "MF",
-    "birthplace": "Tehran",
+    "birthplace": "Yazd",
     "country": "Iran",
-    "lat": 34.9308,
-    "lon": 51.7716
+    "lat": 31.8974,
+    "lon": 54.3569
   },
   {
     "id": "IRN-saeid_ezatolahi",
@@ -6506,10 +6506,10 @@
     "team": "Iran",
     "teamCode": "IRN",
     "position": "FW",
-    "birthplace": "Tehran",
+    "birthplace": "Bushehr",
     "country": "Iran",
-    "lat": 35.6223,
-    "lon": 51.219
+    "lat": 28.9688,
+    "lon": 50.8385
   },
   {
     "id": "IRN-shahriyar_moghanlou",
@@ -6517,10 +6517,10 @@
     "team": "Iran",
     "teamCode": "IRN",
     "position": "FW",
-    "birthplace": "Tehran",
+    "birthplace": "Zanjan",
     "country": "Iran",
-    "lat": 36.1462,
-    "lon": 51.7378
+    "lat": 36.6736,
+    "lon": 48.4787
   },
   {
     "id": "IRN-ali_alipour",
@@ -9333,10 +9333,10 @@
     "team": "New Zealand",
     "teamCode": "NZL",
     "position": "FW",
-    "birthplace": "Auckland",
+    "birthplace": "Wellington",
     "country": "New Zealand",
-    "lat": -37.0573,
-    "lon": 175.0145
+    "lat": -41.2866,
+    "lon": 174.7756
   },
   {
     "id": "NZL-jesse_randall",

@@ -15,7 +15,8 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    await markPosted(body.id, body.posted);
+    const tweetUrl = typeof body.tweetUrl === 'string' ? body.tweetUrl : undefined;
+    await markPosted(body.id, body.posted, tweetUrl);
     return NextResponse.json({ ok: true });
   } catch (err) {
     return NextResponse.json(

@@ -12,6 +12,7 @@ export function TweetRow({ tweet, adminKey }: { tweet: QueuedTweet; adminKey: st
   const [posted, setPosted] = useState(tweet.posted);
   const [copied, setCopied] = useState(false);
   const [busy, setBusy] = useState(false);
+  const [url, setUrl] = useState(tweet.tweet_url ?? '');
 
   const copy = async () => {
     await navigator.clipboard.writeText(tweet.text);
@@ -25,7 +26,7 @@ export function TweetRow({ tweet, adminKey }: { tweet: QueuedTweet; adminKey: st
       const res = await fetch('/api/admin/tweets', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id: tweet.id, posted: !posted, key: adminKey }),
+        body: JSON.stringify({ id: tweet.id, posted: !posted, tweetUrl: url || undefined, key: adminKey }),
       });
       if (res.ok) setPosted(!posted);
     } finally {
@@ -65,10 +66,25 @@ export function TweetRow({ tweet, adminKey }: { tweet: QueuedTweet; adminKey: st
         {tweet.text}
       </pre>
 
-      <div style={{ display: 'flex', gap: 8 }}>
+      <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
         <button onClick={copy} style={btnStyle('#1d4ed8')}>
           {copied ? '✓ Gekopieerd' : 'Kopieer'}
         </button>
+        <input
+          value={url}
+          onChange={(e) => setUrl(e.target.value)}
+          placeholder="Plak hier de tweet-URL (optioneel)"
+          style={{
+            flex: 1,
+            minWidth: 200,
+            background: '#0a0a0a',
+            border: '1px solid #333',
+            borderRadius: 8,
+            padding: '8px 10px',
+            color: '#fff',
+            fontSize: 13,
+          }}
+        />
         <button onClick={toggle} disabled={busy} style={btnStyle(posted ? '#444' : '#15803d')}>
           {posted ? 'Ongedaan maken' : '✓ Geplaatst'}
         </button>

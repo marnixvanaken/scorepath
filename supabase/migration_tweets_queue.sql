@@ -10,6 +10,8 @@ create table tweets_queue (
   scheduled_for date      not null,              -- voor welke dag bedoeld
   posted      boolean     not null default false,
   posted_at   timestamptz,
+  tweet_url   text,                              -- door jou geplakt na plaatsen
+  tweet_id    text,                              -- afgeleid uit de URL, voor latere metrics
   dedupe_key  text        unique not null,       -- account+type+scheduled_for, voorkomt dubbelen
   created_at  timestamptz not null default now()
 );

@@ -10,8 +10,16 @@ export interface QueuedTweet {
   scheduled_for: string;
   posted: boolean;
   posted_at: string | null;
+  tweet_url: string | null;
+  tweet_id: string | null;
   dedupe_key: string;
   created_at: string;
+}
+
+// Haalt de tweet-ID uit een x.com/twitter.com status-URL.
+export function parseTweetId(url: string): string | null {
+  const m = url.match(/status\/(\d+)/);
+  return m ? m[1] : null;
 }
 
 export type NewTweet = Omit<QueuedTweet, 'id' | 'posted' | 'posted_at' | 'created_at'>;
@@ -50,11 +58,20 @@ export async function getQueue(includePosted = false): Promise<QueuedTweet[]> {
   return data ?? [];
 }
 
-export async function markPosted(id: string, posted: boolean): Promise<void> {
+export async function markPosted(id: string, posted: boolean, tweetUrl?: string): Promise<void> {
   const supabase = getServiceClient();
-  const { error } = await supabase
-    .from('tweets_queue')
-    .update({ posted, posted_at: posted ? new Date().toISOString() : null })
-    .eq('id', id);
+  const update: Record<string, unknown> = {
+    posted,
+    posted_at: posted ? new Date().toISOString() : null,
+  };
+  if (posted && tweetUrl) {
+    update.tweet_url = tweetUrl;
+    update.tweet_id = parseTweetId(tweetUrl);
+  }
+  if (!posted) {
+    update.tweet_url = null;
+    update.tweet_id = null;
+  }
+  const { error } = await supabase.from('tweets_queue').update(update).eq('id', id);
   if (error) throw new Error(`Status bijwerken mislukt: ${error.message}`);
 }

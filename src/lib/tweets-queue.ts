@@ -55,6 +55,28 @@ export async function enqueueTweets(tweets: NewTweet[], force = false): Promise<
   return data?.length ?? 0;
 }
 
+// Voegt één topical/eigen tweet toe (bijv. inhakend op nieuws van vandaag).
+export async function addCustomTweet(input: {
+  account: string;
+  handle: string;
+  lang: string;
+  text: string;
+  scheduled_for: string;
+}): Promise<void> {
+  const supabase = getServiceClient();
+  const row: NewTweet = {
+    account: input.account,
+    handle: input.handle,
+    lang: input.lang,
+    type: 'topical',
+    text: input.text,
+    scheduled_for: input.scheduled_for,
+    dedupe_key: `${input.account}:topical:${Date.now()}`,
+  };
+  const { error } = await supabase.from('tweets_queue').insert(row);
+  if (error) throw new Error(`Toevoegen mislukt: ${error.message}`);
+}
+
 export async function getQueue(includePosted = false): Promise<QueuedTweet[]> {
   const supabase = getServiceClient();
   let query = supabase

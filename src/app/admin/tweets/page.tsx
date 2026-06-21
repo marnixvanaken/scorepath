@@ -1,5 +1,6 @@
 import { getQueue, type QueuedTweet } from '@/lib/tweets-queue';
 import { TweetList } from './TweetList';
+import { AddTweetForm } from './AddTweetForm';
 
 export const dynamic = 'force-dynamic';
 
@@ -37,7 +38,12 @@ export default async function AdminTweetsPage(props: {
       </p>
 
       {error && <p style={{ color: '#f87171' }}>Fout: {error}</p>}
-      {!error && <TweetList tweets={tweets} adminKey={key} />}
+      {!error && (
+        <>
+          <AddTweetForm adminKey={key} />
+          <TweetList tweets={tweets} adminKey={key} />
+        </>
+      )}
     </main>
   );
 }

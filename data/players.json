@@ -11786,10 +11786,10 @@
     "team": "Sweden",
     "teamCode": "SWE",
     "position": "DF",
-    "birthplace": "Stockholm",
+    "birthplace": "Uddevalla",
     "country": "Sweden",
-    "lat": 59.3294,
-    "lon": 18.0686
+    "lat": 57.7215,
+    "lon": 11.9212
   },
   {
     "id": "SWE-carl_starfelt",
@@ -11863,10 +11863,10 @@
     "team": "Sweden",
     "teamCode": "SWE",
     "position": "MF",
-    "birthplace": "Stockholm",
+    "birthplace": "Säter",
     "country": "Sweden",
-    "lat": 59.3294,
-    "lon": 18.0686
+    "lat": 60.3536,
+    "lon": 15.7506
   },
   {
     "id": "SWE-gustaf_nilsson",
@@ -11885,10 +11885,10 @@
     "team": "Sweden",
     "teamCode": "SWE",
     "position": "FW",
-    "birthplace": "Stockholm",
+    "birthplace": "Gothenburg",
     "country": "Sweden",
-    "lat": 59.3294,
-    "lon": 18.0686
+    "lat": 57.7089,
+    "lon": 11.9746
   },
   {
     "id": "SWE-anthony_elanga",
@@ -11896,10 +11896,10 @@
     "team": "Sweden",
     "teamCode": "SWE",
     "position": "FW",
-    "birthplace": "Stockholm",
+    "birthplace": "Malmö",
     "country": "Sweden",
-    "lat": 59.3294,
-    "lon": 18.0686
+    "lat": 55.605,
+    "lon": 13.0038
   },
   {
     "id": "SWE-viktor_gyokeres",
@@ -11973,10 +11973,10 @@
     "team": "Sweden",
     "teamCode": "SWE",
     "position": "MF",
-    "birthplace": "Gothenburg",
+    "birthplace": "Norrköping",
     "country": "Sweden",
-    "lat": 57.7089,
-    "lon": 11.9746
+    "lat": 58.5942,
+    "lon": 16.1826
   },
   {
     "id": "SWE-hjalmar_ekdal",
@@ -12028,10 +12028,10 @@
     "team": "Tunisia",
     "teamCode": "TUN",
     "position": "GK",
-    "birthplace": "Tunis",
+    "birthplace": "Medenine",
     "country": "Tunisia",
-    "lat": 36.8065,
-    "lon": 10.1815
+    "lat": 33.3544,
+    "lon": 10.5039
   },
   {
     "id": "TUN-sabri_ben_hessen",
@@ -12039,10 +12039,10 @@
     "team": "Tunisia",
     "teamCode": "TUN",
     "position": "GK",
-    "birthplace": "Tunis",
+    "birthplace": "Sfax",
     "country": "Tunisia",
-    "lat": 36.8065,
-    "lon": 10.1815
+    "lat": 34.7406,
+    "lon": 10.7603
   },
   {
     "id": "TUN-ali_abdi",
@@ -12050,10 +12050,10 @@
     "team": "Tunisia",
     "teamCode": "TUN",
     "position": "DF",
-    "birthplace": "Tunis",
+    "birthplace": "Sfax",
     "country": "Tunisia",
-    "lat": 36.8065,
-    "lon": 10.1815
+    "lat": 34.7406,
+    "lon": 10.7603
   },
   {
     "id": "TUN-omar_rekik",
@@ -12061,10 +12061,10 @@
     "team": "Tunisia",
     "teamCode": "TUN",
     "position": "DF",
-    "birthplace": "Tunis",
-    "country": "Tunisia",
-    "lat": 36.8065,
-    "lon": 10.1815
+    "birthplace": "Helmond",
+    "country": "Netherlands",
+    "lat": 51.4833,
+    "lon": 5.6667
   },
   {
     "id": "TUN-adem_arous",
@@ -12072,10 +12072,10 @@
     "team": "Tunisia",
     "teamCode": "TUN",
     "position": "DF",
-    "birthplace": "Tunis",
-    "country": "Tunisia",
-    "lat": 36.8065,
-    "lon": 10.1815
+    "birthplace": "Medina",
+    "country": "Saudi Arabia",
+    "lat": 24.4683,
+    "lon": 39.6142
   },
   {
     "id": "TUN-moutaz_neffati",
@@ -12083,10 +12083,10 @@
     "team": "Tunisia",
     "teamCode": "TUN",
     "position": "DF",
-    "birthplace": "Tunis",
-    "country": "Tunisia",
-    "lat": 36.8065,
-    "lon": 10.1815
+    "birthplace": "Norrköping",
+    "country": "Sweden",
+    "lat": 58.5942,
+    "lon": 16.1826
   },
   {
     "id": "TUN-raed_chikhaoui",
@@ -12094,10 +12094,10 @@
     "team": "Tunisia",
     "teamCode": "TUN",
     "position": "DF",
-    "birthplace": "Tunis",
+    "birthplace": "Sakiet Ezzit",
     "country": "Tunisia",
-    "lat": 36.8065,
-    "lon": 10.1815
+    "lat": 34.7333,
+    "lon": 10.7667
   },
   {
     "id": "TUN-rani_khedira",
@@ -12116,10 +12116,10 @@
     "team": "Tunisia",
     "teamCode": "TUN",
     "position": "MF",
-    "birthplace": "Tunis",
+    "birthplace": "Sousse",
     "country": "Tunisia",
-    "lat": 36.8065,
-    "lon": 10.1815
+    "lat": 35.8256,
+    "lon": 10.6369
   },
   {
     "id": "TUN-ellyes_skhiri",
@@ -12127,10 +12127,10 @@
     "team": "Tunisia",
     "teamCode": "TUN",
     "position": "MF",
-    "birthplace": "Tunis",
-    "country": "Tunisia",
-    "lat": 36.8065,
-    "lon": 10.1815
+    "birthplace": "Lunel",
+    "country": "France",
+    "lat": 43.6751,
+    "lon": 4.1357
   },
   {
     "id": "TUN-anis_ben_slimane",
@@ -12138,10 +12138,10 @@
     "team": "Tunisia",
     "teamCode": "TUN",
     "position": "MF",
-    "birthplace": "Tunis",
-    "country": "Tunisia",
-    "lat": 36.8065,
-    "lon": 10.1815
+    "birthplace": "Copenhagen",
+    "country": "Denmark",
+    "lat": 55.6761,
+    "lon": 12.5683
   },
   {
     "id": "TUN-khalil_ayari",
@@ -12160,10 +12160,10 @@
     "team": "Tunisia",
     "teamCode": "TUN",
     "position": "FW",
-    "birthplace": "Tunis",
-    "country": "Tunisia",
-    "lat": 36.8065,
-    "lon": 10.1815
+    "birthplace": "Hamburg",
+    "country": "Germany",
+    "lat": 53.5753,
+    "lon": 10.0153
   },
   {
     "id": "TUN-hazem_mastouri",
@@ -12182,10 +12182,10 @@
     "team": "Tunisia",
     "teamCode": "TUN",
     "position": "FW",
-    "birthplace": "Tunis",
-    "country": "Tunisia",
-    "lat": 36.8065,
-    "lon": 10.1815
+    "birthplace": "Paris",
+    "country": "France",
+    "lat": 48.8567,
+    "lon": 2.3522
   },
   {
     "id": "TUN-mortadha_ben_ouanes",
@@ -12193,10 +12193,10 @@
     "team": "Tunisia",
     "teamCode": "TUN",
     "position": "FW",
-    "birthplace": "Tunis",
+    "birthplace": "Sousse",
     "country": "Tunisia",
-    "lat": 36.8065,
-    "lon": 10.1815
+    "lat": 35.8256,
+    "lon": 10.6369
   },
   {
     "id": "TUN-firas_chaouat",
@@ -12204,10 +12204,10 @@
     "team": "Tunisia",
     "teamCode": "TUN",
     "position": "FW",
-    "birthplace": "Tunis",
+    "birthplace": "Sfax",
     "country": "Tunisia",
-    "lat": 36.9296,
-    "lon": 10.2514
+    "lat": 34.7406,
+    "lon": 10.7603
   },
   {
     "id": "TUN-sebastian_tounekti",
@@ -12215,10 +12215,10 @@
     "team": "Tunisia",
     "teamCode": "TUN",
     "position": "FW",
-    "birthplace": "Tunis",
-    "country": "Tunisia",
-    "lat": 36.8065,
-    "lon": 10.1815
+    "birthplace": "Tromsø",
+    "country": "Norway",
+    "lat": 69.6492,
+    "lon": 18.9553
   },
   {
     "id": "TUN-rayan_elloumi",
@@ -12226,10 +12226,10 @@
     "team": "Tunisia",
     "teamCode": "TUN",
     "position": "FW",
-    "birthplace": "Tunis",
-    "country": "Tunisia",
-    "lat": 36.8065,
-    "lon": 10.1815
+    "birthplace": "St. Albert",
+    "country": "Canada",
+    "lat": 53.6334,
+    "lon": -113.6261
   },
   {
     "id": "TUN-montassar_talbi",
@@ -12237,10 +12237,10 @@
     "team": "Tunisia",
     "teamCode": "TUN",
     "position": "DF",
-    "birthplace": "Tunis",
-    "country": "Tunisia",
-    "lat": 36.8065,
-    "lon": 10.1815
+    "birthplace": "Paris",
+    "country": "France",
+    "lat": 48.8567,
+    "lon": 2.3522
   },
   {
     "id": "TUN-dylan_bronn",
@@ -12259,10 +12259,10 @@
     "team": "Tunisia",
     "teamCode": "TUN",
     "position": "FW",
-    "birthplace": "Stockholm",
-    "country": "Sweden",
-    "lat": 59.3293,
-    "lon": 18.0686
+    "birthplace": "Saint-Denis",
+    "country": "France",
+    "lat": -20.8823,
+    "lon": 55.4504
   },
   {
     "id": "TUN-hannibal_mejbri",
@@ -12281,10 +12281,10 @@
     "team": "Tunisia",
     "teamCode": "TUN",
     "position": "DF",
-    "birthplace": "Paris",
+    "birthplace": "Champigny-sur-Marne",
     "country": "France",
-    "lat": 48.8566,
-    "lon": 2.3522
+    "lat": 48.8181,
+    "lon": 2.5144
   },
   {
     "id": "TUN-mohamed_ben_hmida",
@@ -12327,8 +12327,8 @@
     "position": "GK",
     "birthplace": "Antalya",
     "country": "Turkey",
-    "lat": 37.8333,
-    "lon": 34.75
+    "lat": 36.8969,
+    "lon": 30.7133
   },
   {
     "id": "TUR-zeki_celik",
@@ -12875,10 +12875,10 @@
     "team": "United States",
     "teamCode": "USA",
     "position": "GK",
-    "birthplace": "New York",
-    "country": "USA",
-    "lat": 40.5879,
-    "lon": -74.7749
+    "birthplace": "Park Ridge",
+    "country": "United States",
+    "lat": 40.8534,
+    "lon": -74.0395
   },
   {
     "id": "USA-matt_freese",
@@ -12897,10 +12897,10 @@
     "team": "United States",
     "teamCode": "USA",
     "position": "GK",
-    "birthplace": "New York",
-    "country": "USA",
-    "lat": 41.2484,
-    "lon": -73.7393
+    "birthplace": "Naperville",
+    "country": "United States",
+    "lat": 41.7508,
+    "lon": -88.1535
   },
   {
     "id": "USA-auston_trusty",
@@ -12919,10 +12919,10 @@
     "team": "United States",
     "teamCode": "USA",
     "position": "DF",
-    "birthplace": "New York",
-    "country": "USA",
-    "lat": 40.0183,
-    "lon": -73.7442
+    "birthplace": "Birmingham",
+    "country": "United States",
+    "lat": 33.5186,
+    "lon": -86.8104
   },
   {
     "id": "USA-antonee_robinson",
@@ -13173,7 +13173,7 @@
     "teamCode": "UZB",
     "position": "GK",
     "birthplace": "Jizzakh",
-    "country": "Soviet Union",
+    "country": "Uzbekistan",
     "lat": 40.1167,
     "lon": 67.85
   },
@@ -13272,7 +13272,7 @@
     "teamCode": "UZB",
     "position": "DF",
     "birthplace": "Jizzakh",
-    "country": "Soviet Union",
+    "country": "Uzbekistan",
     "lat": 40.1167,
     "lon": 67.85
   },
@@ -13414,10 +13414,10 @@
     "team": "Uzbekistan",
     "teamCode": "UZB",
     "position": "MF",
-    "birthplace": "Tashkent",
+    "birthplace": "Sirdaryo",
     "country": "Uzbekistan",
-    "lat": 41.2995,
-    "lon": 69.2401
+    "lat": 40.8372,
+    "lon": 68.6633
   },
   {
     "id": "UZB-sherzod_yesanov",

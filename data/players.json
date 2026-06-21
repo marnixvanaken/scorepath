@@ -1160,10 +1160,10 @@
     "team": "Belgium",
     "teamCode": "BEL",
     "position": "DF",
-    "birthplace": "Brussels",
+    "birthplace": "Halle",
     "country": "Belgium",
-    "lat": 50.9913,
-    "lon": 4.3695
+    "lat": 50.7333,
+    "lon": 4.2333
   },
   {
     "id": "BEL-arthur_theate",
@@ -1171,10 +1171,10 @@
     "team": "Belgium",
     "teamCode": "BEL",
     "position": "DF",
-    "birthplace": "Brussels",
+    "birthplace": "Liège",
     "country": "Belgium",
-    "lat": 50.8503,
-    "lon": 4.3517
+    "lat": 50.6325,
+    "lon": 5.5797
   },
   {
     "id": "BEL-brandon_mechele",
@@ -1292,10 +1292,10 @@
     "team": "Belgium",
     "teamCode": "BEL",
     "position": "MF",
-    "birthplace": "Brussels",
+    "birthplace": "Bruges",
     "country": "Belgium",
-    "lat": 50.8503,
-    "lon": 4.3517
+    "lat": 51.2089,
+    "lon": 3.2242
   },
   {
     "id": "BEL-nicolas_raskin",
@@ -1303,10 +1303,10 @@
     "team": "Belgium",
     "teamCode": "BEL",
     "position": "MF",
-    "birthplace": "Brussels",
+    "birthplace": "Liège",
     "country": "Belgium",
-    "lat": 50.8503,
-    "lon": 4.3517
+    "lat": 50.6325,
+    "lon": 5.5797
   },
   {
     "id": "BEL-amadou_onana",
@@ -1314,10 +1314,10 @@
     "team": "Belgium",
     "teamCode": "BEL",
     "position": "MF",
-    "birthplace": "Brussels",
-    "country": "Belgium",
-    "lat": 50.8503,
-    "lon": 4.3517
+    "birthplace": "Dakar",
+    "country": "Senegal",
+    "lat": 14.7167,
+    "lon": -17.4677
   },
   {
     "id": "BEL-jeremy_doku",
@@ -1325,10 +1325,10 @@
     "team": "Belgium",
     "teamCode": "BEL",
     "position": "FW",
-    "birthplace": "Brussels",
+    "birthplace": "Antwerp",
     "country": "Belgium",
-    "lat": 50.8503,
-    "lon": 4.3517
+    "lat": 51.2213,
+    "lon": 4.3997
   },
   {
     "id": "BEL-dodi_lukebakio",
@@ -1402,10 +1402,10 @@
     "team": "Belgium",
     "teamCode": "BEL",
     "position": "MF",
-    "birthplace": "Brussels",
+    "birthplace": "Liège",
     "country": "Belgium",
-    "lat": 50.8503,
-    "lon": 4.3517
+    "lat": 50.6325,
+    "lon": 5.5797
   },
   {
     "id": "BEL-hans_vanaken",
@@ -4295,10 +4295,10 @@
     "team": "Egypt",
     "teamCode": "EGY",
     "position": "GK",
-    "birthplace": "Cairo",
+    "birthplace": "Ismaïlia",
     "country": "Egypt",
-    "lat": 30.0444,
-    "lon": 31.2357
+    "lat": 30.7391,
+    "lon": 31.3951
   },
   {
     "id": "EGY-el_mahdy_soliman",
@@ -4306,10 +4306,10 @@
     "team": "Egypt",
     "teamCode": "EGY",
     "position": "GK",
-    "birthplace": "Cairo",
+    "birthplace": "Sadat City",
     "country": "Egypt",
-    "lat": 30.0444,
-    "lon": 31.2357
+    "lat": 30.3312,
+    "lon": 30.5337
   },
   {
     "id": "EGY-mostafa_shobeir",
@@ -4317,10 +4317,10 @@
     "team": "Egypt",
     "teamCode": "EGY",
     "position": "GK",
-    "birthplace": "Cairo",
+    "birthplace": "Banha",
     "country": "Egypt",
-    "lat": 30.0444,
-    "lon": 31.2357
+    "lat": 30.2355,
+    "lon": 31.1528
   },
   {
     "id": "EGY-mohamed_alaa",
@@ -4328,10 +4328,10 @@
     "team": "Egypt",
     "teamCode": "EGY",
     "position": "GK",
-    "birthplace": "Cairo",
+    "birthplace": "Mahalla El-Kubra",
     "country": "Egypt",
-    "lat": 30.0444,
-    "lon": 31.2357
+    "lat": 30.9818,
+    "lon": 31.1721
   },
   {
     "id": "EGY-yasser_ibrahim",
@@ -4339,10 +4339,10 @@
     "team": "Egypt",
     "teamCode": "EGY",
     "position": "DF",
-    "birthplace": "Cairo",
+    "birthplace": "Ismaïlia",
     "country": "Egypt",
-    "lat": 30.0444,
-    "lon": 31.2357
+    "lat": 30.6555,
+    "lon": 32.1382
   },
   {
     "id": "EGY-mohamed_hany",
@@ -4350,10 +4350,10 @@
     "team": "Egypt",
     "teamCode": "EGY",
     "position": "DF",
-    "birthplace": "Cairo",
+    "birthplace": "Beni Suef",
     "country": "Egypt",
-    "lat": 30.0444,
-    "lon": 31.2357
+    "lat": 29.0363,
+    "lon": 30.96
   },
   {
     "id": "EGY-hossam_abdelmaguid",
@@ -4361,10 +4361,10 @@
     "team": "Egypt",
     "teamCode": "EGY",
     "position": "DF",
-    "birthplace": "Cairo",
+    "birthplace": "Helwan",
     "country": "Egypt",
-    "lat": 30.0444,
-    "lon": 31.2357
+    "lat": 29.6786,
+    "lon": 31.5799
   },
   {
     "id": "EGY-ramy_rabia",
@@ -4372,10 +4372,10 @@
     "team": "Egypt",
     "teamCode": "EGY",
     "position": "DF",
-    "birthplace": "Cairo",
+    "birthplace": "Beni Suef",
     "country": "Egypt",
-    "lat": 30.0444,
-    "lon": 31.2357
+    "lat": 29.2797,
+    "lon": 30.9961
   },
   {
     "id": "EGY-mohamed_abdelmonem",
@@ -4383,10 +4383,10 @@
     "team": "Egypt",
     "teamCode": "EGY",
     "position": "DF",
-    "birthplace": "Cairo",
+    "birthplace": "Zifta",
     "country": "Egypt",
-    "lat": 30.0444,
-    "lon": 31.2357
+    "lat": 30.9732,
+    "lon": 31.5639
   },
   {
     "id": "EGY-ahmed_abou_el_fotouh",
@@ -4394,10 +4394,10 @@
     "team": "Egypt",
     "teamCode": "EGY",
     "position": "DF",
-    "birthplace": "Cairo",
+    "birthplace": "6th of October City",
     "country": "Egypt",
-    "lat": 30.0444,
-    "lon": 31.2357
+    "lat": 29.835,
+    "lon": 30.8579
   },
   {
     "id": "EGY-tarek_alaa",
@@ -4405,10 +4405,10 @@
     "team": "Egypt",
     "teamCode": "EGY",
     "position": "DF",
-    "birthplace": "Cairo",
+    "birthplace": "Tanta",
     "country": "Egypt",
-    "lat": 30.0444,
-    "lon": 31.2357
+    "lat": 30.8464,
+    "lon": 31.0749
   },
   {
     "id": "EGY-emam_ashour",
@@ -4416,10 +4416,10 @@
     "team": "Egypt",
     "teamCode": "EGY",
     "position": "MF",
-    "birthplace": "Cairo",
+    "birthplace": "Menouf",
     "country": "Egypt",
-    "lat": 30.0444,
-    "lon": 31.2357
+    "lat": 30.2954,
+    "lon": 30.8245
   },
   {
     "id": "EGY-hamdy_fathy",
@@ -4427,10 +4427,10 @@
     "team": "Egypt",
     "teamCode": "EGY",
     "position": "MF",
-    "birthplace": "Cairo",
+    "birthplace": "Fayoum",
     "country": "Egypt",
-    "lat": 30.0444,
-    "lon": 31.2357
+    "lat": 29.4508,
+    "lon": 30.4821
   },
   {
     "id": "EGY-ahmed_nabil_koka",
@@ -4438,10 +4438,10 @@
     "team": "Egypt",
     "teamCode": "EGY",
     "position": "MF",
-    "birthplace": "Cairo",
+    "birthplace": "Monufia",
     "country": "Egypt",
-    "lat": 30.0444,
-    "lon": 31.2357
+    "lat": 30.1654,
+    "lon": 30.601
   },
   {
     "id": "EGY-mohanad_lasheen",
@@ -4449,10 +4449,10 @@
     "team": "Egypt",
     "teamCode": "EGY",
     "position": "MF",
-    "birthplace": "Cairo",
+    "birthplace": "Fayoum",
     "country": "Egypt",
-    "lat": 30.0444,
-    "lon": 31.2357
+    "lat": 29.57,
+    "lon": 30.3002
   },
   {
     "id": "EGY-marwan_attia",
@@ -4460,10 +4460,10 @@
     "team": "Egypt",
     "teamCode": "EGY",
     "position": "MF",
-    "birthplace": "Cairo",
+    "birthplace": "New Cairo",
     "country": "Egypt",
-    "lat": 30.0444,
-    "lon": 31.2357
+    "lat": 29.7693,
+    "lon": 31.6594
   },
   {
     "id": "EGY-mahmoud_saber",
@@ -4471,10 +4471,10 @@
     "team": "Egypt",
     "teamCode": "EGY",
     "position": "MF",
-    "birthplace": "Cairo",
+    "birthplace": "6th of October City",
     "country": "Egypt",
-    "lat": 30.0444,
-    "lon": 31.2357
+    "lat": 30.0103,
+    "lon": 30.934
   },
   {
     "id": "EGY-trezeguet",
@@ -4482,10 +4482,10 @@
     "team": "Egypt",
     "teamCode": "EGY",
     "position": "FW",
-    "birthplace": "Cairo",
+    "birthplace": "Kafr el-Sheikh",
     "country": "Egypt",
-    "lat": 30.0444,
-    "lon": 31.2357
+    "lat": 30.8478,
+    "lon": 30.6317
   },
   {
     "id": "EGY-mostafa_mohamed",
@@ -4493,10 +4493,10 @@
     "team": "Egypt",
     "teamCode": "EGY",
     "position": "FW",
-    "birthplace": "Cairo",
+    "birthplace": "Minya",
     "country": "Egypt",
-    "lat": 30.0444,
-    "lon": 31.2357
+    "lat": 29.5957,
+    "lon": 30.3017
   },
   {
     "id": "EGY-haissem_hassan",
@@ -4504,10 +4504,10 @@
     "team": "Egypt",
     "teamCode": "EGY",
     "position": "FW",
-    "birthplace": "Cairo",
+    "birthplace": "Helwan",
     "country": "Egypt",
-    "lat": 30.0444,
-    "lon": 31.2357
+    "lat": 29.7337,
+    "lon": 31.3286
   },
   {
     "id": "EGY-ibrahim_adel",
@@ -4515,10 +4515,10 @@
     "team": "Egypt",
     "teamCode": "EGY",
     "position": "FW",
-    "birthplace": "Cairo",
+    "birthplace": "10th of Ramadan City",
     "country": "Egypt",
-    "lat": 30.0444,
-    "lon": 31.2357
+    "lat": 30.2755,
+    "lon": 31.7387
   },
   {
     "id": "EGY-omar_marmoush",
@@ -4526,10 +4526,10 @@
     "team": "Egypt",
     "teamCode": "EGY",
     "position": "FW",
-    "birthplace": "Cairo",
+    "birthplace": "Suez",
     "country": "Egypt",
-    "lat": 30.0444,
-    "lon": 31.2357
+    "lat": 29.3828,
+    "lon": 32.0787
   },
   {
     "id": "EGY-zizo",
@@ -4537,10 +4537,10 @@
     "team": "Egypt",
     "teamCode": "EGY",
     "position": "FW",
-    "birthplace": "Cairo",
+    "birthplace": "Mahalla El-Kubra",
     "country": "Egypt",
-    "lat": 30.0444,
-    "lon": 31.2357
+    "lat": 30.868,
+    "lon": 31.2236
   },
   {
     "id": "EGY-hamza_abdelkarim",
@@ -6594,10 +6594,10 @@
     "team": "Iraq",
     "teamCode": "IRQ",
     "position": "GK",
-    "birthplace": "Baghdad",
+    "birthplace": "Fallujah",
     "country": "Iraq",
-    "lat": 33.3152,
-    "lon": 44.3661
+    "lat": 33.1316,
+    "lon": 43.7276
   },
   {
     "id": "IRQ-rebin_sulaka",
@@ -6781,10 +6781,10 @@
     "team": "Iraq",
     "teamCode": "IRQ",
     "position": "MF",
-    "birthplace": "Baghdad",
+    "birthplace": "Al-Kut",
     "country": "Iraq",
-    "lat": 33.3152,
-    "lon": 44.3661
+    "lat": 32.9429,
+    "lon": 45.3259
   },
   {
     "id": "IRQ-aymen_hussein",
@@ -6946,7 +6946,7 @@
     "team": "Jordan",
     "teamCode": "JOR",
     "position": "MF",
-    "birthplace": "Amman",
+    "birthplace": "Mafraq",
     "country": "Jordan",
     "lat": 32.3002,
     "lon": 36.0939
@@ -7782,10 +7782,10 @@
     "team": "Saudi Arabia",
     "teamCode": "KSA",
     "position": "DF",
-    "birthplace": "Riyadh",
+    "birthplace": "Shaqra",
     "country": "Saudi Arabia",
-    "lat": 24.7136,
-    "lon": 46.6753
+    "lat": 25.2406,
+    "lon": 45.7464
   },
   {
     "id": "KSA-nawaf_boushal",
@@ -7804,10 +7804,10 @@
     "team": "Saudi Arabia",
     "teamCode": "KSA",
     "position": "MF",
-    "birthplace": "Riyadh",
+    "birthplace": "Al-Kharj",
     "country": "Saudi Arabia",
-    "lat": 24.7136,
-    "lon": 46.6753
+    "lat": 24.8142,
+    "lon": 47.6945
   },
   {
     "id": "KSA-musab_al_juwayr",
@@ -9322,10 +9322,10 @@
     "team": "New Zealand",
     "teamCode": "NZL",
     "position": "MF",
-    "birthplace": "Auckland",
+    "birthplace": "Te Puke",
     "country": "New Zealand",
-    "lat": -37.4255,
-    "lon": 174.6856
+    "lat": -37.7833,
+    "lon": 176.3167
   },
   {
     "id": "NZL-logan_rogerson",
@@ -10466,10 +10466,10 @@
     "team": "Qatar",
     "teamCode": "QAT",
     "position": "MF",
-    "birthplace": "Doha",
-    "country": "Qatar",
-    "lat": 25.2854,
-    "lon": 51.531
+    "birthplace": "Khartoum",
+    "country": "Sudan",
+    "lat": 15.5518,
+    "lon": 32.5324
   },
   {
     "id": "QAT-ahmed_alaaeldin",

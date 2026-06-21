@@ -16,10 +16,10 @@
     "team": "Algeria",
     "teamCode": "ALG",
     "position": "GK",
-    "birthplace": "Algiers",
-    "country": "Algeria",
-    "lat": 36.7372,
-    "lon": 3.0867
+    "birthplace": "Thonon-les-Bains",
+    "country": "France",
+    "lat": 46.3704,
+    "lon": 6.4773
   },
   {
     "id": "ALG-aissa_mandi",
@@ -225,10 +225,10 @@
     "team": "Algeria",
     "teamCode": "ALG",
     "position": "FW",
-    "birthplace": "Algiers",
-    "country": "Algeria",
-    "lat": 36.7372,
-    "lon": 3.0867
+    "birthplace": "Montreuil",
+    "country": "France",
+    "lat": 48.8628,
+    "lon": 2.4463
   },
   {
     "id": "ALG-mohamed_tougai",
@@ -2832,10 +2832,10 @@
     "team": "DR Congo",
     "teamCode": "COD",
     "position": "FW",
-    "birthplace": "Lille",
-    "country": "France",
-    "lat": 50.6319,
-    "lon": 3.0575
+    "birthplace": "Kinshasa",
+    "country": "Democratic Republic of the Congo",
+    "lat": -4.3217,
+    "lon": 15.3222
   },
   {
     "id": "COD-aaron_tshibola",
@@ -7232,10 +7232,10 @@
     "team": "Japan",
     "teamCode": "JPN",
     "position": "DF",
-    "birthplace": "Tokyo",
+    "birthplace": "Hamamatsu",
     "country": "Japan",
-    "lat": 35.6894,
-    "lon": 139.6917
+    "lat": 34.7103,
+    "lon": 137.7266
   },
   {
     "id": "JPN-junnosuke_suzuki",
@@ -7386,10 +7386,10 @@
     "team": "Japan",
     "teamCode": "JPN",
     "position": "FW",
-    "birthplace": "Tokyo",
+    "birthplace": "Hamamatsu",
     "country": "Japan",
-    "lat": 35.6894,
-    "lon": 139.6917
+    "lat": 34.7103,
+    "lon": 137.7266
   },
   {
     "id": "JPN-ko_itakura",
@@ -8970,10 +8970,10 @@
     "team": "Norway",
     "teamCode": "NOR",
     "position": "DF",
-    "birthplace": "Oslo",
+    "birthplace": "Tønsberg",
     "country": "Norway",
-    "lat": 59.9133,
-    "lon": 10.7389
+    "lat": 59.2672,
+    "lon": 10.4078
   },
   {
     "id": "NOR-morten_thorsby",
@@ -12017,10 +12017,10 @@
     "team": "Tunisia",
     "teamCode": "TUN",
     "position": "GK",
-    "birthplace": "Tunis",
+    "birthplace": "Sfax",
     "country": "Tunisia",
-    "lat": 36.8065,
-    "lon": 10.1815
+    "lat": 34.7406,
+    "lon": 10.7603
   },
   {
     "id": "TUN-mouhib_chamakh",
@@ -13260,10 +13260,10 @@
     "team": "Uzbekistan",
     "teamCode": "UZB",
     "position": "DF",
-    "birthplace": "Tashkent",
+    "birthplace": "Namangan",
     "country": "Uzbekistan",
-    "lat": 41.2995,
-    "lon": 69.2401
+    "lat": 40.9983,
+    "lon": 71.6726
   },
   {
     "id": "UZB-jakhongir_urozov",
@@ -13524,10 +13524,10 @@
     "team": "Curaçao",
     "teamCode": "CUW",
     "position": "DF",
-    "birthplace": "Willemstad",
-    "country": "Curaçao",
-    "lat": 12.108,
-    "lon": -68.935
+    "birthplace": "Nieuwegein",
+    "country": "Netherlands",
+    "lat": 52.0325,
+    "lon": 5.0925
   },
   {
     "id": "CUW-armando_obispo",
@@ -13623,10 +13623,10 @@
     "team": "Curaçao",
     "teamCode": "CUW",
     "position": "MF",
-    "birthplace": "Willemstad",
-    "country": "Curaçao",
-    "lat": 12.108,
-    "lon": -68.935
+    "birthplace": "Amsterdam",
+    "country": "Netherlands",
+    "lat": 52.3676,
+    "lon": 4.9041
   },
   {
     "id": "CUW-kevin_felida",

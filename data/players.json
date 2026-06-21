@@ -1193,10 +1193,10 @@
     "team": "Belgium",
     "teamCode": "BEL",
     "position": "DF",
-    "birthplace": "Brussels",
-    "country": "Belgium",
-    "lat": 50.8503,
-    "lon": 4.3517
+    "birthplace": "Condé-sur-l'Escaut",
+    "country": "France",
+    "lat": 50.3675,
+    "lon": 3.6078
   },
   {
     "id": "BEL-thomas_meunier",
@@ -1215,10 +1215,10 @@
     "team": "Belgium",
     "teamCode": "BEL",
     "position": "DF",
-    "birthplace": "Brussels",
-    "country": "Belgium",
-    "lat": 50.8503,
-    "lon": 4.3517
+    "birthplace": "Waalwijk",
+    "country": "Netherlands",
+    "lat": 51.7446,
+    "lon": 5.2368
   },
   {
     "id": "BEL-joaquin_seys",
@@ -1226,10 +1226,10 @@
     "team": "Belgium",
     "teamCode": "BEL",
     "position": "DF",
-    "birthplace": "Brussels",
+    "birthplace": "Hannut",
     "country": "Belgium",
-    "lat": 50.8503,
-    "lon": 4.3517
+    "lat": 50.6771,
+    "lon": 5.0258
   },
   {
     "id": "BEL-nathan_ngoy",
@@ -1237,10 +1237,10 @@
     "team": "Belgium",
     "teamCode": "BEL",
     "position": "DF",
-    "birthplace": "Brussels",
-    "country": "Belgium",
-    "lat": 50.8503,
-    "lon": 4.3517
+    "birthplace": "Breskens",
+    "country": "Netherlands",
+    "lat": 51.4371,
+    "lon": 3.681
   },
   {
     "id": "BEL-timothy_castagne",
@@ -1336,10 +1336,10 @@
     "team": "Belgium",
     "teamCode": "BEL",
     "position": "FW",
-    "birthplace": "Brussels",
+    "birthplace": "Nassogne",
     "country": "Belgium",
-    "lat": 50.8503,
-    "lon": 4.3517
+    "lat": 50.1733,
+    "lon": 5.3218
   },
   {
     "id": "BEL-alexis_saelemaekers",
@@ -1347,10 +1347,10 @@
     "team": "Belgium",
     "teamCode": "BEL",
     "position": "FW",
-    "birthplace": "Brussels",
-    "country": "Belgium",
-    "lat": 50.8503,
-    "lon": 4.3517
+    "birthplace": "Maubeuge",
+    "country": "France",
+    "lat": 50.1093,
+    "lon": 3.5103
   },
   {
     "id": "BEL-thibaut_courtois",
@@ -6310,8 +6310,8 @@
     "position": "GK",
     "birthplace": "Tehran",
     "country": "Iran",
-    "lat": 35.6892,
-    "lon": 51.389
+    "lat": 36.1639,
+    "lon": 50.7957
   },
   {
     "id": "IRN-hossein_hosseini",
@@ -6321,8 +6321,8 @@
     "position": "GK",
     "birthplace": "Tehran",
     "country": "Iran",
-    "lat": 35.6892,
-    "lon": 51.389
+    "lat": 35.9002,
+    "lon": 51.612
   },
   {
     "id": "IRN-saleh_hardani",
@@ -6332,8 +6332,8 @@
     "position": "DF",
     "birthplace": "Tehran",
     "country": "Iran",
-    "lat": 35.6892,
-    "lon": 51.389
+    "lat": 35.2568,
+    "lon": 51.1731
   },
   {
     "id": "IRN-ehsan_hajsafi",
@@ -6354,8 +6354,8 @@
     "position": "DF",
     "birthplace": "Tehran",
     "country": "Iran",
-    "lat": 35.6892,
-    "lon": 51.389
+    "lat": 36.4946,
+    "lon": 50.6194
   },
   {
     "id": "IRN-milad_mohammadi",
@@ -6365,8 +6365,8 @@
     "position": "DF",
     "birthplace": "Tehran",
     "country": "Iran",
-    "lat": 35.6892,
-    "lon": 51.389
+    "lat": 35.0315,
+    "lon": 51.5303
   },
   {
     "id": "IRN-hossein_kanaanizadegan",
@@ -6376,8 +6376,8 @@
     "position": "DF",
     "birthplace": "Tehran",
     "country": "Iran",
-    "lat": 35.6892,
-    "lon": 51.389
+    "lat": 36.4391,
+    "lon": 51.767
   },
   {
     "id": "IRN-ali_nemati",
@@ -6387,8 +6387,8 @@
     "position": "DF",
     "birthplace": "Tehran",
     "country": "Iran",
-    "lat": 35.6892,
-    "lon": 51.389
+    "lat": 36.3372,
+    "lon": 51.7187
   },
   {
     "id": "IRN-ramin_rezaeian",
@@ -6398,8 +6398,8 @@
     "position": "DF",
     "birthplace": "Tehran",
     "country": "Iran",
-    "lat": 35.6892,
-    "lon": 51.389
+    "lat": 34.9237,
+    "lon": 52.2688
   },
   {
     "id": "IRN-aria_yousefi",
@@ -6420,8 +6420,8 @@
     "position": "MF",
     "birthplace": "Tehran",
     "country": "Iran",
-    "lat": 35.6892,
-    "lon": 51.389
+    "lat": 36.4614,
+    "lon": 50.6872
   },
   {
     "id": "IRN-alireza_jahanbakhsh",
@@ -6442,8 +6442,8 @@
     "position": "MF",
     "birthplace": "Tehran",
     "country": "Iran",
-    "lat": 35.6892,
-    "lon": 51.389
+    "lat": 36.443,
+    "lon": 51.7793
   },
   {
     "id": "IRN-saman_ghoddos",
@@ -6464,8 +6464,8 @@
     "position": "MF",
     "birthplace": "Tehran",
     "country": "Iran",
-    "lat": 35.6892,
-    "lon": 51.389
+    "lat": 35.3933,
+    "lon": 50.7477
   },
   {
     "id": "IRN-amirmohammad_razzaghinia",
@@ -6475,8 +6475,8 @@
     "position": "MF",
     "birthplace": "Tehran",
     "country": "Iran",
-    "lat": 35.6892,
-    "lon": 51.389
+    "lat": 34.9308,
+    "lon": 51.7716
   },
   {
     "id": "IRN-saeid_ezatolahi",
@@ -6519,8 +6519,8 @@
     "position": "FW",
     "birthplace": "Tehran",
     "country": "Iran",
-    "lat": 35.6892,
-    "lon": 51.389
+    "lat": 36.1462,
+    "lon": 51.7378
   },
   {
     "id": "IRN-ali_alipour",
@@ -10356,10 +10356,10 @@
     "team": "Qatar",
     "teamCode": "QAT",
     "position": "DF",
-    "birthplace": "Doha",
+    "birthplace": "Al-Wakrah",
     "country": "Qatar",
-    "lat": 25.2854,
-    "lon": 51.531
+    "lat": 24.6449,
+    "lon": 51.296
   },
   {
     "id": "QAT-homam_ahmed",
@@ -10378,10 +10378,10 @@
     "team": "Qatar",
     "teamCode": "QAT",
     "position": "DF",
-    "birthplace": "Doha",
+    "birthplace": "Al-Khor",
     "country": "Qatar",
-    "lat": 25.2854,
-    "lon": 51.531
+    "lat": 25.5395,
+    "lon": 52.2246
   },
   {
     "id": "QAT-sultan_al_brake",

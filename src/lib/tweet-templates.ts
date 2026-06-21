@@ -132,3 +132,22 @@ export function canStillWinNl(teamId: string): string {
   const name = teamNl(teamId);
   return `Kan ${name} het #WK2026 nog winnen? 🤔\n\nDoe de simulatie zelf →\n${BASE_NL}/wk-2026\n\n#WK2026 #Voetbal`;
 }
+
+// Aankondiging van de "beste nummers 3"-feature in de simulator.
+// Speelt in op het hete hangijzer vlak voor het einde van de groepsfase.
+export function bestThirdsAnnouncementNl(): string {
+  const variants = [
+    `🚨 Nieuw in de simulator: je kunt nu de strijd om de 8 beste nummers 3 helemaal zelf naspelen.\n\n4 punten genoeg? Of komt jouw land met 3 nog door op doelsaldo? Vul de poules in en zie de ranglijst live 👇\n${BASE_NL}/wk-2026\n\n#WK2026 #Voetbal`,
+    `Het format waar iedereen over struikelt: de 8 beste nummers 3. 🤯\n\nWij hebben 'm nu in de simulator zitten — vul de uitslagen in en zie meteen wie dat laatste ticket naar de Round of 32 pakt.\n${BASE_NL}/wk-2026\n\n#WK2026 #Voetbal`,
+    `Wie wordt straks een van de 8 beste nummers 3? 👀\n\nSpeel de groepsfase zelf na en check de complete ranglijst — inclusief alle tiebreakers, precies volgens de FIFA-regels.\n${BASE_NL}/wk-2026\n\n#WK2026 #Voetbal`,
+  ];
+  return variants[new Date().getDate() % variants.length];
+}
+
+export function bestThirdsAnnouncementEn(): string {
+  const variants = [
+    `🚨 New in the simulator: you can now play out the race for the 8 best third-placed teams yourself.\n\n4 points enough? Or does your team sneak through on goal difference with 3? Fill in the groups and watch the ranking live 👇\n${BASE_EN}/wk-2026\n\n#WC2026 #WorldCup2026`,
+    `The format everyone's confused about: the 8 best third-placed teams. 🤯\n\nIt's now live in our simulator — fill in the results and instantly see who grabs that last Round of 32 ticket.\n${BASE_EN}/wk-2026\n\n#WC2026 #WorldCup2026`,
+  ];
+  return variants[new Date().getDate() % variants.length];
+}

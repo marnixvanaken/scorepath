@@ -3,6 +3,10 @@
     {
       "path": "/api/generate-blog",
       "schedule": "0 7 * * *"
+    },
+    {
+      "path": "/api/cron/wk-daily",
+      "schedule": "0 22 * * *"
     }
   ]
 }

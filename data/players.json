@@ -2513,10 +2513,10 @@
     "team": "Ivory Coast",
     "teamCode": "CIV",
     "position": "FW",
-    "birthplace": "Abidjan",
-    "country": "Ivory Coast",
-    "lat": 5.3364,
-    "lon": -4.0267
+    "birthplace": "Divo",
+    "country": "Côte d'Ivoire",
+    "lat": 5.7744,
+    "lon": -4.5582
   },
   {
     "id": "CIV-elye_wahi",
@@ -5747,10 +5747,10 @@
     "team": "Ghana",
     "teamCode": "GHA",
     "position": "GK",
-    "birthplace": "Accra",
+    "birthplace": "Kasoa",
     "country": "Ghana",
-    "lat": 5.6037,
-    "lon": -0.187
+    "lat": 5.5861,
+    "lon": -0.8306
   },
   {
     "id": "GHA-jonas_adjetey",
@@ -8497,10 +8497,10 @@
     "team": "Mexico",
     "teamCode": "MEX",
     "position": "FW",
-    "birthplace": "Mexico City",
+    "birthplace": "Apan",
     "country": "Mexico",
-    "lat": 19.4326,
-    "lon": -99.1332
+    "lat": 19.5454,
+    "lon": -98.4415
   },
   {
     "id": "MEX-edson_alvarez",
@@ -10609,10 +10609,10 @@
     "team": "South Africa",
     "teamCode": "RSA",
     "position": "GK",
-    "birthplace": "Johannesburg",
+    "birthplace": "Vanderbijlpark",
     "country": "South Africa",
-    "lat": -26.2041,
-    "lon": 28.0473
+    "lat": -26.6166,
+    "lon": 27.7395
   },
   {
     "id": "RSA-thabang_matuludi",
@@ -10620,10 +10620,10 @@
     "team": "South Africa",
     "teamCode": "RSA",
     "position": "DF",
-    "birthplace": "Johannesburg",
+    "birthplace": "Rustenburg",
     "country": "South Africa",
-    "lat": -26.2041,
-    "lon": 28.0473
+    "lat": -25.2114,
+    "lon": 27.2783
   },
   {
     "id": "RSA-khulumani_ndamane",
@@ -10631,10 +10631,10 @@
     "team": "South Africa",
     "teamCode": "RSA",
     "position": "DF",
-    "birthplace": "Johannesburg",
+    "birthplace": "Heidelberg",
     "country": "South Africa",
-    "lat": -26.2041,
-    "lon": 28.0473
+    "lat": -26.5228,
+    "lon": 28.3398
   },
   {
     "id": "RSA-aubrey_modiba",
@@ -10664,10 +10664,10 @@
     "team": "South Africa",
     "teamCode": "RSA",
     "position": "DF",
-    "birthplace": "Johannesburg",
+    "birthplace": "Potchefstroom",
     "country": "South Africa",
-    "lat": -26.2041,
-    "lon": 28.0473
+    "lat": -26.6468,
+    "lon": 27.3509
   },
   {
     "id": "RSA-nkosinathi_sibisi",
@@ -10708,10 +10708,10 @@
     "team": "South Africa",
     "teamCode": "RSA",
     "position": "DF",
-    "birthplace": "Johannesburg",
+    "birthplace": "Heidelberg",
     "country": "South Africa",
-    "lat": -26.2041,
-    "lon": 28.0473
+    "lat": -26.5191,
+    "lon": 28.5441
   },
   {
     "id": "RSA-teboho_mokoena",
@@ -10730,10 +10730,10 @@
     "team": "South Africa",
     "teamCode": "RSA",
     "position": "MF",
-    "birthplace": "Johannesburg",
+    "birthplace": "Rustenburg",
     "country": "South Africa",
-    "lat": -26.2041,
-    "lon": 28.0473
+    "lat": -25.7319,
+    "lon": 27.3437
   },
   {
     "id": "RSA-themba_zwane",
@@ -10818,10 +10818,10 @@
     "team": "South Africa",
     "teamCode": "RSA",
     "position": "FW",
-    "birthplace": "Johannesburg",
+    "birthplace": "Springs",
     "country": "South Africa",
-    "lat": -26.2041,
-    "lon": 28.0473
+    "lat": -26.0236,
+    "lon": 28.6255
   },
   {
     "id": "RSA-iqraam_rayners",

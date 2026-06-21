@@ -9201,10 +9201,10 @@
     "team": "New Zealand",
     "teamCode": "NZL",
     "position": "DF",
-    "birthplace": "Auckland",
+    "birthplace": "Christchurch",
     "country": "New Zealand",
-    "lat": -36.8426,
-    "lon": 175.0315
+    "lat": -43.5321,
+    "lon": 172.6362
   },
   {
     "id": "NZL-tyler_bindon",
@@ -9223,10 +9223,10 @@
     "team": "New Zealand",
     "teamCode": "NZL",
     "position": "DF",
-    "birthplace": "Auckland",
-    "country": "New Zealand",
-    "lat": -37.452,
-    "lon": 175.3783
+    "birthplace": "Cardiff",
+    "country": "Wales",
+    "lat": 51.4816,
+    "lon": -3.1791
   },
   {
     "id": "NZL-callan_elliot",
@@ -9234,10 +9234,10 @@
     "team": "New Zealand",
     "teamCode": "NZL",
     "position": "DF",
-    "birthplace": "Auckland",
-    "country": "New Zealand",
-    "lat": -37.3643,
-    "lon": 175.5689
+    "birthplace": "Dumfries",
+    "country": "Scotland",
+    "lat": 55.0709,
+    "lon": -3.6051
   },
   {
     "id": "NZL-joe_bell",
@@ -9245,10 +9245,10 @@
     "team": "New Zealand",
     "teamCode": "NZL",
     "position": "MF",
-    "birthplace": "Auckland",
-    "country": "New Zealand",
-    "lat": -36.529,
-    "lon": 175.5264
+    "birthplace": "Bristol",
+    "country": "England",
+    "lat": 51.4545,
+    "lon": -2.5879
   },
   {
     "id": "NZL-marko_stamenic",
@@ -9256,10 +9256,10 @@
     "team": "New Zealand",
     "teamCode": "NZL",
     "position": "MF",
-    "birthplace": "Auckland",
+    "birthplace": "Wellington",
     "country": "New Zealand",
-    "lat": -36.3789,
-    "lon": 175.6752
+    "lat": -41.2866,
+    "lon": 174.7756
   },
   {
     "id": "NZL-lachlan_bayliss",
@@ -9267,10 +9267,10 @@
     "team": "New Zealand",
     "teamCode": "NZL",
     "position": "MF",
-    "birthplace": "Auckland",
-    "country": "New Zealand",
-    "lat": -35.9285,
-    "lon": 175.3205
+    "birthplace": "Sydney",
+    "country": "Australia",
+    "lat": -33.8688,
+    "lon": 151.2093
   },
   {
     "id": "NZL-elijah_just",
@@ -9278,10 +9278,10 @@
     "team": "New Zealand",
     "teamCode": "NZL",
     "position": "MF",
-    "birthplace": "Auckland",
+    "birthplace": "Palmerston North",
     "country": "New Zealand",
-    "lat": -36.2538,
-    "lon": 174.3218
+    "lat": -40.3556,
+    "lon": 175.6114
   },
   {
     "id": "NZL-alex_rufer",
@@ -9289,10 +9289,10 @@
     "team": "New Zealand",
     "teamCode": "NZL",
     "position": "MF",
-    "birthplace": "Auckland",
-    "country": "New Zealand",
-    "lat": -35.8107,
-    "lon": 174.1693
+    "birthplace": "Geneva",
+    "country": "Switzerland",
+    "lat": 46.2044,
+    "lon": 6.1432
   },
   {
     "id": "NZL-ben_old",
@@ -9344,10 +9344,10 @@
     "team": "New Zealand",
     "teamCode": "NZL",
     "position": "FW",
-    "birthplace": "Auckland",
+    "birthplace": "Wellington",
     "country": "New Zealand",
-    "lat": -36.5418,
-    "lon": 175.2124
+    "lat": -41.2866,
+    "lon": 174.7756
   },
   {
     "id": "NZL-kosta_barbarouses",
@@ -9355,10 +9355,10 @@
     "team": "New Zealand",
     "teamCode": "NZL",
     "position": "FW",
-    "birthplace": "Auckland",
+    "birthplace": "Wellington",
     "country": "New Zealand",
-    "lat": -36.5846,
-    "lon": 173.8652
+    "lat": -41.2866,
+    "lon": 174.7756
   },
   {
     "id": "NZL-ben_waine",
@@ -9366,10 +9366,10 @@
     "team": "New Zealand",
     "teamCode": "NZL",
     "position": "FW",
-    "birthplace": "Auckland",
+    "birthplace": "Wellington",
     "country": "New Zealand",
-    "lat": -36.0112,
-    "lon": 174.4555
+    "lat": -41.2866,
+    "lon": 174.7756
   },
   {
     "id": "NZL-michael_boxall",
@@ -9421,10 +9421,10 @@
     "team": "New Zealand",
     "teamCode": "NZL",
     "position": "DF",
-    "birthplace": "Auckland",
-    "country": "New Zealand",
-    "lat": -36.8485,
-    "lon": 174.7633
+    "birthplace": "Brummen",
+    "country": "Netherlands",
+    "lat": 52.0881,
+    "lon": 6.1475
   },
   {
     "id": "NZL-tommy_smith",
@@ -9432,10 +9432,10 @@
     "team": "New Zealand",
     "teamCode": "NZL",
     "position": "DF",
-    "birthplace": "Auckland",
-    "country": "New Zealand",
-    "lat": -36.8485,
-    "lon": 174.7633
+    "birthplace": "Macclesfield",
+    "country": "England",
+    "lat": 53.2581,
+    "lon": -2.1274
   },
   {
     "id": "PAN-luis_mejia",

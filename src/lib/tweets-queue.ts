@@ -22,7 +22,10 @@ export function parseTweetId(url: string): string | null {
   return m ? m[1] : null;
 }
 
-export type NewTweet = Omit<QueuedTweet, 'id' | 'posted' | 'posted_at' | 'created_at'>;
+export type NewTweet = Omit<
+  QueuedTweet,
+  'id' | 'posted' | 'posted_at' | 'created_at' | 'tweet_url' | 'tweet_id'
+>;
 
 function getServiceClient() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;

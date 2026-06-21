@@ -1149,10 +1149,10 @@
     "team": "Belgium",
     "teamCode": "BEL",
     "position": "GK",
-    "birthplace": "Brussels",
+    "birthplace": "Zottegem",
     "country": "Belgium",
-    "lat": 51.0108,
-    "lon": 4.3285
+    "lat": 50.8696,
+    "lon": 3.8105
   },
   {
     "id": "BEL-zeno_debast",
@@ -1193,10 +1193,10 @@
     "team": "Belgium",
     "teamCode": "BEL",
     "position": "DF",
-    "birthplace": "Condé-sur-l'Escaut",
-    "country": "France",
-    "lat": 50.3675,
-    "lon": 3.6078
+    "birthplace": "Knokke-Heist",
+    "country": "Belgium",
+    "lat": 51.36,
+    "lon": 3.295
   },
   {
     "id": "BEL-thomas_meunier",
@@ -1215,10 +1215,10 @@
     "team": "Belgium",
     "teamCode": "BEL",
     "position": "DF",
-    "birthplace": "Waalwijk",
-    "country": "Netherlands",
-    "lat": 51.7446,
-    "lon": 5.2368
+    "birthplace": "Antwerp",
+    "country": "Belgium",
+    "lat": 51.2213,
+    "lon": 4.3997
   },
   {
     "id": "BEL-joaquin_seys",
@@ -1237,10 +1237,10 @@
     "team": "Belgium",
     "teamCode": "BEL",
     "position": "DF",
-    "birthplace": "Breskens",
-    "country": "Netherlands",
-    "lat": 51.4371,
-    "lon": 3.681
+    "birthplace": "Brussels",
+    "country": "Belgium",
+    "lat": 50.8503,
+    "lon": 4.3517
   },
   {
     "id": "BEL-timothy_castagne",
@@ -1336,10 +1336,10 @@
     "team": "Belgium",
     "teamCode": "BEL",
     "position": "FW",
-    "birthplace": "Nassogne",
+    "birthplace": "Asse",
     "country": "Belgium",
-    "lat": 50.1733,
-    "lon": 5.3218
+    "lat": 50.906,
+    "lon": 4.2
   },
   {
     "id": "BEL-alexis_saelemaekers",
@@ -1347,10 +1347,10 @@
     "team": "Belgium",
     "teamCode": "BEL",
     "position": "FW",
-    "birthplace": "Maubeuge",
-    "country": "France",
-    "lat": 50.1093,
-    "lon": 3.5103
+    "birthplace": "Berchem-Sainte-Agathe",
+    "country": "Belgium",
+    "lat": 50.8647,
+    "lon": 4.3058
   },
   {
     "id": "BEL-thibaut_courtois",

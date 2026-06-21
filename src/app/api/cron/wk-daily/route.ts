@@ -18,17 +18,6 @@ function today(): string {
   return new Date().toLocaleDateString('en-CA', { timeZone: 'Europe/Amsterdam' }); // YYYY-MM-DD
 }
 
-function todayLabelEn(): string {
-  return new Date().toLocaleDateString('en-GB', {
-    weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Europe/Amsterdam',
-  });
-}
-function todayLabelNl(): string {
-  return new Date().toLocaleDateString('nl-NL', {
-    weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Europe/Amsterdam',
-  });
-}
-
 async function fetchTodaysMatches(): Promise<MatchDay[]> {
   const apiKey = process.env.FOOTBALL_DATA_API_KEY;
   if (!apiKey) return [];
@@ -53,6 +42,9 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
+  // ?force=1 regenereert (overschrijft) de content voor vandaag
+  const force = new URL(req.url).searchParams.get('force') === '1';
+
   const day = today();
   const matches = await fetchTodaysMatches();
   const tweets: NewTweet[] = [];
@@ -71,22 +63,23 @@ export async function GET(req: NextRequest) {
     });
   };
 
+  // @ScorepathEN (EN) — hoofdaccount, eerst
+  add('scorepath', '@ScorepathEN', 'en', 'birthplace', birthplaceSpotlightEn());
+  if (matches.length > 0) {
+    add('scorepath', '@ScorepathEN', 'en', 'recap', matchDayRecapEn(matches));
+  }
+
   // @LaatsteMan1998 (NL)
   add('laasteman', '@LaatsteMan1998', 'nl', 'birthplace', birthplaceSpotlightNl());
   if (matches.length > 0) {
-    add('laasteman', '@LaatsteMan1998', 'nl', 'recap', matchDayRecapNl(matches, todayLabelNl()));
-  }
-
-  // @ScorepathEN (EN)
-  add('scorepath', '@ScorepathEN', 'en', 'birthplace', birthplaceSpotlightEn());
-  if (matches.length > 0) {
-    add('scorepath', '@ScorepathEN', 'en', 'recap', matchDayRecapEn(matches, todayLabelEn()));
+    add('laasteman', '@LaatsteMan1998', 'nl', 'recap', matchDayRecapNl(matches));
   }
 
   try {
-    const inserted = await enqueueTweets(tweets);
+    const inserted = await enqueueTweets(tweets, force);
     return NextResponse.json({
       day,
+      force,
       generated: tweets.length,
       inserted,
       skippedDuplicates: tweets.length - inserted,

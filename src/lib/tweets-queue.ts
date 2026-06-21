@@ -34,11 +34,19 @@ function getServiceClient() {
   return createClient(url, key);
 }
 
-// Voegt tweets toe en slaat bestaande (zelfde dedupe_key) over.
-// Geeft het aantal nieuw toegevoegde rijen terug.
-export async function enqueueTweets(tweets: NewTweet[]): Promise<number> {
+// Voegt tweets toe. Standaard worden bestaande (zelfde dedupe_key) overgeslagen.
+// Met force=true wordt de tekst van bestaande rijen overschreven (regenereren),
+// behalve rijen die al geplaatst zijn. Geeft het aantal geraakte rijen terug.
+export async function enqueueTweets(tweets: NewTweet[], force = false): Promise<number> {
   if (tweets.length === 0) return 0;
   const supabase = getServiceClient();
+
+  if (force) {
+    // Overschrijf alleen nog niet-geplaatste rijen, zodat we geen geplaatste content kwijtraken.
+    const keys = tweets.map((t) => t.dedupe_key);
+    await supabase.from('tweets_queue').delete().in('dedupe_key', keys).eq('posted', false);
+  }
+
   const { data, error } = await supabase
     .from('tweets_queue')
     .upsert(tweets, { onConflict: 'dedupe_key', ignoreDuplicates: true })

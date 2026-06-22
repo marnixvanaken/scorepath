@@ -44,6 +44,7 @@ export const ES: Messages = {
     qualified: 'Clasificado',
     maybeQualified: 'Quizás',
     eliminated: 'Eliminado',
+    confirmed: 'Ya clasificado a la ronda de 32',
   },
   thirds: {
     title: 'Mejores terceros',

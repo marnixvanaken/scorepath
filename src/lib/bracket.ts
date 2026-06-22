@@ -173,6 +173,10 @@ export const CONFIRMED_WINNERS: Partial<Record<GroupId, string>> = {
   E: 'GER', // Duitsland — 1e Groep E
 };
 
+// Teams die in werkelijkheid al zeker zijn van de laatste 32 (handig voor een
+// "geplaatst"-markering in de groepsstanden).
+export const CONFIRMED_QUALIFIED: ReadonlySet<string> = new Set(Object.values(CONFIRMED_WINNERS));
+
 /**
  * Vul de bevestigde groepswinnaars in als de gebruiker die groep nog niet zelf
  * heeft ingevuld. `touched` bevat de groepen waarvoor al input bestaat; voor die

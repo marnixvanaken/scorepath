@@ -3,6 +3,7 @@
 import { AnimatePresence, motion } from 'motion/react';
 import type { Standing } from '@/lib/types';
 import { teamById, getTeamName } from '@/data/worldcup2026';
+import { CONFIRMED_QUALIFIED } from '@/lib/bracket';
 import { useParams } from 'next/navigation';
 import { Flag } from './Flag';
 import { Tooltip } from './Tooltip';
@@ -38,6 +39,10 @@ export function StandingsTable({ standings, bestThirdIds, groupColor }: Props) {
           const team = teamById(s.teamId);
           const advances = i < 2 || (i === 2 && bestThirdIds.has(s.teamId));
           const isNed = s.teamId === 'NED';
+          // Landen die in werkelijkheid al geplaatst zijn (GER/MEX/USA). Tonen we
+          // als gouden vinkje zolang de groep nog niet volledig is gesimuleerd;
+          // daarna nemen de normale ✓/?/✗-badges het over.
+          const isConfirmed = !groupComplete && CONFIRMED_QUALIFIED.has(s.teamId);
 
           const statusBar = advances ? 'border-l-2' : 'border-l-2 border-transparent';
           const statusBarStyle = advances ? { borderLeftColor: groupColor ?? '#22c55e' } : {};
@@ -67,6 +72,17 @@ export function StandingsTable({ standings, bestThirdIds, groupColor }: Props) {
               <span className={`flex items-center gap-1.5 font-semibold min-w-0 ${nameCls}`}>
                 <Flag teamId={s.teamId} size={26} />
                 <span className="truncate uppercase text-[13px] tracking-wide">{team ? getTeamName(team, lang) : s.teamId}</span>
+                {isConfirmed && (
+                  <Tooltip text={msg.status.confirmed}>
+                    <span
+                      className="shrink-0 text-[11px] font-bold px-1 py-0.5 rounded leading-none flex items-center"
+                      style={{ backgroundColor: '#C9A84326', color: '#C9A843' }}
+                      aria-label={msg.status.confirmed}
+                    >
+                      ✓
+                    </span>
+                  </Tooltip>
+                )}
                 {groupComplete && (
                   <span className={`shrink-0 text-[11px] font-bold px-1 py-0.5 rounded leading-none ${
                     i < 2

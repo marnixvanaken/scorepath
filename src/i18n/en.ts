@@ -44,6 +44,7 @@ export const EN: Messages = {
     qualified: 'Through',
     maybeQualified: 'Maybe',
     eliminated: 'Eliminated',
+    confirmed: 'Already through to the Round of 32',
   },
   thirds: {
     title: 'Best third-placed teams',

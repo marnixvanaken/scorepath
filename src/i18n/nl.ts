@@ -44,6 +44,7 @@ export const NL: Messages = {
     qualified: 'Door',
     maybeQualified: 'Misschien',
     eliminated: 'Uitgeschakeld',
+    confirmed: 'Al zeker van de laatste 32',
   },
   thirds: {
     title: 'Beste nummers 3',

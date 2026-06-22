@@ -3,6 +3,7 @@
 import { useMemo } from 'react';
 import type { GroupId, MatchResult, Standing } from '@/lib/types';
 import { groupFixtures, GROUP_COLORS, teamById, getTeamName } from '@/data/worldcup2026';
+import { CONFIRMED_QUALIFIED } from '@/lib/bracket';
 import { useMessages } from '@/hooks/useMessages';
 import { useParams } from 'next/navigation';
 import { MatchInputRow } from './MatchInputRow';
@@ -154,6 +155,16 @@ export function GroupCard({
                     {isPicked && (
                       <span className="absolute top-0.5 left-0.5 w-5 h-5 flex items-center justify-center rounded-sm text-[10px] font-black text-black" style={{ backgroundColor: '#C9A843' }}>
                         {rank + 1}
+                      </span>
+                    )}
+                    {CONFIRMED_QUALIFIED.has(teamId) && (
+                      <span
+                        className="absolute top-0.5 right-0.5 w-4 h-4 flex items-center justify-center rounded-sm text-[10px] font-black leading-none"
+                        style={{ backgroundColor: '#C9A84326', color: '#C9A843' }}
+                        title={msg.status.confirmed}
+                        aria-label={msg.status.confirmed}
+                      >
+                        ✓
                       </span>
                     )}
                     <Flag teamId={teamId} size={40} />

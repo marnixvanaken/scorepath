@@ -3,6 +3,7 @@ import { decodeResults } from '@/lib/serialization';
 import { decodeKnockout, buildBracket, type BracketMatch, type BracketSlot, type KnockoutResults } from '@/lib/bracket';
 import { computeAllGroups, getQualifiers } from '@/lib/standings';
 import { FLAG_CODE, flagUrl } from '@/data/flags';
+import { KNOCKOUT_SCHEDULE, getCityName, formatKickoff, DEFAULT_TZ } from '@/data/knockoutSchedule';
 import { getMessages } from '@/i18n';
 import type { NextRequest } from 'next/server';
 
@@ -11,7 +12,9 @@ export const runtime = 'edge';
 // Instagram Stories: 1080×1920
 const W       = 1080;
 const H_CARD  = 1920;
-const H       = 53;
+const H       = 53;   // verticale eenheid per slot-paar (bepaalt kolom-uitlijning)
+const SLOT_H  = 38;   // hoogte van één team-rij binnen een wedstrijd
+const META_H  = 28;   // hoogte van de schema-regel boven elke wedstrijd
 const COL_W   = 160;
 const COL_GAP = 10;
 const PAD_X   = 120;   // (1080 - 5×160 - 4×10) / 2
@@ -75,6 +78,7 @@ function renderColumn(
   BODY: string,
   winnerLabel: string,
   finalLabel: string,
+  lang: string,
   winnerId?: string | null,
 ) {
   const groupH  = Math.pow(2, roundIdx + 1) * H;
@@ -98,7 +102,7 @@ function renderColumn(
 
           return (
             <div style={{
-              height: H,
+              height: SLOT_H,
               width: COL_W,
               display: 'flex',
               alignItems: 'center',
@@ -122,6 +126,23 @@ function renderColumn(
             </div>
           );
         };
+
+        // Schema-regel boven elke wedstrijd: #nummer · datum · tijd / speelstad.
+        // Tijd in Nederlandse tijd (CEST) — de gedeelde kaart is een momentopname.
+        const sched = KNOCKOUT_SCHEDULE[match.id];
+        const meta = sched ? (
+          <div style={{ height: META_H, width: COL_W, display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '0 2px' }}>
+            <div style={{ display: 'flex', alignItems: 'baseline', gap: 4 }}>
+              <span style={{ fontSize: 12, fontWeight: 700, color: GOLD, fontFamily: BODY }}>#{sched.no}</span>
+              <span style={{ fontSize: 9, color: MUTED, fontFamily: BODY }}>
+                {(() => { const { date, time } = formatKickoff(sched.kickoff, DEFAULT_TZ, lang); return `${date} · ${time}`; })()}
+              </span>
+            </div>
+            <span style={{ fontSize: 9, color: MUTED, fontFamily: BODY, marginTop: 1 }}>
+              {getCityName(sched.city, lang)}
+            </span>
+          </div>
+        ) : null;
 
         // ── Final column: winner display above match pair ──
         if (isFinal) {
@@ -160,6 +181,7 @@ function renderColumn(
               </div>
 
               {/* Match pair */}
+              {meta}
               <div style={{
                 border: `2px solid ${MATCH_BORDER}`,
                 overflow: 'hidden',
@@ -212,6 +234,7 @@ function renderColumn(
               justifyContent: 'center',
             }}
           >
+            {meta}
             <div style={{
               border: `2px solid ${MATCH_BORDER}`,
               overflow: 'hidden',
@@ -233,7 +256,8 @@ export async function GET(req: NextRequest) {
   const { searchParams } = req.nextUrl;
   const s = searchParams.get('s') ?? '';
   const k = searchParams.get('k') ?? '';
-  const oc = getMessages(searchParams.get('lang') ?? 'nl').ogCard;
+  const lang = searchParams.get('lang') ?? 'nl';
+  const oc = getMessages(lang).ogCard;
 
   if (!s) return new Response('Not found', { status: 404 });
 
@@ -330,6 +354,7 @@ export async function GET(req: NextRequest) {
             r.matches, kr, r.idx, BODY,
             oc.wc.result.champion.toUpperCase(),
             oc.wc.result.final,
+            lang,
             r.idx === 4 ? finalWinnerId : undefined,
           ))}
         </div>

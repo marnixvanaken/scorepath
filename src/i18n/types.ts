@@ -42,6 +42,7 @@ export interface Messages {
     qualified: string;
     maybeQualified: string;
     eliminated: string;
+    confirmed: string;
   };
   thirds: {
     title: string;

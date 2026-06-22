@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { motion, AnimatePresence } from 'motion/react';
@@ -8,9 +8,19 @@ import type { BracketMatch, KnockoutResults } from '@/lib/bracket';
 import type { Qualifiers } from '@/lib/types';
 import { buildBracket } from '@/lib/bracket';
 import { teamById, getTeamName } from '@/data/worldcup2026';
+import {
+  KNOCKOUT_SCHEDULE,
+  getCityName,
+  formatKickoff,
+  TIMEZONES,
+  getTimezoneLabel,
+  DEFAULT_TZ,
+} from '@/data/knockoutSchedule';
 import { Flag } from './Flag';
 import { useMessages } from '@/hooks/useMessages';
 import { simulatorPath } from '@/lib/routes';
+
+const TZ_STORAGE_KEY = 'scorepath-tz';
 
 interface SlotProps {
   slot: BracketMatch['slot1'];
@@ -68,19 +78,40 @@ function TeamSlot({ slot, slotNum, matchId, winner, onPick }: SlotProps) {
   );
 }
 
+function MatchMeta({ matchId, tz, lang }: { matchId: string; tz: string; lang: string }) {
+  const sched = KNOCKOUT_SCHEDULE[matchId];
+  if (!sched) return null;
+  const { date, time } = formatKickoff(sched.kickoff, tz, lang);
+  return (
+    <div className="px-1.5 pt-1 pb-1 border-b border-white/5">
+      <div className="flex items-baseline gap-1 leading-none">
+        <span className="text-[10px] font-bold text-[#C9A843] shrink-0">#{sched.no}</span>
+        <span className="text-[9px] text-slate-400 truncate">{date} · {time}</span>
+      </div>
+      <div className="text-[9px] text-slate-500 truncate leading-tight mt-0.5">
+        {getCityName(sched.city, lang)}
+      </div>
+    </div>
+  );
+}
+
 function MatchBox({
   match,
   highlight,
   kr,
   onPick,
-  className = 'w-[11rem] shrink-0',
+  tz,
+  className = 'w-[11.5rem] shrink-0',
 }: {
   match: BracketMatch;
   highlight?: boolean;
   kr: KnockoutResults;
   onPick: (matchId: string, slot: 1 | 2) => void;
+  tz: string;
   className?: string;
 }) {
+  const params = useParams();
+  const lang = typeof params?.lang === 'string' ? params.lang : 'nl';
   const known = match.slot1.teamId || match.slot2.teamId;
   const winner = kr[match.id];
   return (
@@ -91,6 +122,7 @@ function MatchBox({
         ? 'border-[#C9A843]/35 bg-card'
         : 'border-[#C9A843]/10 bg-[#0A0A0A]/50'
     }`} style={{ borderRadius: '0 6px 0 6px' }}>
+      <MatchMeta matchId={match.id} tz={tz} lang={lang} />
       <div className="flex items-stretch">
         <TeamSlot slot={match.slot1} slotNum={1} matchId={match.id} winner={winner} onPick={onPick} />
         <div className="border-l border-white/5 shrink-0" />
@@ -106,12 +138,14 @@ function MobileRound({
   single,
   kr,
   onPick,
+  tz,
 }: {
   label: string;
   matches: BracketMatch[];
   single?: boolean;
   kr: KnockoutResults;
   onPick: (matchId: string, slot: 1 | 2) => void;
+  tz: string;
 }) {
   return (
     <div>
@@ -125,6 +159,7 @@ function MobileRound({
             highlight={matches[0].slot1.teamId === 'NED' || matches[0].slot2.teamId === 'NED'}
             kr={kr}
             onPick={onPick}
+            tz={tz}
             className="w-full"
           />
         </div>
@@ -137,11 +172,45 @@ function MobileRound({
               highlight={m.slot1.teamId === 'NED' || m.slot2.teamId === 'NED'}
               kr={kr}
               onPick={onPick}
+              tz={tz}
               className="w-full"
             />
           ))}
         </div>
       )}
+    </div>
+  );
+}
+
+function TimezoneToolbar({
+  tz,
+  onChange,
+  label,
+  lang,
+}: {
+  tz: string;
+  onChange: (tz: string) => void;
+  label: string;
+  lang: string;
+}) {
+  return (
+    <div className="flex items-center justify-end gap-2 px-3 mb-3">
+      <label htmlFor="bracket-tz" className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
+        {label}
+      </label>
+      <select
+        id="bracket-tz"
+        value={tz}
+        onChange={(e) => onChange(e.target.value)}
+        className="text-[11px] font-semibold rounded px-2 py-1 cursor-pointer"
+        style={{ background: 'var(--bg-panel)', border: '1px solid var(--border)', color: 'var(--fg-subtle)' }}
+      >
+        {TIMEZONES.map((z) => (
+          <option key={z.id} value={z.id}>
+            {getTimezoneLabel(z, lang)}
+          </option>
+        ))}
+      </select>
     </div>
   );
 }
@@ -230,7 +299,9 @@ function BG({ a, b, right, gap = 6 }: {
 }
 
 // Round labels are localized via useMessages() in BracketView
-const COL_W = 176;
+// COL_W must match the MatchBox width (w-[11.5rem] = 184px) so the column
+// headers line up with the boxes below them.
+const COL_W = 184;
 const CONN_W = 10;
 
 interface Props {
@@ -243,7 +314,25 @@ interface Props {
 
 export function BracketView({ qualifiers, kr, onPick, encodedS, encodedK }: Props) {
   const msg = useMessages();
+  const params = useParams();
+  const lang = typeof params?.lang === 'string' ? params.lang : 'nl';
   const rounds = [msg.bracket.r32, msg.bracket.r16, msg.bracket.qf, msg.bracket.sf, msg.bracket.final];
+
+  // Tijdzone voor de speeltijden. Default = Nederlandse tijd (CEST), met
+  // persistente keuze in localStorage. We lezen pas na mount uit om
+  // hydration-mismatch te voorkomen.
+  const [tz, setTz] = useState<string>(DEFAULT_TZ);
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem(TZ_STORAGE_KEY);
+      if (saved && TIMEZONES.some((z) => z.id === saved)) setTz(saved);
+    } catch { /* localStorage niet beschikbaar */ }
+  }, []);
+  function handleTzChange(next: string) {
+    setTz(next);
+    try { localStorage.setItem(TZ_STORAGE_KEY, next); } catch { /* negeer */ }
+  }
+
   const { r32, r16, qf, sf, final } = useMemo(
     () => buildBracket(qualifiers, kr),
     [qualifiers, kr],
@@ -251,7 +340,7 @@ export function BracketView({ qualifiers, kr, onPick, encodedS, encodedK }: Prop
 
   function mk(m: BracketMatch) {
     const hasNed = m.slot1.teamId === 'NED' || m.slot2.teamId === 'NED';
-    return <MatchBox key={m.id} match={m} highlight={hasNed} kr={kr} onPick={onPick} />;
+    return <MatchBox key={m.id} match={m} highlight={hasNed} kr={kr} onPick={onPick} tz={tz} />;
   }
 
   function branch(r32i: number, r16i: number, qfi: number) {
@@ -273,13 +362,15 @@ export function BracketView({ qualifiers, kr, onPick, encodedS, encodedK }: Prop
 
   return (
     <>
+      <TimezoneToolbar tz={tz} onChange={handleTzChange} label={msg.bracket.timezoneLabel} lang={lang} />
+
       {/* ── Mobile (< 640px): verticale scroll per ronde ── */}
       <div className="sm:hidden flex flex-col gap-4 py-2">
-        <MobileRound label={rounds[0]} matches={r32}     kr={kr} onPick={onPick} />
-        <MobileRound label={rounds[1]} matches={r16}     kr={kr} onPick={onPick} />
-        <MobileRound label={rounds[2]} matches={qf}      kr={kr} onPick={onPick} />
-        <MobileRound label={rounds[3]} matches={sf}      kr={kr} onPick={onPick} />
-        <MobileRound label={rounds[4]} matches={[final]} kr={kr} onPick={onPick} single />
+        <MobileRound label={rounds[0]} matches={r32}     kr={kr} onPick={onPick} tz={tz} />
+        <MobileRound label={rounds[1]} matches={r16}     kr={kr} onPick={onPick} tz={tz} />
+        <MobileRound label={rounds[2]} matches={qf}      kr={kr} onPick={onPick} tz={tz} />
+        <MobileRound label={rounds[3]} matches={sf}      kr={kr} onPick={onPick} tz={tz} />
+        <MobileRound label={rounds[4]} matches={[final]} kr={kr} onPick={onPick} tz={tz} single />
         <AnimatePresence>
           {finalWinnerId && <WinnerBanner key={finalWinnerId} teamId={finalWinnerId} encodedS={encodedS} encodedK={encodedK} />}
         </AnimatePresence>

@@ -194,6 +194,7 @@ export const NL: Messages = {
     final: 'Finale',
     myCard: 'MIJN KAART',
     shareLink: 'DEEL LINK',
+    timezoneLabel: 'Tijdzone',
   },
   cookie: {
     text: 'We gebruiken cookies voor anonieme statistieken om de site te verbeteren.',

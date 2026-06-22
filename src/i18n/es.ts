@@ -194,6 +194,7 @@ export const ES: Messages = {
     final: 'Final',
     myCard: 'MI TARJETA',
     shareLink: 'COMPARTIR',
+    timezoneLabel: 'Zona horaria',
   },
   cookie: {
     text: 'Usamos cookies de análisis anónimas para mejorar este sitio.',

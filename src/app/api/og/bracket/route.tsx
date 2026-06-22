@@ -76,17 +76,9 @@ function renderColumn(
   kr: KnockoutResults,
   roundIdx: number,
   BODY: string,
-  winnerLabel: string,
-  finalLabel: string,
   lang: string,
-  winnerId?: string | null,
 ) {
-  const groupH  = Math.pow(2, roundIdx + 1) * H;
-  const isFinal = roundIdx === 4;
-  const winnerStars = winnerId ? (WC_TITLES[winnerId] ?? 0) + 1 : 0;
-  const winnerFlag  = winnerId
-    ? (FLAG_CODE[winnerId] ? `https://flagcdn.com/w160/${FLAG_CODE[winnerId]}.png` : null)
-    : null;
+  const groupH = Math.pow(2, roundIdx + 1) * H;
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', width: COL_W }}>
@@ -144,86 +136,8 @@ function renderColumn(
           </div>
         ) : null;
 
-        // ── Final column: winner display above match pair ──
-        if (isFinal) {
-          return (
-            <div
-              key={`${match.id}-${mi}`}
-              style={{ height: groupH, display: 'flex', flexDirection: 'column' }}
-            >
-              {/* Top: winner trophy */}
-              <div style={{
-                flex: 1,
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: 10,
-              }}>
-                {winnerFlag ? (
-                  <>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={winnerFlag}
-                      alt=""
-                      width={COL_W - 24}
-                      height={Math.round((COL_W - 24) * 0.67)}
-                      style={{ borderRadius: '0 10px 0 10px', border: `2px solid ${GOLD}` }}
-                    />
-                    <StarRow count={winnerStars} size={14} />
-                    <span style={{ fontSize: 11, fontWeight: 700, color: GOLD, letterSpacing: '0.15em', fontFamily: BODY }}>
-                      {winnerLabel}
-                    </span>
-                  </>
-                ) : (
-                  <span style={{ fontSize: 11, color: MUTED, fontFamily: BODY }}>{finalLabel}</span>
-                )}
-              </div>
-
-              {/* Match pair */}
-              {meta}
-              <div style={{
-                border: `2px solid ${MATCH_BORDER}`,
-                overflow: 'hidden',
-                display: 'flex',
-                flexDirection: 'column',
-              }}>
-                {renderSlot(1)}
-                <div style={{ height: 1, background: MATCH_BORDER }} />
-                {renderSlot(2)}
-              </div>
-
-              {/* Bottom: winner trophy (mirror) */}
-              <div style={{
-                flex: 1,
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: 10,
-              }}>
-                {winnerFlag ? (
-                  <>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={winnerFlag}
-                      alt=""
-                      width={COL_W - 24}
-                      height={Math.round((COL_W - 24) * 0.67)}
-                      style={{ borderRadius: '0 10px 0 10px', border: `2px solid ${GOLD}` }}
-                    />
-                    <StarRow count={winnerStars} size={14} />
-                    <span style={{ fontSize: 11, fontWeight: 700, color: GOLD, letterSpacing: '0.15em', fontFamily: BODY }}>
-                      {winnerLabel}
-                    </span>
-                  </>
-                ) : null}
-              </div>
-            </div>
-          );
-        }
-
-        // ── All other rounds: centered tight pairs ──
+        // Alle rondes (incl. finale) renderen identiek: schema-regel + paar,
+        // verticaal gecentreerd. De kampioensvlag staat los rechtsboven (zie GET).
         return (
           <div
             key={`${match.id}-${mi}`}
@@ -288,6 +202,12 @@ export async function GET(req: NextRequest) {
     ? shortId(finalWinnerSlot === 1 ? bracket.final.slot1 : bracket.final.slot2)
     : null);
 
+  // Kampioen-banner rechtsboven: bestaande WK-titels + deze (gesimuleerde) titel.
+  const champStars = finalWinnerCode ? (finalWinnerId ? (WC_TITLES[finalWinnerId] ?? 0) + 1 : 1) : 0;
+  const champFlag  = finalWinnerId && FLAG_CODE[finalWinnerId]
+    ? `https://flagcdn.com/w320/${FLAG_CODE[finalWinnerId]}.png`
+    : null;
+
   const rounds: { label: string; matches: BracketMatch[]; idx: number }[] = [
     { label: oc.bracket.round.r32,   matches: bracket.r32,     idx: 0 },
     { label: oc.bracket.round.r16,   matches: bracket.r16,     idx: 1 },
@@ -301,6 +221,7 @@ export async function GET(req: NextRequest) {
       <div style={{
         width: W, height: H_CARD, background: BG,
         display: 'flex', flexDirection: 'column', fontFamily: BODY,
+        position: 'relative',
       }}>
         {/* ── Header ── */}
         <div style={{
@@ -317,18 +238,7 @@ export async function GET(req: NextRequest) {
               {oc.bracket.subtitle}
             </span>
           </div>
-          {finalWinnerCode ? (
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill={GOLD}>
-                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-              </svg>
-              <span style={{ fontSize: 14, fontWeight: 700, color: GOLD, fontFamily: BODY, letterSpacing: '0.08em' }}>
-                {finalWinnerCode}
-              </span>
-            </div>
-          ) : (
-            <span style={{ fontSize: 11, color: MUTED, fontFamily: BODY }}>scorepath.nl</span>
-          )}
+          <span style={{ fontSize: 11, color: MUTED, fontFamily: BODY }}>scorepath.nl</span>
         </div>
 
         {/* ── Column labels ── */}
@@ -350,13 +260,7 @@ export async function GET(req: NextRequest) {
 
         {/* ── Bracket columns ── */}
         <div style={{ height: H * 32, display: 'flex', padding: `0 ${PAD_X}px`, gap: COL_GAP }}>
-          {rounds.map((r) => renderColumn(
-            r.matches, kr, r.idx, BODY,
-            oc.wc.result.champion.toUpperCase(),
-            oc.wc.result.final,
-            lang,
-            r.idx === 4 ? finalWinnerId : undefined,
-          ))}
+          {rounds.map((r) => renderColumn(r.matches, kr, r.idx, BODY, lang))}
         </div>
 
         {/* ── Footer ── */}
@@ -368,6 +272,43 @@ export async function GET(req: NextRequest) {
             scorepath.nl · {oc.bracket.header}
           </span>
         </div>
+
+        {/* ── Kampioen-banner: één vlag rechtsboven, sterren gecentreerd erboven ── */}
+        {finalWinnerCode ? (
+          <div style={{
+            position: 'absolute',
+            top: 210,
+            right: PAD_X,
+            width: 230,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: 8,
+          }}>
+            <StarRow count={champStars} size={18} />
+            {champFlag ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={champFlag}
+                alt=""
+                width={200}
+                height={134}
+                style={{ borderRadius: '0 14px 0 14px', border: `3px solid ${GOLD}` }}
+              />
+            ) : (
+              <div style={{
+                width: 200, height: 134, background: PANEL, border: `3px solid ${GOLD}`,
+                borderRadius: '0 14px 0 14px', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                fontSize: 40, fontWeight: 700, color: INK, fontFamily: BODY,
+              }}>
+                {finalWinnerCode}
+              </div>
+            )}
+            <span style={{ fontSize: 15, fontWeight: 700, color: GOLD, letterSpacing: '0.18em', fontFamily: BODY }}>
+              {oc.wc.result.champion.toUpperCase()}
+            </span>
+          </div>
+        ) : null}
       </div>
     ),
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

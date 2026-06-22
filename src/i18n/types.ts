@@ -192,6 +192,7 @@ export interface Messages {
     final: string;
     myCard: string;
     shareLink: string;
+    timezoneLabel: string;
   };
   cookie: {
     text: string;

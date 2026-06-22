@@ -194,6 +194,7 @@ export const EN: Messages = {
     final: 'Final',
     myCard: 'MY CARD',
     shareLink: 'SHARE LINK',
+    timezoneLabel: 'Time zone',
   },
   cookie: {
     text: 'We use anonymous analytics cookies to improve this site.',

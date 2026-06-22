@@ -1,5 +1,6 @@
 import type { GroupId, Qualifiers } from './types';
 import { THIRD_PLACE_SLOTS } from '@/data/knockoutCombinations';
+import { KNOCKOUT_MATCH_NO } from '@/data/knockoutSchedule';
 
 // matchId → 1 (slot1 wins) | 2 (slot2 wins)
 export type KnockoutResults = Record<string, 1 | 2>;
@@ -102,22 +103,26 @@ function empty(id: string, l1: string, l2: string): BracketMatch {
   return { id, slot1: { teamId: null, label: l1 }, slot2: { teamId: null, label: l2 } };
 }
 
+// Label voor een nog onbekende deelnemer: "W #73" = winnaar van wedstrijd 73.
+function winnerLabel(feeder: BracketMatch): string {
+  const no = KNOCKOUT_MATCH_NO[feeder.id];
+  return no ? `W #${no}` : 'W';
+}
+
 function propagate(
   prev: BracketMatch[],
   ids: string[],
   kr: KnockoutResults,
-  labelFn: (i: number) => [string, string],
 ): BracketMatch[] {
   return Array.from({ length: prev.length / 2 }, (_, i) => {
     const a = prev[i * 2];
     const b = prev[i * 2 + 1];
     const winA = kr[a.id] ? (kr[a.id] === 1 ? a.slot1 : a.slot2) : null;
     const winB = kr[b.id] ? (kr[b.id] === 1 ? b.slot1 : b.slot2) : null;
-    const [l1, l2] = labelFn(i);
     return {
       id: ids[i],
-      slot1: winA ?? { teamId: null, label: l1 },
-      slot2: winB ?? { teamId: null, label: l2 },
+      slot1: winA ?? { teamId: null, label: winnerLabel(a) },
+      slot2: winB ?? { teamId: null, label: winnerLabel(b) },
     };
   });
 }
@@ -136,29 +141,52 @@ export function buildBracket(q: Qualifiers, kr: KnockoutResults = {}) {
     r32,
     Array.from({ length: 8 }, (_, i) => `r16-${i}`),
     kr,
-    (i) => [`W R32-${i * 2 + 1}`, `W R32-${i * 2 + 2}`],
   );
 
   const qf = propagate(
     r16,
     Array.from({ length: 4 }, (_, i) => `kw-${i}`),
     kr,
-    (i) => [`W 1/16-${i * 2 + 1}`, `W 1/16-${i * 2 + 2}`],
   );
 
   const sf = propagate(
     qf,
     ['hf-0', 'hf-1'],
     kr,
-    (i) => [`W KW-${i * 2 + 1}`, `W KW-${i * 2 + 2}`],
   );
 
   const [finalMatch] = propagate(
     sf,
     ['finale'],
     kr,
-    () => ['W HF-1', 'W HF-2'],
   );
 
   return { r32, r16, qf, sf, final: finalMatch };
+}
+
+// Teams die al zeker zijn van de Round of 32 en in de officiële po-indeling als
+// groepswinnaar staan. We tonen ze automatisch als startwaarde in de bracket;
+// zodra de gebruiker die groep zelf invult, wint die keuze (zie applyConfirmedWinners).
+export const CONFIRMED_WINNERS: Partial<Record<GroupId, string>> = {
+  A: 'MEX', // Mexico (gastland) — 1e Groep A
+  D: 'USA', // Verenigde Staten (gastland) — 1e Groep D
+  E: 'GER', // Duitsland — 1e Groep E
+};
+
+/**
+ * Vul de bevestigde groepswinnaars in als de gebruiker die groep nog niet zelf
+ * heeft ingevuld. `touched` bevat de groepen waarvoor al input bestaat; voor die
+ * groepen laten we de berekende winnaar staan (bewerkbare standaard).
+ */
+export function applyConfirmedWinners(q: Qualifiers, touched: Set<GroupId>): Qualifiers {
+  let changed = false;
+  const winners = q.winners.map((w) => {
+    const confirmed = CONFIRMED_WINNERS[w.group];
+    if (confirmed && !touched.has(w.group) && w.teamId !== confirmed) {
+      changed = true;
+      return { ...w, teamId: confirmed };
+    }
+    return w;
+  });
+  return changed ? { ...q, winners } : q;
 }

@@ -9,7 +9,7 @@ import { useKnockoutState } from '@/hooks/useKnockoutState';
 import { useTiebreakState } from '@/hooks/useTiebreakState';
 import { computeAllGroups, rankThirdPlaced, getQualifiers, isGroupComplete } from '@/lib/standings';
 import { encodeResults } from '@/lib/serialization';
-import { encodeKnockout, buildBracket } from '@/lib/bracket';
+import { encodeKnockout, buildBracket, applyConfirmedWinners } from '@/lib/bracket';
 import { prefillResults } from '@/lib/prefill';
 import { synthesizeDragResults } from '@/lib/dragResults';
 import { GROUP_IDS, groupFixtures, teamById } from '@/data/worldcup2026';
@@ -114,10 +114,24 @@ export default function SimulatorClient({ initialMode, initialView = 'groepsfase
     [thirds],
   );
 
+  // Groepen waarvoor de gebruiker zelf al een uitslag/volgorde heeft ingevuld.
+  // Voor die groepen laten we de bevestigde winnaars (GER/MEX/USA) los.
+  const touchedGroups = useMemo(() => {
+    const s = new Set<GroupId>();
+    if (inputMode === 'drag') {
+      GROUP_IDS.forEach((g) => { if ((groupDragOrders[g]?.length ?? 0) > 0) s.add(g); });
+    } else {
+      results.forEach((r) => s.add(r.group));
+    }
+    return s;
+  }, [inputMode, results, groupDragOrders]);
+
   const qualifiers = useMemo(() => {
-    if (inputMode === 'drag') return getDragQualifiers(groupDragOrders, thirdsDragOrder);
-    return getQualifiers(results, {}, manualOrder);
-  }, [inputMode, results, manualOrder, groupDragOrders, thirdsDragOrder]);
+    const base = inputMode === 'drag'
+      ? getDragQualifiers(groupDragOrders, thirdsDragOrder)
+      : getQualifiers(results, {}, manualOrder);
+    return applyConfirmedWinners(base, touchedGroups);
+  }, [inputMode, results, manualOrder, groupDragOrders, thirdsDragOrder, touchedGroups]);
 
   // In Volgorde-modus bevat `results` geen scores; leid uitslagen af uit de
   // gesleepte volgorde zodat de gedeelde kaart-URL dezelfde gekwalificeerden

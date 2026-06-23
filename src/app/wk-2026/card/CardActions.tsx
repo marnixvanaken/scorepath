@@ -12,6 +12,7 @@ interface Props {
 
 async function shareFile(url: string, filename: string, title: string) {
   const res = await fetch(url);
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
   const blob = await res.blob();
   const file = new File([blob], filename, { type: 'image/png' });
 
@@ -26,7 +27,7 @@ async function shareFile(url: string, filename: string, title: string) {
   a.href = objUrl;
   a.download = filename;
   a.click();
-  URL.revokeObjectURL(objUrl);
+  setTimeout(() => URL.revokeObjectURL(objUrl), 100);
 }
 
 export function CardActions({ ogUrl, bracketUrl, teamName }: Props) {
@@ -36,7 +37,8 @@ export function CardActions({ ogUrl, bracketUrl, teamName }: Props) {
   async function downloadRoute() {
     try {
       await shareFile(ogUrl, `scorepath-${slug}-route-wk2026.png`, `${teamName} · Route WK 2026`);
-    } catch {
+    } catch (err) {
+      if (err instanceof Error && err.name === 'AbortError') return;
       toast(msg.card.downloadFailed);
     }
   }
@@ -44,7 +46,8 @@ export function CardActions({ ogUrl, bracketUrl, teamName }: Props) {
   async function downloadBracket() {
     try {
       await shareFile(bracketUrl, `scorepath-bracket-wk2026.png`, 'WK 2026 Bracket');
-    } catch {
+    } catch (err) {
+      if (err instanceof Error && err.name === 'AbortError') return;
       toast(msg.card.downloadFailed);
     }
   }

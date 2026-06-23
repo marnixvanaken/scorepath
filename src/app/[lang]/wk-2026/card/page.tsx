@@ -1,13 +1,49 @@
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { notFound } from 'next/navigation';
+import type { Metadata } from 'next';
 import { Logo } from '@/components/Logo';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { TEAMS } from '@/data/worldcup2026';
 import { CardActions } from '@/app/wk-2026/card/CardActions';
-import { isLocale, getMessages } from '@/i18n';
-import { SITE_NAME } from '@/lib/siteConfig';
+import { isLocale, getMessages, DEFAULT_LOCALE } from '@/i18n';
+import { SITE_NAME, SITE_URL } from '@/lib/siteConfig';
 import { simulatorPath, birthplacePath } from '@/lib/routes';
+
+export async function generateMetadata(
+  props: PageProps<'/[lang]/wk-2026/card'> & {
+    searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+  }
+): Promise<Metadata> {
+  const { lang } = await props.params;
+  const locale = isLocale(lang) ? lang : DEFAULT_LOCALE;
+  const params = await props.searchParams;
+  const teamId = Array.isArray(params.team) ? params.team[0] : params.team;
+  const s = Array.isArray(params.s) ? params.s[0] : params.s;
+  const k = Array.isArray(params.k) ? params.k[0] : params.k;
+
+  const team = teamId && s ? TEAMS.find((t) => t.id === teamId) : null;
+  if (!team || !s) return { title: `${SITE_NAME} · WK 2026` };
+
+  const ogParams = new URLSearchParams({ team: teamId!, s, lang: locale });
+  if (k) ogParams.set('k', k);
+  const ogImageUrl = `${SITE_URL}/api/og?${ogParams.toString()}`;
+
+  const title = `${team.name} · WK 2026 · ${SITE_NAME}`;
+
+  return {
+    title,
+    openGraph: {
+      title,
+      images: [{ url: ogImageUrl, width: 1800, height: 2700, alt: `${team.name} WK 2026 route` }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      images: [ogImageUrl],
+    },
+  };
+}
 
 export default async function CardPage(
   props: PageProps<'/[lang]/wk-2026/card'> & {

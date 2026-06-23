@@ -104,7 +104,7 @@ export const NL: Messages = {
     shareLink: 'DEEL LINK',
     routeTab: 'ROUTE',
     bracketTab: 'BRACKET',
-    swipeHint: 'Veeg omhoog/omlaag of tik om te wisselen',
+    swipeHint: 'Veeg opzij of tik op een tab om te wisselen',
   },
   home: {
     tagline1: 'Voorspel het WK 2026.',

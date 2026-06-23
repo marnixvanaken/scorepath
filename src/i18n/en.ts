@@ -104,7 +104,7 @@ export const EN: Messages = {
     shareLink: 'SHARE LINK',
     routeTab: 'ROUTE',
     bracketTab: 'BRACKET',
-    swipeHint: 'Swipe up/down or tap to switch',
+    swipeHint: 'Swipe sideways or tap a tab to switch',
   },
   home: {
     tagline1: 'Predict the 2026 World Cup.',

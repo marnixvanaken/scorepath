@@ -31,11 +31,11 @@ async function shareFile(url: string, filename: string, title: string) {
   setTimeout(() => URL.revokeObjectURL(objUrl), 100);
 }
 
-// Verticale slide: nieuwe kaart komt van onder (volgende) of boven (vorige).
+// Horizontale slide: nieuwe kaart komt van rechts (volgende) of links (vorige).
 const variants = {
-  enter: (dir: number) => ({ y: dir > 0 ? '100%' : '-100%', opacity: 0 }),
-  center: { y: 0, opacity: 1 },
-  exit: (dir: number) => ({ y: dir > 0 ? '-100%' : '100%', opacity: 0 }),
+  enter: (dir: number) => ({ x: dir > 0 ? '100%' : '-100%', opacity: 0 }),
+  center: { x: 0, opacity: 1 },
+  exit: (dir: number) => ({ x: dir > 0 ? '-100%' : '100%', opacity: 0 }),
 };
 
 const SWIPE_THRESHOLD = 60;
@@ -45,23 +45,11 @@ export function CardViewer({ ogUrl, bracketUrl, teamName }: Props) {
   const slug = teamName.toLowerCase().replace(/\s+/g, '-');
 
   const slides = [
-    {
-      url: ogUrl,
-      label: msg.card.routeTab,
-      file: `scorepath-${slug}-route-wk2026.png`,
-      title: `${teamName} · Route WK 2026`,
-      download: msg.card.downloadRouteCard,
-    },
-    {
-      url: bracketUrl,
-      label: msg.card.bracketTab,
-      file: 'scorepath-bracket-wk2026.png',
-      title: 'WK 2026 Bracket',
-      download: msg.card.downloadBracket,
-    },
+    { url: ogUrl, label: msg.card.routeTab },
+    { url: bracketUrl, label: msg.card.bracketTab },
   ];
 
-  // [index, richting] — richting bepaalt de animatie (1 = omlaag, -1 = omhoog).
+  // [index, richting] — richting bepaalt de animatie (1 = volgende, -1 = vorige).
   const [[index, dir], setPage] = useState<[number, number]>([0, 0]);
   const active = slides[index];
 
@@ -72,13 +60,22 @@ export function CardViewer({ ogUrl, bracketUrl, teamName }: Props) {
   }
 
   function onDragEnd(_e: unknown, info: PanInfo) {
-    if (info.offset.y < -SWIPE_THRESHOLD) paginate(index + 1);
-    else if (info.offset.y > SWIPE_THRESHOLD) paginate(index - 1);
+    if (info.offset.x < -SWIPE_THRESHOLD) paginate(index + 1);
+    else if (info.offset.x > SWIPE_THRESHOLD) paginate(index - 1);
   }
 
-  async function downloadActive() {
+  async function downloadRoute() {
     try {
-      await shareFile(active.url, active.file, active.title);
+      await shareFile(ogUrl, `scorepath-${slug}-route-wk2026.png`, `${teamName} · Route WK 2026`);
+    } catch (err) {
+      if (err instanceof Error && err.name === 'AbortError') return;
+      toast(msg.card.downloadFailed);
+    }
+  }
+
+  async function downloadBracket() {
+    try {
+      await shareFile(bracketUrl, 'scorepath-bracket-wk2026.png', 'WK 2026 Bracket');
     } catch (err) {
       if (err instanceof Error && err.name === 'AbortError') return;
       toast(msg.card.downloadFailed);
@@ -105,8 +102,11 @@ export function CardViewer({ ogUrl, bracketUrl, teamName }: Props) {
     toast(msg.card.linkCopied);
   }
 
+  const hasPrev = index > 0;
+  const hasNext = index < slides.length - 1;
+
   return (
-    <div className="w-full max-w-sm flex flex-col items-center gap-5">
+    <div className="w-full max-w-sm flex flex-col items-center gap-4">
       {/* Tab-toggle: Route / Bracket */}
       <div
         className="flex gap-0.5 p-0.5 rounded-full"
@@ -132,7 +132,7 @@ export function CardViewer({ ogUrl, bracketUrl, teamName }: Props) {
         ))}
       </div>
 
-      {/* Verticale swipe-carousel */}
+      {/* Horizontale swipe-carousel */}
       <div
         className="relative w-full overflow-hidden rounded-lg shadow-xl"
         style={{ aspectRatio: '2 / 3', background: 'var(--bg-card)', border: '1px solid var(--border)' }}
@@ -146,27 +146,64 @@ export function CardViewer({ ogUrl, bracketUrl, teamName }: Props) {
             animate="center"
             exit="exit"
             transition={{
-              y: { type: 'spring', stiffness: 300, damping: 32 },
+              x: { type: 'spring', stiffness: 300, damping: 32 },
               opacity: { duration: 0.2 },
             }}
-            drag="y"
-            dragConstraints={{ top: 0, bottom: 0 }}
+            drag="x"
+            dragConstraints={{ left: 0, right: 0 }}
             dragElastic={0.18}
             onDragEnd={onDragEnd}
             className="absolute inset-0 flex items-center justify-center cursor-grab active:cursor-grabbing"
           >
+            {/*
+              pointer-events blijven AAN op de afbeelding zodat rechtsklik
+              (desktop) en lang-indrukken (mobiel) "kopiëren/opslaan" tonen.
+              draggable={false} houdt de horizontale swipe vrij van de native
+              image-drag; de pointer-events bubbelen naar de drag-container.
+            */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={active.url}
               alt={`${teamName} ${active.label}`}
-              className="h-full w-full object-contain pointer-events-none select-none"
+              className="h-full w-full object-contain select-none"
               draggable={false}
             />
           </motion.div>
         </AnimatePresence>
 
-        {/* Verticale dot-indicator */}
-        <div className="absolute right-2.5 top-1/2 -translate-y-1/2 flex flex-col gap-2">
+        {/* Swipe-affordance: pulserende pijlen (ook klikbaar) */}
+        {hasPrev && (
+          <motion.button
+            onClick={() => paginate(index - 1)}
+            aria-label={slides[index - 1].label}
+            className="absolute left-2 top-1/2 -translate-y-1/2 w-9 h-9 flex items-center justify-center rounded-full"
+            style={{ background: 'rgba(0,0,0,0.45)', color: '#fff', backdropFilter: 'blur(2px)' }}
+            animate={{ x: [0, -4, 0] }}
+            transition={{ duration: 1.4, repeat: Infinity, ease: 'easeInOut' }}
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+              <path d="M15 18l-6-6 6-6" />
+            </svg>
+          </motion.button>
+        )}
+        {hasNext && (
+          <motion.button
+            onClick={() => paginate(index + 1)}
+            aria-label={slides[index + 1].label}
+            className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-1 h-9 pl-2.5 pr-3 rounded-full"
+            style={{ background: 'rgba(0,0,0,0.45)', color: '#fff', backdropFilter: 'blur(2px)' }}
+            animate={{ x: [0, 4, 0] }}
+            transition={{ duration: 1.4, repeat: Infinity, ease: 'easeInOut' }}
+          >
+            <span className="text-[10px] font-bold tracking-widest uppercase">{slides[index + 1].label}</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+              <path d="M9 18l6-6-6-6" />
+            </svg>
+          </motion.button>
+        )}
+
+        {/* Positie-dots onderaan */}
+        <div className="absolute bottom-2.5 left-1/2 -translate-x-1/2 flex gap-2">
           {slides.map((s, i) => (
             <button
               key={s.label}
@@ -174,9 +211,9 @@ export function CardViewer({ ogUrl, bracketUrl, teamName }: Props) {
               aria-label={s.label}
               className="rounded-full transition-all duration-300"
               style={{
-                width: 7,
-                height: i === index ? 22 : 7,
-                background: i === index ? 'var(--cta)' : 'var(--border)',
+                height: 7,
+                width: i === index ? 22 : 7,
+                background: i === index ? 'var(--cta)' : 'rgba(255,255,255,0.55)',
               }}
             />
           ))}
@@ -187,15 +224,23 @@ export function CardViewer({ ogUrl, bracketUrl, teamName }: Props) {
         {msg.card.swipeHint}
       </p>
 
-      {/* Acties — download volgt de zichtbare kaart */}
+      {/* Beide kaarten apart downloadbaar + deel-link */}
       <div className="flex flex-wrap gap-3 justify-center">
         <motion.button
           whileTap={{ scale: 0.95 }}
-          onClick={downloadActive}
+          onClick={downloadRoute}
           className="px-5 py-3 text-sm font-bold tracking-widest uppercase text-white transition-opacity hover:opacity-90"
-          style={{ background: index === 0 ? 'var(--cta)' : '#1e3a5f', borderRadius: '0 8px 0 8px' }}
+          style={{ background: 'var(--cta)', borderRadius: '0 8px 0 8px' }}
         >
-          {active.download}
+          {msg.card.downloadRouteCard}
+        </motion.button>
+        <motion.button
+          whileTap={{ scale: 0.95 }}
+          onClick={downloadBracket}
+          className="px-5 py-3 text-sm font-bold tracking-widest uppercase text-white transition-opacity hover:opacity-90"
+          style={{ background: '#1e3a5f', borderRadius: '0 8px 0 8px' }}
+        >
+          {msg.card.downloadBracket}
         </motion.button>
         <motion.button
           whileTap={{ scale: 0.95 }}

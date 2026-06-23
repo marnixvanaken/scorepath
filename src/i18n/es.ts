@@ -104,7 +104,7 @@ export const ES: Messages = {
     shareLink: 'COMPARTIR',
     routeTab: 'RUTA',
     bracketTab: 'CUADRO',
-    swipeHint: 'Desliza o toca para cambiar',
+    swipeHint: 'Desliza o toca una pestaña para cambiar',
   },
   home: {
     tagline1: 'Predice el Mundial 2026.',

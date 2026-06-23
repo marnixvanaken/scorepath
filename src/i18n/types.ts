@@ -100,6 +100,9 @@ export interface Messages {
     downloadRouteCard: string;
     downloadBracket: string;
     shareLink: string;
+    routeTab: string;
+    bracketTab: string;
+    swipeHint: string;
   };
   home: {
     tagline1: string;

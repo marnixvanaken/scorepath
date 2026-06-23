@@ -5,7 +5,7 @@ import type { Metadata } from 'next';
 import { Logo } from '@/components/Logo';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { TEAMS } from '@/data/worldcup2026';
-import { CardActions } from '@/app/wk-2026/card/CardActions';
+import { CardViewer } from '@/app/wk-2026/card/CardViewer';
 import { isLocale, getMessages, DEFAULT_LOCALE } from '@/i18n';
 import { SITE_NAME, SITE_URL } from '@/lib/siteConfig';
 import { simulatorPath, birthplacePath } from '@/lib/routes';
@@ -95,16 +95,9 @@ export default async function CardPage(
           {team.name.toUpperCase()}
         </p>
 
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={ogUrl}
-          alt={`${team.name} WK 2026`}
-          className="w-full max-w-sm rounded-lg shadow-xl"
-          style={{ border: '1px solid var(--border)' }}
-        />
+        <CardViewer ogUrl={ogUrl} bracketUrl={bracketUrl} teamName={team.name} />
 
-        <div className="flex flex-wrap gap-3 mt-8 justify-center">
-          <CardActions ogUrl={ogUrl} bracketUrl={bracketUrl} teamName={team.name} />
+        <div className="flex flex-wrap gap-3 mt-6 justify-center">
           <Link
             href={backUrl}
             className="px-6 py-3 text-sm font-bold tracking-widest uppercase transition-opacity hover:opacity-70"

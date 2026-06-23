@@ -102,6 +102,9 @@ export const ES: Messages = {
     downloadRouteCard: '↓ TARJETA DE RUTA',
     downloadBracket: '↓ CUADRO',
     shareLink: 'COMPARTIR',
+    routeTab: 'RUTA',
+    bracketTab: 'CUADRO',
+    swipeHint: 'Desliza o toca para cambiar',
   },
   home: {
     tagline1: 'Predice el Mundial 2026.',

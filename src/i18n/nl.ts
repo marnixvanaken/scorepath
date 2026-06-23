@@ -102,6 +102,9 @@ export const NL: Messages = {
     downloadRouteCard: '↓ ROUTE KAART',
     downloadBracket: '↓ BRACKET',
     shareLink: 'DEEL LINK',
+    routeTab: 'ROUTE',
+    bracketTab: 'BRACKET',
+    swipeHint: 'Veeg omhoog/omlaag of tik om te wisselen',
   },
   home: {
     tagline1: 'Voorspel het WK 2026.',

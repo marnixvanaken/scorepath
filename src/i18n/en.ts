@@ -102,6 +102,9 @@ export const EN: Messages = {
     downloadRouteCard: '↓ ROUTE CARD',
     downloadBracket: '↓ BRACKET',
     shareLink: 'SHARE LINK',
+    routeTab: 'ROUTE',
+    bracketTab: 'BRACKET',
+    swipeHint: 'Swipe sideways or tap a tab to switch',
   },
   home: {
     tagline1: 'Predict the 2026 World Cup.',

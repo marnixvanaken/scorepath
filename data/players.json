@@ -16,10 +16,10 @@
     "team": "Algeria",
     "teamCode": "ALG",
     "position": "GK",
-    "birthplace": "Algiers",
-    "country": "Algeria",
-    "lat": 36.7372,
-    "lon": 3.0867
+    "birthplace": "Thonon-les-Bains",
+    "country": "France",
+    "lat": 46.3704,
+    "lon": 6.4773
   },
   {
     "id": "ALG-aissa_mandi",
@@ -82,10 +82,10 @@
     "team": "Algeria",
     "teamCode": "ALG",
     "position": "DF",
-    "birthplace": "Algiers",
+    "birthplace": "Touggourt",
     "country": "Algeria",
-    "lat": 36.7372,
-    "lon": 3.0867
+    "lat": 33.0956,
+    "lon": 6.0678
   },
   {
     "id": "ALG-ramiz_zerrouki",
@@ -225,10 +225,10 @@
     "team": "Algeria",
     "teamCode": "ALG",
     "position": "FW",
-    "birthplace": "Algiers",
-    "country": "Algeria",
-    "lat": 36.7372,
-    "lon": 3.0867
+    "birthplace": "Montreuil",
+    "country": "France",
+    "lat": 48.8628,
+    "lon": 2.4463
   },
   {
     "id": "ALG-mohamed_tougai",
@@ -1149,10 +1149,10 @@
     "team": "Belgium",
     "teamCode": "BEL",
     "position": "GK",
-    "birthplace": "Brussels",
+    "birthplace": "Zottegem",
     "country": "Belgium",
-    "lat": 51.0108,
-    "lon": 4.3285
+    "lat": 50.8696,
+    "lon": 3.8105
   },
   {
     "id": "BEL-zeno_debast",
@@ -1160,10 +1160,10 @@
     "team": "Belgium",
     "teamCode": "BEL",
     "position": "DF",
-    "birthplace": "Brussels",
+    "birthplace": "Halle",
     "country": "Belgium",
-    "lat": 50.9913,
-    "lon": 4.3695
+    "lat": 50.7333,
+    "lon": 4.2333
   },
   {
     "id": "BEL-arthur_theate",
@@ -1171,10 +1171,10 @@
     "team": "Belgium",
     "teamCode": "BEL",
     "position": "DF",
-    "birthplace": "Brussels",
+    "birthplace": "Liège",
     "country": "Belgium",
-    "lat": 50.8503,
-    "lon": 4.3517
+    "lat": 50.6325,
+    "lon": 5.5797
   },
   {
     "id": "BEL-brandon_mechele",
@@ -1193,10 +1193,10 @@
     "team": "Belgium",
     "teamCode": "BEL",
     "position": "DF",
-    "birthplace": "Brussels",
+    "birthplace": "Knokke-Heist",
     "country": "Belgium",
-    "lat": 50.8503,
-    "lon": 4.3517
+    "lat": 51.36,
+    "lon": 3.295
   },
   {
     "id": "BEL-thomas_meunier",
@@ -1215,10 +1215,10 @@
     "team": "Belgium",
     "teamCode": "BEL",
     "position": "DF",
-    "birthplace": "Brussels",
+    "birthplace": "Antwerp",
     "country": "Belgium",
-    "lat": 50.8503,
-    "lon": 4.3517
+    "lat": 51.2213,
+    "lon": 4.3997
   },
   {
     "id": "BEL-joaquin_seys",
@@ -1226,10 +1226,10 @@
     "team": "Belgium",
     "teamCode": "BEL",
     "position": "DF",
-    "birthplace": "Brussels",
+    "birthplace": "Hannut",
     "country": "Belgium",
-    "lat": 50.8503,
-    "lon": 4.3517
+    "lat": 50.6771,
+    "lon": 5.0258
   },
   {
     "id": "BEL-nathan_ngoy",
@@ -1292,10 +1292,10 @@
     "team": "Belgium",
     "teamCode": "BEL",
     "position": "MF",
-    "birthplace": "Brussels",
+    "birthplace": "Bruges",
     "country": "Belgium",
-    "lat": 50.8503,
-    "lon": 4.3517
+    "lat": 51.2089,
+    "lon": 3.2242
   },
   {
     "id": "BEL-nicolas_raskin",
@@ -1303,10 +1303,10 @@
     "team": "Belgium",
     "teamCode": "BEL",
     "position": "MF",
-    "birthplace": "Brussels",
+    "birthplace": "Liège",
     "country": "Belgium",
-    "lat": 50.8503,
-    "lon": 4.3517
+    "lat": 50.6325,
+    "lon": 5.5797
   },
   {
     "id": "BEL-amadou_onana",
@@ -1314,10 +1314,10 @@
     "team": "Belgium",
     "teamCode": "BEL",
     "position": "MF",
-    "birthplace": "Brussels",
-    "country": "Belgium",
-    "lat": 50.8503,
-    "lon": 4.3517
+    "birthplace": "Dakar",
+    "country": "Senegal",
+    "lat": 14.7167,
+    "lon": -17.4677
   },
   {
     "id": "BEL-jeremy_doku",
@@ -1325,10 +1325,10 @@
     "team": "Belgium",
     "teamCode": "BEL",
     "position": "FW",
-    "birthplace": "Brussels",
+    "birthplace": "Antwerp",
     "country": "Belgium",
-    "lat": 50.8503,
-    "lon": 4.3517
+    "lat": 51.2213,
+    "lon": 4.3997
   },
   {
     "id": "BEL-dodi_lukebakio",
@@ -1336,10 +1336,10 @@
     "team": "Belgium",
     "teamCode": "BEL",
     "position": "FW",
-    "birthplace": "Brussels",
+    "birthplace": "Asse",
     "country": "Belgium",
-    "lat": 50.8503,
-    "lon": 4.3517
+    "lat": 50.906,
+    "lon": 4.2
   },
   {
     "id": "BEL-alexis_saelemaekers",
@@ -1347,10 +1347,10 @@
     "team": "Belgium",
     "teamCode": "BEL",
     "position": "FW",
-    "birthplace": "Brussels",
+    "birthplace": "Berchem-Sainte-Agathe",
     "country": "Belgium",
-    "lat": 50.8503,
-    "lon": 4.3517
+    "lat": 50.8647,
+    "lon": 4.3058
   },
   {
     "id": "BEL-thibaut_courtois",
@@ -1402,10 +1402,10 @@
     "team": "Belgium",
     "teamCode": "BEL",
     "position": "MF",
-    "birthplace": "Brussels",
+    "birthplace": "Liège",
     "country": "Belgium",
-    "lat": 50.8503,
-    "lon": 4.3517
+    "lat": 50.6325,
+    "lon": 5.5797
   },
   {
     "id": "BEL-hans_vanaken",
@@ -2513,10 +2513,10 @@
     "team": "Ivory Coast",
     "teamCode": "CIV",
     "position": "FW",
-    "birthplace": "Abidjan",
-    "country": "Ivory Coast",
-    "lat": 5.3364,
-    "lon": -4.0267
+    "birthplace": "Divo",
+    "country": "Côte d'Ivoire",
+    "lat": 5.7744,
+    "lon": -4.5582
   },
   {
     "id": "CIV-elye_wahi",
@@ -4295,10 +4295,10 @@
     "team": "Egypt",
     "teamCode": "EGY",
     "position": "GK",
-    "birthplace": "Cairo",
+    "birthplace": "Ismaïlia",
     "country": "Egypt",
-    "lat": 30.0444,
-    "lon": 31.2357
+    "lat": 30.7391,
+    "lon": 31.3951
   },
   {
     "id": "EGY-el_mahdy_soliman",
@@ -4306,10 +4306,10 @@
     "team": "Egypt",
     "teamCode": "EGY",
     "position": "GK",
-    "birthplace": "Cairo",
+    "birthplace": "Sadat City",
     "country": "Egypt",
-    "lat": 30.0444,
-    "lon": 31.2357
+    "lat": 30.3312,
+    "lon": 30.5337
   },
   {
     "id": "EGY-mostafa_shobeir",
@@ -4317,10 +4317,10 @@
     "team": "Egypt",
     "teamCode": "EGY",
     "position": "GK",
-    "birthplace": "Cairo",
+    "birthplace": "Banha",
     "country": "Egypt",
-    "lat": 30.0444,
-    "lon": 31.2357
+    "lat": 30.2355,
+    "lon": 31.1528
   },
   {
     "id": "EGY-mohamed_alaa",
@@ -4328,10 +4328,10 @@
     "team": "Egypt",
     "teamCode": "EGY",
     "position": "GK",
-    "birthplace": "Cairo",
+    "birthplace": "Mahalla El-Kubra",
     "country": "Egypt",
-    "lat": 30.0444,
-    "lon": 31.2357
+    "lat": 30.9818,
+    "lon": 31.1721
   },
   {
     "id": "EGY-yasser_ibrahim",
@@ -4339,10 +4339,10 @@
     "team": "Egypt",
     "teamCode": "EGY",
     "position": "DF",
-    "birthplace": "Cairo",
+    "birthplace": "Ismaïlia",
     "country": "Egypt",
-    "lat": 30.0444,
-    "lon": 31.2357
+    "lat": 30.6555,
+    "lon": 32.1382
   },
   {
     "id": "EGY-mohamed_hany",
@@ -4350,10 +4350,10 @@
     "team": "Egypt",
     "teamCode": "EGY",
     "position": "DF",
-    "birthplace": "Cairo",
+    "birthplace": "Beni Suef",
     "country": "Egypt",
-    "lat": 30.0444,
-    "lon": 31.2357
+    "lat": 29.0363,
+    "lon": 30.96
   },
   {
     "id": "EGY-hossam_abdelmaguid",
@@ -4361,10 +4361,10 @@
     "team": "Egypt",
     "teamCode": "EGY",
     "position": "DF",
-    "birthplace": "Cairo",
+    "birthplace": "Helwan",
     "country": "Egypt",
-    "lat": 30.0444,
-    "lon": 31.2357
+    "lat": 29.6786,
+    "lon": 31.5799
   },
   {
     "id": "EGY-ramy_rabia",
@@ -4372,10 +4372,10 @@
     "team": "Egypt",
     "teamCode": "EGY",
     "position": "DF",
-    "birthplace": "Cairo",
+    "birthplace": "Beni Suef",
     "country": "Egypt",
-    "lat": 30.0444,
-    "lon": 31.2357
+    "lat": 29.2797,
+    "lon": 30.9961
   },
   {
     "id": "EGY-mohamed_abdelmonem",
@@ -4383,10 +4383,10 @@
     "team": "Egypt",
     "teamCode": "EGY",
     "position": "DF",
-    "birthplace": "Cairo",
+    "birthplace": "Zifta",
     "country": "Egypt",
-    "lat": 30.0444,
-    "lon": 31.2357
+    "lat": 30.9732,
+    "lon": 31.5639
   },
   {
     "id": "EGY-ahmed_abou_el_fotouh",
@@ -4394,10 +4394,10 @@
     "team": "Egypt",
     "teamCode": "EGY",
     "position": "DF",
-    "birthplace": "Cairo",
+    "birthplace": "6th of October City",
     "country": "Egypt",
-    "lat": 30.0444,
-    "lon": 31.2357
+    "lat": 29.835,
+    "lon": 30.8579
   },
   {
     "id": "EGY-tarek_alaa",
@@ -4405,10 +4405,10 @@
     "team": "Egypt",
     "teamCode": "EGY",
     "position": "DF",
-    "birthplace": "Cairo",
+    "birthplace": "Tanta",
     "country": "Egypt",
-    "lat": 30.0444,
-    "lon": 31.2357
+    "lat": 30.8464,
+    "lon": 31.0749
   },
   {
     "id": "EGY-emam_ashour",
@@ -4416,10 +4416,10 @@
     "team": "Egypt",
     "teamCode": "EGY",
     "position": "MF",
-    "birthplace": "Cairo",
+    "birthplace": "Menouf",
     "country": "Egypt",
-    "lat": 30.0444,
-    "lon": 31.2357
+    "lat": 30.2954,
+    "lon": 30.8245
   },
   {
     "id": "EGY-hamdy_fathy",
@@ -4427,10 +4427,10 @@
     "team": "Egypt",
     "teamCode": "EGY",
     "position": "MF",
-    "birthplace": "Cairo",
+    "birthplace": "Fayoum",
     "country": "Egypt",
-    "lat": 30.0444,
-    "lon": 31.2357
+    "lat": 29.4508,
+    "lon": 30.4821
   },
   {
     "id": "EGY-ahmed_nabil_koka",
@@ -4438,10 +4438,10 @@
     "team": "Egypt",
     "teamCode": "EGY",
     "position": "MF",
-    "birthplace": "Cairo",
+    "birthplace": "Monufia",
     "country": "Egypt",
-    "lat": 30.0444,
-    "lon": 31.2357
+    "lat": 30.1654,
+    "lon": 30.601
   },
   {
     "id": "EGY-mohanad_lasheen",
@@ -4449,10 +4449,10 @@
     "team": "Egypt",
     "teamCode": "EGY",
     "position": "MF",
-    "birthplace": "Cairo",
+    "birthplace": "Fayoum",
     "country": "Egypt",
-    "lat": 30.0444,
-    "lon": 31.2357
+    "lat": 29.57,
+    "lon": 30.3002
   },
   {
     "id": "EGY-marwan_attia",
@@ -4460,10 +4460,10 @@
     "team": "Egypt",
     "teamCode": "EGY",
     "position": "MF",
-    "birthplace": "Cairo",
+    "birthplace": "New Cairo",
     "country": "Egypt",
-    "lat": 30.0444,
-    "lon": 31.2357
+    "lat": 29.7693,
+    "lon": 31.6594
   },
   {
     "id": "EGY-mahmoud_saber",
@@ -4471,10 +4471,10 @@
     "team": "Egypt",
     "teamCode": "EGY",
     "position": "MF",
-    "birthplace": "Cairo",
+    "birthplace": "6th of October City",
     "country": "Egypt",
-    "lat": 30.0444,
-    "lon": 31.2357
+    "lat": 30.0103,
+    "lon": 30.934
   },
   {
     "id": "EGY-trezeguet",
@@ -4482,10 +4482,10 @@
     "team": "Egypt",
     "teamCode": "EGY",
     "position": "FW",
-    "birthplace": "Cairo",
+    "birthplace": "Kafr el-Sheikh",
     "country": "Egypt",
-    "lat": 30.0444,
-    "lon": 31.2357
+    "lat": 30.8478,
+    "lon": 30.6317
   },
   {
     "id": "EGY-mostafa_mohamed",
@@ -4493,10 +4493,10 @@
     "team": "Egypt",
     "teamCode": "EGY",
     "position": "FW",
-    "birthplace": "Cairo",
+    "birthplace": "Minya",
     "country": "Egypt",
-    "lat": 30.0444,
-    "lon": 31.2357
+    "lat": 29.5957,
+    "lon": 30.3017
   },
   {
     "id": "EGY-haissem_hassan",
@@ -4504,10 +4504,10 @@
     "team": "Egypt",
     "teamCode": "EGY",
     "position": "FW",
-    "birthplace": "Cairo",
+    "birthplace": "Helwan",
     "country": "Egypt",
-    "lat": 30.0444,
-    "lon": 31.2357
+    "lat": 29.7337,
+    "lon": 31.3286
   },
   {
     "id": "EGY-ibrahim_adel",
@@ -4515,10 +4515,10 @@
     "team": "Egypt",
     "teamCode": "EGY",
     "position": "FW",
-    "birthplace": "Cairo",
+    "birthplace": "10th of Ramadan City",
     "country": "Egypt",
-    "lat": 30.0444,
-    "lon": 31.2357
+    "lat": 30.2755,
+    "lon": 31.7387
   },
   {
     "id": "EGY-omar_marmoush",
@@ -4526,10 +4526,10 @@
     "team": "Egypt",
     "teamCode": "EGY",
     "position": "FW",
-    "birthplace": "Cairo",
+    "birthplace": "Suez",
     "country": "Egypt",
-    "lat": 30.0444,
-    "lon": 31.2357
+    "lat": 29.3828,
+    "lon": 32.0787
   },
   {
     "id": "EGY-zizo",
@@ -4537,10 +4537,10 @@
     "team": "Egypt",
     "teamCode": "EGY",
     "position": "FW",
-    "birthplace": "Cairo",
+    "birthplace": "Mahalla El-Kubra",
     "country": "Egypt",
-    "lat": 30.0444,
-    "lon": 31.2357
+    "lat": 30.868,
+    "lon": 31.2236
   },
   {
     "id": "EGY-hamza_abdelkarim",
@@ -5747,10 +5747,10 @@
     "team": "Ghana",
     "teamCode": "GHA",
     "position": "GK",
-    "birthplace": "Accra",
+    "birthplace": "Kasoa",
     "country": "Ghana",
-    "lat": 5.6037,
-    "lon": -0.187
+    "lat": 5.5861,
+    "lon": -0.8306
   },
   {
     "id": "GHA-jonas_adjetey",
@@ -6308,10 +6308,10 @@
     "team": "Iran",
     "teamCode": "IRN",
     "position": "GK",
-    "birthplace": "Tehran",
+    "birthplace": "Fardis",
     "country": "Iran",
-    "lat": 35.6892,
-    "lon": 51.389
+    "lat": 35.7264,
+    "lon": 50.9786
   },
   {
     "id": "IRN-hossein_hosseini",
@@ -6319,10 +6319,10 @@
     "team": "Iran",
     "teamCode": "IRN",
     "position": "GK",
-    "birthplace": "Tehran",
+    "birthplace": "Shiraz",
     "country": "Iran",
-    "lat": 35.6892,
-    "lon": 51.389
+    "lat": 29.5918,
+    "lon": 52.5837
   },
   {
     "id": "IRN-saleh_hardani",
@@ -6330,10 +6330,10 @@
     "team": "Iran",
     "teamCode": "IRN",
     "position": "DF",
-    "birthplace": "Tehran",
+    "birthplace": "Bahmaei",
     "country": "Iran",
-    "lat": 35.6892,
-    "lon": 51.389
+    "lat": 30.8667,
+    "lon": 50.6639
   },
   {
     "id": "IRN-ehsan_hajsafi",
@@ -6352,10 +6352,10 @@
     "team": "Iran",
     "teamCode": "IRN",
     "position": "DF",
-    "birthplace": "Tehran",
+    "birthplace": "Babolsar",
     "country": "Iran",
-    "lat": 35.6892,
-    "lon": 51.389
+    "lat": 36.7045,
+    "lon": 52.6589
   },
   {
     "id": "IRN-milad_mohammadi",
@@ -6374,10 +6374,10 @@
     "team": "Iran",
     "teamCode": "IRN",
     "position": "DF",
-    "birthplace": "Tehran",
+    "birthplace": "Bandar-e Mahshahr",
     "country": "Iran",
-    "lat": 35.6892,
-    "lon": 51.389
+    "lat": 30.4623,
+    "lon": 49.1797
   },
   {
     "id": "IRN-ali_nemati",
@@ -6385,10 +6385,10 @@
     "team": "Iran",
     "teamCode": "IRN",
     "position": "DF",
-    "birthplace": "Tehran",
+    "birthplace": "Nishapur",
     "country": "Iran",
-    "lat": 35.6892,
-    "lon": 51.389
+    "lat": 36.2138,
+    "lon": 58.7958
   },
   {
     "id": "IRN-ramin_rezaeian",
@@ -6396,10 +6396,10 @@
     "team": "Iran",
     "teamCode": "IRN",
     "position": "DF",
-    "birthplace": "Tehran",
+    "birthplace": "Sari",
     "country": "Iran",
-    "lat": 35.6892,
-    "lon": 51.389
+    "lat": 36.5656,
+    "lon": 53.06
   },
   {
     "id": "IRN-aria_yousefi",
@@ -6407,10 +6407,10 @@
     "team": "Iran",
     "teamCode": "IRN",
     "position": "DF",
-    "birthplace": "Tehran",
+    "birthplace": "Bandar-e Mahshahr",
     "country": "Iran",
-    "lat": 35.5168,
-    "lon": 51.3514
+    "lat": 30.4623,
+    "lon": 49.1797
   },
   {
     "id": "IRN-mohammad_ghorbani",
@@ -6418,10 +6418,10 @@
     "team": "Iran",
     "teamCode": "IRN",
     "position": "MF",
-    "birthplace": "Tehran",
+    "birthplace": "Arak",
     "country": "Iran",
-    "lat": 35.6892,
-    "lon": 51.389
+    "lat": 34.0954,
+    "lon": 49.6889
   },
   {
     "id": "IRN-alireza_jahanbakhsh",
@@ -6440,10 +6440,10 @@
     "team": "Iran",
     "teamCode": "IRN",
     "position": "MF",
-    "birthplace": "Tehran",
+    "birthplace": "Bushehr",
     "country": "Iran",
-    "lat": 35.6892,
-    "lon": 51.389
+    "lat": 28.9688,
+    "lon": 50.8385
   },
   {
     "id": "IRN-saman_ghoddos",
@@ -6462,10 +6462,10 @@
     "team": "Iran",
     "teamCode": "IRN",
     "position": "MF",
-    "birthplace": "Tehran",
+    "birthplace": "Karaj",
     "country": "Iran",
-    "lat": 35.6892,
-    "lon": 51.389
+    "lat": 35.8327,
+    "lon": 50.9654
   },
   {
     "id": "IRN-amirmohammad_razzaghinia",
@@ -6473,10 +6473,10 @@
     "team": "Iran",
     "teamCode": "IRN",
     "position": "MF",
-    "birthplace": "Tehran",
+    "birthplace": "Yazd",
     "country": "Iran",
-    "lat": 35.6892,
-    "lon": 51.389
+    "lat": 31.8974,
+    "lon": 54.3569
   },
   {
     "id": "IRN-saeid_ezatolahi",
@@ -6506,10 +6506,10 @@
     "team": "Iran",
     "teamCode": "IRN",
     "position": "FW",
-    "birthplace": "Tehran",
+    "birthplace": "Bushehr",
     "country": "Iran",
-    "lat": 35.6223,
-    "lon": 51.219
+    "lat": 28.9688,
+    "lon": 50.8385
   },
   {
     "id": "IRN-shahriyar_moghanlou",
@@ -6517,10 +6517,10 @@
     "team": "Iran",
     "teamCode": "IRN",
     "position": "FW",
-    "birthplace": "Tehran",
+    "birthplace": "Zanjan",
     "country": "Iran",
-    "lat": 35.6892,
-    "lon": 51.389
+    "lat": 36.6736,
+    "lon": 48.4787
   },
   {
     "id": "IRN-ali_alipour",
@@ -6528,10 +6528,10 @@
     "team": "Iran",
     "teamCode": "IRN",
     "position": "FW",
-    "birthplace": "Tehran",
+    "birthplace": "Qaemshahr",
     "country": "Iran",
-    "lat": 35.6892,
-    "lon": 51.389
+    "lat": 36.4607,
+    "lon": 52.8639
   },
   {
     "id": "IRN-roozbeh_cheshmi",
@@ -6594,10 +6594,10 @@
     "team": "Iraq",
     "teamCode": "IRQ",
     "position": "GK",
-    "birthplace": "Baghdad",
+    "birthplace": "Fallujah",
     "country": "Iraq",
-    "lat": 33.3152,
-    "lon": 44.3661
+    "lat": 33.1316,
+    "lon": 43.7276
   },
   {
     "id": "IRQ-rebin_sulaka",
@@ -6781,10 +6781,10 @@
     "team": "Iraq",
     "teamCode": "IRQ",
     "position": "MF",
-    "birthplace": "Baghdad",
+    "birthplace": "Al-Kut",
     "country": "Iraq",
-    "lat": 33.3152,
-    "lon": 44.3661
+    "lat": 32.9429,
+    "lon": 45.3259
   },
   {
     "id": "IRQ-aymen_hussein",
@@ -6946,7 +6946,7 @@
     "team": "Jordan",
     "teamCode": "JOR",
     "position": "MF",
-    "birthplace": "Amman",
+    "birthplace": "Mafraq",
     "country": "Jordan",
     "lat": 32.3002,
     "lon": 36.0939
@@ -7232,10 +7232,10 @@
     "team": "Japan",
     "teamCode": "JPN",
     "position": "DF",
-    "birthplace": "Tokyo",
+    "birthplace": "Hamamatsu",
     "country": "Japan",
-    "lat": 35.6894,
-    "lon": 139.6917
+    "lat": 34.7103,
+    "lon": 137.7266
   },
   {
     "id": "JPN-junnosuke_suzuki",
@@ -7386,10 +7386,10 @@
     "team": "Japan",
     "teamCode": "JPN",
     "position": "FW",
-    "birthplace": "Tokyo",
+    "birthplace": "Hamamatsu",
     "country": "Japan",
-    "lat": 35.6894,
-    "lon": 139.6917
+    "lat": 34.7103,
+    "lon": 137.7266
   },
   {
     "id": "JPN-ko_itakura",
@@ -7782,10 +7782,10 @@
     "team": "Saudi Arabia",
     "teamCode": "KSA",
     "position": "DF",
-    "birthplace": "Riyadh",
+    "birthplace": "Shaqra",
     "country": "Saudi Arabia",
-    "lat": 24.7136,
-    "lon": 46.6753
+    "lat": 25.2406,
+    "lon": 45.7464
   },
   {
     "id": "KSA-nawaf_boushal",
@@ -7804,10 +7804,10 @@
     "team": "Saudi Arabia",
     "teamCode": "KSA",
     "position": "MF",
-    "birthplace": "Riyadh",
+    "birthplace": "Al-Kharj",
     "country": "Saudi Arabia",
-    "lat": 24.7136,
-    "lon": 46.6753
+    "lat": 24.8142,
+    "lon": 47.6945
   },
   {
     "id": "KSA-musab_al_juwayr",
@@ -8497,10 +8497,10 @@
     "team": "Mexico",
     "teamCode": "MEX",
     "position": "FW",
-    "birthplace": "Mexico City",
+    "birthplace": "Apan",
     "country": "Mexico",
-    "lat": 19.4326,
-    "lon": -99.1332
+    "lat": 19.5454,
+    "lon": -98.4415
   },
   {
     "id": "MEX-edson_alvarez",
@@ -8970,10 +8970,10 @@
     "team": "Norway",
     "teamCode": "NOR",
     "position": "DF",
-    "birthplace": "Oslo",
+    "birthplace": "Tønsberg",
     "country": "Norway",
-    "lat": 59.9133,
-    "lon": 10.7389
+    "lat": 59.2672,
+    "lon": 10.4078
   },
   {
     "id": "NOR-morten_thorsby",
@@ -9201,10 +9201,10 @@
     "team": "New Zealand",
     "teamCode": "NZL",
     "position": "DF",
-    "birthplace": "Auckland",
+    "birthplace": "Christchurch",
     "country": "New Zealand",
-    "lat": -36.8426,
-    "lon": 175.0315
+    "lat": -43.5321,
+    "lon": 172.6362
   },
   {
     "id": "NZL-tyler_bindon",
@@ -9223,10 +9223,10 @@
     "team": "New Zealand",
     "teamCode": "NZL",
     "position": "DF",
-    "birthplace": "Auckland",
-    "country": "New Zealand",
-    "lat": -37.452,
-    "lon": 175.3783
+    "birthplace": "Cardiff",
+    "country": "Wales",
+    "lat": 51.4816,
+    "lon": -3.1791
   },
   {
     "id": "NZL-callan_elliot",
@@ -9234,10 +9234,10 @@
     "team": "New Zealand",
     "teamCode": "NZL",
     "position": "DF",
-    "birthplace": "Auckland",
-    "country": "New Zealand",
-    "lat": -37.3643,
-    "lon": 175.5689
+    "birthplace": "Dumfries",
+    "country": "Scotland",
+    "lat": 55.0709,
+    "lon": -3.6051
   },
   {
     "id": "NZL-joe_bell",
@@ -9245,10 +9245,10 @@
     "team": "New Zealand",
     "teamCode": "NZL",
     "position": "MF",
-    "birthplace": "Auckland",
-    "country": "New Zealand",
-    "lat": -36.529,
-    "lon": 175.5264
+    "birthplace": "Bristol",
+    "country": "England",
+    "lat": 51.4545,
+    "lon": -2.5879
   },
   {
     "id": "NZL-marko_stamenic",
@@ -9256,10 +9256,10 @@
     "team": "New Zealand",
     "teamCode": "NZL",
     "position": "MF",
-    "birthplace": "Auckland",
+    "birthplace": "Wellington",
     "country": "New Zealand",
-    "lat": -36.3789,
-    "lon": 175.6752
+    "lat": -41.2866,
+    "lon": 174.7756
   },
   {
     "id": "NZL-lachlan_bayliss",
@@ -9267,10 +9267,10 @@
     "team": "New Zealand",
     "teamCode": "NZL",
     "position": "MF",
-    "birthplace": "Auckland",
-    "country": "New Zealand",
-    "lat": -35.9285,
-    "lon": 175.3205
+    "birthplace": "Sydney",
+    "country": "Australia",
+    "lat": -33.8688,
+    "lon": 151.2093
   },
   {
     "id": "NZL-elijah_just",
@@ -9278,10 +9278,10 @@
     "team": "New Zealand",
     "teamCode": "NZL",
     "position": "MF",
-    "birthplace": "Auckland",
+    "birthplace": "Palmerston North",
     "country": "New Zealand",
-    "lat": -36.2538,
-    "lon": 174.3218
+    "lat": -40.3556,
+    "lon": 175.6114
   },
   {
     "id": "NZL-alex_rufer",
@@ -9289,10 +9289,10 @@
     "team": "New Zealand",
     "teamCode": "NZL",
     "position": "MF",
-    "birthplace": "Auckland",
-    "country": "New Zealand",
-    "lat": -35.8107,
-    "lon": 174.1693
+    "birthplace": "Geneva",
+    "country": "Switzerland",
+    "lat": 46.2044,
+    "lon": 6.1432
   },
   {
     "id": "NZL-ben_old",
@@ -9322,10 +9322,10 @@
     "team": "New Zealand",
     "teamCode": "NZL",
     "position": "MF",
-    "birthplace": "Auckland",
+    "birthplace": "Te Puke",
     "country": "New Zealand",
-    "lat": -37.4255,
-    "lon": 174.6856
+    "lat": -37.7833,
+    "lon": 176.3167
   },
   {
     "id": "NZL-logan_rogerson",
@@ -9333,10 +9333,10 @@
     "team": "New Zealand",
     "teamCode": "NZL",
     "position": "FW",
-    "birthplace": "Auckland",
+    "birthplace": "Wellington",
     "country": "New Zealand",
-    "lat": -37.0573,
-    "lon": 175.0145
+    "lat": -41.2866,
+    "lon": 174.7756
   },
   {
     "id": "NZL-jesse_randall",
@@ -9344,10 +9344,10 @@
     "team": "New Zealand",
     "teamCode": "NZL",
     "position": "FW",
-    "birthplace": "Auckland",
+    "birthplace": "Wellington",
     "country": "New Zealand",
-    "lat": -36.5418,
-    "lon": 175.2124
+    "lat": -41.2866,
+    "lon": 174.7756
   },
   {
     "id": "NZL-kosta_barbarouses",
@@ -9355,10 +9355,10 @@
     "team": "New Zealand",
     "teamCode": "NZL",
     "position": "FW",
-    "birthplace": "Auckland",
+    "birthplace": "Wellington",
     "country": "New Zealand",
-    "lat": -36.5846,
-    "lon": 173.8652
+    "lat": -41.2866,
+    "lon": 174.7756
   },
   {
     "id": "NZL-ben_waine",
@@ -9366,10 +9366,10 @@
     "team": "New Zealand",
     "teamCode": "NZL",
     "position": "FW",
-    "birthplace": "Auckland",
+    "birthplace": "Wellington",
     "country": "New Zealand",
-    "lat": -36.0112,
-    "lon": 174.4555
+    "lat": -41.2866,
+    "lon": 174.7756
   },
   {
     "id": "NZL-michael_boxall",
@@ -9421,10 +9421,10 @@
     "team": "New Zealand",
     "teamCode": "NZL",
     "position": "DF",
-    "birthplace": "Auckland",
-    "country": "New Zealand",
-    "lat": -36.8485,
-    "lon": 174.7633
+    "birthplace": "Brummen",
+    "country": "Netherlands",
+    "lat": 52.0881,
+    "lon": 6.1475
   },
   {
     "id": "NZL-tommy_smith",
@@ -9432,10 +9432,10 @@
     "team": "New Zealand",
     "teamCode": "NZL",
     "position": "DF",
-    "birthplace": "Auckland",
-    "country": "New Zealand",
-    "lat": -36.8485,
-    "lon": 174.7633
+    "birthplace": "Macclesfield",
+    "country": "England",
+    "lat": 53.2581,
+    "lon": -2.1274
   },
   {
     "id": "PAN-luis_mejia",
@@ -10356,10 +10356,10 @@
     "team": "Qatar",
     "teamCode": "QAT",
     "position": "DF",
-    "birthplace": "Doha",
+    "birthplace": "Al-Wakrah",
     "country": "Qatar",
-    "lat": 25.2854,
-    "lon": 51.531
+    "lat": 24.6449,
+    "lon": 51.296
   },
   {
     "id": "QAT-homam_ahmed",
@@ -10378,10 +10378,10 @@
     "team": "Qatar",
     "teamCode": "QAT",
     "position": "DF",
-    "birthplace": "Doha",
+    "birthplace": "Al-Khor",
     "country": "Qatar",
-    "lat": 25.2854,
-    "lon": 51.531
+    "lat": 25.5395,
+    "lon": 52.2246
   },
   {
     "id": "QAT-sultan_al_brake",
@@ -10466,10 +10466,10 @@
     "team": "Qatar",
     "teamCode": "QAT",
     "position": "MF",
-    "birthplace": "Doha",
-    "country": "Qatar",
-    "lat": 25.2854,
-    "lon": 51.531
+    "birthplace": "Khartoum",
+    "country": "Sudan",
+    "lat": 15.5518,
+    "lon": 32.5324
   },
   {
     "id": "QAT-ahmed_alaaeldin",
@@ -10609,10 +10609,10 @@
     "team": "South Africa",
     "teamCode": "RSA",
     "position": "GK",
-    "birthplace": "Johannesburg",
+    "birthplace": "Vanderbijlpark",
     "country": "South Africa",
-    "lat": -26.2041,
-    "lon": 28.0473
+    "lat": -26.6166,
+    "lon": 27.7395
   },
   {
     "id": "RSA-thabang_matuludi",
@@ -10620,10 +10620,10 @@
     "team": "South Africa",
     "teamCode": "RSA",
     "position": "DF",
-    "birthplace": "Johannesburg",
+    "birthplace": "Rustenburg",
     "country": "South Africa",
-    "lat": -26.2041,
-    "lon": 28.0473
+    "lat": -25.2114,
+    "lon": 27.2783
   },
   {
     "id": "RSA-khulumani_ndamane",
@@ -10631,10 +10631,10 @@
     "team": "South Africa",
     "teamCode": "RSA",
     "position": "DF",
-    "birthplace": "Johannesburg",
+    "birthplace": "Heidelberg",
     "country": "South Africa",
-    "lat": -26.2041,
-    "lon": 28.0473
+    "lat": -26.5228,
+    "lon": 28.3398
   },
   {
     "id": "RSA-aubrey_modiba",
@@ -10664,10 +10664,10 @@
     "team": "South Africa",
     "teamCode": "RSA",
     "position": "DF",
-    "birthplace": "Johannesburg",
+    "birthplace": "Potchefstroom",
     "country": "South Africa",
-    "lat": -26.2041,
-    "lon": 28.0473
+    "lat": -26.6468,
+    "lon": 27.3509
   },
   {
     "id": "RSA-nkosinathi_sibisi",
@@ -10708,10 +10708,10 @@
     "team": "South Africa",
     "teamCode": "RSA",
     "position": "DF",
-    "birthplace": "Johannesburg",
+    "birthplace": "Heidelberg",
     "country": "South Africa",
-    "lat": -26.2041,
-    "lon": 28.0473
+    "lat": -26.5191,
+    "lon": 28.5441
   },
   {
     "id": "RSA-teboho_mokoena",
@@ -10730,10 +10730,10 @@
     "team": "South Africa",
     "teamCode": "RSA",
     "position": "MF",
-    "birthplace": "Johannesburg",
+    "birthplace": "Rustenburg",
     "country": "South Africa",
-    "lat": -26.2041,
-    "lon": 28.0473
+    "lat": -25.7319,
+    "lon": 27.3437
   },
   {
     "id": "RSA-themba_zwane",
@@ -10818,10 +10818,10 @@
     "team": "South Africa",
     "teamCode": "RSA",
     "position": "FW",
-    "birthplace": "Johannesburg",
+    "birthplace": "Springs",
     "country": "South Africa",
-    "lat": -26.2041,
-    "lon": 28.0473
+    "lat": -26.0236,
+    "lon": 28.6255
   },
   {
     "id": "RSA-iqraam_rayners",
@@ -12017,10 +12017,10 @@
     "team": "Tunisia",
     "teamCode": "TUN",
     "position": "GK",
-    "birthplace": "Tunis",
+    "birthplace": "Sfax",
     "country": "Tunisia",
-    "lat": 36.8065,
-    "lon": 10.1815
+    "lat": 34.7406,
+    "lon": 10.7603
   },
   {
     "id": "TUN-mouhib_chamakh",
@@ -12722,9 +12722,9 @@
     "teamCode": "URU",
     "position": "MF",
     "birthplace": "Florida",
-    "country": "United States",
-    "lat": 28.1333,
-    "lon": -81.6317
+    "country": "Uruguay",
+    "lat": -34.095,
+    "lon": -56.215
   },
   {
     "id": "URU-nicolas_de_la_cruz",
@@ -13260,10 +13260,10 @@
     "team": "Uzbekistan",
     "teamCode": "UZB",
     "position": "DF",
-    "birthplace": "Tashkent",
+    "birthplace": "Namangan",
     "country": "Uzbekistan",
-    "lat": 41.2995,
-    "lon": 69.2401
+    "lat": 40.9983,
+    "lon": 71.6726
   },
   {
     "id": "UZB-jakhongir_urozov",
@@ -13524,10 +13524,10 @@
     "team": "Curaçao",
     "teamCode": "CUW",
     "position": "DF",
-    "birthplace": "Willemstad",
-    "country": "Curaçao",
-    "lat": 12.108,
-    "lon": -68.935
+    "birthplace": "Nieuwegein",
+    "country": "Netherlands",
+    "lat": 52.0325,
+    "lon": 5.0925
   },
   {
     "id": "CUW-armando_obispo",
@@ -13623,10 +13623,10 @@
     "team": "Curaçao",
     "teamCode": "CUW",
     "position": "MF",
-    "birthplace": "Willemstad",
-    "country": "Curaçao",
-    "lat": 12.108,
-    "lon": -68.935
+    "birthplace": "Amsterdam",
+    "country": "Netherlands",
+    "lat": 52.3676,
+    "lon": 4.9041
   },
   {
     "id": "CUW-kevin_felida",

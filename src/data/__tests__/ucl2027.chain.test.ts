@@ -5,6 +5,10 @@ import {
   seedPool,
   drawTies,
   simulateTie,
+  buildFixedTies,
+  hasFixedDraw,
+  clubById,
+  FIXED_TIES,
   hasRestriction,
   finalizeLeaguePots,
   LP_POT1,
@@ -13,6 +17,7 @@ import {
   LP_POT34_FIXED,
   LP_POT4_FIXED,
   type UCLClub,
+  type UCLTie,
   type RoundDef,
 } from '@/data/ucl2027';
 import {
@@ -32,33 +37,45 @@ import {
 } from '@/lib/uclLeague';
 import { encodeCard, decodeCard, cardOutcome, cardIsChampion, type CardMatch } from '@/lib/uclCard';
 
+// Bouwt de duels van een ronde: vaste loting (Q1/Q2) of willekeurige trekking.
+// winnerOfTie lost { winner: tieId }-slots in een vaste loting op.
+function tiesForRound(
+  def: RoundDef,
+  winnersByRound: Record<string, UCLClub[]>,
+  winnerOfTie: Record<string, UCLClub>
+): UCLTie[] {
+  if (hasFixedDraw(def.id)) {
+    return buildFixedTies(def.id, (tieId) => winnerOfTie[tieId]);
+  }
+  const pool: UCLClub[] = [...def.direct, ...(def.feedsFrom ? winnersByRound[def.feedsFrom] : [])];
+  const { seeded, unseeded } = seedPool(pool);
+  return drawTies(seeded, unseeded, def.id);
+}
+
 // Simuleer de hele kwalificatie automatisch (zoals bij instap op een latere stage)
 // en geef de 7 play-off-winnaars terug.
 function autoQualify(): UCLClub[] {
   const winners: Record<string, UCLClub[]> = {};
+  const winnerOfTie: Record<string, UCLClub> = {};
   for (const def of ROUNDS) {
-    const pool: UCLClub[] = [...def.direct, ...(def.feedsFrom ? winners[def.feedsFrom] : [])];
-    const { seeded, unseeded } = seedPool(pool);
-    const ties = drawTies(seeded, unseeded, def.id);
-    winners[def.id] = ties.map((t) => simulateTie(t));
+    const ties = tiesForRound(def, winners, winnerOfTie);
+    const ws = ties.map((t) => simulateTie(t));
+    winners[def.id] = ws;
+    ties.forEach((t, i) => (winnerOfTie[t.id] = ws[i]));
   }
   return [...winners['po-cp'], ...winners['po-lp']];
 }
 
-// Simuleer een complete kwalificatie: per ronde loten + willekeurig winnaars kiezen,
-// winnaars doorsturen. Verifieer aantallen, restricties en de uniekheid van ID's.
+// Simuleer een complete kwalificatie: per ronde loten/bouwen + willekeurig winnaars
+// kiezen, winnaars doorsturen. Verifieer aantallen, restricties en uniekheid van ID's.
 function simulate() {
   const winners: Record<string, UCLClub[]> = {};
+  const winnerOfTie: Record<string, UCLClub> = {};
   const tieCounts: Record<string, number> = {};
   const restrictionViolations: string[] = [];
 
   for (const def of ROUNDS) {
-    const pool: UCLClub[] = [
-      ...def.direct,
-      ...(def.feedsFrom ? winners[def.feedsFrom] : []),
-    ];
-    const { seeded, unseeded } = seedPool(pool);
-    const ties = drawTies(seeded, unseeded, def.id);
+    const ties = tiesForRound(def, winners, winnerOfTie);
     tieCounts[def.id] = ties.length;
     for (const t of ties) {
       if (hasRestriction(t.home, t.away)) {
@@ -66,7 +83,9 @@ function simulate() {
       }
     }
     // willekeurige winnaar per duel
-    winners[def.id] = ties.map((t) => (Math.random() > 0.5 ? t.home : t.away));
+    const ws = ties.map((t) => (Math.random() > 0.5 ? t.home : t.away));
+    winners[def.id] = ws;
+    ties.forEach((t, i) => (winnerOfTie[t.id] = ws[i]));
   }
   return { winners, tieCounts, restrictionViolations };
 }
@@ -315,6 +334,60 @@ describe('MijnKaart-serialisatie', () => {
 
   it('lege string → lege lijst', () => {
     expect(decodeCard('')).toEqual([]);
+  });
+});
+
+describe('vaste loting Q1 + Q2', () => {
+  it('Q1: 14 duels met concrete, unieke clubs', () => {
+    const ties = buildFixedTies('q1', () => undefined);
+    expect(ties.length).toBe(14);
+    const ids = ties.flatMap((t) => [t.home.id, t.away.id]);
+    expect(new Set(ids).size).toBe(28); // 28 verschillende clubs
+    for (const t of ties) {
+      expect(t.firstLeg).toBeTruthy();
+      expect(t.secondLeg).toBeTruthy();
+    }
+  });
+
+  it('Q2-CP verwijst naar elke Q1-winnaar precies één keer', () => {
+    const refs = FIXED_TIES['q2-cp']
+      .flatMap((t) => [t.home, t.away])
+      .filter((s): s is { winner: string } => 'winner' in s)
+      .map((s) => s.winner);
+    expect(refs.length).toBe(14);
+    expect(new Set(refs)).toEqual(new Set(FIXED_TIES['q1'].map((t) => t.id)));
+  });
+
+  it('Q2 levert de juiste aantallen op zodra Q1-winnaars bekend zijn', () => {
+    // kies deterministisch de thuisploeg als winnaar van elk Q1-duel
+    const q1 = buildFixedTies('q1', () => undefined);
+    const winnerOfTie: Record<string, UCLClub> = {};
+    for (const t of q1) winnerOfTie[t.id] = t.home;
+    const resolve = (id: string) => winnerOfTie[id];
+
+    const cp = buildFixedTies('q2-cp', resolve);
+    const lp = buildFixedTies('q2-lp', resolve);
+    expect(cp.length).toBe(12);
+    expect(lp.length).toBe(2);
+    // 24 unieke clubs in CP (10 direct + 14 Q1-winnaars)
+    expect(new Set(cp.flatMap((t) => [t.home.id, t.away.id])).size).toBe(24);
+    // geen politieke restricties, ongeacht de Q1-uitkomst (200 willekeurige runs)
+    for (let run = 0; run < 200; run++) {
+      const wm: Record<string, UCLClub> = {};
+      for (const t of q1) wm[t.id] = Math.random() > 0.5 ? t.home : t.away;
+      const ties = buildFixedTies('q2-cp', (id) => wm[id]);
+      for (const t of ties) expect(hasRestriction(t.home, t.away)).toBe(false);
+    }
+  });
+
+  it('alle directe instappers + Q1-winnaars in Q2 bestaan als club', () => {
+    for (const rid of ['q2-cp', 'q2-lp']) {
+      for (const t of FIXED_TIES[rid]) {
+        for (const s of [t.home, t.away]) {
+          if ('club' in s) expect(clubById(s.club)).toBeDefined();
+        }
+      }
+    }
   });
 });
 

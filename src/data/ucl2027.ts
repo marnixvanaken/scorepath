@@ -11,6 +11,8 @@ export interface UCLTie {
   id: string;
   home: UCLClub;  // eerste getrokken = thuisspeler heenwedstrijd
   away: UCLClub;
+  firstLeg?: string;   // datumlabel heenwedstrijd (alleen bij vaste loting)
+  secondLeg?: string;  // datumlabel terugwedstrijd (alleen bij vaste loting)
 }
 
 export type UCLPath = 'champions' | 'league';
@@ -401,3 +403,91 @@ const CLUB_BY_ID: Record<string, UCLClub> = Object.fromEntries(ALL_CLUBS.map((c)
 export function clubById(id: string): UCLClub | undefined {
   return CLUB_BY_ID[id];
 }
+
+// ─── Vaste loting (reeds verrichte trekkingen) ───────────────────────────────
+// Q1: geloot 16 juni 2026 — alle duels met concrete clubs.
+// Q2: geloot 17 juni 2026 — bracket waarin slots verwijzen naar Q1-winnaars.
+// Een slot is óf een directe instapper ({ club }) óf de winnaar van een eerder
+// duel ({ winner: tieId }). "Winner of match N" uit de UEFA-tabel = Q1-duel N,
+// in deze code 0-geïndexeerd als 'q1-(N-1)'.
+
+export type TieSlot = { club: string } | { winner: string };
+
+export interface FixedTie {
+  id: string;
+  home: TieSlot;   // Team 1 in de UEFA-tabel = thuis in de heenwedstrijd
+  away: TieSlot;
+  firstLeg: string;
+  secondLeg: string;
+}
+
+// Datum van de loting per ronde (voor het "officiële loting"-label in de UI).
+export const FIXED_DRAW_DATE: Record<string, string> = {
+  q1: '16 juni 2026',
+  'q2-cp': '17 juni 2026',
+  'q2-lp': '17 juni 2026',
+};
+
+export const FIXED_TIES: Record<string, FixedTie[]> = {
+  // Q1 — 14 duels, geloot 16 juni 2026.
+  q1: [
+    { id: 'q1-0',  home: { club: 'SAB' }, away: { club: 'TNS' }, firstLeg: '7 jul',  secondLeg: '14 jul' },
+    { id: 'q1-1',  home: { club: 'FLR' }, away: { club: 'SHR' }, firstLeg: '7 jul',  secondLeg: '14 jul' },
+    { id: 'q1-2',  home: { club: 'FLO' }, away: { club: 'IBM' }, firstLeg: '8 jul',  secondLeg: '14 jul' },
+    { id: 'q1-3',  home: { club: 'LIN' }, away: { club: 'ESC' }, firstLeg: '7 jul',  secondLeg: '14 jul' },
+    { id: 'q1-4',  home: { club: 'TRE' }, away: { club: 'LAR' }, firstLeg: '7 jul',  secondLeg: '14 jul' },
+    { id: 'q1-5',  home: { club: 'ARR' }, away: { club: 'RIG' }, firstLeg: '7 jul',  secondLeg: '14 jul' },
+    { id: 'q1-6',  home: { club: 'VAR' }, away: { club: 'KUP' }, firstLeg: '7 jul',  secondLeg: '14 jul' },
+    { id: 'q1-7',  home: { club: 'KZG' }, away: { club: 'DRI' }, firstLeg: '7 jul',  secondLeg: '14 jul' },
+    { id: 'q1-8',  home: { club: 'MLV' }, away: { club: 'UNI' }, firstLeg: '8 jul',  secondLeg: '15 jul' },
+    { id: 'q1-9',  home: { club: 'PET' }, away: { club: 'EGN' }, firstLeg: '8 jul',  secondLeg: '15 jul' },
+    { id: 'q1-10', home: { club: 'BOR' }, away: { club: 'LEV' }, firstLeg: '7 jul',  secondLeg: '14 jul' },
+    { id: 'q1-11', home: { club: 'VIK' }, away: { club: 'ETO' }, firstLeg: '7 jul',  secondLeg: '14 jul' },
+    { id: 'q1-12', home: { club: 'KAI' }, away: { club: 'SUT' }, firstLeg: '8 jul',  secondLeg: '15 jul' },
+    { id: 'q1-13', home: { club: 'KI'  }, away: { club: 'ATB' }, firstLeg: '7 jul',  secondLeg: '15 jul' },
+  ],
+
+  // Q2 Champions Path — 12 duels, geloot 17 juni 2026.
+  // 10 directe instappers + 14 Q1-winnaars.
+  'q2-cp': [
+    { id: 'q2-cp-0',  home: { club: 'MJA' },       away: { winner: 'q1-3' },  firstLeg: '21/22 jul', secondLeg: '28/29 jul' },
+    { id: 'q2-cp-1',  home: { winner: 'q1-4' },    away: { club: 'RSB' },     firstLeg: '21/22 jul', secondLeg: '28/29 jul' },
+    { id: 'q2-cp-2',  home: { winner: 'q1-0' },    away: { winner: 'q1-6' },  firstLeg: '21/22 jul', secondLeg: '28/29 jul' },
+    { id: 'q2-cp-3',  home: { winner: 'q1-13' },   away: { winner: 'q1-7' },  firstLeg: '21/22 jul', secondLeg: '28/29 jul' },
+    { id: 'q2-cp-4',  home: { club: 'AGF' },       away: { club: 'LEP' },     firstLeg: '21 jul',    secondLeg: '28/29 jul' },
+    { id: 'q2-cp-5',  home: { winner: 'q1-5' },    away: { winner: 'q1-1' },  firstLeg: '21/22 jul', secondLeg: '28/29 jul' },
+    { id: 'q2-cp-6',  home: { winner: 'q1-10' },   away: { winner: 'q1-8' },  firstLeg: '21/22 jul', secondLeg: '28/29 jul' },
+    { id: 'q2-cp-7',  home: { club: 'OMO' },       away: { winner: 'q1-12' }, firstLeg: '21/22 jul', secondLeg: '28/29 jul' },
+    { id: 'q2-cp-8',  home: { club: 'THU' },       away: { club: 'DZG' },     firstLeg: '21/22 jul', secondLeg: '28/29 jul' },
+    { id: 'q2-cp-9',  home: { winner: 'q1-11' },   away: { club: 'HBS' },     firstLeg: '21/22 jul', secondLeg: '28/29 jul' },
+    { id: 'q2-cp-10', home: { winner: 'q1-2' },    away: { club: 'SLO' },     firstLeg: '21/22 jul', secondLeg: '28/29 jul' },
+    { id: 'q2-cp-11', home: { winner: 'q1-9' },    away: { club: 'CLJ' },     firstLeg: '21/22 jul', secondLeg: '28/29 jul' },
+  ],
+
+  // Q2 League Path — 2 duels, geloot 17 juni 2026. Vier directe instappers.
+  'q2-lp': [
+    { id: 'q2-lp-0', home: { club: 'FEN' }, away: { club: 'GOR' }, firstLeg: '21/22 jul', secondLeg: '28/29 jul' },
+    { id: 'q2-lp-1', home: { club: 'STG' }, away: { club: 'HOM' }, firstLeg: '21 jul',    secondLeg: '28 jul' },
+  ],
+};
+
+// Bouwt de duels van een vaste-loting-ronde. winnerClub lost een
+// { winner: tieId }-slot op naar de gekozen winnaar van dat duel. Duels waarvan
+// een slot nog niet bekend is (winnaar nog niet gekozen) worden overgeslagen.
+export function buildFixedTies(
+  roundId: string,
+  winnerClub: (tieId: string) => UCLClub | undefined
+): UCLTie[] {
+  const resolve = (s: TieSlot): UCLClub | undefined =>
+    'club' in s ? clubById(s.club) : winnerClub(s.winner);
+  const ties: UCLTie[] = [];
+  for (const d of FIXED_TIES[roundId] ?? []) {
+    const home = resolve(d.home);
+    const away = resolve(d.away);
+    if (!home || !away) continue;
+    ties.push({ id: d.id, home, away, firstLeg: d.firstLeg, secondLeg: d.secondLeg });
+  }
+  return ties;
+}
+
+export const hasFixedDraw = (roundId: string): boolean => roundId in FIXED_TIES;

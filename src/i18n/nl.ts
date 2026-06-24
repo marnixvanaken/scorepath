@@ -120,6 +120,10 @@ export const NL: Messages = {
     birthplaceTitle: 'Welke WK-speler is het dichtst bij jou geboren?',
     birthplaceDesc: 'Voer je geboorteplaats in en ontdek welke WK-speler het dichtst bij jou vandaan komt.',
     openBirthplace: 'OPEN CHECKER',
+    uclEyebrow: 'Champions League 2026/27',
+    uclTitle: 'Speel de Champions League 2026/27 na',
+    uclDesc: 'Volg jouw club door de officiële loting — van de eerste voorronde tot de finale.',
+    openUcl: 'OPEN LOTING',
   },
   start: {
     step1Label: 'Stap 1 van 2',
@@ -157,6 +161,7 @@ export const NL: Messages = {
     simulator: 'Simulator',
     about: 'Over ons',
     birthplace: 'Geboorteplaats',
+    ucl: 'Champions League',
   },
   privacy: {
     pageTitle: 'Privacyverklaring',

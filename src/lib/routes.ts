@@ -22,6 +22,10 @@ export const BIRTHPLACE_SLUG: Record<Locale, string> = {
 
 export const BIRTHPLACE_PHYSICAL_SLUG = BIRTHPLACE_SLUG.nl;
 
+// ── Champions League-loting ───────────────────────────────────────────
+// Eén gedeelde slug voor alle talen.
+export const UCL_SLUG = 'ucl-2027';
+
 // Blog: canonieke slug (= nl-slug, tevens content-key) -> gelokaliseerde slug per taal.
 export const BLOG_SLUGS: Record<string, Record<Locale, string>> = {
   'drie-legendes-wk-2026': {
@@ -84,6 +88,11 @@ export function simulatorPath(locale: string): string {
 export function birthplacePath(locale: string): string {
   const l = toLocale(locale);
   return `/${l}/${BIRTHPLACE_SLUG[l]}`;
+}
+
+export function uclPath(locale: string): string {
+  const l = toLocale(locale);
+  return `/${l}/${UCL_SLUG}`;
 }
 
 export function localizedBlogSlug(canonical: string, locale: string): string {

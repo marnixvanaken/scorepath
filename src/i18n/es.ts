@@ -120,6 +120,10 @@ export const ES: Messages = {
     birthplaceTitle: '¿Qué jugador del Mundial nació más cerca de ti?',
     birthplaceDesc: 'Introduce tu lugar de nacimiento y descubre qué jugador del Mundial viene de más cerca.',
     openBirthplace: 'ABRIR HERRAMIENTA',
+    uclEyebrow: 'Champions League 2026/27',
+    uclTitle: 'Juega la Champions League 2026/27',
+    uclDesc: 'Sigue a tu club por el sorteo oficial — desde la primera ronda de clasificación hasta la final.',
+    openUcl: 'ABRIR SORTEO',
   },
   start: {
     step1Label: 'Paso 1 de 2',
@@ -157,6 +161,7 @@ export const ES: Messages = {
     simulator: 'Simulador',
     about: 'Acerca de',
     birthplace: 'Lugar natal',
+    ucl: 'Champions League',
   },
   privacy: {
     pageTitle: 'Política de privacidad',

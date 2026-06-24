@@ -7,7 +7,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { SITE_NAME, SITE_URL } from '@/lib/siteConfig';
 import { isLocale, DEFAULT_LOCALE, getMessages } from '@/i18n';
-import { alternatesFor, ogLocaleFields, ogImages, simulatorPath, birthplacePath } from '@/lib/routes';
+import { alternatesFor, ogLocaleFields, ogImages, simulatorPath, birthplacePath, uclPath } from '@/lib/routes';
 
 export async function generateMetadata(props: PageProps<'/[lang]'>): Promise<Metadata> {
   const { lang } = await props.params;
@@ -85,8 +85,14 @@ export default async function HomePage(props: PageProps<'/[lang]'> & {
           <Logo size="md" />
           <div className="flex items-center gap-4">
             <Link
-              href={birthplacePath(lang)}
+              href={uclPath(lang)}
               className="c-fg text-sm font-bold tracking-widest uppercase transition-opacity opacity-40 hover:opacity-70"
+            >
+              {msg.nav.ucl}
+            </Link>
+            <Link
+              href={birthplacePath(lang)}
+              className="c-fg text-sm font-bold tracking-widest uppercase transition-opacity opacity-40 hover:opacity-70 hidden sm:inline"
             >
               {msg.nav.birthplace}
             </Link>
@@ -186,6 +192,36 @@ export default async function HomePage(props: PageProps<'/[lang]'> & {
         </div>
       </section>
 
+      <section className="border-t border-themed px-6 sm:px-10 py-14 sm:py-20">
+        <div className="max-w-5xl mx-auto">
+          <div
+            className="relative overflow-hidden px-6 sm:px-12 py-12 sm:py-16"
+            style={{
+              borderRadius: '0 28px 0 28px',
+              background: 'linear-gradient(135deg, #001D62 0%, #0A2A7A 55%, #001142 100%)',
+              boxShadow: '0 20px 60px -25px rgba(0, 29, 98, 0.7)',
+            }}
+          >
+            <p className="text-[#C9A843] text-xs font-bold tracking-[0.25em] uppercase mb-4">
+              {msg.home.uclEyebrow}
+            </p>
+            <h2
+              className="text-white font-bold leading-snug mb-4 max-w-xl"
+              style={{ fontSize: 'clamp(1.25rem, 2.5vw, 1.75rem)' }}
+            >
+              {msg.home.uclTitle}
+            </h2>
+            <p
+              className="mb-8 max-w-lg leading-relaxed"
+              style={{ color: 'rgba(255,255,255,0.72)', fontSize: 'clamp(0.9rem, 1.3vw, 1rem)' }}
+            >
+              {msg.home.uclDesc}
+            </p>
+            <UCLLink href={uclPath(lang)} label={msg.home.openUcl} />
+          </div>
+        </div>
+      </section>
+
       <footer className="px-6 sm:px-10 py-5">
         <div className="max-w-5xl mx-auto flex items-center justify-between">
           <Logo size="sm" />
@@ -216,6 +252,30 @@ function SecondaryLink({ href, label }: { href: string; label: string }) {
         borderRadius: '0 12px 0 12px',
         border: '2px solid var(--cta)',
         color: 'var(--cta)',
+      }}
+    >
+      {label}
+      <svg
+        style={{ width: 'clamp(16px, 2vw, 22px)', height: 'clamp(16px, 2vw, 22px)' }}
+        viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden
+      >
+        <path d="M5 12h14M12 5l7 7-7 7" />
+      </svg>
+    </Link>
+  );
+}
+
+function UCLLink({ href, label }: { href: string; label: string }) {
+  return (
+    <Link
+      href={href}
+      className="inline-flex items-center gap-4 font-display tracking-widest transition-opacity hover:opacity-90"
+      style={{
+        fontSize: 'clamp(1rem, 2vw, 1.4rem)',
+        padding: 'clamp(0.8rem, 1.5vw, 1.1rem) clamp(1.2rem, 3vw, 2.4rem)',
+        borderRadius: '0 12px 0 12px',
+        background: '#C9A843',
+        color: '#001D62',
       }}
     >
       {label}

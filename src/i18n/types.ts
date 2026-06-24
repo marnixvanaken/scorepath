@@ -115,6 +115,10 @@ export interface Messages {
     birthplaceTitle: string;
     birthplaceDesc: string;
     openBirthplace: string;
+    birthplaceEyebrow: string;
+    wcEyebrow: string;
+    wcTitle: string;
+    wcDesc: string;
     uclEyebrow: string;
     uclTitle: string;
     uclDesc: string;

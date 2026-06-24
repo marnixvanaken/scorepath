@@ -3,11 +3,12 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import { isLocale, DEFAULT_LOCALE, getMessages } from '@/i18n';
 import { SITE_NAME } from '@/lib/siteConfig';
-import { alternatesFor, ogLocaleFields, ogImages, birthplacePath, simulatorPath } from '@/lib/routes';
+import { alternatesFor, ogLocaleFields, ogImages, birthplacePath, simulatorPath, uclPath } from '@/lib/routes';
 import { players } from '@/data/players';
 import { Logo } from '@/components/Logo';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
+import { FeatureCard, CARD_SCHEMES } from '@/components/FeatureCard';
 import BirthplaceFeature from '@/app/wk-geboorteplaats/BirthplaceFeature';
 
 export async function generateMetadata(props: PageProps<'/[lang]/wk-geboorteplaats'>): Promise<Metadata> {
@@ -68,6 +69,26 @@ export default async function BirthplacePage(props: PageProps<'/[lang]/wk-geboor
 
       <main className="flex-1">
         <BirthplaceFeature players={players} m={m} locale={lang} />
+        <section className="px-6 py-14 sm:py-16" style={{ borderTop: '1px solid var(--border)' }}>
+          <div className="max-w-2xl mx-auto grid grid-cols-1 gap-6">
+            <FeatureCard
+              href={uclPath(lang)}
+              eyebrow={msg.home.uclEyebrow}
+              title={msg.home.uclTitle}
+              desc={msg.home.uclDesc}
+              cta={msg.home.openUcl}
+              scheme={CARD_SCHEMES.ucl}
+            />
+            <FeatureCard
+              href={simulatorPath(lang)}
+              eyebrow={msg.home.wcEyebrow}
+              title={msg.home.wcTitle}
+              desc={msg.home.wcDesc}
+              cta={msg.home.openSimulator}
+              scheme={CARD_SCHEMES.wc}
+            />
+          </div>
+        </section>
       </main>
 
       <footer className="px-6 py-4" style={{ borderTop: '1px solid var(--border)' }}>

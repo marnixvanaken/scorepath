@@ -2,10 +2,11 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import SimulatorClient from '@/app/wk-2026/SimulatorClient';
 import type { InputMode } from '@/hooks/useSimulatorState';
-import { isLocale, DEFAULT_LOCALE } from '@/i18n';
+import { isLocale, DEFAULT_LOCALE, getMessages } from '@/i18n';
 import { SITE_NAME, SITE_URL } from '@/lib/siteConfig';
-import { alternatesFor, ogLocaleFields, ogImages, simulatorPath } from '@/lib/routes';
+import { alternatesFor, ogLocaleFields, ogImages, simulatorPath, birthplacePath, uclPath } from '@/lib/routes';
 import { FaqSection } from '@/components/FaqSection';
+import { FeatureCard, CARD_SCHEMES } from '@/components/FeatureCard';
 import { getFaq } from '@/data/faq';
 
 export async function generateMetadata(props: PageProps<'/[lang]/wk-2026'>): Promise<Metadata> {
@@ -57,6 +58,7 @@ export default async function SimulatorPage(
   const { lang } = await props.params;
   if (!isLocale(lang)) notFound();
 
+  const msg = getMessages(lang);
   const params = await props.searchParams;
   const rawMode = Array.isArray(params.mode) ? params.mode[0] : params.mode;
   const initialMode: InputMode =
@@ -86,6 +88,26 @@ export default async function SimulatorPage(
       />
       <SimulatorClient initialMode={initialMode} initialView={initialView} />
       <FaqSection lang={lang} />
+      <section className="bg-themed border-t border-themed px-6 sm:px-10 py-14 sm:py-20">
+        <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <FeatureCard
+            href={uclPath(lang)}
+            eyebrow={msg.home.uclEyebrow}
+            title={msg.home.uclTitle}
+            desc={msg.home.uclDesc}
+            cta={msg.home.openUcl}
+            scheme={CARD_SCHEMES.ucl}
+          />
+          <FeatureCard
+            href={birthplacePath(lang)}
+            eyebrow={msg.home.birthplaceEyebrow}
+            title={msg.home.birthplaceTitle}
+            desc={msg.home.birthplaceDesc}
+            cta={msg.home.openBirthplace}
+            scheme={CARD_SCHEMES.birthplace}
+          />
+        </div>
+      </section>
     </>
   );
 }

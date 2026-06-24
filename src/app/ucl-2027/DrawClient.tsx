@@ -6,6 +6,10 @@ import {
   seedPool,
   drawTies,
   simulateTie,
+  buildFixedTies,
+  hasFixedDraw,
+  clubById,
+  FIXED_DRAW_DATE,
   ROUND_BY_ID,
   ROUNDS,
   STAGES,
@@ -79,6 +83,37 @@ function cardRoundOf(roundId: string): string {
 
 const stageIndexOf = (key: StageKey) => STAGES.findIndex((s) => s.key === key);
 
+const stageIsFixed = (stage: (typeof STAGES)[number]) =>
+  stage.key !== 'LP' && stage.roundIds.length > 0 && stage.roundIds.every(hasFixedDraw);
+
+// Zoekt de gekozen winnaar (als club) van een duel over alle reeds bekende rondes.
+// Gebruikt om { winner: tieId }-slots in een vaste loting op te lossen.
+function winnerClubFrom(
+  state: Record<string, RoundState>,
+  tieId: string
+): UCLClub | undefined {
+  for (const rs of Object.values(state)) {
+    const wid = rs.winners[tieId];
+    if (wid) return clubById(wid);
+  }
+  return undefined;
+}
+
+// Bouwt de duels van één ronde: vaste loting (Q1/Q2) of willekeurige trekking.
+function buildRoundTies(
+  rid: string,
+  resolved: Record<string, RoundState>,
+  winnersLocal: (feedsFrom: string) => UCLClub[]
+): UCLTie[] {
+  if (hasFixedDraw(rid)) {
+    return buildFixedTies(rid, (tieId) => winnerClubFrom(resolved, tieId));
+  }
+  const def = ROUND_BY_ID[rid];
+  const pool = [...def.direct, ...(def.feedsFrom ? winnersLocal(def.feedsFrom) : [])];
+  const { seeded, unseeded } = seedPool(pool);
+  return drawTies(seeded, unseeded, rid);
+}
+
 // Auto-simuleer een reeks kwalificatierondes (op ECI). Gebruikt voor de rondes
 // vóór het instappunt van de gekozen club.
 function autoSimRounds(roundIds: string[]): Record<string, RoundState> {
@@ -88,15 +123,27 @@ function autoSimRounds(roundIds: string[]): Record<string, RoundState> {
     return rs.ties.map((t) => (t.home.id === rs.winners[t.id] ? t.home : t.away));
   };
   for (const rid of roundIds) {
-    const def = ROUND_BY_ID[rid];
-    const pool = [...def.direct, ...(def.feedsFrom ? winnersLocal(def.feedsFrom) : [])];
-    const { seeded, unseeded } = seedPool(pool);
-    const ties = drawTies(seeded, unseeded, rid);
+    const ties = buildRoundTies(rid, acc, winnersLocal);
     const winners: Record<string, string> = {};
     for (const t of ties) winners[t.id] = simulateTie(t).id;
     acc[rid] = { phase: 'drawn', ties, revealed: ties.length, winners };
   }
   return acc;
+}
+
+// Zet een vaste-loting-stage meteen klaar (statisch, geen loting-animatie): bouw
+// de duels op, winnaars nog leeg zodat de gebruiker ze zelf kiest of simuleert.
+function buildFixedStage(
+  stage: (typeof STAGES)[number],
+  prev: Record<string, RoundState>
+): Record<string, RoundState> {
+  const next = { ...prev };
+  for (const rid of stage.roundIds) {
+    if (next[rid]) continue;
+    const ties = buildFixedTies(rid, (tieId) => winnerClubFrom(next, tieId));
+    next[rid] = { phase: 'drawn', ties, revealed: ties.length, winners: {} };
+  }
+  return next;
 }
 
 export default function DrawClient({ lang }: { lang: string }) {
@@ -130,11 +177,21 @@ export default function DrawClient({ lang }: { lang: string }) {
     const entry = entryStageOf(clubId);
     const idx = stageIndexOf(entry);
     const earlierRoundIds = STAGES.slice(0, idx).flatMap((s) => s.roundIds);
-    setRounds(autoSimRounds(earlierRoundIds));
+    let base = autoSimRounds(earlierRoundIds);
+    // Vaste-loting-instapronde (Q1/Q2) staat meteen statisch klaar.
+    if (stageIsFixed(STAGES[idx])) base = buildFixedStage(STAGES[idx], base);
+    setRounds(base);
     setLeague(null);
     setEntryIdx(idx);
     setStageIdx(idx);
     setSelectedClubId(clubId);
+  }, []);
+
+  // Volgende stage. Bij een vaste-loting-stage worden de duels meteen klaargezet.
+  const goToStage = useCallback((nextIdx: number) => {
+    setStageIdx(nextIdx);
+    const stage = STAGES[nextIdx];
+    if (stageIsFixed(stage)) setRounds((prev) => buildFixedStage(stage, prev));
   }, []);
 
   const drawStage = useCallback(() => {
@@ -380,7 +437,7 @@ export default function DrawClient({ lang }: { lang: string }) {
           >
             <p className="text-sm text-slate-400">Alle winnaars gekozen voor {stage.label}.</p>
             <button
-              onClick={() => setStageIdx((i) => i + 1)}
+              onClick={() => goToStage(stageIdx + 1)}
               className="px-8 py-3 bg-[var(--cta)] hover:opacity-90 text-white font-bold text-sm uppercase tracking-widest rounded transition-colors"
             >
               Naar {STAGES[stageIdx + 1].label} →
@@ -607,6 +664,7 @@ function PathDraw({
   onSimulate: () => void;
 }) {
   const accent = pathAccent(def);
+  const drawDate = FIXED_DRAW_DATE[def.id];
   return (
     <section>
       <div className="mb-4 flex items-center justify-between gap-3">
@@ -614,7 +672,10 @@ function PathDraw({
           <h2 className="text-sm font-bold uppercase tracking-widest shrink-0" style={{ color: accent }}>
             {def.titleNl}
           </h2>
-          <span className="text-xs text-slate-500 truncate">{state.ties.length} duels — klik op de winnaar</span>
+          <span className="text-xs text-slate-500 truncate">
+            {drawDate ? `Officiële loting · ${drawDate} — ` : ''}
+            {state.ties.length} duels — klik op de winnaar
+          </span>
         </div>
         <button
           onClick={onSimulate}
@@ -668,10 +729,17 @@ function TieCard({
       className="rounded-xl border overflow-hidden bg-[var(--bg-card)]"
       style={{ borderColor: involvesMe ? `${accent}80` : 'rgba(255,255,255,0.1)' }}
     >
-      <div className="px-4 py-2.5 bg-[var(--bg-panel)] flex items-center justify-between">
-        <span className="text-xs text-slate-500 font-semibold">Duel {index}</span>
+      <div className="px-4 py-2.5 bg-[var(--bg-panel)] flex items-center justify-between gap-2">
+        <span className="text-xs text-slate-500 font-semibold shrink-0">
+          Duel {index}
+          {tie.firstLeg && (
+            <span className="ml-2 font-normal text-slate-600">
+              heen {tie.firstLeg} · terug {tie.secondLeg}
+            </span>
+          )}
+        </span>
         {winnerId && (
-          <span className="text-xs" style={{ color: accent }}>
+          <span className="text-xs text-right" style={{ color: accent }}>
             {(tie.home.id === winnerId ? tie.home : tie.away).name} ✓
           </span>
         )}

@@ -316,6 +316,10 @@ export async function GET(req: NextRequest) {
   );
 
   return new Response(img.body, {
-    headers: { 'Content-Type': 'image/png', 'Cache-Control': 'no-store' },
+    headers: {
+      'Content-Type': 'image/png',
+      // Bracket is een momentopname van s/k — veilig en wenselijk om te cachen.
+      'Cache-Control': 'public, max-age=31536000, immutable',
+    },
   });
 }

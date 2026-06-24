@@ -251,7 +251,10 @@ export async function GET(req: NextRequest) {
   return new Response(img.body, {
     headers: {
       'Content-Type': 'image/png',
-      'Cache-Control': 'no-store',
+      // De afbeelding is volledig bepaald door de URL-parameters (team/s/k),
+      // dus veilig om lang te cachen. Dit verhelpt de lange witte wachttijd bij
+      // (her)laden en bij gedeelde links (CDN + browser).
+      'Cache-Control': 'public, max-age=31536000, immutable',
     },
   });
 }

@@ -11,6 +11,10 @@ interface Props {
   teamName: string;
 }
 
+// Beeldkleuren uit de OG-afbeeldingen — zo is er geen witte flits tijdens laden.
+const IMG_BG = '#F2EDE4';
+const SKEL = '#DED4C5';
+
 async function shareFile(url: string, filename: string, title: string) {
   const res = await fetch(url);
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -40,18 +44,62 @@ const variants = {
 
 const SWIPE_THRESHOLD = 60;
 
+// Skeleton in de vorm van de route-kaart: kop, naam, label, divider, rijen.
+function RouteSkeleton() {
+  return (
+    <div className="absolute inset-0 flex flex-col p-[7%] animate-pulse">
+      <div className="h-[2%] w-[55%] rounded" style={{ background: SKEL }} />
+      <div className="h-[8%] w-[78%] rounded mt-[5%]" style={{ background: SKEL }} />
+      <div className="h-[10%] w-[62%] rounded mt-[3%]" style={{ background: SKEL }} />
+      <div className="h-[0.5%] w-full rounded mt-[5%]" style={{ background: SKEL }} />
+      <div className="flex-1 flex flex-col justify-center gap-[3%] mt-[5%]">
+        {Array.from({ length: 6 }).map((_, i) => (
+          <div key={i} className="h-[9%] w-full rounded" style={{ background: SKEL }} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// Skeleton in de vorm van de bracket: kop + 5 kolommen, aflopend aantal blokjes.
+function BracketSkeleton() {
+  const cols = [16, 8, 4, 2, 1];
+  return (
+    <div className="absolute inset-0 flex flex-col p-[6%] animate-pulse">
+      <div className="h-[2.5%] w-[40%] rounded" style={{ background: SKEL }} />
+      <div className="flex-1 flex gap-[2%] mt-[4%]">
+        {cols.map((n, ci) => (
+          <div key={ci} className="flex-1 flex flex-col justify-around">
+            {Array.from({ length: n }).map((_, i) => (
+              <div key={i} className="w-full rounded-sm" style={{ background: SKEL, height: '3%' }} />
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export function CardViewer({ ogUrl, bracketUrl, teamName }: Props) {
   const msg = useMessages();
   const slug = teamName.toLowerCase().replace(/\s+/g, '-');
 
+  // Elke kaart heeft zijn eigen, optimale verhouding. De container-hoogte
+  // animeert vloeiend mee bij het wisselen, zodat elke kaart de viewer volledig
+  // vult (geen letterbox-randen, geen lege ruimte).
   const slides = [
-    { url: ogUrl, label: msg.card.routeTab },
-    { url: bracketUrl, label: msg.card.bracketTab },
+    { url: ogUrl, label: msg.card.routeTab, ratio: 2 / 3 },
+    { url: bracketUrl, label: msg.card.bracketTab, ratio: 9 / 16 },
   ];
 
   // [index, richting] — richting bepaalt de animatie (1 = volgende, -1 = vorige).
   const [[index, dir], setPage] = useState<[number, number]>([0, 0]);
+  const [loaded, setLoaded] = useState<Record<number, boolean>>({});
   const active = slides[index];
+
+  function markLoaded(i: number) {
+    setLoaded((prev) => (prev[i] ? prev : { ...prev, [i]: true }));
+  }
 
   function paginate(next: number) {
     const clamped = Math.max(0, Math.min(slides.length - 1, next));
@@ -107,6 +155,15 @@ export function CardViewer({ ogUrl, bracketUrl, teamName }: Props) {
 
   return (
     <div className="w-full max-w-sm flex flex-col items-center gap-4">
+      {/* Onzichtbare preloader: laadt beide kaarten vooraf zodat swipen snappy is
+          en de skeleton zo kort mogelijk zichtbaar blijft. */}
+      <div aria-hidden style={{ position: 'absolute', width: 0, height: 0, overflow: 'hidden', opacity: 0 }}>
+        {slides.map((s, i) => (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img key={s.url} src={s.url} alt="" onLoad={() => markLoaded(i)} onError={() => markLoaded(i)} />
+        ))}
+      </div>
+
       {/* Tab-toggle: Route / Bracket */}
       <div
         className="flex gap-0.5 p-0.5 rounded-full"
@@ -132,10 +189,12 @@ export function CardViewer({ ogUrl, bracketUrl, teamName }: Props) {
         ))}
       </div>
 
-      {/* Horizontale swipe-carousel */}
-      <div
+      {/* Horizontale swipe-carousel — ratio animeert per kaart, crème laadkleur */}
+      <motion.div
         className="relative w-full overflow-hidden rounded-lg shadow-xl"
-        style={{ aspectRatio: '2 / 3', background: 'var(--bg-card)', border: '1px solid var(--border)' }}
+        style={{ aspectRatio: 2 / 3, background: IMG_BG, border: '1px solid var(--border)' }}
+        animate={{ aspectRatio: active.ratio }}
+        transition={{ type: 'spring', stiffness: 260, damping: 30 }}
       >
         <AnimatePresence custom={dir} initial={false}>
           <motion.div
@@ -153,19 +212,24 @@ export function CardViewer({ ogUrl, bracketUrl, teamName }: Props) {
             dragConstraints={{ left: 0, right: 0 }}
             dragElastic={0.18}
             onDragEnd={onDragEnd}
-            className="absolute inset-0 flex items-center justify-center cursor-grab active:cursor-grabbing"
+            className="absolute inset-0 cursor-grab active:cursor-grabbing"
+            style={{ background: IMG_BG }}
           >
+            {/* Skeleton in de vorm van de betreffende kaart, tot de afbeelding laadt */}
+            {!loaded[index] && (index === 0 ? <RouteSkeleton /> : <BracketSkeleton />)}
             {/*
               pointer-events blijven AAN op de afbeelding zodat rechtsklik
               (desktop) en lang-indrukken (mobiel) "kopiëren/opslaan" tonen.
-              draggable={false} houdt de horizontale swipe vrij van de native
-              image-drag; de pointer-events bubbelen naar de drag-container.
+              draggable={false} houdt de swipe vrij van native image-drag.
             */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={active.url}
               alt={`${teamName} ${active.label}`}
-              className="h-full w-full object-contain select-none"
+              onLoad={() => markLoaded(index)}
+              onError={() => markLoaded(index)}
+              className="absolute inset-0 h-full w-full object-contain select-none transition-opacity duration-300"
+              style={{ opacity: loaded[index] ? 1 : 0 }}
               draggable={false}
             />
           </motion.div>
@@ -176,7 +240,7 @@ export function CardViewer({ ogUrl, bracketUrl, teamName }: Props) {
           <motion.button
             onClick={() => paginate(index - 1)}
             aria-label={slides[index - 1].label}
-            className="absolute left-2 top-1/2 -translate-y-1/2 w-9 h-9 flex items-center justify-center rounded-full"
+            className="absolute left-2 top-1/2 -translate-y-1/2 z-10 w-9 h-9 flex items-center justify-center rounded-full"
             style={{ background: 'rgba(0,0,0,0.45)', color: '#fff', backdropFilter: 'blur(2px)' }}
             animate={{ x: [0, -4, 0] }}
             transition={{ duration: 1.4, repeat: Infinity, ease: 'easeInOut' }}
@@ -190,7 +254,7 @@ export function CardViewer({ ogUrl, bracketUrl, teamName }: Props) {
           <motion.button
             onClick={() => paginate(index + 1)}
             aria-label={slides[index + 1].label}
-            className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-1 h-9 pl-2.5 pr-3 rounded-full"
+            className="absolute right-2 top-1/2 -translate-y-1/2 z-10 flex items-center gap-1 h-9 pl-2.5 pr-3 rounded-full"
             style={{ background: 'rgba(0,0,0,0.45)', color: '#fff', backdropFilter: 'blur(2px)' }}
             animate={{ x: [0, 4, 0] }}
             transition={{ duration: 1.4, repeat: Infinity, ease: 'easeInOut' }}
@@ -203,7 +267,7 @@ export function CardViewer({ ogUrl, bracketUrl, teamName }: Props) {
         )}
 
         {/* Positie-dots onderaan */}
-        <div className="absolute bottom-2.5 left-1/2 -translate-x-1/2 flex gap-2">
+        <div className="absolute bottom-2.5 left-1/2 -translate-x-1/2 z-10 flex gap-2">
           {slides.map((s, i) => (
             <button
               key={s.label}
@@ -213,12 +277,12 @@ export function CardViewer({ ogUrl, bracketUrl, teamName }: Props) {
               style={{
                 height: 7,
                 width: i === index ? 22 : 7,
-                background: i === index ? 'var(--cta)' : 'rgba(255,255,255,0.55)',
+                background: i === index ? 'var(--cta)' : 'rgba(0,0,0,0.25)',
               }}
             />
           ))}
         </div>
-      </div>
+      </motion.div>
 
       <p className="text-[11px] tracking-wide" style={{ color: 'var(--fg-subtle)' }}>
         {msg.card.swipeHint}

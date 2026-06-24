@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ScorePath — Birthplace Reel (POC) · Paris</title>
+<!--
+  PROOF OF CONCEPT — 9:16 short-form video (TikTok / Reels / Shorts)
+  Self-contained: open in a browser and it auto-plays + loops.
+  Data is REAL (from data/players.json): 8 World Cup 2026 players born in Paris,
+  none of whom play for France. This is the visual the Remotion generator would
+  render to MP4 per city/country, batched from players.json.
+
+  To get an MP4 now: screen-record this tab (the frame is true 1080×1920).
+-->
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=JetBrains+Mono:wght@400;700&display=swap');
+
+  :root{
+    --orange:#FF6B00;
+    --orange-soft:rgba(255,107,0,.12);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%;background:#000;overflow:hidden;font-family:'Inter',sans-serif}
+  body{display:flex;align-items:center;justify-content:center}
+
+  /* True 1080×1920 frame, scaled to fit the viewport (crisp for screen-recording) */
+  .scaler{width:1080px;height:1920px;transform-origin:center center;flex-shrink:0}
+  .frame{
+    position:relative;width:1080px;height:1920px;overflow:hidden;
+    background:#0a0a0a;color:#fff;
+  }
+
+  /* persistent brand background */
+  .grid{position:absolute;inset:0;opacity:.5;
+    background-image:
+      linear-gradient(rgba(255,107,0,.05) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(255,107,0,.05) 1px,transparent 1px);
+    background-size:90px 90px;}
+  .glow{position:absolute;top:-200px;left:50%;transform:translateX(-50%);
+    width:1100px;height:700px;
+    background:radial-gradient(ellipse,rgba(255,107,0,.16) 0%,transparent 70%);}
+  .wordmark{position:absolute;top:46px;left:54px;z-index:20;
+    font-weight:900;letter-spacing:-1px;font-size:34px;color:#fff;}
+  .wordmark b{color:var(--orange)}
+  .progress{position:absolute;left:0;bottom:0;height:8px;width:0;background:var(--orange);z-index:30}
+  body.run .progress{animation:bar 16.5s linear forwards}
+  @keyframes bar{to{width:100%}}
+
+  /* scene layers */
+  .scene{position:absolute;inset:0;display:flex;flex-direction:column;
+    justify-content:center;padding:0 88px;opacity:0;z-index:5}
+  body.run .s1{animation:sceneCycle 3.6s 0s    both}
+  body.run .s2{animation:sceneCycle 3.6s 3.3s  both}
+  body.run .s3{animation:sceneCycle 8.6s 6.5s  both}
+  body.run .s4{animation:sceneIn   2.0s 14.7s both}
+  @keyframes sceneCycle{0%{opacity:0}9%{opacity:1}86%{opacity:1}100%{opacity:0}}
+  @keyframes sceneIn{0%{opacity:0}100%{opacity:1}}
+
+  /* ── Scene 1 — hook ── */
+  .eyebrow{font-size:26px;font-weight:700;letter-spacing:6px;text-transform:uppercase;
+    color:var(--orange);margin-bottom:30px}
+  .bignum{font-size:300px;font-weight:900;line-height:.85;color:#fff;margin-bottom:6px}
+  .hookline{font-size:52px;font-weight:700;line-height:1.15;color:rgba(255,255,255,.85);max-width:760px}
+  .city-h{font-size:172px;font-weight:900;line-height:.9;color:var(--orange);letter-spacing:-3px;margin-top:6px}
+  .hooksub{font-size:34px;color:rgba(255,255,255,.45);margin-top:34px;max-width:720px;line-height:1.4}
+
+  body.run .s1 .eyebrow{animation:fadeUp .6s .25s both}
+  body.run .s1 .bignum {animation:pop    .8s .55s both}
+  body.run .s1 .hookline{animation:fadeUp .6s 1.0s both}
+  body.run .s1 .city-h {animation:reveal .7s 1.35s both}
+  body.run .s1 .hooksub{animation:fadeUp .6s 1.8s both}
+
+  /* ── Scene 2 — map ── */
+  .map-wrap{align-items:center;text-align:center}
+  .map{position:relative;width:760px;height:760px;margin:0 auto;border-radius:24px;
+    background:
+      radial-gradient(circle at 50% 50%, rgba(255,107,0,.10), transparent 60%),
+      linear-gradient(rgba(255,255,255,.06) 2px,transparent 2px),
+      linear-gradient(90deg,rgba(255,255,255,.06) 2px,transparent 2px),
+      #0d0d0d;
+    background-size:100% 100%, 60px 60px, 60px 60px;
+    border:1px solid rgba(255,107,0,.18);overflow:hidden}
+  body.run .s2 .map{animation:pop .7s .1s both}
+  .pin{position:absolute;top:50%;left:50%;width:46px;height:46px;margin:-46px 0 0 -23px;
+    background:var(--orange);border-radius:50% 50% 50% 0;transform:rotate(-45deg);
+    box-shadow:0 10px 30px rgba(0,0,0,.6)}
+  .pin::after{content:"";position:absolute;top:13px;left:13px;width:20px;height:20px;
+    background:#0a0a0a;border-radius:50%}
+  body.run .s2 .pin{animation:pinDrop .7s .55s both}
+  .ring{position:absolute;top:50%;left:50%;width:120px;height:120px;margin:-60px 0 0 -60px;
+    border:3px solid var(--orange);border-radius:50%;opacity:0}
+  body.run .s2 .ring{animation:ring 2s 1.1s infinite}
+  body.run .s2 .ring.r2{animation-delay:1.8s}
+  .coord{font-family:'JetBrains Mono',monospace;font-size:30px;color:rgba(255,255,255,.5);
+    margin-top:40px;letter-spacing:2px}
+  .map-city{font-size:84px;font-weight:900;margin-top:10px}
+  body.run .s2 .coord,body.run .s2 .map-city{animation:fadeUp .6s .9s both}
+
+  /* ── Scene 3 — the twist + players ── */
+  .twist{font-size:50px;font-weight:900;line-height:1.1;margin-bottom:44px}
+  .twist .dim{color:rgba(255,255,255,.4);text-decoration:line-through;text-decoration-color:var(--orange);text-decoration-thickness:5px}
+  body.run .s3 .twist{animation:fadeUp .6s .15s both}
+  .cards{display:flex;flex-direction:column;gap:18px}
+  .card{display:flex;align-items:center;gap:22px;background:#111;border-left:5px solid var(--orange);
+    border-radius:10px;padding:22px 28px;opacity:0}
+  .card .nm{font-size:37px;font-weight:700;color:#fff}
+  .card .to{margin-left:auto;display:flex;align-items:center;gap:14px;
+    font-size:33px;font-weight:700;color:rgba(255,255,255,.7)}
+  .card .fl{font-size:46px;line-height:1}
+  .card .arrow{color:rgba(255,255,255,.25);font-weight:900}
+  body.run .s3 .card{animation:cardIn .5s both}
+  body.run .s3 .card:nth-child(1){animation-delay:.55s}
+  body.run .s3 .card:nth-child(2){animation-delay:1.0s}
+  body.run .s3 .card:nth-child(3){animation-delay:1.45s}
+  body.run .s3 .card:nth-child(4){animation-delay:1.9s}
+  body.run .s3 .card:nth-child(5){animation-delay:2.35s}
+  body.run .s3 .card:nth-child(6){animation-delay:2.8s}
+  body.run .s3 .card:nth-child(7){animation-delay:3.25s}
+  body.run .s3 .card:nth-child(8){animation-delay:3.7s}
+
+  /* ── Scene 4 — CTA ── */
+  .s4{align-items:flex-start;text-align:left}
+  .cta-eyebrow{font-size:28px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--orange);margin-bottom:26px}
+  .cta-h{font-size:80px;font-weight:900;line-height:1.04;margin-bottom:40px}
+  .cta-h span{color:var(--orange)}
+  .cta-btn{display:inline-flex;align-items:center;gap:18px;background:var(--orange);color:#fff;
+    font-size:42px;font-weight:900;padding:30px 54px;border-radius:0 18px 0 18px}
+  body.run .s4 .cta-btn{animation:ctaPulse 1.6s 1s 3}
+  .cta-sub{font-size:32px;color:rgba(255,255,255,.45);margin-top:34px}
+
+  /* keyframes */
+  @keyframes fadeUp{from{opacity:0;transform:translateY(34px)}to{opacity:1;transform:none}}
+  @keyframes pop{0%{opacity:0;transform:scale(.4);filter:blur(10px)}60%{opacity:1;transform:scale(1.06);filter:blur(0)}100%{transform:scale(1)}}
+  @keyframes reveal{from{opacity:0;clip-path:inset(0 100% 0 0)}to{opacity:1;clip-path:inset(0 0 0 0)}}
+  @keyframes cardIn{from{opacity:0;transform:translateX(46px)}to{opacity:1;transform:none}}
+  @keyframes pinDrop{0%{opacity:0;transform:rotate(-45deg) translateY(-80px) scale(.5)}60%{opacity:1;transform:rotate(-45deg) translateY(0) scale(1.12)}100%{transform:rotate(-45deg) scale(1)}}
+  @keyframes ring{0%{opacity:.55;transform:scale(.25)}100%{opacity:0;transform:scale(2.6)}}
+  @keyframes ctaPulse{0%,100%{box-shadow:0 0 0 0 rgba(255,107,0,.55)}50%{box-shadow:0 0 0 26px rgba(255,107,0,0)}}
+
+  /* controls (not part of the video) */
+  .controls{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:99;
+    display:flex;gap:10px;font-family:'JetBrains Mono',monospace}
+  .controls button{background:#1a1a1a;color:#fff;border:1px solid #333;border-radius:8px;
+    padding:10px 18px;font-size:13px;cursor:pointer}
+  .controls button:hover{border-color:var(--orange)}
+</style>
+</head>
+<body>
+  <div class="scaler" id="scaler">
+    <div class="frame">
+      <div class="grid"></div>
+      <div class="glow"></div>
+      <div class="wordmark">SCORE<b>PATH</b></div>
+      <div class="progress"></div>
+
+      <!-- Scene 1 -->
+      <section class="scene s1">
+        <div class="eyebrow">World Cup 2026 · Birthplaces</div>
+        <div class="bignum">8</div>
+        <div class="hookline">World Cup players were born in</div>
+        <div class="city-h">PARIS</div>
+        <div class="hooksub">…and you'd never guess who they actually play for.</div>
+      </section>
+
+      <!-- Scene 2 -->
+      <section class="scene s2 map-wrap">
+        <div class="map">
+          <span class="ring"></span>
+          <span class="ring r2"></span>
+          <span class="pin"></span>
+        </div>
+        <div class="coord">48.86° N · 2.35° E</div>
+        <div class="map-city">Paris, France</div>
+      </section>
+
+      <!-- Scene 3 -->
+      <section class="scene s3">
+        <div class="twist">But not one of them<br>plays for <span class="dim">🇫🇷 France</span>.</div>
+        <div class="cards">
+          <div class="card"><span class="nm">Anis Hadj Moussa</span><span class="to"><span class="arrow">→</span> Algeria <span class="fl">🇩🇿</span></span></div>
+          <div class="card"><span class="nm">Yahia Fofana</span><span class="to"><span class="arrow">→</span> Ivory Coast <span class="fl">🇨🇮</span></span></div>
+          <div class="card"><span class="nm">Seko Fofana</span><span class="to"><span class="arrow">→</span> Ivory Coast <span class="fl">🇨🇮</span></span></div>
+          <div class="card"><span class="nm">Jean-Kévin Duverne</span><span class="to"><span class="arrow">→</span> Haiti <span class="fl">🇭🇹</span></span></div>
+          <div class="card"><span class="nm">Lenny Joseph</span><span class="to"><span class="arrow">→</span> Haiti <span class="fl">🇭🇹</span></span></div>
+          <div class="card"><span class="nm">Ismaël Gharbi</span><span class="to"><span class="arrow">→</span> Tunisia <span class="fl">🇹🇳</span></span></div>
+          <div class="card"><span class="nm">Montassar Talbi</span><span class="to"><span class="arrow">→</span> Tunisia <span class="fl">🇹🇳</span></span></div>
+          <div class="card"><span class="nm">Dylan Bronn</span><span class="to"><span class="arrow">→</span> Tunisia <span class="fl">🇹🇳</span></span></div>
+        </div>
+      </section>
+
+      <!-- Scene 4 -->
+      <section class="scene s4">
+        <div class="cta-eyebrow">Your turn</div>
+        <div class="cta-h">Find the players<br>born in <span>your city</span>.</div>
+        <div class="cta-btn">scorepath.nl &nbsp;→</div>
+        <div class="cta-sub">Free World Cup 2026 simulator · 48 teams · 104 games</div>
+      </section>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button id="replay">↻ Replay</button>
+    <button id="loop">Loop: ON</button>
+  </div>
+
+  <script>
+    var body=document.body, scaler=document.getElementById('scaler');
+    var DURATION=16800, looping=true, timer=null;
+
+    function fit(){
+      var s=Math.min(window.innerWidth/1080, window.innerHeight/1920);
+      scaler.style.transform='scale('+s+')';
+    }
+    window.addEventListener('resize',fit); fit();
+
+    function play(){
+      body.classList.remove('run');
+      void body.offsetWidth;          // force reflow so animations restart
+      body.classList.add('run');
+      if(looping){ clearTimeout(timer); timer=setTimeout(play, DURATION); }
+    }
+    document.getElementById('replay').onclick=play;
+    document.getElementById('loop').onclick=function(){
+      looping=!looping; this.textContent='Loop: '+(looping?'ON':'OFF');
+      if(looping){ timer=setTimeout(play,DURATION); } else { clearTimeout(timer); }
+    };
+    play();
+  </script>
+</body>
+</html>

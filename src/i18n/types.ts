@@ -115,6 +115,10 @@ export interface Messages {
     birthplaceTitle: string;
     birthplaceDesc: string;
     openBirthplace: string;
+    uclEyebrow: string;
+    uclTitle: string;
+    uclDesc: string;
+    openUcl: string;
   };
   start: {
     step1Label: string;
@@ -152,6 +156,7 @@ export interface Messages {
     simulator: string;
     about: string;
     birthplace: string;
+    ucl: string;
   };
   privacy: {
     pageTitle: string;

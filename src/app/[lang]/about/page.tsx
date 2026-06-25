@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Logo } from '@/components/Logo';
+import { SiteFooter } from '@/components/SiteFooter';
 import { SITE_URL, SITE_NAME } from '@/lib/siteConfig';
 import { isLocale, DEFAULT_LOCALE, getMessages } from '@/i18n';
 import { alternatesFor, ogLocaleFields, ogImages } from '@/lib/routes';
@@ -90,16 +91,7 @@ export default async function AboutPage(props: PageProps<'/[lang]/about'>) {
         </div>
       </main>
 
-      <footer className="border-t border-themed px-6 py-6">
-        <div className="max-w-3xl mx-auto flex items-center justify-between">
-          <Logo size="sm" />
-          <div className="c-fg-subtle flex items-center gap-3 text-[11px] font-bold tracking-widest uppercase">
-            <Link href={`/${lang}/privacy`} className="hover:opacity-70 transition-opacity">{msg.nav.privacy}</Link>
-            <span>·</span>
-            <span>© {new Date().getFullYear()} {SITE_NAME}</span>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter lang={lang} width="max-w-3xl" />
     </div>
   );
 }

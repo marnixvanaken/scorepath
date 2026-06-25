@@ -19,14 +19,14 @@ export function TimPayneContent({ lang = 'nl' }: { lang?: string }) {
             { num: '1M+', label: 'followers', sub: 'six weeks later' },
             { num: '250×', label: 'growth', sub: 'in one tournament' },
           ] as const).map(({ num, label, sub }) => (
-            <div key={label} className="bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl p-4 text-center">
+            <div key={label} className="bg-[#0d0d0d] border border-themed rounded-xl p-4 text-center">
               <p className="font-display text-4xl text-orange-500 leading-none mb-1">{num}</p>
               <p className="text-white font-semibold text-xs">{label}</p>
               <p className="text-slate-600 text-[10px] mt-0.5">{sub}</p>
             </div>
           ))}
         </div>
-        <figure className="my-8 bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl p-6">
+        <figure className="my-8 bg-[#0d0d0d] border border-themed rounded-xl p-6">
           <blockquote className="mb-4">
             <p className="text-slate-200 text-lg leading-relaxed italic">
               &ldquo;I had no idea that people outside my city knew my name. The World Cup changes everything — in ninety minutes.&rdquo;
@@ -96,7 +96,7 @@ export function TimPayneContent({ lang = 'nl' }: { lang?: string }) {
         <p className="text-slate-300 text-lg leading-relaxed mb-10">
           And that is exactly what makes the World Cup so unique. In a world where fame is carefully built over years, there is still one tournament where it can happen in 90 minutes. That&apos;s the promise of the World Cup. Tim Payne is the proof.
         </p>
-        <div className="rounded-2xl bg-[#0d0d0d] border border-[#1a1a1a] p-7 text-center">
+        <div className="rounded-2xl bg-[#0d0d0d] border border-themed p-7 text-center">
           <p className="font-display text-3xl text-white mb-3">Which underdog do you pick?</p>
           <p className="text-slate-400 text-sm leading-relaxed max-w-md mx-auto mb-6">Simulate all groups and the bracket on ScorePath. Fill in results, see live standings and share your scenario with a single link.</p>
           <Link href={sim} className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-400 active:bg-orange-600 text-white font-bold px-6 py-3.5 rounded-xl transition-colors text-sm">
@@ -123,14 +123,14 @@ export function TimPayneContent({ lang = 'nl' }: { lang?: string }) {
             { num: '1M+', label: 'seguidores', sub: 'seis semanas después' },
             { num: '250×', label: 'crecimiento', sub: 'en un torneo' },
           ] as const).map(({ num, label, sub }) => (
-            <div key={label} className="bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl p-4 text-center">
+            <div key={label} className="bg-[#0d0d0d] border border-themed rounded-xl p-4 text-center">
               <p className="font-display text-4xl text-orange-500 leading-none mb-1">{num}</p>
               <p className="text-white font-semibold text-xs">{label}</p>
               <p className="text-slate-600 text-[10px] mt-0.5">{sub}</p>
             </div>
           ))}
         </div>
-        <figure className="my-8 bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl p-6">
+        <figure className="my-8 bg-[#0d0d0d] border border-themed rounded-xl p-6">
           <blockquote className="mb-4">
             <p className="text-slate-200 text-lg leading-relaxed italic">
               &ldquo;No tenía idea de que la gente fuera de mi ciudad conociera mi nombre. El Mundial lo cambia todo, en noventa minutos.&rdquo;
@@ -200,7 +200,7 @@ export function TimPayneContent({ lang = 'nl' }: { lang?: string }) {
         <p className="text-slate-300 text-lg leading-relaxed mb-10">
           Y eso es exactamente lo que hace al Mundial tan único. En un mundo donde la fama se construye cuidadosamente a lo largo de años, sigue existiendo un torneo donde puede ocurrir en 90 minutos. Esa es la promesa del Mundial. Tim Payne es la prueba.
         </p>
-        <div className="rounded-2xl bg-[#0d0d0d] border border-[#1a1a1a] p-7 text-center">
+        <div className="rounded-2xl bg-[#0d0d0d] border border-themed p-7 text-center">
           <p className="font-display text-3xl text-white mb-3">¿A qué sorpresa apuestas tú?</p>
           <p className="text-slate-400 text-sm leading-relaxed max-w-md mx-auto mb-6">Simula todos los grupos y el bracket en ScorePath. Rellena resultados, ve en directo las tablas y comparte tu escenario con un solo enlace.</p>
           <Link href={sim} className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-400 active:bg-orange-600 text-white font-bold px-6 py-3.5 rounded-xl transition-colors text-sm">
@@ -230,7 +230,7 @@ export function TimPayneContent({ lang = 'nl' }: { lang?: string }) {
           { num: '1M+', label: 'volgers', sub: 'zes weken later' },
           { num: '250×', label: 'groei', sub: 'in één toernooi' },
         ] as const).map(({ num, label, sub }) => (
-          <div key={label} className="bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl p-4 text-center">
+          <div key={label} className="bg-[#0d0d0d] border border-themed rounded-xl p-4 text-center">
             <p className="font-display text-4xl text-orange-500 leading-none mb-1">{num}</p>
             <p className="text-white font-semibold text-xs">{label}</p>
             <p className="text-slate-600 text-[10px] mt-0.5">{sub}</p>
@@ -238,7 +238,7 @@ export function TimPayneContent({ lang = 'nl' }: { lang?: string }) {
         ))}
       </div>
 
-      <figure className="my-8 bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl p-6">
+      <figure className="my-8 bg-[#0d0d0d] border border-themed rounded-xl p-6">
         <blockquote className="mb-4">
           <p className="text-slate-200 text-lg leading-relaxed italic">
             &ldquo;Ik had geen idee dat mensen buiten mijn stad mijn naam kenden. Het WK verandert alles — in negentig minuten.&rdquo;
@@ -336,7 +336,7 @@ export function TimPayneContent({ lang = 'nl' }: { lang?: string }) {
         En dat is precies wat het WK zo uniek maakt. In een wereld waar roem zorgvuldig wordt opgebouwd over jaren, is er nog steeds één toernooi waar het in 90 minuten kan. Dat is de belofte van het WK. Tim Payne is het bewijs.
       </p>
 
-      <div className="rounded-2xl bg-[#0d0d0d] border border-[#1a1a1a] p-7 text-center">
+      <div className="rounded-2xl bg-[#0d0d0d] border border-themed p-7 text-center">
         <p className="font-display text-3xl text-white mb-3">
           Welke underdog pik jij?
         </p>

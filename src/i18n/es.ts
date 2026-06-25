@@ -266,7 +266,7 @@ export const ES: Messages = {
         sf: 'Semifinal',
         qf: 'Cuartos de final',
         r16: 'Octavos de final',
-        r32: 'Dieciseisavos',
+        r32: 'Ronda de 32',
         group: 'Fase de grupos',
       },
       round: {

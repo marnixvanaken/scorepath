@@ -20,7 +20,7 @@ export function VsIranContent({ lang = 'nl' }: { lang?: string }) {
         <p className="text-slate-300 text-lg leading-relaxed mb-5">
           Iran won 2-1 through goals from Estili and Mahdavikia. The Iranians celebrated it as a national victory, far beyond football. The Americans, under coach Steve Sampson, left the tournament early. The match remained in collective memory as something greater than sport.
         </p>
-        <div className="my-8 bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl p-5">
+        <div className="my-8 bg-[#0d0d0d] border border-themed rounded-xl p-5">
           <p className="text-[10px] font-bold text-slate-600 uppercase tracking-widest mb-4">Match data · June 21, 1998</p>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             {([
@@ -36,7 +36,7 @@ export function VsIranContent({ lang = 'nl' }: { lang?: string }) {
             ))}
           </div>
         </div>
-        <figure className="my-8 bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl p-6">
+        <figure className="my-8 bg-[#0d0d0d] border border-themed rounded-xl p-6">
           <blockquote className="mb-4">
             <p className="text-slate-200 text-lg leading-relaxed italic">
               &ldquo;You play for your country, but you know the world is watching for more than just football. Yet the pitch is the place where you&apos;re simply human beings.&rdquo;
@@ -93,7 +93,7 @@ export function VsIranContent({ lang = 'nl' }: { lang?: string }) {
         <p className="text-slate-300 text-lg leading-relaxed mb-10">
           In 1998 the Iranians brought flowers. In 2026? We don&apos;t know. But we know the world is watching.
         </p>
-        <div className="rounded-2xl bg-[#0d0d0d] border border-[#1a1a1a] p-7 text-center">
+        <div className="rounded-2xl bg-[#0d0d0d] border border-themed p-7 text-center">
           <p className="font-display text-3xl text-white mb-3">Write your scenario</p>
           <p className="text-slate-400 text-sm leading-relaxed max-w-md mx-auto mb-6">How far do the USA and Iran go? Simulate all 12 groups and see live who advances to the knockout stage. Share your bracket with a single link.</p>
           <Link href={sim} className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-400 active:bg-orange-600 text-white font-bold px-6 py-3.5 rounded-xl transition-colors text-sm">
@@ -121,7 +121,7 @@ export function VsIranContent({ lang = 'nl' }: { lang?: string }) {
         <p className="text-slate-300 text-lg leading-relaxed mb-5">
           Irán ganó 2-1 con goles de Estili y Mahdavikia. Los iraníes lo celebraron como una victoria nacional, más allá del fútbol. Los estadounidenses, con el seleccionador Steve Sampson, abandonaron pronto el torneo. El partido quedó en la memoria colectiva como algo más que deporte.
         </p>
-        <div className="my-8 bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl p-5">
+        <div className="my-8 bg-[#0d0d0d] border border-themed rounded-xl p-5">
           <p className="text-[10px] font-bold text-slate-600 uppercase tracking-widest mb-4">Datos del partido · 21 de junio de 1998</p>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             {([
@@ -137,7 +137,7 @@ export function VsIranContent({ lang = 'nl' }: { lang?: string }) {
             ))}
           </div>
         </div>
-        <figure className="my-8 bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl p-6">
+        <figure className="my-8 bg-[#0d0d0d] border border-themed rounded-xl p-6">
           <blockquote className="mb-4">
             <p className="text-slate-200 text-lg leading-relaxed italic">
               &ldquo;Juegas por tu país, pero sabes que el mundo te mira por algo más que el fútbol. Sin embargo, el campo es el lugar donde simplemente eres persona.&rdquo;
@@ -194,7 +194,7 @@ export function VsIranContent({ lang = 'nl' }: { lang?: string }) {
         <p className="text-slate-300 text-lg leading-relaxed mb-10">
           En 1998 los iraníes trajeron flores. ¿En 2026? No lo sabemos. Pero sabemos que el mundo estará mirando.
         </p>
-        <div className="rounded-2xl bg-[#0d0d0d] border border-[#1a1a1a] p-7 text-center">
+        <div className="rounded-2xl bg-[#0d0d0d] border border-themed p-7 text-center">
           <p className="font-display text-3xl text-white mb-3">Escribe tu escenario</p>
           <p className="text-slate-400 text-sm leading-relaxed max-w-md mx-auto mb-6">¿Hasta dónde llegan EE.UU. e Irán? Simula los 12 grupos y ve en directo quién pasa a la eliminatoria. Comparte tu bracket con un solo enlace.</p>
           <Link href={sim} className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-400 active:bg-orange-600 text-white font-bold px-6 py-3.5 rounded-xl transition-colors text-sm">
@@ -228,7 +228,7 @@ export function VsIranContent({ lang = 'nl' }: { lang?: string }) {
         Iran won met 2-1 via twee doelpunten van Estili en Mahdavikia. De Iraniërs vierden het als een nationale overwinning, ver buiten het voetbal. De Amerikanen, onder bondscoach Steve Sampson, vertrokken vroeg uit het toernooi. De wedstrijd bleef in het collectieve geheugen hangen als meer dan sport.
       </p>
 
-      <div className="my-8 bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl p-5">
+      <div className="my-8 bg-[#0d0d0d] border border-themed rounded-xl p-5">
         <p className="text-[10px] font-bold text-slate-600 uppercase tracking-widest mb-4">Wedstrijdgegevens · 21 juni 1998</p>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
           {([
@@ -245,7 +245,7 @@ export function VsIranContent({ lang = 'nl' }: { lang?: string }) {
         </div>
       </div>
 
-      <figure className="my-8 bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl p-6">
+      <figure className="my-8 bg-[#0d0d0d] border border-themed rounded-xl p-6">
         <blockquote className="mb-4">
           <p className="text-slate-200 text-lg leading-relaxed italic">
             &ldquo;Je speelt voor je land, maar je weet dat de wereld kijkt om meer dan het voetbal. Toch is het veld de plek waar je gewoon mensen bent.&rdquo;
@@ -325,7 +325,7 @@ export function VsIranContent({ lang = 'nl' }: { lang?: string }) {
         In 1998 gaven Iraniërs bloemen. In 2026? We weten het niet. Maar we weten dat de wereld kijkt.
       </p>
 
-      <div className="rounded-2xl bg-[#0d0d0d] border border-[#1a1a1a] p-7 text-center">
+      <div className="rounded-2xl bg-[#0d0d0d] border border-themed p-7 text-center">
         <p className="font-display text-3xl text-white mb-3">
           Schrijf jouw scenario
         </p>

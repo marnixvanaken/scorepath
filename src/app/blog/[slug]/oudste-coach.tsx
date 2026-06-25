@@ -29,14 +29,14 @@ export function OudsteCoachContent({ lang = 'nl' }: { lang?: string }) {
             { num: '4', label: 'World Cups', sub: 'as Uruguay manager' },
             { num: '16', label: 'years', sub: 'his time as national coach' },
           ] as const).map(({ num, label, sub }) => (
-            <div key={label} className="bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl p-4 text-center">
+            <div key={label} className="bg-[#0d0d0d] border border-themed rounded-xl p-4 text-center">
               <p className="font-display text-4xl text-orange-500 leading-none mb-1">{num}</p>
               <p className="text-white font-semibold text-xs">{label}</p>
               <p className="text-slate-600 text-[10px] mt-0.5">{sub}</p>
             </div>
           ))}
         </div>
-        <figure className="my-8 bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl p-6">
+        <figure className="my-8 bg-[#0d0d0d] border border-themed rounded-xl p-6">
           <blockquote className="mb-4">
             <p className="text-slate-200 text-lg leading-relaxed italic">
               &ldquo;Age is a number. The passion for the game and the will to keep learning determine whether you&apos;re ready — not the years.&rdquo;
@@ -87,7 +87,7 @@ export function OudsteCoachContent({ lang = 'nl' }: { lang?: string }) {
         <p className="text-slate-300 text-lg leading-relaxed mb-10">
           If in 2026 a coach steps into the technical zone who is older than Tabárez was in 2018, that is the story of the tournament. And the statistic associated with them: not the system, not the formation, but their age on the day of the final.
         </p>
-        <div className="rounded-2xl bg-[#0d0d0d] border border-[#1a1a1a] p-7 text-center">
+        <div className="rounded-2xl bg-[#0d0d0d] border border-themed p-7 text-center">
           <p className="font-display text-3xl text-white mb-3">Which coach wins World Cup 2026?</p>
           <p className="text-slate-400 text-sm leading-relaxed max-w-md mx-auto mb-6">Simulate all groups and the bracket on ScorePath. Fill in results, see live standings and share your prediction.</p>
           <Link href={sim} className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-400 active:bg-orange-600 text-white font-bold px-6 py-3.5 rounded-xl transition-colors text-sm">
@@ -124,14 +124,14 @@ export function OudsteCoachContent({ lang = 'nl' }: { lang?: string }) {
             { num: '4', label: 'Mundiales', sub: 'como seleccionador de Uruguay' },
             { num: '16', label: 'años', sub: 'su etapa como seleccionador' },
           ] as const).map(({ num, label, sub }) => (
-            <div key={label} className="bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl p-4 text-center">
+            <div key={label} className="bg-[#0d0d0d] border border-themed rounded-xl p-4 text-center">
               <p className="font-display text-4xl text-orange-500 leading-none mb-1">{num}</p>
               <p className="text-white font-semibold text-xs">{label}</p>
               <p className="text-slate-600 text-[10px] mt-0.5">{sub}</p>
             </div>
           ))}
         </div>
-        <figure className="my-8 bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl p-6">
+        <figure className="my-8 bg-[#0d0d0d] border border-themed rounded-xl p-6">
           <blockquote className="mb-4">
             <p className="text-slate-200 text-lg leading-relaxed italic">
               &ldquo;La edad es un número. La pasión por el juego y la voluntad de seguir aprendiendo determinan si estás preparado, no los años.&rdquo;
@@ -182,7 +182,7 @@ export function OudsteCoachContent({ lang = 'nl' }: { lang?: string }) {
         <p className="text-slate-300 text-lg leading-relaxed mb-10">
           Si en 2026 un entrenador entra en el área técnica con más edad que Tabárez en 2018, esa será la historia del torneo. Y la estadística que todos asociarán con él: no su sistema, no su formación, sino su edad el día de la final.
         </p>
-        <div className="rounded-2xl bg-[#0d0d0d] border border-[#1a1a1a] p-7 text-center">
+        <div className="rounded-2xl bg-[#0d0d0d] border border-themed p-7 text-center">
           <p className="font-display text-3xl text-white mb-3">¿Qué entrenador gana el Mundial 2026?</p>
           <p className="text-slate-400 text-sm leading-relaxed max-w-md mx-auto mb-6">Simula todos los grupos y el bracket en ScorePath. Rellena resultados, ve en directo las tablas y comparte tu predicción.</p>
           <Link href={sim} className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-400 active:bg-orange-600 text-white font-bold px-6 py-3.5 rounded-xl transition-colors text-sm">
@@ -226,7 +226,7 @@ export function OudsteCoachContent({ lang = 'nl' }: { lang?: string }) {
           { num: '4', label: 'WKs', sub: 'als Uruguay-bondscoach' },
           { num: '16', label: 'jaar', sub: 'zijn bondscoach-periode' },
         ] as const).map(({ num, label, sub }) => (
-          <div key={label} className="bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl p-4 text-center">
+          <div key={label} className="bg-[#0d0d0d] border border-themed rounded-xl p-4 text-center">
             <p className="font-display text-4xl text-orange-500 leading-none mb-1">{num}</p>
             <p className="text-white font-semibold text-xs">{label}</p>
             <p className="text-slate-600 text-[10px] mt-0.5">{sub}</p>
@@ -234,7 +234,7 @@ export function OudsteCoachContent({ lang = 'nl' }: { lang?: string }) {
         ))}
       </div>
 
-      <figure className="my-8 bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl p-6">
+      <figure className="my-8 bg-[#0d0d0d] border border-themed rounded-xl p-6">
         <blockquote className="mb-4">
           <p className="text-slate-200 text-lg leading-relaxed italic">
             &ldquo;Leeftijd is een getal. De passie voor het spel en de wil om te leren bepalen of je klaar bent, niet het aantal jaren.&rdquo;
@@ -306,7 +306,7 @@ export function OudsteCoachContent({ lang = 'nl' }: { lang?: string }) {
         Als er in 2026 een coach de technische zone instapt die ouder is dan Tabárez was in 2018, is dat het verhaal van het toernooi. En de statistiek die iedereen met hem verbindt: niet zijn systeem, niet zijn formatie, maar zijn leeftijd op de dag van de finale.
       </p>
 
-      <div className="rounded-2xl bg-[#0d0d0d] border border-[#1a1a1a] p-7 text-center">
+      <div className="rounded-2xl bg-[#0d0d0d] border border-themed p-7 text-center">
         <p className="font-display text-3xl text-white mb-3">
           Welke coach wint WK 2026?
         </p>

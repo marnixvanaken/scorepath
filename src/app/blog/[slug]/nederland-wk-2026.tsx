@@ -17,7 +17,7 @@ export function NederlandWk2026Content({ lang = 'nl' }: { lang?: string }) {
             { num: '0', label: 'World titles', sub: 'the dream lives on' },
             { num: '48', label: 'Teams', sub: 'more room in 2026' },
           ] as const).map(({ num, label, sub }) => (
-            <div key={label} className="bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl p-4 text-center">
+            <div key={label} className="bg-[#0d0d0d] border border-themed rounded-xl p-4 text-center">
               <p className="font-display text-4xl text-orange-500 leading-none mb-1">{num}</p>
               <p className="text-white font-semibold text-xs">{label}</p>
               <p className="text-slate-600 text-[10px] mt-0.5">{sub}</p>
@@ -92,7 +92,7 @@ export function NederlandWk2026Content({ lang = 'nl' }: { lang?: string }) {
           The dream of a first Dutch World Cup title remains alive. And with an expanded format offering more chances than ever, the summer of 2026 in North America could be the moment Oranje finally goes all the way.
         </p>
 
-        <div className="rounded-2xl bg-[#0d0d0d] border border-[#1a1a1a] p-7 text-center">
+        <div className="rounded-2xl bg-[#0d0d0d] border border-themed p-7 text-center">
           <p className="font-display text-3xl text-white mb-3">Write the Dutch fairy tale</p>
           <p className="text-slate-400 text-sm leading-relaxed max-w-md mx-auto mb-6">Does the Netherlands reach the final in your scenario? Simulate all groups and the full bracket on ScorePath and share your prediction with one link.</p>
           <Link href={sim} className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-400 active:bg-orange-600 text-white font-bold px-6 py-3.5 rounded-xl transition-colors text-sm">
@@ -117,7 +117,7 @@ export function NederlandWk2026Content({ lang = 'nl' }: { lang?: string }) {
             { num: '0', label: 'Títulos', sub: 'el sueño sigue vivo' },
             { num: '48', label: 'Equipos', sub: 'más margen en 2026' },
           ] as const).map(({ num, label, sub }) => (
-            <div key={label} className="bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl p-4 text-center">
+            <div key={label} className="bg-[#0d0d0d] border border-themed rounded-xl p-4 text-center">
               <p className="font-display text-4xl text-orange-500 leading-none mb-1">{num}</p>
               <p className="text-white font-semibold text-xs">{label}</p>
               <p className="text-slate-600 text-[10px] mt-0.5">{sub}</p>
@@ -162,7 +162,7 @@ export function NederlandWk2026Content({ lang = 'nl' }: { lang?: string }) {
           El sueño del primer título mundialista neerlandés sigue vivo. Y con un formato ampliado que ofrece más oportunidades que nunca, el verano de 2026 en Norteamérica podría ser el momento en que la Naranja llegue hasta el final.
         </p>
 
-        <div className="rounded-2xl bg-[#0d0d0d] border border-[#1a1a1a] p-7 text-center">
+        <div className="rounded-2xl bg-[#0d0d0d] border border-themed p-7 text-center">
           <p className="font-display text-3xl text-white mb-3">Escribe el cuento de hadas neerlandés</p>
           <p className="text-slate-400 text-sm leading-relaxed max-w-md mx-auto mb-6">¿Llega Países Bajos a la final en tu escenario? Simula todos los grupos y el cuadro completo en ScorePath y comparte tu predicción con un enlace.</p>
           <Link href={sim} className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-400 active:bg-orange-600 text-white font-bold px-6 py-3.5 rounded-xl transition-colors text-sm">
@@ -187,7 +187,7 @@ export function NederlandWk2026Content({ lang = 'nl' }: { lang?: string }) {
           { num: '0', label: 'Wereldtitels', sub: 'de droom leeft' },
           { num: '48', label: 'Teams', sub: 'meer speelruimte in 2026' },
         ] as const).map(({ num, label, sub }) => (
-          <div key={label} className="bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl p-4 text-center">
+          <div key={label} className="bg-[#0d0d0d] border border-themed rounded-xl p-4 text-center">
             <p className="font-display text-4xl text-orange-500 leading-none mb-1">{num}</p>
             <p className="text-white font-semibold text-xs">{label}</p>
             <p className="text-slate-600 text-[10px] mt-0.5">{sub}</p>
@@ -283,7 +283,7 @@ export function NederlandWk2026Content({ lang = 'nl' }: { lang?: string }) {
         De droom van de eerste Nederlandse wereldtitel leeft. En met een uitgebreid format dat meer kansen biedt dan ooit, kan de zomer van 2026 in Noord-Amerika het moment zijn dat Oranje eindelijk helemaal doorgaat.
       </p>
 
-      <div className="rounded-2xl bg-[#0d0d0d] border border-[#1a1a1a] p-7 text-center">
+      <div className="rounded-2xl bg-[#0d0d0d] border border-themed p-7 text-center">
         <p className="font-display text-3xl text-white mb-3">
           Schrijf het Oranje-sprookje
         </p>

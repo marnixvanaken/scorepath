@@ -1,6 +1,7 @@
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import { Logo } from '@/components/Logo';
+import { SiteFooter } from '@/components/SiteFooter';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import type { Metadata } from 'next';
@@ -117,7 +118,7 @@ export default async function HomePage(props: PageProps<'/[lang]'> & {
               className="c-fg-muted"
               style={{ fontSize: 'clamp(4.5rem, 14vw, 10rem)' }}
             >
-              {lang === 'es' ? 'MUNDIAL' : 'WK'}
+              {lang === 'es' ? 'MUNDIAL' : lang === 'en' ? 'WORLD CUP' : 'WK'}
             </span>
             <span
               className="text-[#D93B1F]"
@@ -193,20 +194,7 @@ export default async function HomePage(props: PageProps<'/[lang]'> & {
         </div>
       </section>
 
-      <footer className="px-6 sm:px-10 py-5">
-        <div className="max-w-5xl mx-auto flex items-center justify-between">
-          <Logo size="sm" />
-          <div className="c-fg-subtle flex items-center gap-4 text-xs font-bold tracking-widest uppercase">
-            <Link href={`/${lang}/blog`} className="hover:opacity-70 transition-opacity">{msg.nav.blog}</Link>
-            <span>·</span>
-            <Link href={simulatorPath(lang)} className="hover:opacity-70 transition-opacity">{msg.nav.simulator}</Link>
-            <span>·</span>
-            <Link href={`/${lang}/about`} className="hover:opacity-70 transition-opacity">{msg.nav.about}</Link>
-            <span>·</span>
-            <Link href={`/${lang}/privacy`} className="hover:opacity-70 transition-opacity">{msg.nav.privacy}</Link>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter lang={lang} />
 
     </div>
   );

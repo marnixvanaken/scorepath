@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Logo } from '@/components/Logo';
+import { SiteFooter } from '@/components/SiteFooter';
 import { SITE_URL, SITE_NAME } from '@/lib/siteConfig';
 import { isLocale, DEFAULT_LOCALE, getMessages } from '@/i18n';
 import { alternatesFor } from '@/lib/routes';
@@ -23,7 +24,7 @@ export default async function PrivacyPage(props: PageProps<'/[lang]/privacy'>) {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <header className="px-6 sm:px-10 py-5 border-b border-[#141414]">
+      <header className="px-6 sm:px-10 py-5 border-b border-themed">
         <div className="max-w-3xl mx-auto">
           <Link href={`/${lang}`}><Logo size="sm" /></Link>
         </div>
@@ -35,12 +36,7 @@ export default async function PrivacyPage(props: PageProps<'/[lang]/privacy'>) {
         </div>
       </main>
 
-      <footer className="border-t border-[#141414] px-6 py-6">
-        <div className="max-w-3xl mx-auto flex items-center justify-between">
-          <Logo size="sm" />
-          <p className="text-[11px] text-slate-700">© {new Date().getFullYear()} {SITE_NAME}</p>
-        </div>
-      </footer>
+      <SiteFooter lang={lang} width="max-w-3xl" />
     </div>
   );
 }

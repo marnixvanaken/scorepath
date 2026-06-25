@@ -17,7 +17,7 @@ export function Wk2026FormatContent({ lang = 'nl' }: { lang?: string }) {
             { num: '12', label: 'Groups', sub: 'of 4 teams each' },
             { num: '104', label: 'Matches', sub: 'from group stage to final' },
           ] as const).map(({ num, label, sub }) => (
-            <div key={label} className="bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl p-4 text-center">
+            <div key={label} className="bg-[#0d0d0d] border border-themed rounded-xl p-4 text-center">
               <p className="font-display text-4xl text-orange-500 leading-none mb-1">{num}</p>
               <p className="text-white font-semibold text-xs">{label}</p>
               <p className="text-slate-600 text-[10px] mt-0.5">{sub}</p>
@@ -111,7 +111,7 @@ export function Wk2026FormatContent({ lang = 'nl' }: { lang?: string }) {
           The final will be played on 19 July 2026 at MetLife Stadium in New Jersey. 104 matches. 48 teams. One trophy. The biggest World Cup ever.
         </p>
 
-        <div className="rounded-2xl bg-[#0d0d0d] border border-[#1a1a1a] p-7 text-center">
+        <div className="rounded-2xl bg-[#0d0d0d] border border-themed p-7 text-center">
           <p className="font-display text-3xl text-white mb-3">Simulate the full tournament</p>
           <p className="text-slate-400 text-sm leading-relaxed max-w-md mx-auto mb-6">Fill in all group results, see who advances through the round of 32, and play out the knockout bracket all the way to the final. Share your scenario with a single link.</p>
           <Link href={sim} className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-400 active:bg-orange-600 text-white font-bold px-6 py-3.5 rounded-xl transition-colors text-sm">
@@ -136,7 +136,7 @@ export function Wk2026FormatContent({ lang = 'nl' }: { lang?: string }) {
             { num: '12', label: 'Grupos', sub: 'de 4 equipos cada uno' },
             { num: '104', label: 'Partidos', sub: 'de la fase de grupos a la final' },
           ] as const).map(({ num, label, sub }) => (
-            <div key={label} className="bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl p-4 text-center">
+            <div key={label} className="bg-[#0d0d0d] border border-themed rounded-xl p-4 text-center">
               <p className="font-display text-4xl text-orange-500 leading-none mb-1">{num}</p>
               <p className="text-white font-semibold text-xs">{label}</p>
               <p className="text-slate-600 text-[10px] mt-0.5">{sub}</p>
@@ -222,7 +222,7 @@ export function Wk2026FormatContent({ lang = 'nl' }: { lang?: string }) {
           La final se jugará el 19 de julio de 2026 en el MetLife Stadium de Nueva Jersey. 104 partidos. 48 equipos. Un trofeo. El mayor Mundial de la historia.
         </p>
 
-        <div className="rounded-2xl bg-[#0d0d0d] border border-[#1a1a1a] p-7 text-center">
+        <div className="rounded-2xl bg-[#0d0d0d] border border-themed p-7 text-center">
           <p className="font-display text-3xl text-white mb-3">Simula el torneo completo</p>
           <p className="text-slate-400 text-sm leading-relaxed max-w-md mx-auto mb-6">Rellena todos los resultados de grupos, ve quién avanza en la ronda de 32 y juega el cuadro eliminatorio hasta la final. Comparte tu escenario con un solo enlace.</p>
           <Link href={sim} className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-400 active:bg-orange-600 text-white font-bold px-6 py-3.5 rounded-xl transition-colors text-sm">
@@ -247,7 +247,7 @@ export function Wk2026FormatContent({ lang = 'nl' }: { lang?: string }) {
           { num: '12', label: 'Groepen', sub: 'van elk 4 teams' },
           { num: '104', label: 'Wedstrijden', sub: 'van groepsfase tot finale' },
         ] as const).map(({ num, label, sub }) => (
-          <div key={label} className="bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl p-4 text-center">
+          <div key={label} className="bg-[#0d0d0d] border border-themed rounded-xl p-4 text-center">
             <p className="font-display text-4xl text-orange-500 leading-none mb-1">{num}</p>
             <p className="text-white font-semibold text-xs">{label}</p>
             <p className="text-slate-600 text-[10px] mt-0.5">{sub}</p>
@@ -358,7 +358,7 @@ export function Wk2026FormatContent({ lang = 'nl' }: { lang?: string }) {
         Of het gastlandvoordeel verdund raakt over drie landen, moet nog blijken. Maar met grote stadions in Dallas, New York, Los Angeles, Toronto en Mexico-Stad is de sfeer gegarandeerd. De finale wordt op 19 juli 2026 gespeeld in het MetLife Stadium in New Jersey. 104 wedstrijden. 48 teams. Één trofee. Het grootste WK ooit.
       </p>
 
-      <div className="rounded-2xl bg-[#0d0d0d] border border-[#1a1a1a] p-7 text-center">
+      <div className="rounded-2xl bg-[#0d0d0d] border border-themed p-7 text-center">
         <p className="font-display text-3xl text-white mb-3">
           Simuleer het volledige toernooi
         </p>

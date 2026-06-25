@@ -28,7 +28,7 @@ export function MbappeKloseContent({ lang = 'nl' }: { lang?: string }) {
         <div className="my-8 overflow-x-auto">
           <table className="w-full text-sm border-collapse">
             <thead>
-              <tr className="border-b border-[#1a1a1a]">
+              <tr className="border-b border-themed">
                 <th className="text-left text-[10px] font-bold text-slate-600 uppercase tracking-widest pb-3 pr-4">#</th>
                 <th className="text-left text-[10px] font-bold text-slate-600 uppercase tracking-widest pb-3 pr-4">Player</th>
                 <th className="text-left text-[10px] font-bold text-slate-600 uppercase tracking-widest pb-3 pr-4">Country</th>
@@ -44,7 +44,7 @@ export function MbappeKloseContent({ lang = 'nl' }: { lang?: string }) {
                 { rank: '=4', name: 'Lionel Messi', country: 'Argentina', goals: '13', highlight: false },
                 { rank: '6', name: 'Kylian Mbappé', country: 'France', goals: '12*', highlight: true },
               ] as const).map(({ rank, name, country, goals, highlight }) => (
-                <tr key={name} className={`border-b border-[#141414] ${highlight ? 'text-orange-400' : 'text-slate-300'}`}>
+                <tr key={name} className={`border-b border-themed ${highlight ? 'text-orange-400' : 'text-slate-300'}`}>
                   <td className="py-2.5 pr-4 text-slate-600 text-xs">{rank}</td>
                   <td className={`py-2.5 pr-4 font-semibold text-sm ${highlight ? 'text-orange-400' : 'text-white'}`}>{name}</td>
                   <td className="py-2.5 pr-4 text-slate-500 text-xs">{country}</td>
@@ -55,7 +55,7 @@ export function MbappeKloseContent({ lang = 'nl' }: { lang?: string }) {
           </table>
           <p className="text-[10px] text-slate-700 mt-2">* after 2 World Cups, before the start of World Cup 2026</p>
         </div>
-        <figure className="my-8 bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl p-6">
+        <figure className="my-8 bg-[#0d0d0d] border border-themed rounded-xl p-6">
           <blockquote className="mb-4">
             <p className="text-slate-200 text-lg leading-relaxed italic">
               &ldquo;Records are there to be broken. That&apos;s the beauty of sport. If it&apos;s Mbappé who does it, then he has earned it.&rdquo;
@@ -104,7 +104,7 @@ export function MbappeKloseContent({ lang = 'nl' }: { lang?: string }) {
         <p className="text-slate-300 text-lg leading-relaxed mb-10">
           Mbappé is the first player in decades with the pace to do it. His first two World Cups were historic. His third could be legendary.
         </p>
-        <div className="rounded-2xl bg-[#0d0d0d] border border-[#1a1a1a] p-7 text-center">
+        <div className="rounded-2xl bg-[#0d0d0d] border border-themed p-7 text-center">
           <p className="font-display text-3xl text-white mb-3">Write your scenario</p>
           <p className="text-slate-400 text-sm leading-relaxed max-w-md mx-auto mb-6">How far does Mbappé take France? Simulate all groups and the bracket on ScorePath and share your prediction with a single link.</p>
           <Link href={sim} className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-400 active:bg-orange-600 text-white font-bold px-6 py-3.5 rounded-xl transition-colors text-sm">
@@ -140,7 +140,7 @@ export function MbappeKloseContent({ lang = 'nl' }: { lang?: string }) {
         <div className="my-8 overflow-x-auto">
           <table className="w-full text-sm border-collapse">
             <thead>
-              <tr className="border-b border-[#1a1a1a]">
+              <tr className="border-b border-themed">
                 <th className="text-left text-[10px] font-bold text-slate-600 uppercase tracking-widest pb-3 pr-4">#</th>
                 <th className="text-left text-[10px] font-bold text-slate-600 uppercase tracking-widest pb-3 pr-4">Jugador</th>
                 <th className="text-left text-[10px] font-bold text-slate-600 uppercase tracking-widest pb-3 pr-4">País</th>
@@ -156,7 +156,7 @@ export function MbappeKloseContent({ lang = 'nl' }: { lang?: string }) {
                 { rank: '=4', name: 'Lionel Messi', country: 'Argentina', goals: '13', highlight: false },
                 { rank: '6', name: 'Kylian Mbappé', country: 'Francia', goals: '12*', highlight: true },
               ] as const).map(({ rank, name, country, goals, highlight }) => (
-                <tr key={name} className={`border-b border-[#141414] ${highlight ? 'text-orange-400' : 'text-slate-300'}`}>
+                <tr key={name} className={`border-b border-themed ${highlight ? 'text-orange-400' : 'text-slate-300'}`}>
                   <td className="py-2.5 pr-4 text-slate-600 text-xs">{rank}</td>
                   <td className={`py-2.5 pr-4 font-semibold text-sm ${highlight ? 'text-orange-400' : 'text-white'}`}>{name}</td>
                   <td className="py-2.5 pr-4 text-slate-500 text-xs">{country}</td>
@@ -167,7 +167,7 @@ export function MbappeKloseContent({ lang = 'nl' }: { lang?: string }) {
           </table>
           <p className="text-[10px] text-slate-700 mt-2">* tras 2 Mundiales, antes del inicio del Mundial 2026</p>
         </div>
-        <figure className="my-8 bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl p-6">
+        <figure className="my-8 bg-[#0d0d0d] border border-themed rounded-xl p-6">
           <blockquote className="mb-4">
             <p className="text-slate-200 text-lg leading-relaxed italic">
               &ldquo;Los récords están para batirse. Esa es la belleza del deporte. Si es Mbappé quien lo hace, se lo habrá ganado.&rdquo;
@@ -216,7 +216,7 @@ export function MbappeKloseContent({ lang = 'nl' }: { lang?: string }) {
         <p className="text-slate-300 text-lg leading-relaxed mb-10">
           Mbappé es el primer jugador en décadas con el ritmo necesario para lograrlo. Sus dos primeros Mundiales fueron históricos. El tercero podría ser legendario.
         </p>
-        <div className="rounded-2xl bg-[#0d0d0d] border border-[#1a1a1a] p-7 text-center">
+        <div className="rounded-2xl bg-[#0d0d0d] border border-themed p-7 text-center">
           <p className="font-display text-3xl text-white mb-3">Escribe tu escenario</p>
           <p className="text-slate-400 text-sm leading-relaxed max-w-md mx-auto mb-6">¿Hasta dónde lleva Mbappé a Francia? Simula todos los grupos y el bracket en ScorePath y comparte tu predicción con un solo enlace.</p>
           <Link href={sim} className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-400 active:bg-orange-600 text-white font-bold px-6 py-3.5 rounded-xl transition-colors text-sm">
@@ -259,7 +259,7 @@ export function MbappeKloseContent({ lang = 'nl' }: { lang?: string }) {
       <div className="my-8 overflow-x-auto">
         <table className="w-full text-sm border-collapse">
           <thead>
-            <tr className="border-b border-[#1a1a1a]">
+            <tr className="border-b border-themed">
               <th className="text-left text-[10px] font-bold text-slate-600 uppercase tracking-widest pb-3 pr-4">#</th>
               <th className="text-left text-[10px] font-bold text-slate-600 uppercase tracking-widest pb-3 pr-4">Speler</th>
               <th className="text-left text-[10px] font-bold text-slate-600 uppercase tracking-widest pb-3 pr-4">Land</th>
@@ -275,7 +275,7 @@ export function MbappeKloseContent({ lang = 'nl' }: { lang?: string }) {
               { rank: '=4', name: 'Lionel Messi', country: 'Argentinië', goals: '13', highlight: false },
               { rank: '6', name: 'Kylian Mbappé', country: 'Frankrijk', goals: '12*', highlight: true },
             ] as const).map(({ rank, name, country, goals, highlight }) => (
-              <tr key={name} className={`border-b border-[#141414] ${highlight ? 'text-orange-400' : 'text-slate-300'}`}>
+              <tr key={name} className={`border-b border-themed ${highlight ? 'text-orange-400' : 'text-slate-300'}`}>
                 <td className="py-2.5 pr-4 text-slate-600 text-xs">{rank}</td>
                 <td className={`py-2.5 pr-4 font-semibold text-sm ${highlight ? 'text-orange-400' : 'text-white'}`}>{name}</td>
                 <td className="py-2.5 pr-4 text-slate-500 text-xs">{country}</td>
@@ -287,7 +287,7 @@ export function MbappeKloseContent({ lang = 'nl' }: { lang?: string }) {
         <p className="text-[10px] text-slate-700 mt-2">* na 2 WKs, voor aanvang WK 2026</p>
       </div>
 
-      <figure className="my-8 bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl p-6">
+      <figure className="my-8 bg-[#0d0d0d] border border-themed rounded-xl p-6">
         <blockquote className="mb-4">
           <p className="text-slate-200 text-lg leading-relaxed italic">
             &ldquo;Records zijn er om gebroken te worden. Dat is de schoonheid van sport. Als het Mbappé is die het doet, dan heeft hij het verdiend.&rdquo;
@@ -357,7 +357,7 @@ export function MbappeKloseContent({ lang = 'nl' }: { lang?: string }) {
         Mbappé is de eerste speler in decennia die het tempo heeft om dit te doen. Zijn eerste twee WK&apos;s waren historisch. Zijn derde kan legendarisch zijn.
       </p>
 
-      <div className="rounded-2xl bg-[#0d0d0d] border border-[#1a1a1a] p-7 text-center">
+      <div className="rounded-2xl bg-[#0d0d0d] border border-themed p-7 text-center">
         <p className="font-display text-3xl text-white mb-3">
           Schrijf jouw scenario
         </p>

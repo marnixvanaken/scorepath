@@ -33,8 +33,8 @@ export function CourtoisCleanSheetsContent({ lang = 'nl' }: { lang?: string }) {
         <p className="text-slate-300 text-lg leading-relaxed mb-5">
           World Cup 2026 is his fourth. And with a new Belgian generation taking shape, he has for the first time in years a team that can go further than one round.
         </p>
-        <div className="my-8 bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl overflow-hidden">
-          <div className="px-5 py-3 border-b border-[#141414]">
+        <div className="my-8 bg-[#0d0d0d] border border-themed rounded-xl overflow-hidden">
+          <div className="px-5 py-3 border-b border-themed">
             <p className="text-[10px] font-bold text-slate-600 uppercase tracking-widest">Courtois at the World Cup</p>
           </div>
           {([
@@ -43,7 +43,7 @@ export function CourtoisCleanSheetsContent({ lang = 'nl' }: { lang?: string }) {
             { year: '2022', result: 'Group stage', award: '' },
             { year: '2026', result: '?', award: 'Record in sight' },
           ] as const).map(({ year, result, award }) => (
-            <div key={year} className="flex items-center gap-4 px-5 py-3 border-b border-[#0f0f0f] last:border-0">
+            <div key={year} className="flex items-center gap-4 px-5 py-3 border-b border-themed last:border-0">
               <span className="text-slate-500 text-sm font-tabular w-10">{year}</span>
               <span className="text-white text-sm font-semibold flex-1">{result}</span>
               {award && (
@@ -54,7 +54,7 @@ export function CourtoisCleanSheetsContent({ lang = 'nl' }: { lang?: string }) {
             </div>
           ))}
         </div>
-        <figure className="my-8 bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl p-6">
+        <figure className="my-8 bg-[#0d0d0d] border border-themed rounded-xl p-6">
           <blockquote className="mb-4">
             <p className="text-slate-200 text-lg leading-relaxed italic">
               &ldquo;The Golden Glove in 2018 was nice, but I want more. Reaching a World Cup final with Belgium — that&apos;s what I train for every day.&rdquo;
@@ -100,7 +100,7 @@ export function CourtoisCleanSheetsContent({ lang = 'nl' }: { lang?: string }) {
         <p className="text-slate-300 text-lg leading-relaxed mb-10">
           Courtois has everything it takes to claim that stage. Tall, dominant in the air, excellent with his feet and experienced enough not to give it away easily. In 2026 he gets his chance.
         </p>
-        <div className="rounded-2xl bg-[#0d0d0d] border border-[#1a1a1a] p-7 text-center">
+        <div className="rounded-2xl bg-[#0d0d0d] border border-themed p-7 text-center">
           <p className="font-display text-3xl text-white mb-3">Let Belgium go far</p>
           <p className="text-slate-400 text-sm leading-relaxed max-w-md mx-auto mb-6">Simulate all groups and the full bracket on ScorePath. Fill in results, see live standings and share your prediction with a single link.</p>
           <Link href={sim} className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-400 active:bg-orange-600 text-white font-bold px-6 py-3.5 rounded-xl transition-colors text-sm">
@@ -141,8 +141,8 @@ export function CourtoisCleanSheetsContent({ lang = 'nl' }: { lang?: string }) {
         <p className="text-slate-300 text-lg leading-relaxed mb-5">
           El Mundial 2026 es su cuarto. Y con una nueva generación belga tomando forma, tiene por primera vez en años un equipo capaz de ir más allá de una ronda.
         </p>
-        <div className="my-8 bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl overflow-hidden">
-          <div className="px-5 py-3 border-b border-[#141414]">
+        <div className="my-8 bg-[#0d0d0d] border border-themed rounded-xl overflow-hidden">
+          <div className="px-5 py-3 border-b border-themed">
             <p className="text-[10px] font-bold text-slate-600 uppercase tracking-widest">Courtois en el Mundial</p>
           </div>
           {([
@@ -151,7 +151,7 @@ export function CourtoisCleanSheetsContent({ lang = 'nl' }: { lang?: string }) {
             { year: '2022', result: 'Fase de grupos', award: '' },
             { year: '2026', result: '?', award: 'Récord en el horizonte' },
           ] as const).map(({ year, result, award }) => (
-            <div key={year} className="flex items-center gap-4 px-5 py-3 border-b border-[#0f0f0f] last:border-0">
+            <div key={year} className="flex items-center gap-4 px-5 py-3 border-b border-themed last:border-0">
               <span className="text-slate-500 text-sm font-tabular w-10">{year}</span>
               <span className="text-white text-sm font-semibold flex-1">{result}</span>
               {award && (
@@ -162,7 +162,7 @@ export function CourtoisCleanSheetsContent({ lang = 'nl' }: { lang?: string }) {
             </div>
           ))}
         </div>
-        <figure className="my-8 bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl p-6">
+        <figure className="my-8 bg-[#0d0d0d] border border-themed rounded-xl p-6">
           <blockquote className="mb-4">
             <p className="text-slate-200 text-lg leading-relaxed italic">
               &ldquo;El Guante de Oro en 2018 estuvo bien, pero quiero más. Llegar a una final del Mundial con Bélgica — para eso entreno cada día.&rdquo;
@@ -208,7 +208,7 @@ export function CourtoisCleanSheetsContent({ lang = 'nl' }: { lang?: string }) {
         <p className="text-slate-300 text-lg leading-relaxed mb-10">
           Courtois tiene todo lo necesario para reclamar ese escenario. Alto, dominante en el juego aéreo, excelente con los pies y con suficiente experiencia para no regalarlo fácilmente. En 2026 llega su oportunidad.
         </p>
-        <div className="rounded-2xl bg-[#0d0d0d] border border-[#1a1a1a] p-7 text-center">
+        <div className="rounded-2xl bg-[#0d0d0d] border border-themed p-7 text-center">
           <p className="font-display text-3xl text-white mb-3">Que Bélgica llegue lejos</p>
           <p className="text-slate-400 text-sm leading-relaxed max-w-md mx-auto mb-6">Simula todos los grupos y el bracket completo en ScorePath. Rellena resultados, ve en directo las tablas y comparte tu predicción con un solo enlace.</p>
           <Link href={sim} className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-400 active:bg-orange-600 text-white font-bold px-6 py-3.5 rounded-xl transition-colors text-sm">
@@ -260,8 +260,8 @@ export function CourtoisCleanSheetsContent({ lang = 'nl' }: { lang?: string }) {
         WK 2026 is zijn vierde. En met een nieuwe Belgische generatie in opbouw heeft hij voor het eerst in jaren weer een elftal dat meer dan één ronde ver kan komen.
       </p>
 
-      <div className="my-8 bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl overflow-hidden">
-        <div className="px-5 py-3 border-b border-[#141414]">
+      <div className="my-8 bg-[#0d0d0d] border border-themed rounded-xl overflow-hidden">
+        <div className="px-5 py-3 border-b border-themed">
           <p className="text-[10px] font-bold text-slate-600 uppercase tracking-widest">Courtois op het WK</p>
         </div>
         {([
@@ -270,7 +270,7 @@ export function CourtoisCleanSheetsContent({ lang = 'nl' }: { lang?: string }) {
           { year: '2022', result: 'Groepsfase', award: '' },
           { year: '2026', result: '?', award: 'Kans op record' },
         ] as const).map(({ year, result, award }) => (
-          <div key={year} className="flex items-center gap-4 px-5 py-3 border-b border-[#0f0f0f] last:border-0">
+          <div key={year} className="flex items-center gap-4 px-5 py-3 border-b border-themed last:border-0">
             <span className="text-slate-500 text-sm font-tabular w-10">{year}</span>
             <span className="text-white text-sm font-semibold flex-1">{result}</span>
             {award && (
@@ -282,7 +282,7 @@ export function CourtoisCleanSheetsContent({ lang = 'nl' }: { lang?: string }) {
         ))}
       </div>
 
-      <figure className="my-8 bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl p-6">
+      <figure className="my-8 bg-[#0d0d0d] border border-themed rounded-xl p-6">
         <blockquote className="mb-4">
           <p className="text-slate-200 text-lg leading-relaxed italic">
             &ldquo;De Gouden Handschoen in 2018 was mooi, maar ik wil méér. Een WK-finale halen met België — dat is waarvoor ik elke dag train.&rdquo;
@@ -346,7 +346,7 @@ export function CourtoisCleanSheetsContent({ lang = 'nl' }: { lang?: string }) {
         Courtois heeft alles in huis om dat podium te claimen. Groot, dominant in de lucht, uitstekend met zijn voeten en ervaren genoeg om het niet zomaar weg te geven. In 2026 krijgt hij zijn kans.
       </p>
 
-      <div className="rounded-2xl bg-[#0d0d0d] border border-[#1a1a1a] p-7 text-center">
+      <div className="rounded-2xl bg-[#0d0d0d] border border-themed p-7 text-center">
         <p className="font-display text-3xl text-white mb-3">
           Laat België ver komen
         </p>

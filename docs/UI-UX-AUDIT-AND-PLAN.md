@@ -7,6 +7,14 @@ Evidence-based review of the whole site across **all routes, all locales
 Severity: **P0** = visibly broken/wrong · **P1** = inconsistent/theming/i18n gap
 · **P2** = polish/cleanup.
 
+> **Status (in progress).** ✅ Done: Phase 0 (B1 EN hero, A1 NL "Laatste 16",
+> A2 "Ronde van 32"); Phase 1 partial — color tokenization (D1: 134 hardcoded
+> borders → `border-themed`), Tooltip re-token (D2), ES round-term unify (A3),
+> and the shared `<SiteFooter>` across home/about/blog/privacy (C1/C2/C3).
+> ⏳ Remaining Phase 1: full UCL-2027 localization (B2/B3 — larger sub-project,
+> `UCLBracket` + `DrawClient` are extensively Dutch) and a shared `<SiteHeader>`
+> (C5). Phase 2/3 (type scale, contrast, dead-code cleanup) not started.
+
 ---
 
 ## 1. Scope & method

@@ -19,7 +19,7 @@ export function DrieLegendesContent({ lang = 'nl' }: { lang?: string }) {
             { num: '20', label: 'years', sub: '2006 to 2026' },
             { num: '3', label: 'legends', sub: 'together, for the first time' },
           ] as const).map(({ num, label, sub }) => (
-            <div key={label} className="bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl p-4 text-center">
+            <div key={label} className="bg-[#0d0d0d] border border-themed rounded-xl p-4 text-center">
               <p className="font-display text-4xl text-orange-500 leading-none mb-1">{num}</p>
               <p className="text-white font-semibold text-xs">{label}</p>
               <p className="text-slate-600 text-[10px] mt-0.5">{sub}</p>
@@ -53,7 +53,7 @@ export function DrieLegendesContent({ lang = 'nl' }: { lang?: string }) {
         <blockquote className="border-l-2 border-orange-500 pl-5 my-8">
           <p className="text-slate-200 text-xl font-semibold leading-snug italic">If it works, we&apos;ll be telling a fairy tale for generations.</p>
         </blockquote>
-        <figure className="my-8 bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl p-6">
+        <figure className="my-8 bg-[#0d0d0d] border border-themed rounded-xl p-6">
           <blockquote className="mb-4">
             <p className="text-slate-200 text-lg leading-relaxed italic">
               &ldquo;This is the most beautiful thing I&apos;ve ever experienced in football. I dreamed of this for so long. Now I just want to enjoy it.&rdquo;
@@ -117,7 +117,7 @@ export function DrieLegendesContent({ lang = 'nl' }: { lang?: string }) {
         <p className="text-slate-300 text-lg leading-relaxed mb-10">
           On July 19, 2026 the winner will be crowned at MetLife Stadium in New Jersey. Whether Messi, Ronaldo and Ochoa are still competing or already at home: it doesn&apos;t matter. What counts is that they were there. Six times. We witnessed that.
         </p>
-        <div className="rounded-2xl bg-[#0d0d0d] border border-[#1a1a1a] p-7 text-center">
+        <div className="rounded-2xl bg-[#0d0d0d] border border-themed p-7 text-center">
           <p className="font-display text-3xl text-white mb-3">Write history yourself</p>
           <p className="text-slate-400 text-sm leading-relaxed max-w-md mx-auto mb-6">Does Messi crash out in the group stage or reach the final? Does Ochoa guide Mexico to the quarter-finals? Simulate all scenarios on ScorePath and share your bracket with a single link.</p>
           <Link href={sim} className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-400 active:bg-orange-600 text-white font-bold px-6 py-3.5 rounded-xl transition-colors text-sm">
@@ -144,7 +144,7 @@ export function DrieLegendesContent({ lang = 'nl' }: { lang?: string }) {
             { num: '20', label: 'años', sub: 'de 2006 a 2026' },
             { num: '3', label: 'leyendas', sub: 'juntos, por primera vez' },
           ] as const).map(({ num, label, sub }) => (
-            <div key={label} className="bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl p-4 text-center">
+            <div key={label} className="bg-[#0d0d0d] border border-themed rounded-xl p-4 text-center">
               <p className="font-display text-4xl text-orange-500 leading-none mb-1">{num}</p>
               <p className="text-white font-semibold text-xs">{label}</p>
               <p className="text-slate-600 text-[10px] mt-0.5">{sub}</p>
@@ -178,7 +178,7 @@ export function DrieLegendesContent({ lang = 'nl' }: { lang?: string }) {
         <blockquote className="border-l-2 border-orange-500 pl-5 my-8">
           <p className="text-slate-200 text-xl font-semibold leading-snug italic">Si funciona, contaremos un cuento de hadas durante generaciones.</p>
         </blockquote>
-        <figure className="my-8 bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl p-6">
+        <figure className="my-8 bg-[#0d0d0d] border border-themed rounded-xl p-6">
           <blockquote className="mb-4">
             <p className="text-slate-200 text-lg leading-relaxed italic">
               &ldquo;Esto es lo más bonito que he vivido en el fútbol. Lo soñé tanto tiempo. Ahora solo quiero disfrutarlo.&rdquo;
@@ -242,7 +242,7 @@ export function DrieLegendesContent({ lang = 'nl' }: { lang?: string }) {
         <p className="text-slate-300 text-lg leading-relaxed mb-10">
           El 19 de julio de 2026 se coronará al campeón en el MetLife Stadium de Nueva Jersey. Que Messi, Ronaldo y Ochoa sigan participando o ya estén en casa: da igual. Lo que importa es que estuvieron ahí. Seis veces. Fuimos testigos de ello.
         </p>
-        <div className="rounded-2xl bg-[#0d0d0d] border border-[#1a1a1a] p-7 text-center">
+        <div className="rounded-2xl bg-[#0d0d0d] border border-themed p-7 text-center">
           <p className="font-display text-3xl text-white mb-3">Escribe la historia tú mismo</p>
           <p className="text-slate-400 text-sm leading-relaxed max-w-md mx-auto mb-6">¿Messi cae en la fase de grupos o llega a la final? ¿Ochoa lleva a México a cuartos? Simula todos los escenarios en ScorePath y comparte tu bracket con un solo enlace.</p>
           <Link href={sim} className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-400 active:bg-orange-600 text-white font-bold px-6 py-3.5 rounded-xl transition-colors text-sm">
@@ -272,7 +272,7 @@ export function DrieLegendesContent({ lang = 'nl' }: { lang?: string }) {
           { num: '20', label: 'jaar', sub: '2006 tot 2026' },
           { num: '3', label: 'legendes', sub: 'tegelijk, voor het eerst' },
         ] as const).map(({ num, label, sub }) => (
-          <div key={label} className="bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl p-4 text-center">
+          <div key={label} className="bg-[#0d0d0d] border border-themed rounded-xl p-4 text-center">
             <p className="font-display text-4xl text-orange-500 leading-none mb-1">{num}</p>
             <p className="text-white font-semibold text-xs">{label}</p>
             <p className="text-slate-600 text-[10px] mt-0.5">{sub}</p>
@@ -327,7 +327,7 @@ export function DrieLegendesContent({ lang = 'nl' }: { lang?: string }) {
         </p>
       </blockquote>
 
-      <figure className="my-8 bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl p-6">
+      <figure className="my-8 bg-[#0d0d0d] border border-themed rounded-xl p-6">
         <blockquote className="mb-4">
           <p className="text-slate-200 text-lg leading-relaxed italic">
             &ldquo;Dit is het mooiste wat ik ooit heb meegemaakt in het voetbal. Ik heb er zo lang van gedroomd. Nu wil ik er gewoon van genieten.&rdquo;
@@ -422,7 +422,7 @@ export function DrieLegendesContent({ lang = 'nl' }: { lang?: string }) {
         Op 19 juli 2026 wordt de winnaar gekroond in het MetLife Stadium in New Jersey. Of Messi, Ronaldo en Ochoa dan nog meedoen of al thuis zitten: het doet er niet toe. Wat telt, is dat ze er waren. Zes keer. Dat hebben we meegemaakt.
       </p>
 
-      <div className="rounded-2xl bg-[#0d0d0d] border border-[#1a1a1a] p-7 text-center">
+      <div className="rounded-2xl bg-[#0d0d0d] border border-themed p-7 text-center">
         <p className="font-display text-3xl text-white mb-3">
           Schrijf zelf de geschiedenis
         </p>

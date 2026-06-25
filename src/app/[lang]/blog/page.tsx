@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Logo } from '@/components/Logo';
+import { SiteFooter } from '@/components/SiteFooter';
 import { getPublishedBlogs } from '@/data/blogs';
 import { getLocalizedBlogMeta } from '@/data/blogTranslations';
 import { getDynamicBlogs } from '@/lib/supabase';
@@ -80,7 +81,7 @@ export default async function BlogPage(props: PageProps<'/[lang]/blog'>) {
   return (
     <div className="min-h-dvh bg-panel text-slate-100 flex flex-col">
 
-      <nav className="px-6 py-4 border-b border-[#141414]">
+      <nav className="px-6 py-4 border-b border-themed">
         <div className="max-w-5xl mx-auto flex items-center justify-between">
           <Logo size="sm" />
           <div className="flex items-center gap-6">
@@ -119,7 +120,7 @@ export default async function BlogPage(props: PageProps<'/[lang]/blog'>) {
                 <Link
                   key={post.slug}
                   href={blogPath(lang, post.slug)}
-                  className="group block bg-[#0d0d0d] border border-[#1a1a1a] hover:border-orange-500/30 rounded-2xl overflow-hidden transition-all duration-200"
+                  className="group block bg-[#0d0d0d] border border-themed hover:border-orange-500/30 rounded-2xl overflow-hidden transition-all duration-200"
                 >
                   <div className="p-7">
                     <div className="flex items-center gap-3 mb-5">
@@ -162,18 +163,7 @@ export default async function BlogPage(props: PageProps<'/[lang]/blog'>) {
         </section>
       </main>
 
-      <footer className="border-t border-[#141414] px-6 py-6">
-        <div className="max-w-5xl mx-auto flex items-center justify-between">
-          <Logo size="sm" />
-          <div className="flex items-center gap-3 text-xs text-slate-700">
-            <span>{msg.blog.footerText}</span>
-            <span>·</span>
-            <Link href={`/${lang}/about`} className="hover:opacity-70 transition-opacity">{msg.nav.about}</Link>
-            <span>·</span>
-            <Link href={`/${lang}/privacy`} className="hover:opacity-70 transition-opacity">{msg.nav.privacy}</Link>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter lang={lang} />
     </div>
   );
 }

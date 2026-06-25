@@ -52,7 +52,7 @@ export default function StartPage() {
 
   return (
     <div className="min-h-dvh bg-panel text-slate-100 flex flex-col overflow-hidden">
-      <header className="shrink-0 px-5 py-4 border-b border-[#141414] flex items-center justify-between">
+      <header className="shrink-0 px-5 py-4 border-b border-themed flex items-center justify-between">
         <AnimatePresence mode="wait">
           {step === 1 ? (
             <motion.div
@@ -119,7 +119,7 @@ export default function StartPage() {
 
                 <button
                   onClick={goToStep2}
-                  className="group w-full text-left bg-[#0d0d0d] border border-[#1a1a1a] hover:border-orange-500/40 active:border-orange-500/70 active:scale-[0.99] rounded-2xl overflow-hidden transition-all duration-150 mb-5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500/50"
+                  className="group w-full text-left bg-[#0d0d0d] border border-themed hover:border-orange-500/40 active:border-orange-500/70 active:scale-[0.99] rounded-2xl overflow-hidden transition-all duration-150 mb-5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500/50"
                 >
                   <div className="p-6">
                     <div className="flex items-center gap-2 mb-4">
@@ -150,7 +150,7 @@ export default function StartPage() {
                     <p className="font-black text-xl text-white mb-1">{msg.start.wc2026Name}</p>
                     <p className="text-slate-500 text-sm">{msg.start.wc2026Sub}</p>
                   </div>
-                  <div className="border-t border-[#1a1a1a] px-6 py-4 flex items-center justify-between bg-[#0a0a0a] group-hover:bg-[#101010] group-active:bg-[#0f0f0f] transition-colors">
+                  <div className="border-t border-themed px-6 py-4 flex items-center justify-between bg-[#0a0a0a] group-hover:bg-[#101010] group-active:bg-[#0f0f0f] transition-colors">
                     <span className="text-sm font-bold text-orange-500 group-hover:text-orange-400 transition-colors">
                       {msg.start.select}
                     </span>
@@ -167,7 +167,7 @@ export default function StartPage() {
                   {COMING_SOON.map(({ name, eta }) => (
                     <div
                       key={name}
-                      className="bg-[#0d0d0d] border border-[#161616] rounded-xl p-4 opacity-30 select-none cursor-not-allowed"
+                      className="bg-[#0d0d0d] border border-themed rounded-xl p-4 opacity-30 select-none cursor-not-allowed"
                     >
                       <p className="font-bold text-white text-sm leading-snug mb-0.5">{name}</p>
                       <p className="text-slate-600 text-xs">{eta}</p>
@@ -198,7 +198,7 @@ export default function StartPage() {
                 <div className="flex flex-col gap-3">
                   <button
                     onClick={() => startSimulator('quick')}
-                    className="group w-full text-left bg-[#0d0d0d] border border-[#1a1a1a] hover:border-orange-500/40 active:border-orange-500/70 active:scale-[0.99] rounded-2xl p-6 transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500/50"
+                    className="group w-full text-left bg-[#0d0d0d] border border-themed hover:border-orange-500/40 active:border-orange-500/70 active:scale-[0.99] rounded-2xl p-6 transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500/50"
                   >
                     <div className="flex items-start justify-between gap-4">
                       <div className="flex-1 min-w-0">
@@ -229,7 +229,7 @@ export default function StartPage() {
 
                   <button
                     onClick={() => startSimulator('exact')}
-                    className="group w-full text-left bg-[#0d0d0d] border border-[#1a1a1a] hover:border-orange-500/40 active:border-orange-500/70 active:scale-[0.99] rounded-2xl p-6 transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500/50"
+                    className="group w-full text-left bg-[#0d0d0d] border border-themed hover:border-orange-500/40 active:border-orange-500/70 active:scale-[0.99] rounded-2xl p-6 transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500/50"
                   >
                     <div className="flex items-start justify-between gap-4">
                       <div className="flex-1 min-w-0">

@@ -22,7 +22,7 @@ export function VijfWkStuntsContent({ lang = 'nl' }: { lang?: string }) {
           The scenes at Middlesbrough&apos;s Ayresome Park that day became legend. Italy&apos;s players reportedly needed police protection on their return home. Pak Doo-ik became a national hero.
         </p>
 
-        <div className="my-8 bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl p-6">
+        <div className="my-8 bg-[#0d0d0d] border border-themed rounded-xl p-6">
           <div className="flex items-center justify-between mb-2">
             <span className="text-slate-400 text-sm font-semibold">North Korea</span>
             <span className="font-display text-3xl text-orange-500">1 – 0</span>
@@ -42,7 +42,7 @@ export function VijfWkStuntsContent({ lang = 'nl' }: { lang?: string }) {
           Senegal went on to reach the quarter-finals in 2002. Twenty years later, in Qatar 2022, they went one better and reached the round of 16. African football has never looked back.
         </p>
 
-        <div className="my-8 bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl p-6">
+        <div className="my-8 bg-[#0d0d0d] border border-themed rounded-xl p-6">
           <div className="flex items-center justify-between mb-2">
             <span className="text-slate-400 text-sm font-semibold">Senegal</span>
             <span className="font-display text-3xl text-orange-500">1 – 0</span>
@@ -105,7 +105,7 @@ export function VijfWkStuntsContent({ lang = 'nl' }: { lang?: string }) {
           , more matches mean more opportunities for drama. Which team creates the next moment that enters the history books?
         </p>
 
-        <div className="rounded-2xl bg-[#0d0d0d] border border-[#1a1a1a] p-7 text-center">
+        <div className="rounded-2xl bg-[#0d0d0d] border border-themed p-7 text-center">
           <p className="font-display text-3xl text-white mb-3">Write your own upset</p>
           <p className="text-slate-400 text-sm leading-relaxed max-w-md mx-auto mb-6">Who falls in your World Cup 2026? Simulate all groups and the full knockout bracket on ScorePath and share your scenario with a single link.</p>
           <Link href={sim} className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-400 active:bg-orange-600 text-white font-bold px-6 py-3.5 rounded-xl transition-colors text-sm">
@@ -132,7 +132,7 @@ export function VijfWkStuntsContent({ lang = 'nl' }: { lang?: string }) {
           Pak Doo-ik marcó el único gol en el minuto 42, y Corea del Norte aguantó para una victoria de 1-0 que sacudió el mundo del fútbol. Fue la primera vez que una nación asiática derrotaba a un rival europeo o sudamericano en un Mundial. Italia quedó eliminada en la fase de grupos. Corea del Norte llegó a cuartos de final.
         </p>
 
-        <div className="my-8 bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl p-6">
+        <div className="my-8 bg-[#0d0d0d] border border-themed rounded-xl p-6">
           <div className="flex items-center justify-between mb-2">
             <span className="text-slate-400 text-sm font-semibold">Corea del Norte</span>
             <span className="font-display text-3xl text-orange-500">1 – 0</span>
@@ -149,7 +149,7 @@ export function VijfWkStuntsContent({ lang = 'nl' }: { lang?: string }) {
           Senegal ganó 1-0 con un gol de Papa Bouba Diop, y Francia fue eliminada sin marcar un solo gol. Los campeones defensores quedaron fuera en la fase de grupos — uno de los derrumbes más impactantes de la historia del torneo.
         </p>
 
-        <div className="my-8 bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl p-6">
+        <div className="my-8 bg-[#0d0d0d] border border-themed rounded-xl p-6">
           <div className="flex items-center justify-between mb-2">
             <span className="text-slate-400 text-sm font-semibold">Senegal</span>
             <span className="font-display text-3xl text-orange-500">1 – 0</span>
@@ -193,7 +193,7 @@ export function VijfWkStuntsContent({ lang = 'nl' }: { lang?: string }) {
           , más partidos significan más oportunidades para el drama. ¿Qué equipo crea el próximo momento que pase a la historia?
         </p>
 
-        <div className="rounded-2xl bg-[#0d0d0d] border border-[#1a1a1a] p-7 text-center">
+        <div className="rounded-2xl bg-[#0d0d0d] border border-themed p-7 text-center">
           <p className="font-display text-3xl text-white mb-3">Escribe tu propio batacazo</p>
           <p className="text-slate-400 text-sm leading-relaxed max-w-md mx-auto mb-6">¿Quién cae en tu Mundial 2026? Simula todos los grupos y el cuadro eliminatorio en ScorePath y comparte tu escenario con un enlace.</p>
           <Link href={sim} className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-400 active:bg-orange-600 text-white font-bold px-6 py-3.5 rounded-xl transition-colors text-sm">
@@ -226,7 +226,7 @@ export function VijfWkStuntsContent({ lang = 'nl' }: { lang?: string }) {
         De taferelen in het Ayresome Park in Middlesbrough werden legendarisch. Pak Doo-ik werd een nationale held. En Italië had naar verluidt politiebescherming nodig bij hun terugkomst thuis.
       </p>
 
-      <div className="my-8 bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl p-6">
+      <div className="my-8 bg-[#0d0d0d] border border-themed rounded-xl p-6">
         <div className="flex items-center justify-between mb-2">
           <span className="text-slate-400 text-sm font-semibold">Noord-Korea</span>
           <span className="font-display text-3xl text-orange-500">1 – 0</span>
@@ -249,7 +249,7 @@ export function VijfWkStuntsContent({ lang = 'nl' }: { lang?: string }) {
         Senegal bereikte in 2002 de kwartfinale. Twintig jaar later, in Qatar 2022, deed Marokko dat nog beter door de halve finale te halen. Het Afrikaanse voetbal heeft zich nooit meer omgekeken.
       </p>
 
-      <div className="my-8 bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl p-6">
+      <div className="my-8 bg-[#0d0d0d] border border-themed rounded-xl p-6">
         <div className="flex items-center justify-between mb-2">
           <span className="text-slate-400 text-sm font-semibold">Senegal</span>
           <span className="font-display text-3xl text-orange-500">1 – 0</span>
@@ -330,7 +330,7 @@ export function VijfWkStuntsContent({ lang = 'nl' }: { lang?: string }) {
         , betekenen meer wedstrijden meer kansen op drama. Welk team schrijft het volgende moment dat de geschiedenisboeken ingaat?
       </p>
 
-      <div className="rounded-2xl bg-[#0d0d0d] border border-[#1a1a1a] p-7 text-center">
+      <div className="rounded-2xl bg-[#0d0d0d] border border-themed p-7 text-center">
         <p className="font-display text-3xl text-white mb-3">
           Schrijf je eigen stunt
         </p>

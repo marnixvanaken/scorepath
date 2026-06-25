@@ -26,14 +26,14 @@ export function YamalDubbelContent({ lang = 'nl' }: { lang?: string }) {
             { num: '17', label: 'years', sub: 'two days after the final' },
             { num: '18-19', label: 'years', sub: 'during World Cup 2026' },
           ] as const).map(({ num, label, sub }) => (
-            <div key={label} className="bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl p-4 text-center">
+            <div key={label} className="bg-[#0d0d0d] border border-themed rounded-xl p-4 text-center">
               <p className="font-display text-4xl text-orange-500 leading-none mb-1">{num}</p>
               <p className="text-white font-semibold text-xs">{label}</p>
               <p className="text-slate-600 text-[10px] mt-0.5">{sub}</p>
             </div>
           ))}
         </div>
-        <figure className="my-8 bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl p-6">
+        <figure className="my-8 bg-[#0d0d0d] border border-themed rounded-xl p-6">
           <blockquote className="mb-4">
             <p className="text-slate-200 text-lg leading-relaxed italic">
               &ldquo;I&apos;m living a dream. This is the beginning, not the end. I want to win so much more.&rdquo;
@@ -87,7 +87,7 @@ export function YamalDubbelContent({ lang = 'nl' }: { lang?: string }) {
           <Link href={`${blogBase}/drie-legendes-wk-2026`} className="text-orange-400 hover:text-orange-300 underline underline-offset-2 transition-colors">Messi and Ronaldo</Link>
           {' '}— both playing their sixth World Cup in 2026 — set the bar for longevity unimaginably high. Yamal has the makings to do the same. But first: the summer of 2026. First: the chance at a record nobody can take from him.
         </p>
-        <div className="rounded-2xl bg-[#0d0d0d] border border-[#1a1a1a] p-7 text-center">
+        <div className="rounded-2xl bg-[#0d0d0d] border border-themed p-7 text-center">
           <p className="font-display text-3xl text-white mb-3">Write Yamal&apos;s story</p>
           <p className="text-slate-400 text-sm leading-relaxed max-w-md mx-auto mb-6">How far does Spain go in your World Cup 2026? Simulate all groups and the bracket on ScorePath. Share your prediction with a single link.</p>
           <Link href={sim} className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-400 active:bg-orange-600 text-white font-bold px-6 py-3.5 rounded-xl transition-colors text-sm">
@@ -121,14 +121,14 @@ export function YamalDubbelContent({ lang = 'nl' }: { lang?: string }) {
             { num: '17', label: 'años', sub: 'dos días después de la final' },
             { num: '18-19', label: 'años', sub: 'durante el Mundial 2026' },
           ] as const).map(({ num, label, sub }) => (
-            <div key={label} className="bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl p-4 text-center">
+            <div key={label} className="bg-[#0d0d0d] border border-themed rounded-xl p-4 text-center">
               <p className="font-display text-4xl text-orange-500 leading-none mb-1">{num}</p>
               <p className="text-white font-semibold text-xs">{label}</p>
               <p className="text-slate-600 text-[10px] mt-0.5">{sub}</p>
             </div>
           ))}
         </div>
-        <figure className="my-8 bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl p-6">
+        <figure className="my-8 bg-[#0d0d0d] border border-themed rounded-xl p-6">
           <blockquote className="mb-4">
             <p className="text-slate-200 text-lg leading-relaxed italic">
               &ldquo;Vivo un sueño. Esto es el principio, no el final. Quiero ganar mucho más.&rdquo;
@@ -182,7 +182,7 @@ export function YamalDubbelContent({ lang = 'nl' }: { lang?: string }) {
           <Link href={`${blogBase}/drie-legendes-wk-2026`} className="text-orange-400 hover:text-orange-300 underline underline-offset-2 transition-colors">Messi y Ronaldo</Link>
           {' '}— que en 2026 juegan ambos su sexto Mundial — pusieron el listón de la longevidad increíblemente alto. Yamal tiene la capacidad para hacer lo mismo. Pero primero: el verano de 2026. Primero: la oportunidad de un récord que nadie le pueda quitar.
         </p>
-        <div className="rounded-2xl bg-[#0d0d0d] border border-[#1a1a1a] p-7 text-center">
+        <div className="rounded-2xl bg-[#0d0d0d] border border-themed p-7 text-center">
           <p className="font-display text-3xl text-white mb-3">Escribe la historia de Yamal</p>
           <p className="text-slate-400 text-sm leading-relaxed max-w-md mx-auto mb-6">¿Hasta dónde llega España en el Mundial 2026? Simula todos los grupos y el bracket en ScorePath. Comparte tu predicción con un solo enlace.</p>
           <Link href={sim} className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-400 active:bg-orange-600 text-white font-bold px-6 py-3.5 rounded-xl transition-colors text-sm">
@@ -222,7 +222,7 @@ export function YamalDubbelContent({ lang = 'nl' }: { lang?: string }) {
           { num: '17', label: 'jaar', sub: 'twee dagen na de finale' },
           { num: '18-19', label: 'jaar', sub: 'tijdens WK 2026' },
         ] as const).map(({ num, label, sub }) => (
-          <div key={label} className="bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl p-4 text-center">
+          <div key={label} className="bg-[#0d0d0d] border border-themed rounded-xl p-4 text-center">
             <p className="font-display text-4xl text-orange-500 leading-none mb-1">{num}</p>
             <p className="text-white font-semibold text-xs">{label}</p>
             <p className="text-slate-600 text-[10px] mt-0.5">{sub}</p>
@@ -230,7 +230,7 @@ export function YamalDubbelContent({ lang = 'nl' }: { lang?: string }) {
         ))}
       </div>
 
-      <figure className="my-8 bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl p-6">
+      <figure className="my-8 bg-[#0d0d0d] border border-themed rounded-xl p-6">
         <blockquote className="mb-4">
           <p className="text-slate-200 text-lg leading-relaxed italic">
             &ldquo;Ik leef in een droom. Dit is het begin, niet het einde. Ik wil nog zoveel meer winnen.&rdquo;
@@ -306,7 +306,7 @@ export function YamalDubbelContent({ lang = 'nl' }: { lang?: string }) {
         {' '}— die in 2026 allebei hun zesde WK spelen — legden de lat voor longeviteit ongelooflijk hoog. Yamal heeft de aanleg om dat ook te doen. Maar eerst: de zomer van 2026. Eerst: de kans op een record dat niemand hem kan afpakken.
       </p>
 
-      <div className="rounded-2xl bg-[#0d0d0d] border border-[#1a1a1a] p-7 text-center">
+      <div className="rounded-2xl bg-[#0d0d0d] border border-themed p-7 text-center">
         <p className="font-display text-3xl text-white mb-3">
           Schrijf Yamal&apos;s verhaal
         </p>

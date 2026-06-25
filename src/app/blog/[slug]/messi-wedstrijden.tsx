@@ -33,8 +33,8 @@ export function MessiWedstrijdenContent({ lang = 'nl' }: { lang?: string }) {
         <p className="text-slate-300 text-lg leading-relaxed mb-5">
           Match by match, a gap opened up in the statistics. After Argentina&apos;s seventh match in Qatar, Messi had broken Matthäus&apos;s record of 25. Every subsequent match was his own record.
         </p>
-        <div className="my-8 bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl overflow-hidden">
-          <div className="px-5 py-3 border-b border-[#141414]">
+        <div className="my-8 bg-[#0d0d0d] border border-themed rounded-xl overflow-hidden">
+          <div className="px-5 py-3 border-b border-themed">
             <p className="text-[10px] font-bold text-slate-600 uppercase tracking-widest">Messi&apos;s World Cup matches by tournament</p>
           </div>
           {([
@@ -44,7 +44,7 @@ export function MessiWedstrijdenContent({ lang = 'nl' }: { lang?: string }) {
             { year: '2018', matches: 4, result: 'Round of 16' },
             { year: '2022', matches: 7, result: 'Champion' },
           ] as const).map(({ year, matches, result }) => (
-            <div key={year} className="flex items-center gap-4 px-5 py-3 border-b border-[#0f0f0f] last:border-0">
+            <div key={year} className="flex items-center gap-4 px-5 py-3 border-b border-themed last:border-0">
               <span className="text-slate-500 text-sm w-10 font-tabular">{year}</span>
               <div className="flex gap-1">
                 {Array.from({ length: matches }).map((_, i) => (
@@ -61,7 +61,7 @@ export function MessiWedstrijdenContent({ lang = 'nl' }: { lang?: string }) {
             <span className="text-slate-400 text-sm">matches — more than anyone else ever</span>
           </div>
         </div>
-        <figure className="my-8 bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl p-6">
+        <figure className="my-8 bg-[#0d0d0d] border border-themed rounded-xl p-6">
           <blockquote className="mb-4">
             <p className="text-slate-200 text-lg leading-relaxed italic">
               &ldquo;Messi is the best footballer I have ever seen. If he breaks my record, there is nobody who deserves it more.&rdquo;
@@ -108,7 +108,7 @@ export function MessiWedstrijdenContent({ lang = 'nl' }: { lang?: string }) {
         <p className="text-slate-300 text-lg leading-relaxed mb-10">
           And he plays anyway. That is perhaps the most impressive thing of all.
         </p>
-        <div className="rounded-2xl bg-[#0d0d0d] border border-[#1a1a1a] p-7 text-center">
+        <div className="rounded-2xl bg-[#0d0d0d] border border-themed p-7 text-center">
           <p className="font-display text-3xl text-white mb-3">How far does Argentina go?</p>
           <p className="text-slate-400 text-sm leading-relaxed max-w-md mx-auto mb-6">Simulate every scenario on ScorePath. Fill in results, see live standings and share your bracket with a single link.</p>
           <Link href={sim} className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-400 active:bg-orange-600 text-white font-bold px-6 py-3.5 rounded-xl transition-colors text-sm">
@@ -149,8 +149,8 @@ export function MessiWedstrijdenContent({ lang = 'nl' }: { lang?: string }) {
         <p className="text-slate-300 text-lg leading-relaxed mb-5">
           Partido a partido se fue abriendo una brecha en las estadísticas. Tras el séptimo partido de Argentina en Catar, Messi había roto el récord de Matthäus, 25. Cada partido posterior era ya su propio récord.
         </p>
-        <div className="my-8 bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl overflow-hidden">
-          <div className="px-5 py-3 border-b border-[#141414]">
+        <div className="my-8 bg-[#0d0d0d] border border-themed rounded-xl overflow-hidden">
+          <div className="px-5 py-3 border-b border-themed">
             <p className="text-[10px] font-bold text-slate-600 uppercase tracking-widest">Partidos de Messi en el Mundial por torneo</p>
           </div>
           {([
@@ -160,7 +160,7 @@ export function MessiWedstrijdenContent({ lang = 'nl' }: { lang?: string }) {
             { year: '2018', matches: 4, result: 'Octavos' },
             { year: '2022', matches: 7, result: 'Campeón' },
           ] as const).map(({ year, matches, result }) => (
-            <div key={year} className="flex items-center gap-4 px-5 py-3 border-b border-[#0f0f0f] last:border-0">
+            <div key={year} className="flex items-center gap-4 px-5 py-3 border-b border-themed last:border-0">
               <span className="text-slate-500 text-sm w-10 font-tabular">{year}</span>
               <div className="flex gap-1">
                 {Array.from({ length: matches }).map((_, i) => (
@@ -177,7 +177,7 @@ export function MessiWedstrijdenContent({ lang = 'nl' }: { lang?: string }) {
             <span className="text-slate-400 text-sm">partidos — más que nadie jamás</span>
           </div>
         </div>
-        <figure className="my-8 bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl p-6">
+        <figure className="my-8 bg-[#0d0d0d] border border-themed rounded-xl p-6">
           <blockquote className="mb-4">
             <p className="text-slate-200 text-lg leading-relaxed italic">
               &ldquo;Messi es el mejor futbolista que he visto jamás. Si rompe mi récord, no hay nadie que lo merezca más.&rdquo;
@@ -224,7 +224,7 @@ export function MessiWedstrijdenContent({ lang = 'nl' }: { lang?: string }) {
         <p className="text-slate-300 text-lg leading-relaxed mb-10">
           Y juega de todas formas. Eso es quizás lo más impresionante de todo.
         </p>
-        <div className="rounded-2xl bg-[#0d0d0d] border border-[#1a1a1a] p-7 text-center">
+        <div className="rounded-2xl bg-[#0d0d0d] border border-themed p-7 text-center">
           <p className="font-display text-3xl text-white mb-3">¿Hasta dónde llega Argentina?</p>
           <p className="text-slate-400 text-sm leading-relaxed max-w-md mx-auto mb-6">Simula cada escenario en ScorePath. Rellena resultados, ve en directo las tablas y comparte tu bracket con un solo enlace.</p>
           <Link href={sim} className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-400 active:bg-orange-600 text-white font-bold px-6 py-3.5 rounded-xl transition-colors text-sm">
@@ -276,8 +276,8 @@ export function MessiWedstrijdenContent({ lang = 'nl' }: { lang?: string }) {
         Wedstrijd voor wedstrijd opende zich een gat in de statistieken. Na Argentinië&apos;s zevende duel in Qatar had Messi Matthäus&apos; record van 25 gebroken. Elke volgende wedstrijd was voortaan zijn eigen record.
       </p>
 
-      <div className="my-8 bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl overflow-hidden">
-        <div className="px-5 py-3 border-b border-[#141414]">
+      <div className="my-8 bg-[#0d0d0d] border border-themed rounded-xl overflow-hidden">
+        <div className="px-5 py-3 border-b border-themed">
           <p className="text-[10px] font-bold text-slate-600 uppercase tracking-widest">Messi&apos;s WK-wedstrijden per toernooi</p>
         </div>
         {([
@@ -287,7 +287,7 @@ export function MessiWedstrijdenContent({ lang = 'nl' }: { lang?: string }) {
           { year: '2018', matches: 4, result: 'Achtste finale' },
           { year: '2022', matches: 7, result: 'Kampioen' },
         ] as const).map(({ year, matches, result }) => (
-          <div key={year} className="flex items-center gap-4 px-5 py-3 border-b border-[#0f0f0f] last:border-0">
+          <div key={year} className="flex items-center gap-4 px-5 py-3 border-b border-themed last:border-0">
             <span className="text-slate-500 text-sm w-10 font-tabular">{year}</span>
             <div className="flex gap-1">
               {Array.from({ length: matches }).map((_, i) => (
@@ -305,7 +305,7 @@ export function MessiWedstrijdenContent({ lang = 'nl' }: { lang?: string }) {
         </div>
       </div>
 
-      <figure className="my-8 bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl p-6">
+      <figure className="my-8 bg-[#0d0d0d] border border-themed rounded-xl p-6">
         <blockquote className="mb-4">
           <p className="text-slate-200 text-lg leading-relaxed italic">
             &ldquo;Messi is de beste voetballer die ik ooit heb gezien. Als hij mijn record breekt, is er niemand die dat meer verdient.&rdquo;
@@ -371,7 +371,7 @@ export function MessiWedstrijdenContent({ lang = 'nl' }: { lang?: string }) {
         En hij speelt toch. Dat is misschien wel het meest indrukwekkende van al.
       </p>
 
-      <div className="rounded-2xl bg-[#0d0d0d] border border-[#1a1a1a] p-7 text-center">
+      <div className="rounded-2xl bg-[#0d0d0d] border border-themed p-7 text-center">
         <p className="font-display text-3xl text-white mb-3">
           Hoever komt Argentinië?
         </p>

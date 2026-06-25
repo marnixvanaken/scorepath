@@ -48,7 +48,7 @@ export const NL: Messages = {
   },
   thirds: {
     title: 'Beste nummers 3',
-    subtitle: 'De 8 beste nummers 3 gaan door naar de Round of 32',
+    subtitle: 'De 8 beste nummers 3 gaan door naar de Ronde van 32',
     group: 'Groep',
     groupAbbr: 'Gr',
     qualified: 'Gekwalificeerd',
@@ -201,7 +201,7 @@ export const NL: Messages = {
   },
   bracket: {
     r32: 'Ronde van 32',
-    r16: '1/16e finale',
+    r16: 'Laatste 16',
     qf: 'Kwartfinale',
     sf: 'Halve finale',
     final: 'Finale',

@@ -36,14 +36,14 @@ export function MessiRivelinoContent({ lang = 'nl' }: { lang?: string }) {
             { num: '1970', label: 'and 1974', sub: "Rivelino's World Cup finals" },
             { num: '2022', label: 'Qatar final', sub: 'Messi scored a free kick' },
           ] as const).map(({ num, label, sub }) => (
-            <div key={label} className="bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl p-4 text-center">
+            <div key={label} className="bg-[#0d0d0d] border border-themed rounded-xl p-4 text-center">
               <p className="font-display text-4xl text-orange-500 leading-none mb-1">{num}</p>
               <p className="text-white font-semibold text-xs">{label}</p>
               <p className="text-slate-600 text-[10px] mt-0.5">{sub}</p>
             </div>
           ))}
         </div>
-        <figure className="my-8 bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl p-6">
+        <figure className="my-8 bg-[#0d0d0d] border border-themed rounded-xl p-6">
           <blockquote className="mb-4">
             <p className="text-slate-200 text-lg leading-relaxed italic">
               &ldquo;A free kick is a moment of silence in a match full of noise. Whoever controls that moment controls the game.&rdquo;
@@ -89,7 +89,7 @@ export function MessiRivelinoContent({ lang = 'nl' }: { lang?: string }) {
         <p className="text-slate-300 text-lg leading-relaxed mb-10">
           Messi has become that warning. And in 2026 he can provide proof that his free kick at the highest level, at the most crucial moment, is the best the World Cup has ever seen.
         </p>
-        <div className="rounded-2xl bg-[#0d0d0d] border border-[#1a1a1a] p-7 text-center">
+        <div className="rounded-2xl bg-[#0d0d0d] border border-themed p-7 text-center">
           <p className="font-display text-3xl text-white mb-3">Write Argentina&apos;s route</p>
           <p className="text-slate-400 text-sm leading-relaxed max-w-md mx-auto mb-6">Simulate all 12 groups and the full bracket on ScorePath. Fill in results, see live standings and share your prediction with a single link.</p>
           <Link href={sim} className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-400 active:bg-orange-600 text-white font-bold px-6 py-3.5 rounded-xl transition-colors text-sm">
@@ -133,14 +133,14 @@ export function MessiRivelinoContent({ lang = 'nl' }: { lang?: string }) {
             { num: '1970', label: 'y 1974', sub: 'los Mundiales de Rivelino' },
             { num: '2022', label: 'final de Catar', sub: 'Messi marcó de falta' },
           ] as const).map(({ num, label, sub }) => (
-            <div key={label} className="bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl p-4 text-center">
+            <div key={label} className="bg-[#0d0d0d] border border-themed rounded-xl p-4 text-center">
               <p className="font-display text-4xl text-orange-500 leading-none mb-1">{num}</p>
               <p className="text-white font-semibold text-xs">{label}</p>
               <p className="text-slate-600 text-[10px] mt-0.5">{sub}</p>
             </div>
           ))}
         </div>
-        <figure className="my-8 bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl p-6">
+        <figure className="my-8 bg-[#0d0d0d] border border-themed rounded-xl p-6">
           <blockquote className="mb-4">
             <p className="text-slate-200 text-lg leading-relaxed italic">
               &ldquo;Un tiro libre es un momento de silencio en un partido lleno de ruido. Quien domina ese momento domina el juego.&rdquo;
@@ -186,7 +186,7 @@ export function MessiRivelinoContent({ lang = 'nl' }: { lang?: string }) {
         <p className="text-slate-300 text-lg leading-relaxed mb-10">
           Messi se ha convertido en esa advertencia. Y en 2026 puede demostrar que su tiro libre al máximo nivel, en el momento más decisivo, es lo mejor que ha visto la historia del Mundial.
         </p>
-        <div className="rounded-2xl bg-[#0d0d0d] border border-[#1a1a1a] p-7 text-center">
+        <div className="rounded-2xl bg-[#0d0d0d] border border-themed p-7 text-center">
           <p className="font-display text-3xl text-white mb-3">Escribe la ruta de Argentina</p>
           <p className="text-slate-400 text-sm leading-relaxed max-w-md mx-auto mb-6">Simula los 12 grupos y el bracket completo en ScorePath. Rellena resultados, ve en directo las tablas y comparte tu predicción con un solo enlace.</p>
           <Link href={sim} className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-400 active:bg-orange-600 text-white font-bold px-6 py-3.5 rounded-xl transition-colors text-sm">
@@ -240,7 +240,7 @@ export function MessiRivelinoContent({ lang = 'nl' }: { lang?: string }) {
           { num: '1970', label: 'en 1974', sub: "Rivelino's WK-finales" },
           { num: '2022', label: 'Qatar finale', sub: 'Messi scoorde vrije trap' },
         ] as const).map(({ num, label, sub }) => (
-          <div key={label} className="bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl p-4 text-center">
+          <div key={label} className="bg-[#0d0d0d] border border-themed rounded-xl p-4 text-center">
             <p className="font-display text-4xl text-orange-500 leading-none mb-1">{num}</p>
             <p className="text-white font-semibold text-xs">{label}</p>
             <p className="text-slate-600 text-[10px] mt-0.5">{sub}</p>
@@ -248,7 +248,7 @@ export function MessiRivelinoContent({ lang = 'nl' }: { lang?: string }) {
         ))}
       </div>
 
-      <figure className="my-8 bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl p-6">
+      <figure className="my-8 bg-[#0d0d0d] border border-themed rounded-xl p-6">
         <blockquote className="mb-4">
           <p className="text-slate-200 text-lg leading-relaxed italic">
             &ldquo;Een vrije trap is een moment van stilte in een wedstrijd vol lawaai. Wie dat moment beheerst, beheerst het spel.&rdquo;
@@ -313,7 +313,7 @@ export function MessiRivelinoContent({ lang = 'nl' }: { lang?: string }) {
         Messi is inmiddels die waarschuwing geworden. En in 2026 kan hij het bewijs leveren dat zijn vrije trap op het allerhoogste niveau, op het meest cruciale moment, het beste is dat de WK-geschiedenis heeft gezien.
       </p>
 
-      <div className="rounded-2xl bg-[#0d0d0d] border border-[#1a1a1a] p-7 text-center">
+      <div className="rounded-2xl bg-[#0d0d0d] border border-themed p-7 text-center">
         <p className="font-display text-3xl text-white mb-3">
           Schrijf Argentinië&apos;s route
         </p>

@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { useParams } from 'next/navigation';
 import { motion, AnimatePresence } from 'motion/react';
 import { clubById, titlesOf } from '@/data/ucl2027';
 import {
@@ -9,9 +10,16 @@ import {
   type KnockoutState,
   type KnockoutTie,
 } from '@/lib/uclLeague';
+import { uclT } from '@/data/uclI18n';
 import { ClubFlag } from './ClubFlag';
 
 const GOLD = '#C9A843';
+
+function useUclT() {
+  const p = useParams();
+  const lang = typeof p?.lang === 'string' ? p.lang : 'nl';
+  return { t: (s: string) => uclT(s, lang), lang };
+}
 
 interface Props {
   knockout: KnockoutState;
@@ -39,6 +47,7 @@ function TeamSlot({
   selectedClubId: string;
   onPick: (roundId: string, tieId: string, clubId: string) => void;
 }) {
+  const { t } = useUclT();
   const club = clubById(clubId);
   const decided = !!winnerId;
   const isWinner = winnerId === clubId;
@@ -61,7 +70,7 @@ function TeamSlot({
       >
         {club?.name ?? clubId}
       </span>
-      {!isHome && <span className="text-[11px] opacity-40 shrink-0">uit</span>}
+      {!isHome && <span className="text-[11px] opacity-40 shrink-0">{t('uit')}</span>}
       {isWinner && (
         <svg width="9" height="9" viewBox="0 0 24 24" className="text-emerald-400 shrink-0" aria-hidden>
           <polyline points="20 6 9 17 4 12" strokeWidth="3" stroke="currentColor" fill="none" strokeLinecap="round" />
@@ -124,6 +133,7 @@ const COL_W = 192;
 const CONN_W = 10;
 
 export function UCLBracket({ knockout, selectedClubId, cardHref, onPick, onResim, onBack }: Props) {
+  const { t } = useUclT();
   const championId = knockoutChampion(knockout);
 
   const win = (roundId: string, tie: KnockoutTie) => knockout.rounds[roundId]?.winners[tie.id];
@@ -163,14 +173,14 @@ export function UCLBracket({ knockout, selectedClubId, cardHref, onPick, onResim
             className="text-xs font-semibold uppercase tracking-widest px-4 py-2 rounded transition-colors c-fg-muted hover:c-fg"
             style={{ border: '1px solid var(--border)' }}
           >
-            ↻ Opnieuw simuleren
+            ↻ {t('Opnieuw simuleren')}
           </button>
           <button
             onClick={onBack}
             className="text-xs font-semibold uppercase tracking-widest px-4 py-2 rounded transition-colors c-fg-muted hover:c-fg"
             style={{ border: '1px solid var(--border)' }}
           >
-            ← Eindstand
+            ← {t('Eindstand')}
           </button>
         </div>
       </div>
@@ -179,10 +189,10 @@ export function UCLBracket({ knockout, selectedClubId, cardHref, onPick, onResim
       {kopo.length > 0 && (
         <section className="mb-8">
           <p className="text-[11px] font-bold uppercase tracking-widest c-fg-muted mb-2">
-            {KNOCKOUT_TITLES.kopo} <span className="opacity-50">— winnaars stromen door naar de achtste finales</span>
+            {t(KNOCKOUT_TITLES.kopo)} <span className="opacity-50">{t('— winnaars stromen door naar de achtste finales')}</span>
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2">
-            {kopo.map((t) => mk('kopo', t, 'w-full'))}
+            {kopo.map((t2) => mk('kopo', t2, 'w-full'))}
           </div>
         </section>
       )}
@@ -201,9 +211,9 @@ export function UCLBracket({ knockout, selectedClubId, cardHref, onPick, onResim
             ).map(([rid, ties]) => (
               <div key={rid}>
                 <p className="text-[11px] font-bold uppercase tracking-widest c-fg-muted mb-1.5">
-                  {KNOCKOUT_TITLES[rid as keyof typeof KNOCKOUT_TITLES]}
+                  {t(KNOCKOUT_TITLES[rid as keyof typeof KNOCKOUT_TITLES])}
                 </p>
-                <div className="flex flex-col gap-1.5">{ties.map((t) => mk(rid, t, 'w-full'))}</div>
+                <div className="flex flex-col gap-1.5">{ties.map((tie) => mk(rid, tie, 'w-full'))}</div>
               </div>
             ))}
           </div>
@@ -217,7 +227,7 @@ export function UCLBracket({ knockout, selectedClubId, cardHref, onPick, onResim
                   className="absolute text-[11px] font-bold uppercase tracking-widest c-fg-muted whitespace-nowrap"
                   style={{ left: 12 + ri * (COL_W + CONN_W), width: COL_W, textAlign: 'center' }}
                 >
-                  {label}
+                  {t(label)}
                 </span>
               ))}
             </div>
@@ -243,6 +253,7 @@ export function UCLBracket({ knockout, selectedClubId, cardHref, onPick, onResim
 }
 
 function WinnerBanner({ clubId, cardHref }: { clubId: string; cardHref: string }) {
+  const { t } = useUclT();
   const club = clubById(clubId);
   const trophies = titlesOf(clubId) + 1; // historische titels + deze winst
 
@@ -262,7 +273,7 @@ function WinnerBanner({ clubId, cardHref }: { clubId: string; cardHref: string }
       className="mt-8 flex flex-col items-center gap-4 py-8 px-4"
       style={{ border: `1px solid ${GOLD}55`, background: 'var(--bg-card)', borderRadius: '0 12px 0 12px' }}
     >
-      <p className="text-xs font-bold uppercase tracking-widest c-gold">Winnaar Champions League 2026/27</p>
+      <p className="text-xs font-bold uppercase tracking-widest c-gold">{t('Winnaar Champions League 2026/27')}</p>
       <ClubFlag code={club?.flagCode ?? 'eu'} size={96} />
       <p className="text-2xl font-bold uppercase tracking-widest c-fg text-center">{club?.name ?? clubId}</p>
       <div className="flex gap-1.5 flex-wrap justify-center">
@@ -272,21 +283,21 @@ function WinnerBanner({ clubId, cardHref }: { clubId: string; cardHref: string }
           </svg>
         ))}
       </div>
-      <p className="text-xs c-fg-muted">{trophies} {trophies === 1 ? 'Europacup I/CL-titel' : 'Europacup I/CL-titels'}</p>
+      <p className="text-xs c-fg-muted">{trophies} {t(trophies === 1 ? 'Europacup I/CL-titel' : 'Europacup I/CL-titels')}</p>
       <div className="w-full max-w-xs flex flex-col gap-2.5 mt-2">
         <Link
           href={cardHref}
           className="w-full py-3 text-center font-bold text-sm uppercase tracking-widest text-white transition-opacity hover:opacity-90"
           style={{ background: 'var(--cta)', borderRadius: '0 10px 0 10px' }}
         >
-          Mijn kaart
+          {t('Mijn kaart')}
         </Link>
         <button
           onClick={handleShare}
           className="w-full py-3 font-bold text-sm uppercase tracking-widest transition-colors"
           style={{ border: '2px solid var(--cta)', color: 'var(--cta)', borderRadius: '0 10px 0 10px', background: 'transparent' }}
         >
-          Deel link
+          {t('Deel link')}
         </button>
       </div>
     </motion.div>

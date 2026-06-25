@@ -41,13 +41,25 @@ import { ClubFlag } from '@/components/ClubFlag';
 import { UCLBracket } from '@/components/UCLBracket';
 import { Logo } from '@/components/Logo';
 import { ThemeToggle } from '@/components/ThemeToggle';
+import { LanguageSwitcher } from '@/components/LanguageSwitcher';
+import { useParams } from 'next/navigation';
+import { uclT } from '@/data/uclI18n';
+
+function useUclT() {
+  const p = useParams();
+  const lang = typeof p?.lang === 'string' ? p.lang : 'nl';
+  return { t: (s: string) => uclT(s, lang), lang };
+}
 
 function TopNav() {
   return (
     <nav className="px-4 py-3" style={{ borderBottom: '1px solid var(--border)' }}>
       <div className="max-w-6xl mx-auto flex items-center justify-between">
         <Logo size="sm" />
-        <ThemeToggle />
+        <div className="flex items-center gap-2">
+          <LanguageSwitcher />
+          <ThemeToggle />
+        </div>
       </div>
     </nav>
   );
@@ -452,6 +464,7 @@ export default function DrawClient({ lang }: { lang: string }) {
 // ─── Club-keuze (instappunt) ─────────────────────────────────────────────────
 
 function ClubPicker({ onSelect }: { onSelect: (clubId: string) => void }) {
+  const { t } = useUclT();
   return (
     <div className="min-h-screen bg-[var(--bg)] text-[var(--fg)]">
       <TopNav />
@@ -460,11 +473,9 @@ function ClubPicker({ onSelect }: { onSelect: (clubId: string) => void }) {
           <p className="text-xs font-semibold text-[#C9A843] uppercase tracking-widest">
             Champions League 2026/27
           </p>
-          <h1 className="text-3xl font-bold tracking-wide leading-tight mt-1">Kies jouw club</h1>
+          <h1 className="text-3xl font-bold tracking-wide leading-tight mt-1">{t('Kies jouw club')}</h1>
           <p className="text-sm text-slate-300 mt-2 max-w-2xl">
-            Je stapt in op de ronde waar jouw club begint. Alle eerdere rondes worden automatisch
-            gesimuleerd. Kies bijvoorbeeld een Q1-club voor de hele weg, of een league-phase-club om
-            meteen bij de 36 te beginnen.
+            {t('Je stapt in op de ronde waar jouw club begint. Alle eerdere rondes worden automatisch gesimuleerd. Kies bijvoorbeeld een Q1-club voor de hele weg, of een league-phase-club om meteen bij de 36 te beginnen.')}
           </p>
         </div>
       </header>
@@ -473,9 +484,9 @@ function ClubPicker({ onSelect }: { onSelect: (clubId: string) => void }) {
         {[...SELECTABLE_BY_STAGE].reverse().map((group) => (
           <section key={group.key}>
             <h2 className="text-sm font-bold text-[#C9A843] uppercase tracking-widest mb-1">
-              {group.label}
+              {t(group.label)}
             </h2>
-            <p className="text-xs text-slate-500 mb-3">Instappen bij {group.label}</p>
+            <p className="text-xs text-slate-500 mb-3">{t('Instappen bij')} {t(group.label)}</p>
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
               {[...group.clubs]
                 .sort((a, b) => a.name.localeCompare(b.name))
@@ -505,7 +516,8 @@ function SelectedClubBadge({ clubId }: { clubId: string }) {
     }
     return null;
   }, [clubId]);
-  if (!club) return <>Kwalificatie</>;
+  const { t } = useUclT();
+  if (!club) return <>{t('Kwalificatie')}</>;
   return (
     <span className="flex items-center gap-2">
       <ClubFlag code={club.flagCode} size={24} />
@@ -517,6 +529,7 @@ function SelectedClubBadge({ clubId }: { clubId: string }) {
 // ─── Stage-stepper ───────────────────────────────────────────────────────────
 
 function StageStepper({ current, entry }: { current: number; entry: number }) {
+  const { t } = useUclT();
   return (
     <div className="max-w-6xl mx-auto px-4 pb-3">
       <div className="flex items-center gap-2 flex-wrap">
@@ -535,10 +548,10 @@ function StageStepper({ current, entry }: { current: number; entry: number }) {
                     ? 'text-[#C9A843] border-[#C9A843]/40'
                     : 'text-slate-500 border-[var(--border)]',
                 ].join(' ')}
-                title={auto ? 'Automatisch gesimuleerd' : undefined}
+                title={auto ? t('Automatisch gesimuleerd') : undefined}
               >
                 {done ? '✓ ' : ''}
-                {s.label}
+                {t(s.label)}
                 {auto ? ' ⚡' : ''}
               </span>
               {i < STAGES.length - 1 && <span className="text-slate-600">·</span>}
@@ -563,6 +576,7 @@ function PreStage({
   selectedClubId: string;
   onDraw: () => void;
 }) {
+  const { t } = useUclT();
   return (
     <div className="space-y-10">
       {stage.roundIds.map((roundId) => {
@@ -572,10 +586,10 @@ function PreStage({
         const accent = pathAccent(def);
         return (
           <section key={roundId}>
-            <RoundHeading def={def} subtitle={`${seeded.length} duels — ${pool.length} clubs`} accent={accent} />
+            <RoundHeading def={def} subtitle={`${seeded.length} ${t('duels')} — ${pool.length} ${t('clubs')}`} accent={accent} />
             <div className="grid grid-cols-2 gap-4">
-              <PotColumn title="Geseed" clubs={seeded} accent={accent} selectedClubId={selectedClubId} />
-              <PotColumn title="Ongeseed" clubs={unseeded} accent={undefined} selectedClubId={selectedClubId} />
+              <PotColumn title={t('Geseed')} clubs={seeded} accent={accent} selectedClubId={selectedClubId} />
+              <PotColumn title={t('Ongeseed')} clubs={unseeded} accent={undefined} selectedClubId={selectedClubId} />
             </div>
           </section>
         );
@@ -583,13 +597,13 @@ function PreStage({
 
       <div className="flex flex-col items-center gap-2 pt-2">
         <p className="text-sm text-slate-400">
-          Loting per pad, politieke restricties worden automatisch gerespecteerd.
+          {t('Loting per pad, politieke restricties worden automatisch gerespecteerd.')}
         </p>
         <button
           onClick={onDraw}
           className="px-8 py-3 bg-[var(--cta)] hover:opacity-90 text-white font-bold text-sm uppercase tracking-widest rounded transition-colors"
         >
-          Loting uitvoeren
+          {t('Loting uitvoeren')}
         </button>
       </div>
     </div>
@@ -597,10 +611,11 @@ function PreStage({
 }
 
 function RoundHeading({ def, subtitle, accent }: { def: RoundDef; subtitle: string; accent: string }) {
+  const { t } = useUclT();
   return (
     <div className="mb-4 flex items-baseline justify-between gap-3">
       <h2 className="text-sm font-bold uppercase tracking-widest" style={{ color: accent }}>
-        {def.titleNl}
+        {t(def.titleNl)}
       </h2>
       <span className="text-xs text-slate-500">{subtitle}</span>
     </div>
@@ -665,16 +680,17 @@ function PathDraw({
 }) {
   const accent = pathAccent(def);
   const drawDate = FIXED_DRAW_DATE[def.id];
+  const { t } = useUclT();
   return (
     <section>
       <div className="mb-4 flex items-center justify-between gap-3">
         <div className="flex items-baseline gap-3 min-w-0">
           <h2 className="text-sm font-bold uppercase tracking-widest shrink-0" style={{ color: accent }}>
-            {def.titleNl}
+            {t(def.titleNl)}
           </h2>
           <span className="text-xs text-slate-500 truncate">
-            {drawDate ? `Officiële loting · ${drawDate} — ` : ''}
-            {state.ties.length} duels — klik op de winnaar
+            {drawDate ? `${t('Officiële loting')} · ${drawDate} — ` : ''}
+            {state.ties.length} {t('duels — klik op de winnaar')}
           </span>
         </div>
         <button
@@ -682,7 +698,7 @@ function PathDraw({
           className="shrink-0 text-xs font-semibold uppercase tracking-widest px-3 py-1.5 rounded transition-colors c-fg-muted hover:c-fg"
           style={{ border: '1px solid var(--border)' }}
         >
-          ⚡ Simuleer
+          ⚡ {t('Simuleer')}
         </button>
       </div>
       <div className="grid gap-3 sm:grid-cols-2">
@@ -786,6 +802,7 @@ function TeamBtn({
   me: boolean;
   onPick: () => void;
 }) {
+  const { t } = useUclT();
   return (
     <button
       onClick={onPick}
@@ -802,9 +819,9 @@ function TeamBtn({
       <ClubFlag code={club.flagCode} size={22} />
       <span className="flex-1 truncate">
         {club.name}
-        {me && <span className="ml-2 text-[11px] uppercase tracking-widest text-[#C9A843]">jouw club</span>}
+        {me && <span className="ml-2 text-[11px] uppercase tracking-widest text-[#C9A843]">{t('jouw club')}</span>}
       </span>
-      <span className="text-xs text-slate-500 shrink-0">{label}</span>
+      <span className="text-xs text-slate-500 shrink-0">{t(label)}</span>
     </button>
   );
 }
@@ -857,16 +874,17 @@ function LeaguePots({
   selectedClubId: string;
   onDraw: () => void;
 }) {
+  const { t } = useUclT();
   return (
     <div>
       <div className="mb-5 flex items-baseline justify-between gap-3">
-        <h2 className="text-sm font-bold uppercase tracking-widest text-[#C9A843]">League phase</h2>
-        <span className="text-xs text-slate-500">36 clubs — 4 potten</span>
+        <h2 className="text-sm font-bold uppercase tracking-widest text-[#C9A843]">{t('League phase')}</h2>
+        <span className="text-xs text-slate-500">{t('36 clubs — 4 potten')}</span>
       </div>
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {[1, 2, 3, 4].map((p) => (
           <div key={p}>
-            <h3 className="text-xs font-bold uppercase tracking-widest mb-3 text-slate-400">Pot {p}</h3>
+            <h3 className="text-xs font-bold uppercase tracking-widest mb-3 text-slate-400">{t('Pot')} {p}</h3>
             <div className="space-y-1.5">
               {potted
                 .filter((x) => x.pot === p)
@@ -891,13 +909,13 @@ function LeaguePots({
       </div>
       <div className="flex flex-col items-center gap-2 pt-8">
         <p className="text-sm text-slate-400">
-          Elke club speelt 8 wedstrijden (2 per pot). Landenrestricties worden afgedwongen.
+          {t('Elke club speelt 8 wedstrijden (2 per pot). Landenrestricties worden afgedwongen.')}
         </p>
         <button
           onClick={onDraw}
           className="px-8 py-3 bg-[var(--cta)] hover:opacity-90 text-white font-bold text-sm uppercase tracking-widest rounded transition-colors"
         >
-          League Phase loting uitvoeren
+          {t('League Phase loting uitvoeren')}
         </button>
       </div>
     </div>
@@ -933,23 +951,25 @@ function LeagueTable({
     () => computeLeagueTable(league.potted, league.schedule, league.goals),
     [league.potted, league.schedule, league.goals]
   );
+  const { t, lang } = useUclT();
+  const cols = lang === 'en' ? ['P', 'W', 'D', 'L'] : lang === 'es' ? ['PJ', 'G', 'E', 'P'] : ['G', 'W', 'G', 'V'];
 
   return (
     <div>
       <div className="mb-4 flex items-center justify-between gap-3 flex-wrap">
-        <h2 className="text-sm font-bold uppercase tracking-widest text-[#C9A843]">Eindstand league phase</h2>
+        <h2 className="text-sm font-bold uppercase tracking-widest text-[#C9A843]">{t('Eindstand league phase')}</h2>
         <div className="flex items-center gap-2">
           <button
             onClick={hasKnockout ? onShowBracket : onStartKnockout}
             className="text-xs font-bold uppercase tracking-widest px-4 py-2 rounded bg-[var(--cta)] hover:opacity-90 text-white transition-colors"
           >
-            {hasKnockout ? 'Toon knockout →' : 'Naar de knockout →'}
+            {hasKnockout ? t('Toon knockout →') : t('Naar de knockout →')}
           </button>
           <button
             onClick={onResim}
             className="text-xs font-semibold uppercase tracking-widest px-4 py-2 rounded border border-white/15 hover:border-white/40 text-slate-300 hover:text-white transition-colors"
           >
-            ↻ Opnieuw simuleren
+            ↻ {t('Opnieuw simuleren')}
           </button>
         </div>
       </div>
@@ -958,7 +978,7 @@ function LeagueTable({
         {Object.entries(BAND_STYLE).map(([k, v]) => (
           <span key={k} className="flex items-center gap-2 text-slate-400">
             <span className="inline-block w-3 h-3 rounded-sm" style={{ backgroundColor: v.bar }} />
-            {v.label}
+            {t(v.label)}
           </span>
         ))}
       </div>
@@ -966,13 +986,13 @@ function LeagueTable({
       <div className="rounded-xl border border-[var(--border)] overflow-hidden">
         <div className="grid grid-cols-[2rem_1fr_repeat(5,2rem)_2.5rem] gap-1 px-3 py-2 text-[11px] uppercase tracking-widest text-slate-500 bg-[var(--bg-panel)]">
           <span>#</span>
-          <span>Club</span>
-          <span className="text-center">G</span>
-          <span className="text-center">W</span>
-          <span className="text-center">G</span>
-          <span className="text-center">V</span>
+          <span>{t('Club')}</span>
+          <span className="text-center">{cols[0]}</span>
+          <span className="text-center">{cols[1]}</span>
+          <span className="text-center">{cols[2]}</span>
+          <span className="text-center">{cols[3]}</span>
           <span className="text-center">+/−</span>
-          <span className="text-center">Ptn</span>
+          <span className="text-center">{t('Ptn')}</span>
         </div>
         {table.map((s, i) => {
           const club = clubs.get(s.clubId)!;
@@ -993,7 +1013,7 @@ function LeagueTable({
                 <span className="flex items-center gap-2 min-w-0">
                   <ClubFlag code={club.flagCode} size={18} />
                   <span className="truncate">{club.name}</span>
-                  {me && <span className="text-[11px] uppercase tracking-widest text-[#C9A843]">jij</span>}
+                  {me && <span className="text-[11px] uppercase tracking-widest text-[#C9A843]">{t('jij')}</span>}
                 </span>
                 <span className="text-center tabular-nums text-slate-400">{s.played}</span>
                 <span className="text-center tabular-nums">{s.won}</span>
@@ -1025,6 +1045,7 @@ function ClubFixtures({
   onOverride: (key: string, goals: [number, number]) => void;
 }) {
   const fixtures = league.schedule.filter((m) => m.homeId === clubId || m.awayId === clubId);
+  const { t } = useUclT();
   return (
     <div className="bg-black/30 px-3 py-3 space-y-1.5 border-l-2 border-[#C9A843]/30">
       {fixtures.map((m) => {
@@ -1039,7 +1060,7 @@ function ClubFixtures({
         const resColor = result === 'W' ? '#2bb673' : result === 'L' ? '#ef4444' : '#94a3b8';
         return (
           <div key={key} className="flex items-center gap-3 text-sm">
-            <span className="text-[11px] w-7 shrink-0 uppercase text-slate-500">{isHome ? 'Thuis' : 'Uit'}</span>
+            <span className="text-[11px] w-7 shrink-0 uppercase text-slate-500">{isHome ? t('Thuis') : t('Uit')}</span>
             <ClubFlag code={opp.flagCode} size={18} />
             <span className="flex-1 truncate text-slate-300">{opp.name}</span>
             <span className="tabular-nums font-semibold w-12 text-center" style={{ color: resColor }}>

@@ -1,9 +1,7 @@
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
-import { Logo } from '@/components/Logo';
+import { SiteHeader } from '@/components/SiteHeader';
 import { SiteFooter } from '@/components/SiteFooter';
-import { ThemeToggle } from '@/components/ThemeToggle';
-import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { SITE_NAME, SITE_URL } from '@/lib/siteConfig';
@@ -82,33 +80,7 @@ export default async function HomePage(props: PageProps<'/[lang]'> & {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}
       />
 
-      <nav className="px-6 sm:px-10 py-5 border-b border-themed">
-        <div className="max-w-5xl mx-auto flex items-center justify-between">
-          <Logo size="md" />
-          <div className="flex items-center gap-4">
-            <Link
-              href={uclPath(lang)}
-              className="c-fg text-sm font-bold tracking-widest uppercase transition-opacity opacity-70 hover:opacity-100"
-            >
-              {msg.nav.ucl}
-            </Link>
-            <Link
-              href={birthplacePath(lang)}
-              className="c-fg text-sm font-bold tracking-widest uppercase transition-opacity opacity-70 hover:opacity-100 hidden sm:inline"
-            >
-              {msg.nav.birthplace}
-            </Link>
-            <Link
-              href={`/${lang}/blog`}
-              className="c-fg text-sm font-bold tracking-widest uppercase transition-opacity opacity-70 hover:opacity-100"
-            >
-              {msg.nav.blog}
-            </Link>
-            <LanguageSwitcher />
-            <ThemeToggle />
-          </div>
-        </div>
-      </nav>
+      <SiteHeader lang={lang} />
 
       <section className="flex-1 flex flex-col justify-center px-6 sm:px-10 pt-16 pb-16">
         <div className="max-w-5xl mx-auto w-full">

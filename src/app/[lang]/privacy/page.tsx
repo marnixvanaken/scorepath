@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { Logo } from '@/components/Logo';
+import { SiteHeader } from '@/components/SiteHeader';
 import { SiteFooter } from '@/components/SiteFooter';
 import { SITE_URL, SITE_NAME } from '@/lib/siteConfig';
 import { isLocale, DEFAULT_LOCALE, getMessages } from '@/i18n';
@@ -24,11 +23,7 @@ export default async function PrivacyPage(props: PageProps<'/[lang]/privacy'>) {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <header className="px-6 sm:px-10 py-5 border-b border-themed">
-        <div className="max-w-3xl mx-auto">
-          <Link href={`/${lang}`}><Logo size="sm" /></Link>
-        </div>
-      </header>
+      <SiteHeader lang={lang} width="max-w-3xl" />
 
       <main className="flex-1 px-6 sm:px-10 py-12">
         <div className="max-w-3xl mx-auto prose prose-invert prose-sm sm:prose-base">

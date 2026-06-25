@@ -1,14 +1,14 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { Logo } from '@/components/Logo';
+import { SiteHeader } from '@/components/SiteHeader';
 import { SiteFooter } from '@/components/SiteFooter';
 import { getPublishedBlogs } from '@/data/blogs';
 import { getLocalizedBlogMeta } from '@/data/blogTranslations';
 import { getDynamicBlogs } from '@/lib/supabase';
 import { isLocale, DEFAULT_LOCALE, getMessages, getDateLocale } from '@/i18n';
 import { SITE_NAME } from '@/lib/siteConfig';
-import { alternatesFor, ogLocaleFields, ogImages, blogPath, simulatorPath, birthplacePath } from '@/lib/routes';
+import { alternatesFor, ogLocaleFields, ogImages, blogPath } from '@/lib/routes';
 
 export const revalidate = 3600;
 
@@ -81,22 +81,7 @@ export default async function BlogPage(props: PageProps<'/[lang]/blog'>) {
   return (
     <div className="min-h-dvh bg-panel text-slate-100 flex flex-col">
 
-      <nav className="px-6 py-4 border-b border-themed">
-        <div className="max-w-5xl mx-auto flex items-center justify-between">
-          <Logo size="sm" />
-          <div className="flex items-center gap-6">
-            <Link href={`/${lang}/blog`} className="text-xs font-bold text-white tracking-wide uppercase">
-              {msg.nav.blog}
-            </Link>
-            <Link href={birthplacePath(lang)} className="text-xs font-bold text-slate-400 hover:text-white transition-colors tracking-wide uppercase">
-              {msg.nav.birthplace}
-            </Link>
-            <Link href={simulatorPath(lang)} className="text-xs font-bold text-orange-500 hover:text-orange-400 transition-colors tracking-wide uppercase">
-              {msg.blog.openSimulator}
-            </Link>
-          </div>
-        </div>
-      </nav>
+      <SiteHeader lang={lang} />
 
       <main className="flex-1">
         <section className="px-6 pt-16 pb-10">

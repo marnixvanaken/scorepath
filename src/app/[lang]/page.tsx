@@ -88,19 +88,19 @@ export default async function HomePage(props: PageProps<'/[lang]'> & {
           <div className="flex items-center gap-4">
             <Link
               href={uclPath(lang)}
-              className="c-fg text-sm font-bold tracking-widest uppercase transition-opacity opacity-40 hover:opacity-70"
+              className="c-fg text-sm font-bold tracking-widest uppercase transition-opacity opacity-70 hover:opacity-100"
             >
               {msg.nav.ucl}
             </Link>
             <Link
               href={birthplacePath(lang)}
-              className="c-fg text-sm font-bold tracking-widest uppercase transition-opacity opacity-40 hover:opacity-70 hidden sm:inline"
+              className="c-fg text-sm font-bold tracking-widest uppercase transition-opacity opacity-70 hover:opacity-100 hidden sm:inline"
             >
               {msg.nav.birthplace}
             </Link>
             <Link
               href={`/${lang}/blog`}
-              className="c-fg text-sm font-bold tracking-widest uppercase transition-opacity opacity-40 hover:opacity-70"
+              className="c-fg text-sm font-bold tracking-widest uppercase transition-opacity opacity-70 hover:opacity-100"
             >
               {msg.nav.blog}
             </Link>

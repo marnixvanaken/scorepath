@@ -128,7 +128,7 @@ export function GroupCard({
             <polyline points="20 6 9 17 4 12" />
           </svg>
         ) : (
-          <span className="text-[10px] font-bold text-white/70 tabular-nums leading-none">
+          <span className="text-[11px] font-bold text-white/70 tabular-nums leading-none">
             {filledCount}/{totalFixtures}
           </span>
         ))}
@@ -153,13 +153,13 @@ export function GroupCard({
                     }`}
                   >
                     {isPicked && (
-                      <span className="absolute top-0.5 left-0.5 w-5 h-5 flex items-center justify-center rounded-sm text-[10px] font-black text-black" style={{ backgroundColor: '#C9A843' }}>
+                      <span className="absolute top-0.5 left-0.5 w-5 h-5 flex items-center justify-center rounded-sm text-[11px] font-black text-black" style={{ backgroundColor: '#C9A843' }}>
                         {rank + 1}
                       </span>
                     )}
                     {CONFIRMED_QUALIFIED.has(teamId) && (
                       <span
-                        className="absolute top-0.5 right-0.5 w-4 h-4 flex items-center justify-center rounded-sm text-[10px] font-black leading-none"
+                        className="absolute top-0.5 right-0.5 w-4 h-4 flex items-center justify-center rounded-sm text-[11px] font-black leading-none"
                         style={{ backgroundColor: '#C9A84326', color: '#C9A843' }}
                         title={msg.status.confirmed}
                         aria-label={msg.status.confirmed}
@@ -168,7 +168,7 @@ export function GroupCard({
                       </span>
                     )}
                     <Flag teamId={teamId} size={40} />
-                    <span className="text-[10px] font-bold text-slate-400 tracking-wide uppercase leading-none">
+                    <span className="text-[11px] font-bold text-slate-400 tracking-wide uppercase leading-none">
                       {teamId}
                     </span>
                   </button>
@@ -219,7 +219,7 @@ export function GroupCard({
               </div>
             )}
 
-            <p className="text-[10px] text-slate-500 px-3 pb-2 pt-1">
+            <p className="text-[11px] text-slate-500 px-3 pb-2 pt-1">
               {allPicked
                 ? msg.simulator.dragHint
                 : `${msg.simulator.dragClickOrder} (${dragOrder.length}/4)`}

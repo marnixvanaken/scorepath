@@ -802,7 +802,7 @@ function TeamBtn({
       <ClubFlag code={club.flagCode} size={22} />
       <span className="flex-1 truncate">
         {club.name}
-        {me && <span className="ml-2 text-[10px] uppercase tracking-widest text-[#C9A843]">jouw club</span>}
+        {me && <span className="ml-2 text-[11px] uppercase tracking-widest text-[#C9A843]">jouw club</span>}
       </span>
       <span className="text-xs text-slate-500 shrink-0">{label}</span>
     </button>
@@ -964,7 +964,7 @@ function LeagueTable({
       </div>
 
       <div className="rounded-xl border border-[var(--border)] overflow-hidden">
-        <div className="grid grid-cols-[2rem_1fr_repeat(5,2rem)_2.5rem] gap-1 px-3 py-2 text-[10px] uppercase tracking-widest text-slate-500 bg-[var(--bg-panel)]">
+        <div className="grid grid-cols-[2rem_1fr_repeat(5,2rem)_2.5rem] gap-1 px-3 py-2 text-[11px] uppercase tracking-widest text-slate-500 bg-[var(--bg-panel)]">
           <span>#</span>
           <span>Club</span>
           <span className="text-center">G</span>
@@ -993,7 +993,7 @@ function LeagueTable({
                 <span className="flex items-center gap-2 min-w-0">
                   <ClubFlag code={club.flagCode} size={18} />
                   <span className="truncate">{club.name}</span>
-                  {me && <span className="text-[10px] uppercase tracking-widest text-[#C9A843]">jij</span>}
+                  {me && <span className="text-[11px] uppercase tracking-widest text-[#C9A843]">jij</span>}
                 </span>
                 <span className="text-center tabular-nums text-slate-400">{s.played}</span>
                 <span className="text-center tabular-nums">{s.won}</span>
@@ -1039,7 +1039,7 @@ function ClubFixtures({
         const resColor = result === 'W' ? '#2bb673' : result === 'L' ? '#ef4444' : '#94a3b8';
         return (
           <div key={key} className="flex items-center gap-3 text-sm">
-            <span className="text-[10px] w-7 shrink-0 uppercase text-slate-500">{isHome ? 'Thuis' : 'Uit'}</span>
+            <span className="text-[11px] w-7 shrink-0 uppercase text-slate-500">{isHome ? 'Thuis' : 'Uit'}</span>
             <ClubFlag code={opp.flagCode} size={18} />
             <span className="flex-1 truncate text-slate-300">{opp.name}</span>
             <span className="tabular-nums font-semibold w-12 text-center" style={{ color: resColor }}>

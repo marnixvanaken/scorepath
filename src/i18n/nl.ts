@@ -201,7 +201,7 @@ export const NL: Messages = {
   },
   bracket: {
     r32: 'Ronde van 32',
-    r16: 'Laatste 16',
+    r16: 'Achtste finale',
     qf: 'Kwartfinale',
     sf: 'Halve finale',
     final: 'Finale',
@@ -265,7 +265,7 @@ export const NL: Messages = {
         final: 'Finale',
         sf: 'Halve finale',
         qf: 'Kwartfinale',
-        r16: 'Laatste 16',
+        r16: 'Achtste finale',
         r32: 'Ronde van 32',
         group: 'Groepsfase',
       },

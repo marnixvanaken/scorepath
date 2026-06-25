@@ -29,10 +29,10 @@ export function MbappeKloseContent({ lang = 'nl' }: { lang?: string }) {
           <table className="w-full text-sm border-collapse">
             <thead>
               <tr className="border-b border-themed">
-                <th className="text-left text-[10px] font-bold text-slate-600 uppercase tracking-widest pb-3 pr-4">#</th>
-                <th className="text-left text-[10px] font-bold text-slate-600 uppercase tracking-widest pb-3 pr-4">Player</th>
-                <th className="text-left text-[10px] font-bold text-slate-600 uppercase tracking-widest pb-3 pr-4">Country</th>
-                <th className="text-right text-[10px] font-bold text-slate-600 uppercase tracking-widest pb-3">Goals</th>
+                <th className="text-left text-[11px] font-bold text-slate-600 uppercase tracking-widest pb-3 pr-4">#</th>
+                <th className="text-left text-[11px] font-bold text-slate-600 uppercase tracking-widest pb-3 pr-4">Player</th>
+                <th className="text-left text-[11px] font-bold text-slate-600 uppercase tracking-widest pb-3 pr-4">Country</th>
+                <th className="text-right text-[11px] font-bold text-slate-600 uppercase tracking-widest pb-3">Goals</th>
               </tr>
             </thead>
             <tbody>
@@ -53,7 +53,7 @@ export function MbappeKloseContent({ lang = 'nl' }: { lang?: string }) {
               ))}
             </tbody>
           </table>
-          <p className="text-[10px] text-slate-700 mt-2">* after 2 World Cups, before the start of World Cup 2026</p>
+          <p className="text-[11px] text-slate-500 mt-2">* after 2 World Cups, before the start of World Cup 2026</p>
         </div>
         <figure className="my-8 bg-[#0d0d0d] border border-themed rounded-xl p-6">
           <blockquote className="mb-4">
@@ -89,7 +89,7 @@ export function MbappeKloseContent({ lang = 'nl' }: { lang?: string }) {
           What is certain: if he finishes as top scorer again in 2026 and France goes deep, the record is within reach. And he could still do it in 2030. Mbappé has time on his side.
         </p>
         <div className="my-10 rounded-2xl bg-[#0d0d0d] border border-orange-500/20 p-7">
-          <p className="text-[10px] font-bold text-orange-500 uppercase tracking-widest mb-3">Simulate it yourself</p>
+          <p className="text-[11px] font-bold text-orange-500 uppercase tracking-widest mb-3">Simulate it yourself</p>
           <p className="text-white font-bold text-xl leading-snug mb-2">How far does France go in your scenario?</p>
           <p className="text-slate-400 text-sm leading-relaxed mb-5">Fill in all group results, see live standings and play through the bracket. How many goals do you give Mbappé?</p>
           <Link href={sim} className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-400 active:bg-orange-600 text-white font-bold px-5 py-3 rounded-xl transition-colors text-sm">
@@ -141,10 +141,10 @@ export function MbappeKloseContent({ lang = 'nl' }: { lang?: string }) {
           <table className="w-full text-sm border-collapse">
             <thead>
               <tr className="border-b border-themed">
-                <th className="text-left text-[10px] font-bold text-slate-600 uppercase tracking-widest pb-3 pr-4">#</th>
-                <th className="text-left text-[10px] font-bold text-slate-600 uppercase tracking-widest pb-3 pr-4">Jugador</th>
-                <th className="text-left text-[10px] font-bold text-slate-600 uppercase tracking-widest pb-3 pr-4">País</th>
-                <th className="text-right text-[10px] font-bold text-slate-600 uppercase tracking-widest pb-3">Goles</th>
+                <th className="text-left text-[11px] font-bold text-slate-600 uppercase tracking-widest pb-3 pr-4">#</th>
+                <th className="text-left text-[11px] font-bold text-slate-600 uppercase tracking-widest pb-3 pr-4">Jugador</th>
+                <th className="text-left text-[11px] font-bold text-slate-600 uppercase tracking-widest pb-3 pr-4">País</th>
+                <th className="text-right text-[11px] font-bold text-slate-600 uppercase tracking-widest pb-3">Goles</th>
               </tr>
             </thead>
             <tbody>
@@ -165,7 +165,7 @@ export function MbappeKloseContent({ lang = 'nl' }: { lang?: string }) {
               ))}
             </tbody>
           </table>
-          <p className="text-[10px] text-slate-700 mt-2">* tras 2 Mundiales, antes del inicio del Mundial 2026</p>
+          <p className="text-[11px] text-slate-500 mt-2">* tras 2 Mundiales, antes del inicio del Mundial 2026</p>
         </div>
         <figure className="my-8 bg-[#0d0d0d] border border-themed rounded-xl p-6">
           <blockquote className="mb-4">
@@ -201,7 +201,7 @@ export function MbappeKloseContent({ lang = 'nl' }: { lang?: string }) {
           Lo que sí es seguro: si vuelve a ser máximo goleador en 2026 y Francia llega lejos, el récord estará al alcance. Y todavía podría hacerlo en 2030. Mbappé tiene el tiempo a su favor.
         </p>
         <div className="my-10 rounded-2xl bg-[#0d0d0d] border border-orange-500/20 p-7">
-          <p className="text-[10px] font-bold text-orange-500 uppercase tracking-widest mb-3">Simúlalo tú mismo</p>
+          <p className="text-[11px] font-bold text-orange-500 uppercase tracking-widest mb-3">Simúlalo tú mismo</p>
           <p className="text-white font-bold text-xl leading-snug mb-2">¿Hasta dónde llega Francia en tu escenario?</p>
           <p className="text-slate-400 text-sm leading-relaxed mb-5">Rellena todos los resultados de grupos, ve en directo las tablas y juega el bracket. ¿Cuántos goles le das a Mbappé?</p>
           <Link href={sim} className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-400 active:bg-orange-600 text-white font-bold px-5 py-3 rounded-xl transition-colors text-sm">
@@ -260,10 +260,10 @@ export function MbappeKloseContent({ lang = 'nl' }: { lang?: string }) {
         <table className="w-full text-sm border-collapse">
           <thead>
             <tr className="border-b border-themed">
-              <th className="text-left text-[10px] font-bold text-slate-600 uppercase tracking-widest pb-3 pr-4">#</th>
-              <th className="text-left text-[10px] font-bold text-slate-600 uppercase tracking-widest pb-3 pr-4">Speler</th>
-              <th className="text-left text-[10px] font-bold text-slate-600 uppercase tracking-widest pb-3 pr-4">Land</th>
-              <th className="text-right text-[10px] font-bold text-slate-600 uppercase tracking-widest pb-3">Goals</th>
+              <th className="text-left text-[11px] font-bold text-slate-600 uppercase tracking-widest pb-3 pr-4">#</th>
+              <th className="text-left text-[11px] font-bold text-slate-600 uppercase tracking-widest pb-3 pr-4">Speler</th>
+              <th className="text-left text-[11px] font-bold text-slate-600 uppercase tracking-widest pb-3 pr-4">Land</th>
+              <th className="text-right text-[11px] font-bold text-slate-600 uppercase tracking-widest pb-3">Goals</th>
             </tr>
           </thead>
           <tbody>
@@ -284,7 +284,7 @@ export function MbappeKloseContent({ lang = 'nl' }: { lang?: string }) {
             ))}
           </tbody>
         </table>
-        <p className="text-[10px] text-slate-700 mt-2">* na 2 WKs, voor aanvang WK 2026</p>
+        <p className="text-[11px] text-slate-500 mt-2">* na 2 WKs, voor aanvang WK 2026</p>
       </div>
 
       <figure className="my-8 bg-[#0d0d0d] border border-themed rounded-xl p-6">
@@ -330,7 +330,7 @@ export function MbappeKloseContent({ lang = 'nl' }: { lang?: string }) {
       </p>
 
       <div className="my-10 rounded-2xl bg-[#0d0d0d] border border-orange-500/20 p-7">
-        <p className="text-[10px] font-bold text-orange-500 uppercase tracking-widest mb-3">
+        <p className="text-[11px] font-bold text-orange-500 uppercase tracking-widest mb-3">
           Simuleer het zelf
         </p>
         <p className="text-white font-bold text-xl leading-snug mb-2">

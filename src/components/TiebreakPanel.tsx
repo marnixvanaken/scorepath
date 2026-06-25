@@ -37,7 +37,7 @@ export function TiebreakPanel({ tiedGroups, manualOrders, onSetManualOrder, onCl
         <span className="text-xs font-bold text-[#E2C46A] flex-1 uppercase tracking-wide">
           {msg.tiebreak.title}
         </span>
-        <span className="text-slate-500 text-[10px]">{open ? '▲' : '▼'}</span>
+        <span className="text-slate-500 text-[11px]">{open ? '▲' : '▼'}</span>
       </button>
 
       <AnimatePresence initial={false}>
@@ -108,13 +108,13 @@ export function TiebreakPanel({ tiedGroups, manualOrders, onSetManualOrder, onCl
                               <button
                                 onClick={() => moveUp(idx)}
                                 disabled={idx === 0}
-                                className="w-6 h-6 rounded bg-slate-700/80 disabled:opacity-20 hover:bg-slate-600 text-slate-300 flex items-center justify-center text-[10px] transition-colors"
+                                className="w-6 h-6 rounded bg-slate-700/80 disabled:opacity-20 hover:bg-slate-600 text-slate-300 flex items-center justify-center text-[11px] transition-colors"
                                 aria-label={msg.tiebreak.up}
                               >▲</button>
                               <button
                                 onClick={() => moveDown(idx)}
                                 disabled={idx === currentOrder.length - 1}
-                                className="w-6 h-6 rounded bg-slate-700/80 disabled:opacity-20 hover:bg-slate-600 text-slate-300 flex items-center justify-center text-[10px] transition-colors"
+                                className="w-6 h-6 rounded bg-slate-700/80 disabled:opacity-20 hover:bg-slate-600 text-slate-300 flex items-center justify-center text-[11px] transition-colors"
                                 aria-label={msg.tiebreak.down}
                               >▼</button>
                             </div>

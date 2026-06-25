@@ -111,13 +111,13 @@ export function ThirdPlacePanel({
       {/* Header */}
       <div className="flex items-baseline gap-3 px-3 py-2.5" style={{ borderBottom: '1px solid rgba(201,168,67,0.2)' }}>
         <h2 className="text-sm font-black text-white">{msg.thirds.title}</h2>
-        <span className="text-[10px] text-slate-500">{msg.thirds.subtitle}</span>
+        <span className="text-[11px] text-slate-500">{msg.thirds.subtitle}</span>
       </div>
 
       {/* Drag mode: versleep groepen om top 8 te kiezen */}
       {inputMode === 'drag' ? (
         <>
-          <p className="text-[10px] text-slate-500 px-3 pt-2 pb-1">{msg.thirds.dragNote}</p>
+          <p className="text-[11px] text-slate-500 px-3 pt-2 pb-1">{msg.thirds.dragNote}</p>
           <Reorder.Group
             axis="y"
             values={thirdsDragOrder}
@@ -193,7 +193,7 @@ export function ThirdPlacePanel({
                 style={rowStyle}
               >
                 <span className="text-center tabular-nums text-slate-600">{t.rank}</span>
-                <span className={`font-bold ${isLast8 ? 'text-[#C9A843]' : 'text-slate-700'}`}>{t.group}</span>
+                <span className={`font-bold ${isLast8 ? 'text-[#C9A843]' : 'text-slate-500'}`}>{t.group}</span>
                 <span className={`flex items-center gap-1 font-semibold min-w-0 ${nameCls}`}>
                   <Flag teamId={t.teamId} size={14} />
                   <span className="truncate uppercase tracking-wide">{team ? getTeamName(team, lang) : t.teamId}</span>
@@ -239,14 +239,14 @@ export function ThirdPlacePanel({
         return (
           <div className="border-t border-[#C9A843]/20 bg-[#C9A843]/5 px-3 py-2">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-[10px] font-bold text-[#E2C46A] flex items-center gap-1.5">
+              <span className="text-[11px] font-bold text-[#E2C46A] flex items-center gap-1.5">
                 <span className="text-[#C9A843]">⚠</span>
                 {msg.thirds.boundaryTie}
               </span>
               {manualOrders[key] && (
                 <button
                   onClick={() => onClearManual(key)}
-                  className="text-[10px] text-slate-600 hover:text-slate-400 transition-colors"
+                  className="text-[11px] text-slate-600 hover:text-slate-400 transition-colors"
                 >
                   {msg.tiebreak.clear}
                 </button>
@@ -259,7 +259,7 @@ export function ThirdPlacePanel({
                 const team = teamById(teamId);
                 return (
                   <div key={teamId} className="flex items-center gap-1.5">
-                    <span className={`text-[10px] font-bold w-5 text-right tabular-nums ${isThrough ? 'text-[#C9A843]' : 'text-slate-600'}`}>
+                    <span className={`text-[11px] font-bold w-5 text-right tabular-nums ${isThrough ? 'text-[#C9A843]' : 'text-slate-600'}`}>
                       {LABELS[absPos]}
                     </span>
                     <div className={`flex items-center gap-1.5 flex-1 rounded px-2 py-1 min-w-0 ${isThrough ? 'bg-[#C9A843]/10' : 'bg-slate-800/40'}`}>
@@ -267,7 +267,7 @@ export function ThirdPlacePanel({
                       <span className={`text-[11px] font-semibold uppercase tracking-wide truncate ${isThrough ? 'text-[#E2C46A]' : 'text-slate-500'}`}>
                         {team ? getTeamName(team, lang) : teamId}
                       </span>
-                      <span className="text-[10px] text-slate-600 ml-auto shrink-0">
+                      <span className="text-[11px] text-slate-600 ml-auto shrink-0">
                         {isThrough ? msg.thirds.through : msg.thirds.out}
                       </span>
                     </div>
@@ -275,13 +275,13 @@ export function ThirdPlacePanel({
                       <button
                         onClick={() => moveUp(idx)}
                         disabled={idx === 0}
-                        className="w-5 h-5 rounded bg-slate-700 disabled:opacity-20 hover:bg-slate-600 text-slate-300 flex items-center justify-center text-[10px] transition-colors"
+                        className="w-5 h-5 rounded bg-slate-700 disabled:opacity-20 hover:bg-slate-600 text-slate-300 flex items-center justify-center text-[11px] transition-colors"
                         aria-label={msg.tiebreak.up}
                       >▲</button>
                       <button
                         onClick={() => moveDown(idx)}
                         disabled={idx === currentOrder.length - 1}
-                        className="w-5 h-5 rounded bg-slate-700 disabled:opacity-20 hover:bg-slate-600 text-slate-300 flex items-center justify-center text-[10px] transition-colors"
+                        className="w-5 h-5 rounded bg-slate-700 disabled:opacity-20 hover:bg-slate-600 text-slate-300 flex items-center justify-center text-[11px] transition-colors"
                         aria-label={msg.tiebreak.down}
                       >▼</button>
                     </div>
@@ -294,13 +294,13 @@ export function ThirdPlacePanel({
       })()}
 
       {/* Legend */}
-      <div className="flex items-center gap-4 px-3 py-2 text-[10px] text-slate-600" style={{ borderTop: '1px solid rgba(201,168,67,0.2)' }}>
+      <div className="flex items-center gap-4 px-3 py-2 text-[11px] text-slate-600" style={{ borderTop: '1px solid rgba(201,168,67,0.2)' }}>
         <span className="flex items-center gap-1.5">
           <span className="w-2 h-2 rounded-sm bg-[#C9A843] shrink-0" />
           {msg.thirds.best8}
         </span>
-        <span className="text-slate-700">{msg.thirds.cutoff}</span>
-        <span className="text-slate-700 ml-auto">{msg.thirds.tiebreakNote}</span>
+        <span className="text-slate-500">{msg.thirds.cutoff}</span>
+        <span className="text-slate-500 ml-auto">{msg.thirds.tiebreakNote}</span>
       </div>
       </>
       )}

@@ -35,7 +35,7 @@ export function CourtoisCleanSheetsContent({ lang = 'nl' }: { lang?: string }) {
         </p>
         <div className="my-8 bg-[#0d0d0d] border border-themed rounded-xl overflow-hidden">
           <div className="px-5 py-3 border-b border-themed">
-            <p className="text-[10px] font-bold text-slate-600 uppercase tracking-widest">Courtois at the World Cup</p>
+            <p className="text-[11px] font-bold text-slate-600 uppercase tracking-widest">Courtois at the World Cup</p>
           </div>
           {([
             { year: '2014', result: 'Quarter-final', award: '' },
@@ -47,7 +47,7 @@ export function CourtoisCleanSheetsContent({ lang = 'nl' }: { lang?: string }) {
               <span className="text-slate-500 text-sm font-tabular w-10">{year}</span>
               <span className="text-white text-sm font-semibold flex-1">{result}</span>
               {award && (
-                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-orange-500/10 text-orange-400 border border-orange-500/20 uppercase tracking-widest">
+                <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-orange-500/10 text-orange-400 border border-orange-500/20 uppercase tracking-widest">
                   {award}
                 </span>
               )}
@@ -85,7 +85,7 @@ export function CourtoisCleanSheetsContent({ lang = 'nl' }: { lang?: string }) {
           . World Cup 2026 will be a tournament full of historic ambitions.
         </p>
         <div className="my-10 rounded-2xl bg-[#0d0d0d] border border-orange-500/20 p-7">
-          <p className="text-[10px] font-bold text-orange-500 uppercase tracking-widest mb-3">Simulate it yourself</p>
+          <p className="text-[11px] font-bold text-orange-500 uppercase tracking-widest mb-3">Simulate it yourself</p>
           <p className="text-white font-bold text-xl leading-snug mb-2">How far does Belgium go in your scenario?</p>
           <p className="text-slate-400 text-sm leading-relaxed mb-5">Fill in all group results and play through the bracket. How many clean sheets do you give Courtois?</p>
           <Link href={sim} className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-400 active:bg-orange-600 text-white font-bold px-5 py-3 rounded-xl transition-colors text-sm">
@@ -143,7 +143,7 @@ export function CourtoisCleanSheetsContent({ lang = 'nl' }: { lang?: string }) {
         </p>
         <div className="my-8 bg-[#0d0d0d] border border-themed rounded-xl overflow-hidden">
           <div className="px-5 py-3 border-b border-themed">
-            <p className="text-[10px] font-bold text-slate-600 uppercase tracking-widest">Courtois en el Mundial</p>
+            <p className="text-[11px] font-bold text-slate-600 uppercase tracking-widest">Courtois en el Mundial</p>
           </div>
           {([
             { year: '2014', result: 'Cuartos de final', award: '' },
@@ -155,7 +155,7 @@ export function CourtoisCleanSheetsContent({ lang = 'nl' }: { lang?: string }) {
               <span className="text-slate-500 text-sm font-tabular w-10">{year}</span>
               <span className="text-white text-sm font-semibold flex-1">{result}</span>
               {award && (
-                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-orange-500/10 text-orange-400 border border-orange-500/20 uppercase tracking-widest">
+                <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-orange-500/10 text-orange-400 border border-orange-500/20 uppercase tracking-widest">
                   {award}
                 </span>
               )}
@@ -193,7 +193,7 @@ export function CourtoisCleanSheetsContent({ lang = 'nl' }: { lang?: string }) {
           . El Mundial 2026 será un torneo lleno de ambiciones históricas.
         </p>
         <div className="my-10 rounded-2xl bg-[#0d0d0d] border border-orange-500/20 p-7">
-          <p className="text-[10px] font-bold text-orange-500 uppercase tracking-widest mb-3">Simúlalo tú mismo</p>
+          <p className="text-[11px] font-bold text-orange-500 uppercase tracking-widest mb-3">Simúlalo tú mismo</p>
           <p className="text-white font-bold text-xl leading-snug mb-2">¿Hasta dónde llega Bélgica en tu escenario?</p>
           <p className="text-slate-400 text-sm leading-relaxed mb-5">Rellena todos los resultados de grupos y juega el bracket. ¿Cuántas porterías a cero le das a Courtois?</p>
           <Link href={sim} className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-400 active:bg-orange-600 text-white font-bold px-5 py-3 rounded-xl transition-colors text-sm">
@@ -262,7 +262,7 @@ export function CourtoisCleanSheetsContent({ lang = 'nl' }: { lang?: string }) {
 
       <div className="my-8 bg-[#0d0d0d] border border-themed rounded-xl overflow-hidden">
         <div className="px-5 py-3 border-b border-themed">
-          <p className="text-[10px] font-bold text-slate-600 uppercase tracking-widest">Courtois op het WK</p>
+          <p className="text-[11px] font-bold text-slate-600 uppercase tracking-widest">Courtois op het WK</p>
         </div>
         {([
           { year: '2014', result: 'Kwartfinale', award: '' },
@@ -274,7 +274,7 @@ export function CourtoisCleanSheetsContent({ lang = 'nl' }: { lang?: string }) {
             <span className="text-slate-500 text-sm font-tabular w-10">{year}</span>
             <span className="text-white text-sm font-semibold flex-1">{result}</span>
             {award && (
-              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-orange-500/10 text-orange-400 border border-orange-500/20 uppercase tracking-widest">
+              <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-orange-500/10 text-orange-400 border border-orange-500/20 uppercase tracking-widest">
                 {award}
               </span>
             )}
@@ -319,7 +319,7 @@ export function CourtoisCleanSheetsContent({ lang = 'nl' }: { lang?: string }) {
       </p>
 
       <div className="my-10 rounded-2xl bg-[#0d0d0d] border border-orange-500/20 p-7">
-        <p className="text-[10px] font-bold text-orange-500 uppercase tracking-widest mb-3">
+        <p className="text-[11px] font-bold text-orange-500 uppercase tracking-widest mb-3">
           Simuleer het zelf
         </p>
         <p className="text-white font-bold text-xl leading-snug mb-2">

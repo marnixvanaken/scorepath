@@ -124,7 +124,7 @@ export default async function BlogPage(props: PageProps<'/[lang]/blog'>) {
                 >
                   <div className="p-7">
                     <div className="flex items-center gap-3 mb-5">
-                      <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-orange-500/10 text-orange-400 border border-orange-500/20 uppercase tracking-widest">
+                      <span className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-orange-500/10 text-orange-400 border border-orange-500/20 uppercase tracking-widest">
                         {post.category}
                       </span>
                       <span className="text-xs text-slate-600">
@@ -141,7 +141,7 @@ export default async function BlogPage(props: PageProps<'/[lang]/blog'>) {
                     </p>
 
                     <div className="flex items-center justify-between">
-                      <span className="text-xs text-slate-700">
+                      <span className="text-xs text-slate-500">
                         {new Date(post.date).toLocaleDateString(dateLocale, {
                           day: 'numeric',
                           month: 'long',

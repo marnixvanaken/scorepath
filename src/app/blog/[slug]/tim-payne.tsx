@@ -22,7 +22,7 @@ export function TimPayneContent({ lang = 'nl' }: { lang?: string }) {
             <div key={label} className="bg-[#0d0d0d] border border-themed rounded-xl p-4 text-center">
               <p className="font-display text-4xl text-orange-500 leading-none mb-1">{num}</p>
               <p className="text-white font-semibold text-xs">{label}</p>
-              <p className="text-slate-600 text-[10px] mt-0.5">{sub}</p>
+              <p className="text-slate-600 text-[11px] mt-0.5">{sub}</p>
             </div>
           ))}
         </div>
@@ -78,7 +78,7 @@ export function TimPayneContent({ lang = 'nl' }: { lang?: string }) {
           Tim Payne is the 2026 version of that phenomenon. And he won&apos;t be the last.
         </p>
         <div className="my-10 rounded-2xl bg-[#0d0d0d] border border-orange-500/20 p-7">
-          <p className="text-[10px] font-bold text-orange-500 uppercase tracking-widest mb-3">Simulate it yourself</p>
+          <p className="text-[11px] font-bold text-orange-500 uppercase tracking-widest mb-3">Simulate it yourself</p>
           <p className="text-white font-bold text-xl leading-snug mb-2">Which country surprises you at World Cup 2026?</p>
           <p className="text-slate-400 text-sm leading-relaxed mb-5">Fill in all group results and see live who reaches the knockout stage. Which underdog do you give the best chance?</p>
           <Link href={sim} className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-400 active:bg-orange-600 text-white font-bold px-5 py-3 rounded-xl transition-colors text-sm">
@@ -126,7 +126,7 @@ export function TimPayneContent({ lang = 'nl' }: { lang?: string }) {
             <div key={label} className="bg-[#0d0d0d] border border-themed rounded-xl p-4 text-center">
               <p className="font-display text-4xl text-orange-500 leading-none mb-1">{num}</p>
               <p className="text-white font-semibold text-xs">{label}</p>
-              <p className="text-slate-600 text-[10px] mt-0.5">{sub}</p>
+              <p className="text-slate-600 text-[11px] mt-0.5">{sub}</p>
             </div>
           ))}
         </div>
@@ -182,7 +182,7 @@ export function TimPayneContent({ lang = 'nl' }: { lang?: string }) {
           Tim Payne es la versión 2026 de ese fenómeno. Y no será el último.
         </p>
         <div className="my-10 rounded-2xl bg-[#0d0d0d] border border-orange-500/20 p-7">
-          <p className="text-[10px] font-bold text-orange-500 uppercase tracking-widest mb-3">Simúlalo tú mismo</p>
+          <p className="text-[11px] font-bold text-orange-500 uppercase tracking-widest mb-3">Simúlalo tú mismo</p>
           <p className="text-white font-bold text-xl leading-snug mb-2">¿Qué país te sorprende en el Mundial 2026?</p>
           <p className="text-slate-400 text-sm leading-relaxed mb-5">Rellena todos los resultados de grupos y ve en directo quién pasa a la eliminatoria. ¿A qué sorpresa le das más posibilidades?</p>
           <Link href={sim} className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-400 active:bg-orange-600 text-white font-bold px-5 py-3 rounded-xl transition-colors text-sm">
@@ -233,7 +233,7 @@ export function TimPayneContent({ lang = 'nl' }: { lang?: string }) {
           <div key={label} className="bg-[#0d0d0d] border border-themed rounded-xl p-4 text-center">
             <p className="font-display text-4xl text-orange-500 leading-none mb-1">{num}</p>
             <p className="text-white font-semibold text-xs">{label}</p>
-            <p className="text-slate-600 text-[10px] mt-0.5">{sub}</p>
+            <p className="text-slate-600 text-[11px] mt-0.5">{sub}</p>
           </div>
         ))}
       </div>
@@ -305,7 +305,7 @@ export function TimPayneContent({ lang = 'nl' }: { lang?: string }) {
       </p>
 
       <div className="my-10 rounded-2xl bg-[#0d0d0d] border border-orange-500/20 p-7">
-        <p className="text-[10px] font-bold text-orange-500 uppercase tracking-widest mb-3">
+        <p className="text-[11px] font-bold text-orange-500 uppercase tracking-widest mb-3">
           Simuleer het zelf
         </p>
         <p className="text-white font-bold text-xl leading-snug mb-2">

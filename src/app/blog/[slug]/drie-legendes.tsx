@@ -22,7 +22,7 @@ export function DrieLegendesContent({ lang = 'nl' }: { lang?: string }) {
             <div key={label} className="bg-[#0d0d0d] border border-themed rounded-xl p-4 text-center">
               <p className="font-display text-4xl text-orange-500 leading-none mb-1">{num}</p>
               <p className="text-white font-semibold text-xs">{label}</p>
-              <p className="text-slate-600 text-[10px] mt-0.5">{sub}</p>
+              <p className="text-slate-600 text-[11px] mt-0.5">{sub}</p>
             </div>
           ))}
         </div>
@@ -95,7 +95,7 @@ export function DrieLegendesContent({ lang = 'nl' }: { lang?: string }) {
           <p className="text-slate-200 text-xl font-semibold leading-snug italic">Ochoa is a constant in a squad that was always inconsistent. A rock.</p>
         </blockquote>
         <div className="my-10 rounded-2xl bg-[#0d0d0d] border border-orange-500/20 p-7">
-          <p className="text-[10px] font-bold text-orange-500 uppercase tracking-widest mb-3">Simulate it yourself</p>
+          <p className="text-[11px] font-bold text-orange-500 uppercase tracking-widest mb-3">Simulate it yourself</p>
           <p className="text-white font-bold text-xl leading-snug mb-2">How far do Argentina, Portugal and Mexico go?</p>
           <p className="text-slate-400 text-sm leading-relaxed mb-5">Fill in all group results and see live who reaches the knockout stage. Share your bracket with a single link.</p>
           <Link href={sim} className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-400 active:bg-orange-600 text-white font-bold px-5 py-3 rounded-xl transition-colors text-sm">
@@ -147,7 +147,7 @@ export function DrieLegendesContent({ lang = 'nl' }: { lang?: string }) {
             <div key={label} className="bg-[#0d0d0d] border border-themed rounded-xl p-4 text-center">
               <p className="font-display text-4xl text-orange-500 leading-none mb-1">{num}</p>
               <p className="text-white font-semibold text-xs">{label}</p>
-              <p className="text-slate-600 text-[10px] mt-0.5">{sub}</p>
+              <p className="text-slate-600 text-[11px] mt-0.5">{sub}</p>
             </div>
           ))}
         </div>
@@ -220,7 +220,7 @@ export function DrieLegendesContent({ lang = 'nl' }: { lang?: string }) {
           <p className="text-slate-200 text-xl font-semibold leading-snug italic">Ochoa es una constante en un equipo que siempre fue irregular. Una roca.</p>
         </blockquote>
         <div className="my-10 rounded-2xl bg-[#0d0d0d] border border-orange-500/20 p-7">
-          <p className="text-[10px] font-bold text-orange-500 uppercase tracking-widest mb-3">Simúlalo tú mismo</p>
+          <p className="text-[11px] font-bold text-orange-500 uppercase tracking-widest mb-3">Simúlalo tú mismo</p>
           <p className="text-white font-bold text-xl leading-snug mb-2">¿Hasta dónde llegan Argentina, Portugal y México?</p>
           <p className="text-slate-400 text-sm leading-relaxed mb-5">Rellena todos los resultados de grupos y ve en directo quién pasa a la fase eliminatoria. Comparte tu bracket con un solo enlace.</p>
           <Link href={sim} className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-400 active:bg-orange-600 text-white font-bold px-5 py-3 rounded-xl transition-colors text-sm">
@@ -275,7 +275,7 @@ export function DrieLegendesContent({ lang = 'nl' }: { lang?: string }) {
           <div key={label} className="bg-[#0d0d0d] border border-themed rounded-xl p-4 text-center">
             <p className="font-display text-4xl text-orange-500 leading-none mb-1">{num}</p>
             <p className="text-white font-semibold text-xs">{label}</p>
-            <p className="text-slate-600 text-[10px] mt-0.5">{sub}</p>
+            <p className="text-slate-600 text-[11px] mt-0.5">{sub}</p>
           </div>
         ))}
       </div>
@@ -383,7 +383,7 @@ export function DrieLegendesContent({ lang = 'nl' }: { lang?: string }) {
       </blockquote>
 
       <div className="my-10 rounded-2xl bg-[#0d0d0d] border border-orange-500/20 p-7">
-        <p className="text-[10px] font-bold text-orange-500 uppercase tracking-widest mb-3">
+        <p className="text-[11px] font-bold text-orange-500 uppercase tracking-widest mb-3">
           Simuleer het zelf
         </p>
         <p className="text-white font-bold text-xl leading-snug mb-2">

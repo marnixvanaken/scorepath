@@ -94,7 +94,7 @@ export default async function BirthplacePage(props: PageProps<'/[lang]/wk-geboor
       <footer className="px-6 py-4" style={{ borderTop: '1px solid var(--border)' }}>
         <div className="max-w-2xl mx-auto flex items-center justify-between">
           <Logo size="sm" />
-          <div className="flex items-center gap-4 text-[10px] font-bold tracking-widest uppercase" style={{ color: 'var(--fg-subtle)' }}>
+          <div className="flex items-center gap-4 text-[11px] font-bold tracking-widest uppercase" style={{ color: 'var(--fg-subtle)' }}>
             <Link href={`/${lang}/blog`} className="transition-opacity hover:opacity-70">{msg.nav.blog}</Link>
             <span>·</span>
             <Link href={simulatorPath(lang)} className="transition-opacity hover:opacity-70">{msg.nav.simulator}</Link>

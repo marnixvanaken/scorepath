@@ -61,7 +61,7 @@ function TeamSlot({
       >
         {club?.name ?? clubId}
       </span>
-      {!isHome && <span className="text-[9px] opacity-40 shrink-0">uit</span>}
+      {!isHome && <span className="text-[11px] opacity-40 shrink-0">uit</span>}
       {isWinner && (
         <svg width="9" height="9" viewBox="0 0 24 24" className="text-emerald-400 shrink-0" aria-hidden>
           <polyline points="20 6 9 17 4 12" strokeWidth="3" stroke="currentColor" fill="none" strokeLinecap="round" />

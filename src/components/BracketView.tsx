@@ -85,10 +85,10 @@ function MatchMeta({ matchId, tz, lang }: { matchId: string; tz: string; lang: s
   return (
     <div className="px-1.5 pt-1 pb-1 border-b border-white/5">
       <div className="flex items-baseline gap-1 leading-none">
-        <span className="text-[10px] font-bold text-[#C9A843] shrink-0">#{sched.no}</span>
-        <span className="text-[9px] text-slate-400 truncate">{date} · {time}</span>
+        <span className="text-[11px] font-bold text-[#C9A843] shrink-0">#{sched.no}</span>
+        <span className="text-[11px] text-slate-400 truncate">{date} · {time}</span>
       </div>
-      <div className="text-[9px] text-slate-500 truncate leading-tight mt-0.5">
+      <div className="text-[11px] text-slate-500 truncate leading-tight mt-0.5">
         {getCityName(sched.city, lang)}
       </div>
     </div>
@@ -195,7 +195,7 @@ function TimezoneToolbar({
 }) {
   return (
     <div className="flex items-center justify-end gap-2 px-3 mb-3">
-      <label htmlFor="bracket-tz" className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
+      <label htmlFor="bracket-tz" className="text-[11px] font-bold uppercase tracking-widest text-slate-400">
         {label}
       </label>
       <select

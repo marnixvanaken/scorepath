@@ -83,7 +83,7 @@ export function TeamPickerButton({ s, k }: Props) {
             style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}
           >
             <div className="p-3" style={{ borderBottom: '1px solid var(--border)' }}>
-              <p className="text-[10px] font-bold tracking-widest uppercase mb-2" style={{ color: 'var(--fg-subtle)' }}>
+              <p className="text-[11px] font-bold tracking-widest uppercase mb-2" style={{ color: 'var(--fg-subtle)' }}>
                 {msg.teamPicker.chooseCountry}
               </p>
               <input
@@ -114,7 +114,7 @@ export function TeamPickerButton({ s, k }: Props) {
                 >
                   <Flag teamId={team.id} size={20} />
                   <span>{getTeamName(team, lang)}</span>
-                  <span className="ml-auto opacity-30 font-mono text-[10px]">{team.id}</span>
+                  <span className="ml-auto opacity-30 font-mono text-[11px]">{team.id}</span>
                 </button>
               ))}
               {filtered.length === 0 && (

@@ -35,7 +35,7 @@ export function MessiWedstrijdenContent({ lang = 'nl' }: { lang?: string }) {
         </p>
         <div className="my-8 bg-[#0d0d0d] border border-themed rounded-xl overflow-hidden">
           <div className="px-5 py-3 border-b border-themed">
-            <p className="text-[10px] font-bold text-slate-600 uppercase tracking-widest">Messi&apos;s World Cup matches by tournament</p>
+            <p className="text-[11px] font-bold text-slate-600 uppercase tracking-widest">Messi&apos;s World Cup matches by tournament</p>
           </div>
           {([
             { year: '2006', matches: 5, result: 'Quarter-final' },
@@ -52,7 +52,7 @@ export function MessiWedstrijdenContent({ lang = 'nl' }: { lang?: string }) {
                 ))}
               </div>
               <span className="text-slate-400 text-xs ml-1">{matches} matches</span>
-              <span className="ml-auto text-[10px] font-bold text-slate-600 uppercase tracking-widest">{result}</span>
+              <span className="ml-auto text-[11px] font-bold text-slate-600 uppercase tracking-widest">{result}</span>
             </div>
           ))}
           <div className="flex items-center gap-4 px-5 py-3 bg-[#0a0a0a]">
@@ -93,7 +93,7 @@ export function MessiWedstrijdenContent({ lang = 'nl' }: { lang?: string }) {
           {' '}— a historic moment we will never see again.
         </p>
         <div className="my-10 rounded-2xl bg-[#0d0d0d] border border-orange-500/20 p-7">
-          <p className="text-[10px] font-bold text-orange-500 uppercase tracking-widest mb-3">Simulate it yourself</p>
+          <p className="text-[11px] font-bold text-orange-500 uppercase tracking-widest mb-3">Simulate it yourself</p>
           <p className="text-white font-bold text-xl leading-snug mb-2">How many matches does Messi play in your bracket?</p>
           <p className="text-slate-400 text-sm leading-relaxed mb-5">Fill in all group results and see how far Argentina goes. Every round Messi plays is new history.</p>
           <Link href={sim} className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-400 active:bg-orange-600 text-white font-bold px-5 py-3 rounded-xl transition-colors text-sm">
@@ -151,7 +151,7 @@ export function MessiWedstrijdenContent({ lang = 'nl' }: { lang?: string }) {
         </p>
         <div className="my-8 bg-[#0d0d0d] border border-themed rounded-xl overflow-hidden">
           <div className="px-5 py-3 border-b border-themed">
-            <p className="text-[10px] font-bold text-slate-600 uppercase tracking-widest">Partidos de Messi en el Mundial por torneo</p>
+            <p className="text-[11px] font-bold text-slate-600 uppercase tracking-widest">Partidos de Messi en el Mundial por torneo</p>
           </div>
           {([
             { year: '2006', matches: 5, result: 'Cuartos' },
@@ -168,7 +168,7 @@ export function MessiWedstrijdenContent({ lang = 'nl' }: { lang?: string }) {
                 ))}
               </div>
               <span className="text-slate-400 text-xs ml-1">{matches} partidos</span>
-              <span className="ml-auto text-[10px] font-bold text-slate-600 uppercase tracking-widest">{result}</span>
+              <span className="ml-auto text-[11px] font-bold text-slate-600 uppercase tracking-widest">{result}</span>
             </div>
           ))}
           <div className="flex items-center gap-4 px-5 py-3 bg-[#0a0a0a]">
@@ -209,7 +209,7 @@ export function MessiWedstrijdenContent({ lang = 'nl' }: { lang?: string }) {
           {' '}— un momento histórico que nunca volveremos a ver.
         </p>
         <div className="my-10 rounded-2xl bg-[#0d0d0d] border border-orange-500/20 p-7">
-          <p className="text-[10px] font-bold text-orange-500 uppercase tracking-widest mb-3">Simúlalo tú mismo</p>
+          <p className="text-[11px] font-bold text-orange-500 uppercase tracking-widest mb-3">Simúlalo tú mismo</p>
           <p className="text-white font-bold text-xl leading-snug mb-2">¿Cuántos partidos juega Messi en tu bracket?</p>
           <p className="text-slate-400 text-sm leading-relaxed mb-5">Rellena todos los resultados de grupos y ve hasta dónde llega Argentina. Cada ronda que juega Messi es nueva historia.</p>
           <Link href={sim} className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-400 active:bg-orange-600 text-white font-bold px-5 py-3 rounded-xl transition-colors text-sm">
@@ -278,7 +278,7 @@ export function MessiWedstrijdenContent({ lang = 'nl' }: { lang?: string }) {
 
       <div className="my-8 bg-[#0d0d0d] border border-themed rounded-xl overflow-hidden">
         <div className="px-5 py-3 border-b border-themed">
-          <p className="text-[10px] font-bold text-slate-600 uppercase tracking-widest">Messi&apos;s WK-wedstrijden per toernooi</p>
+          <p className="text-[11px] font-bold text-slate-600 uppercase tracking-widest">Messi&apos;s WK-wedstrijden per toernooi</p>
         </div>
         {([
           { year: '2006', matches: 5, result: 'Kwartfinale' },
@@ -295,7 +295,7 @@ export function MessiWedstrijdenContent({ lang = 'nl' }: { lang?: string }) {
               ))}
             </div>
             <span className="text-slate-400 text-xs ml-1">{matches} wedstrijden</span>
-            <span className="ml-auto text-[10px] font-bold text-slate-600 uppercase tracking-widest">{result}</span>
+            <span className="ml-auto text-[11px] font-bold text-slate-600 uppercase tracking-widest">{result}</span>
           </div>
         ))}
         <div className="flex items-center gap-4 px-5 py-3 bg-[#0a0a0a]">
@@ -344,7 +344,7 @@ export function MessiWedstrijdenContent({ lang = 'nl' }: { lang?: string }) {
       </p>
 
       <div className="my-10 rounded-2xl bg-[#0d0d0d] border border-orange-500/20 p-7">
-        <p className="text-[10px] font-bold text-orange-500 uppercase tracking-widest mb-3">
+        <p className="text-[11px] font-bold text-orange-500 uppercase tracking-widest mb-3">
           Simuleer het zelf
         </p>
         <p className="text-white font-bold text-xl leading-snug mb-2">

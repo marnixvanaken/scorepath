@@ -80,7 +80,7 @@ export function VijfWkStuntsContent({ lang = 'nl' }: { lang?: string }) {
         </p>
 
         <div className="my-10 rounded-2xl bg-[#0d0d0d] border border-orange-500/20 p-7">
-          <p className="text-[10px] font-bold text-orange-500 uppercase tracking-widest mb-3">Simulate the upsets yourself</p>
+          <p className="text-[11px] font-bold text-orange-500 uppercase tracking-widest mb-3">Simulate the upsets yourself</p>
           <p className="text-white font-bold text-xl leading-snug mb-2">Which giant falls in your scenario?</p>
           <p className="text-slate-400 text-sm leading-relaxed mb-5">With 48 teams and a round of 32, the 2026 World Cup has more room for surprises than any edition before. Fill in all 104 matches on ScorePath and see what unfolds.</p>
           <Link href={sim} className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-400 active:bg-orange-600 text-white font-bold px-5 py-3 rounded-xl transition-colors text-sm">
@@ -293,7 +293,7 @@ export function VijfWkStuntsContent({ lang = 'nl' }: { lang?: string }) {
       </p>
 
       <div className="my-10 rounded-2xl bg-[#0d0d0d] border border-orange-500/20 p-7">
-        <p className="text-[10px] font-bold text-orange-500 uppercase tracking-widest mb-3">
+        <p className="text-[11px] font-bold text-orange-500 uppercase tracking-widest mb-3">
           Simuleer de stunts zelf
         </p>
         <p className="text-white font-bold text-xl leading-snug mb-2">

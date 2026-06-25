@@ -185,7 +185,7 @@ export default async function BirthplaceCardPage(
       <footer className="px-6 py-4" style={{ borderTop: '1px solid var(--border)' }}>
         <div className="max-w-3xl mx-auto flex items-center justify-between">
           <Logo size="sm" />
-          <p className="text-[10px] font-bold tracking-widest uppercase" style={{ color: 'var(--fg-subtle)' }}>
+          <p className="text-[11px] font-bold tracking-widest uppercase" style={{ color: 'var(--fg-subtle)' }}>
             {SITE_NAME.toLowerCase()}.nl
           </p>
         </div>

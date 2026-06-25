@@ -66,7 +66,7 @@ export function MatchInputRow({ group, homeId, awayId, results, inputMode, onRes
           <span className="w-11 h-11 flex items-center justify-center text-base font-bold tabular-nums text-slate-300 bg-panel rounded border border-themed">
             {current.homeGoals}
           </span>
-          <span className="text-slate-600 text-[10px]">–</span>
+          <span className="text-slate-600 text-[11px]">–</span>
           <span className="w-11 h-11 flex items-center justify-center text-base font-bold tabular-nums text-slate-300 bg-panel rounded border border-themed">
             {current.awayGoals}
           </span>
@@ -98,7 +98,7 @@ export function MatchInputRow({ group, homeId, awayId, results, inputMode, onRes
         onWheel={(e) => e.currentTarget.blur()}
         aria-label={`${getTeamName(home, lang)} ${msg.table.goalsLabel}`}
       />
-      <span className="text-slate-600 text-[10px]">–</span>
+      <span className="text-slate-600 text-[11px]">–</span>
       <input
         type="number" min={0} max={20} inputMode="numeric"
         value={awayGoals ?? ''}

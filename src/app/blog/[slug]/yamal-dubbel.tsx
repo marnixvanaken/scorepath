@@ -29,7 +29,7 @@ export function YamalDubbelContent({ lang = 'nl' }: { lang?: string }) {
             <div key={label} className="bg-[#0d0d0d] border border-themed rounded-xl p-4 text-center">
               <p className="font-display text-4xl text-orange-500 leading-none mb-1">{num}</p>
               <p className="text-white font-semibold text-xs">{label}</p>
-              <p className="text-slate-600 text-[10px] mt-0.5">{sub}</p>
+              <p className="text-slate-600 text-[11px] mt-0.5">{sub}</p>
             </div>
           ))}
         </div>
@@ -70,7 +70,7 @@ export function YamalDubbelContent({ lang = 'nl' }: { lang?: string }) {
           If Spain reaches the final, Yamal has already shown that age sets no limits. The question isn&apos;t whether he&apos;s good enough. The question is whether fortune is on his side.
         </p>
         <div className="my-10 rounded-2xl bg-[#0d0d0d] border border-orange-500/20 p-7">
-          <p className="text-[10px] font-bold text-orange-500 uppercase tracking-widest mb-3">Simulate it yourself</p>
+          <p className="text-[11px] font-bold text-orange-500 uppercase tracking-widest mb-3">Simulate it yourself</p>
           <p className="text-white font-bold text-xl leading-snug mb-2">Does Spain reach the final in your scenario?</p>
           <p className="text-slate-400 text-sm leading-relaxed mb-5">Fill in all group results and play through the bracket. Give Yamal his shot at the grand double.</p>
           <Link href={sim} className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-400 active:bg-orange-600 text-white font-bold px-5 py-3 rounded-xl transition-colors text-sm">
@@ -124,7 +124,7 @@ export function YamalDubbelContent({ lang = 'nl' }: { lang?: string }) {
             <div key={label} className="bg-[#0d0d0d] border border-themed rounded-xl p-4 text-center">
               <p className="font-display text-4xl text-orange-500 leading-none mb-1">{num}</p>
               <p className="text-white font-semibold text-xs">{label}</p>
-              <p className="text-slate-600 text-[10px] mt-0.5">{sub}</p>
+              <p className="text-slate-600 text-[11px] mt-0.5">{sub}</p>
             </div>
           ))}
         </div>
@@ -165,7 +165,7 @@ export function YamalDubbelContent({ lang = 'nl' }: { lang?: string }) {
           Si España llega a la final, Yamal ya habrá demostrado que la edad no pone límites. La pregunta no es si está a la altura. La pregunta es si el destino le acompaña.
         </p>
         <div className="my-10 rounded-2xl bg-[#0d0d0d] border border-orange-500/20 p-7">
-          <p className="text-[10px] font-bold text-orange-500 uppercase tracking-widest mb-3">Simúlalo tú mismo</p>
+          <p className="text-[11px] font-bold text-orange-500 uppercase tracking-widest mb-3">Simúlalo tú mismo</p>
           <p className="text-white font-bold text-xl leading-snug mb-2">¿Llega España a la final en tu escenario?</p>
           <p className="text-slate-400 text-sm leading-relaxed mb-5">Rellena todos los resultados de grupos y juega el bracket. Dale a Yamal su oportunidad en el gran doblete.</p>
           <Link href={sim} className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-400 active:bg-orange-600 text-white font-bold px-5 py-3 rounded-xl transition-colors text-sm">
@@ -225,7 +225,7 @@ export function YamalDubbelContent({ lang = 'nl' }: { lang?: string }) {
           <div key={label} className="bg-[#0d0d0d] border border-themed rounded-xl p-4 text-center">
             <p className="font-display text-4xl text-orange-500 leading-none mb-1">{num}</p>
             <p className="text-white font-semibold text-xs">{label}</p>
-            <p className="text-slate-600 text-[10px] mt-0.5">{sub}</p>
+            <p className="text-slate-600 text-[11px] mt-0.5">{sub}</p>
           </div>
         ))}
       </div>
@@ -277,7 +277,7 @@ export function YamalDubbelContent({ lang = 'nl' }: { lang?: string }) {
       </p>
 
       <div className="my-10 rounded-2xl bg-[#0d0d0d] border border-orange-500/20 p-7">
-        <p className="text-[10px] font-bold text-orange-500 uppercase tracking-widest mb-3">
+        <p className="text-[11px] font-bold text-orange-500 uppercase tracking-widest mb-3">
           Simuleer het zelf
         </p>
         <p className="text-white font-bold text-xl leading-snug mb-2">

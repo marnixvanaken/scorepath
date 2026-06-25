@@ -21,7 +21,7 @@ export function VsIranContent({ lang = 'nl' }: { lang?: string }) {
           Iran won 2-1 through goals from Estili and Mahdavikia. The Iranians celebrated it as a national victory, far beyond football. The Americans, under coach Steve Sampson, left the tournament early. The match remained in collective memory as something greater than sport.
         </p>
         <div className="my-8 bg-[#0d0d0d] border border-themed rounded-xl p-5">
-          <p className="text-[10px] font-bold text-slate-600 uppercase tracking-widest mb-4">Match data · June 21, 1998</p>
+          <p className="text-[11px] font-bold text-slate-600 uppercase tracking-widest mb-4">Match data · June 21, 1998</p>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             {([
               { label: 'Result', value: 'Iran 2–1 USA' },
@@ -30,7 +30,7 @@ export function VsIranContent({ lang = 'nl' }: { lang?: string }) {
               { label: 'Goals', value: "Estili 40', Mahdavikia 84', McBride 87'" },
             ] as const).map(({ label, value }) => (
               <div key={label}>
-                <p className="text-[10px] font-bold text-slate-600 uppercase tracking-widest mb-1">{label}</p>
+                <p className="text-[11px] font-bold text-slate-600 uppercase tracking-widest mb-1">{label}</p>
                 <p className="text-white text-sm font-semibold leading-snug">{value}</p>
               </div>
             ))}
@@ -78,7 +78,7 @@ export function VsIranContent({ lang = 'nl' }: { lang?: string }) {
           And in footballing terms? The USA has a talented generation ready: McKennie, Pulisic, Weah, Reyna. Iran plays compact and dangerous on the counter. Tactically it would be a fascinating duel.
         </p>
         <div className="my-10 rounded-2xl bg-[#0d0d0d] border border-orange-500/20 p-7">
-          <p className="text-[10px] font-bold text-orange-500 uppercase tracking-widest mb-3">Simulate it yourself</p>
+          <p className="text-[11px] font-bold text-orange-500 uppercase tracking-widest mb-3">Simulate it yourself</p>
           <p className="text-white font-bold text-xl leading-snug mb-2">Do the USA and Iran land in the same group?</p>
           <p className="text-slate-400 text-sm leading-relaxed mb-5">Fill in all group results and see live which countries reach the knockout stage. Share your bracket with a single link.</p>
           <Link href={sim} className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-400 active:bg-orange-600 text-white font-bold px-5 py-3 rounded-xl transition-colors text-sm">
@@ -122,7 +122,7 @@ export function VsIranContent({ lang = 'nl' }: { lang?: string }) {
           Irán ganó 2-1 con goles de Estili y Mahdavikia. Los iraníes lo celebraron como una victoria nacional, más allá del fútbol. Los estadounidenses, con el seleccionador Steve Sampson, abandonaron pronto el torneo. El partido quedó en la memoria colectiva como algo más que deporte.
         </p>
         <div className="my-8 bg-[#0d0d0d] border border-themed rounded-xl p-5">
-          <p className="text-[10px] font-bold text-slate-600 uppercase tracking-widest mb-4">Datos del partido · 21 de junio de 1998</p>
+          <p className="text-[11px] font-bold text-slate-600 uppercase tracking-widest mb-4">Datos del partido · 21 de junio de 1998</p>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             {([
               { label: 'Resultado', value: 'Irán 2–1 EE.UU.' },
@@ -131,7 +131,7 @@ export function VsIranContent({ lang = 'nl' }: { lang?: string }) {
               { label: 'Goles', value: "Estili 40', Mahdavikia 84', McBride 87'" },
             ] as const).map(({ label, value }) => (
               <div key={label}>
-                <p className="text-[10px] font-bold text-slate-600 uppercase tracking-widest mb-1">{label}</p>
+                <p className="text-[11px] font-bold text-slate-600 uppercase tracking-widest mb-1">{label}</p>
                 <p className="text-white text-sm font-semibold leading-snug">{value}</p>
               </div>
             ))}
@@ -179,7 +179,7 @@ export function VsIranContent({ lang = 'nl' }: { lang?: string }) {
           ¿Y futbolísticamente? EE.UU. tiene una generación talentosa lista: McKennie, Pulisic, Weah, Reyna. Irán juega compacto y peligroso al contragolpe. Tácticamente sería un duelo muy interesante.
         </p>
         <div className="my-10 rounded-2xl bg-[#0d0d0d] border border-orange-500/20 p-7">
-          <p className="text-[10px] font-bold text-orange-500 uppercase tracking-widest mb-3">Simúlalo tú mismo</p>
+          <p className="text-[11px] font-bold text-orange-500 uppercase tracking-widest mb-3">Simúlalo tú mismo</p>
           <p className="text-white font-bold text-xl leading-snug mb-2">¿Caen EE.UU. e Irán en el mismo grupo?</p>
           <p className="text-slate-400 text-sm leading-relaxed mb-5">Rellena todos los resultados de grupos y ve en directo qué países pasan a la fase eliminatoria. Comparte tu bracket con un solo enlace.</p>
           <Link href={sim} className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-400 active:bg-orange-600 text-white font-bold px-5 py-3 rounded-xl transition-colors text-sm">
@@ -229,7 +229,7 @@ export function VsIranContent({ lang = 'nl' }: { lang?: string }) {
       </p>
 
       <div className="my-8 bg-[#0d0d0d] border border-themed rounded-xl p-5">
-        <p className="text-[10px] font-bold text-slate-600 uppercase tracking-widest mb-4">Wedstrijdgegevens · 21 juni 1998</p>
+        <p className="text-[11px] font-bold text-slate-600 uppercase tracking-widest mb-4">Wedstrijdgegevens · 21 juni 1998</p>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
           {([
             { label: 'Uitslag', value: 'Iran 2–1 VS' },
@@ -238,7 +238,7 @@ export function VsIranContent({ lang = 'nl' }: { lang?: string }) {
             { label: 'Doelpunten', value: "Estili 40', Mahdavikia 84', McBride 87'" },
           ] as const).map(({ label, value }) => (
             <div key={label}>
-              <p className="text-[10px] font-bold text-slate-600 uppercase tracking-widest mb-1">{label}</p>
+              <p className="text-[11px] font-bold text-slate-600 uppercase tracking-widest mb-1">{label}</p>
               <p className="text-white text-sm font-semibold leading-snug">{value}</p>
             </div>
           ))}
@@ -298,7 +298,7 @@ export function VsIranContent({ lang = 'nl' }: { lang?: string }) {
       </p>
 
       <div className="my-10 rounded-2xl bg-[#0d0d0d] border border-orange-500/20 p-7">
-        <p className="text-[10px] font-bold text-orange-500 uppercase tracking-widest mb-3">
+        <p className="text-[11px] font-bold text-orange-500 uppercase tracking-widest mb-3">
           Simuleer het zelf
         </p>
         <p className="text-white font-bold text-xl leading-snug mb-2">

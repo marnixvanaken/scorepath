@@ -182,7 +182,7 @@ export default async function BlogPostPage(props: PageProps<'/[lang]/blog/[slug]
             </Link>
 
             <div className="flex items-center gap-3 mb-5">
-              <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-orange-500/10 text-orange-400 border border-orange-500/20 uppercase tracking-widest">
+              <span className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-orange-500/10 text-orange-400 border border-orange-500/20 uppercase tracking-widest">
                 {displayCategory}
               </span>
               <span className="text-[11px] text-slate-600">{readTime} {msg.blog.readTime}</span>
@@ -236,7 +236,7 @@ export default async function BlogPostPage(props: PageProps<'/[lang]/blog/[slug]
             </Link>
             <div className="flex flex-wrap gap-2">
               {tags.map((tag) => (
-                <span key={tag} className="text-[10px] font-semibold px-2.5 py-1 rounded-full bg-[#111] border border-[#222] text-slate-500 uppercase tracking-widest">
+                <span key={tag} className="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-[#111] border border-[#222] text-slate-500 uppercase tracking-widest">
                   {tag}
                 </span>
               ))}
@@ -260,7 +260,7 @@ export default async function BlogPostPage(props: PageProps<'/[lang]/blog/[slug]
                         className="group block bg-[#0d0d0d] border border-themed hover:border-orange-500/30 rounded-xl overflow-hidden transition-all duration-200"
                       >
                         <div className="p-5">
-                          <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-orange-500/10 text-orange-400 border border-orange-500/20 uppercase tracking-widest">
+                          <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-orange-500/10 text-orange-400 border border-orange-500/20 uppercase tracking-widest">
                             {relLocalized?.category ?? rel.category}
                           </span>
                           <h3 className="font-bold text-white text-sm leading-snug mt-3 mb-3 group-hover:text-orange-400 transition-colors line-clamp-2">

@@ -259,7 +259,7 @@ export function CardViewer({ ogUrl, bracketUrl, teamName }: Props) {
             animate={{ x: [0, 4, 0] }}
             transition={{ duration: 1.4, repeat: Infinity, ease: 'easeInOut' }}
           >
-            <span className="text-[10px] font-bold tracking-widest uppercase">{slides[index + 1].label}</span>
+            <span className="text-[11px] font-bold tracking-widest uppercase">{slides[index + 1].label}</span>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
               <path d="M9 18l6-6-6-6" />
             </svg>

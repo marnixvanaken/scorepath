@@ -231,10 +231,10 @@ export interface Messages {
     searching: string;
     noResults: string;
     nearest: string;
-    top5: string;
+    topN: string;
     distanceKm: string;
-    showTop5: string;
-    hideTop5: string;
+    showTopN: string;
+    hideTopN: string;
     posGK: string;
     posDF: string;
     posMF: string;

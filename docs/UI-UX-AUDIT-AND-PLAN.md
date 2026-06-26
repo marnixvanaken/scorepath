@@ -7,13 +7,16 @@ Evidence-based review of the whole site across **all routes, all locales
 Severity: **P0** = visibly broken/wrong · **P1** = inconsistent/theming/i18n gap
 · **P2** = polish/cleanup.
 
-> **Status (in progress).** ✅ Done: Phase 0 (B1 EN hero, A1 NL "Laatste 16",
-> A2 "Ronde van 32"); Phase 1 partial — color tokenization (D1: 134 hardcoded
-> borders → `border-themed`), Tooltip re-token (D2), ES round-term unify (A3),
-> and the shared `<SiteFooter>` across home/about/blog/privacy (C1/C2/C3).
-> ⏳ Remaining Phase 1: full UCL-2027 localization (B2/B3 — larger sub-project,
-> `UCLBracket` + `DrawClient` are extensively Dutch) and a shared `<SiteHeader>`
-> (C5). Phase 2/3 (type scale, contrast, dead-code cleanup) not started.
+> **Status — complete.** ✅ Phase 0 (B1 EN hero, A1 NL "Achtste finale",
+> A2 "Ronde van 32"). ✅ Phase 1 — colour tokenization (D1: 134 borders →
+> `border-themed`), Tooltip re-token (D2), ES round-term unify (A3), shared
+> `<SiteFooter>` (C1–C3) and `<SiteHeader>` (C5, with language/theme toggles on
+> every content page), and full UCL-2027 localization (B2/B3, via `uclT()`).
+> ✅ Phase 2 — fonts ≥11px (E1/E2), contrast fixes (F1). ✅ Phase 3 — dead
+> `wk-*` palette removed + `--brand-orange` token (D4/D6), `top5→topN` keys (A4),
+> NL "OPEN ZOEKER" (A5). Plus a living design-system page at `/[lang]/design`.
+> Intentionally kept: `route.ts` Dutch labels (G1) — not user-facing, covered by
+> tests; remove only if desired.
 
 ---
 

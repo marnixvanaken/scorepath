@@ -123,7 +123,7 @@ export default async function BirthplaceCardPage(
           {playerRows.length > 0 && (
             <div>
               <p className="text-xs font-bold tracking-[0.18em] uppercase mb-3" style={{ color: 'var(--fg-subtle)' }}>
-                {m.top5}
+                {m.topN}
               </p>
               <ol className="space-y-2">
                 {playerRows.map(({ player, distance, rank }) => (

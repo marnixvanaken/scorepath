@@ -13,7 +13,7 @@ export function Logo({ variant = 'wordmark', size = 'md', className = '' }: Logo
 
   const icon = (
     <svg width={px} height={px} viewBox="0 0 96 96" fill="none" aria-hidden="true">
-      <rect width="96" height="96" rx="22" fill="#FF6B00"/>
+      <rect width="96" height="96" rx="22" fill="var(--brand-orange)"/>
       <line x1="14" y1="22" x2="30" y2="22" stroke="white" strokeWidth="3.5" strokeLinecap="round" opacity="0.75"/>
       <line x1="14" y1="38" x2="30" y2="38" stroke="white" strokeWidth="3.5" strokeLinecap="round" opacity="0.75"/>
       <path d="M30 22 Q30 30 38 30" stroke="white" strokeWidth="3.5" strokeLinecap="round" fill="none" opacity="0.75"/>

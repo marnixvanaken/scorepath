@@ -6,16 +6,6 @@
   --font-display: var(--font-bebas), ui-sans-serif, sans-serif;
   --font-ui:      var(--font-barlow), ui-sans-serif, system-ui, sans-serif;
   --font-sans:    var(--font-barlow), ui-sans-serif, system-ui, sans-serif;
-
-  /* WK 2026-geïnspireerd kleurenpalet */
-  --color-wk-navy:    #000000;
-  --color-wk-card:    #0B1628;
-  --color-wk-panel:   #081020;
-  --color-wk-border:  #1A3050;
-  --color-wk-gold:    #C9A843;
-  --color-wk-gold-lt: #E2C46A;
-  --color-wk-red:     #C4122F;
-  --color-wk-red-lt:  #E8415A;
 }
 
 /* ── DARK (standaard) ── */
@@ -32,15 +22,7 @@
   --cta-hover:     #E8351E;
   --gold:          #C9A843;
   --gold-lt:       #E2C46A;
-
-  --color-wk-navy:    #080808;
-  --color-wk-card:    #0D0D0D;
-  --color-wk-panel:   #0A0A0A;
-  --color-wk-border:  #1A1A1A;
-  --color-wk-gold:    #C9A843;
-  --color-wk-gold-lt: #E2C46A;
-  --color-wk-red:     #C4122F;
-  --color-wk-red-lt:  #E8415A;
+  --brand-orange:  #FF6B00;
 }
 
 /* ── LIGHT ── */

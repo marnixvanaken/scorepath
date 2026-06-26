@@ -341,7 +341,7 @@ export default function BirthplaceFeature({ players, m, locale }: Props) {
       {/* Top 10 list */}
       {results.length > 0 && (
         <div>
-          <p className="text-xs font-semibold text-[--fg]/50 uppercase tracking-widest mb-3">{m.top5}</p>
+          <p className="text-xs font-semibold text-[--fg]/50 uppercase tracking-widest mb-3">{m.topN}</p>
           <ol className="space-y-1.5">
             {results.map((p, i) => (
               <li key={p.id}>
@@ -403,7 +403,7 @@ export default function BirthplaceFeature({ players, m, locale }: Props) {
               onClick={() => setShowAllOnMap((v) => !v)}
               className="text-xs text-[--cta]/80 hover:text-[--cta] transition-colors"
             >
-              {showAllOnMap ? m.hideTop5 : m.showTop5}
+              {showAllOnMap ? m.hideTopN : m.showTopN}
             </button>
           </div>
           <div className="rounded-2xl overflow-hidden border border-white/10" style={{ height: 280 }}>

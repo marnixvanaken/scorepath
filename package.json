@@ -10,7 +10,7 @@
     "test:watch": "vitest",
     "build-players": "npx tsx scripts/build-players.ts",
     "build-clubs": "npx tsx scripts/build-clubs.ts",
-    "build-land-dots": "npx tsx scripts/build-land-dots.ts"
+    "build-borders": "npx tsx scripts/build-borders.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.100.1",

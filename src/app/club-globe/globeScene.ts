@@ -1,14 +1,20 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { getClubTexture, disposeTextureCache } from './markerTextures';
+import { buildCityLabels, getCityLabelTexture, disposeCityLabelCache, type CityLabel } from './cityLabels';
 
 // Imperative three.js engine behind <ClubGlobe>. Same pattern as Leaflet in
 // PlayerMap.tsx: one class owning the canvas, React only drives it via props.
 // Rendering is on-demand (dirty flag) so an idle globe costs ~nothing.
+//
+// Look: NASA day texture (light theme) / night texture (dark theme) with a
+// topology bump map, country borders and club-city labels — plus the club
+// dot/crest-sprite marker layers.
 
 export interface GlobeClub {
   id: string;
   name: string;
+  city: string;
   lat: number;
   lng: number;
   crest: string | null;
@@ -17,20 +23,26 @@ export interface GlobeClub {
 
 export interface GlobeSceneOptions {
   canvas: HTMLCanvasElement;
-  landDots: number[]; // flat [lat*100, lng*100, ...]
+  borders: number[][]; // polylines of [lat*100, lng*100, ...]
   clubs: GlobeClub[];
   onClubClick?: (id: string) => void;
   onHoverChange?: (id: string | null) => void;
 }
 
 const R = 1;                  // globe radius
-const LAND_ALT = 1.002;       // land dots sit just above the sphere
+const BORDER_ALT = 1.0015;    // border lines sit just above the sphere
 const CLUB_ALT = 1.006;
 const SPRITE_ALT = 1.015;
+const LABEL_ALT = 1.010;
 const SPRITE_ZOOM = 2.1;      // camera distance below which crest sprites appear
-const CAM_MIN = 1.35;
+const LABEL_ZOOM = 1.6;       // camera distance below which city labels appear
+const CAM_MIN = 1.07;
 const CAM_MAX = 3.6;
 const CAM_START = 2.9;
+
+const TEXTURE_DAY = '/globe/earth-day.jpg';
+const TEXTURE_NIGHT = '/globe/earth-night.jpg';
+const TEXTURE_TOPOLOGY = '/globe/earth-topology.png';
 
 export function latLngToVector3(lat: number, lng: number, radius: number): THREE.Vector3 {
   const phi = ((90 - lat) * Math.PI) / 180;
@@ -43,22 +55,22 @@ export function latLngToVector3(lat: number, lng: number, radius: number): THREE
 }
 
 interface ThemeColors {
-  sphere: THREE.Color;
-  land: THREE.Color;
+  sphere: THREE.Color;   // flat fallback while textures load
   club: THREE.Color;
   halo: THREE.Color;
+  borderOpacity: number;
 }
 
 function readThemeColors(): ThemeColors {
   const style = getComputedStyle(document.documentElement);
   const get = (name: string, fallback: string) => new THREE.Color(style.getPropertyValue(name).trim() || fallback);
-  // Dark needs the brighter muted tone for the land dots to stay visible.
   const isLight = document.documentElement.dataset.theme === 'light';
   return {
     sphere: get('--bg-card', '#0D0D0D'),
-    land: get(isLight ? '--fg-subtle' : '--fg-muted', '#94A3B8'),
     club: get('--cta', '#D93B1F'),
-    halo: get(isLight ? '--fg-subtle' : '--fg-muted', '#94A3B8'),
+    // Vaste atmosferische blauwtinten — passend bij de realistische aarde.
+    halo: new THREE.Color(isLight ? '#7FB4E8' : '#2E5C8F'),
+    borderOpacity: isLight ? 0.6 : 0.32,
   };
 }
 
@@ -88,7 +100,7 @@ const DOT_FRAGMENT = /* glsl */ `
   }
 `;
 
-// Soft rim so the sphere lifts off the page background in both themes.
+// Soft atmosphere rim so the sphere lifts off the page background.
 const HALO_VERTEX = /* glsl */ `
   varying vec3 vNormal;
   void main() {
@@ -132,10 +144,13 @@ export class GlobeScene {
   private camera: THREE.PerspectiveCamera;
   private controls: OrbitControls;
 
-  private sphereMat: THREE.MeshBasicMaterial;
-  private landMat: THREE.ShaderMaterial;
+  private sphereMat: THREE.MeshPhongMaterial;
   private clubMat: THREE.ShaderMaterial;
   private haloMat: THREE.ShaderMaterial;
+  private borderMat: THREE.LineBasicMaterial;
+  private dayTexture: THREE.Texture | null = null;
+  private nightTexture: THREE.Texture | null = null;
+
   private clubPoints: THREE.Points;
   private clubAlpha: Float32Array;
   private clubPositions: THREE.Vector3[];
@@ -143,6 +158,9 @@ export class GlobeScene {
 
   private sprites = new Map<string, THREE.Sprite>();
   private spriteGroup = new THREE.Group();
+  private cityLabels: CityLabel[];
+  private citySprites = new Map<string, THREE.Sprite>();
+  private cityGroup = new THREE.Group();
   private selectionRing: THREE.Mesh<THREE.RingGeometry, THREE.MeshBasicMaterial>;
 
   private raycaster = new THREE.Raycaster();
@@ -174,7 +192,7 @@ export class GlobeScene {
     this.renderer = new THREE.WebGLRenderer({ canvas: this.canvas, antialias: true, alpha: true });
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-    this.camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
+    this.camera = new THREE.PerspectiveCamera(45, 1, 0.01, 100);
     // Start centered on Europe, where most v1 clubs are.
     this.camera.position.copy(latLngToVector3(46, 8, CAM_START));
 
@@ -191,13 +209,22 @@ export class GlobeScene {
 
     const colors = readThemeColors();
 
-    // Base sphere.
-    this.sphereMat = new THREE.MeshBasicMaterial({ color: colors.sphere });
-    const sphere = new THREE.Mesh(new THREE.SphereGeometry(R, 64, 64), this.sphereMat);
+    // Lighting: soft ambient + a headlight that follows the camera, so the
+    // visible hemisphere is always evenly lit with a hint of relief.
+    this.scene.add(new THREE.AmbientLight(0xffffff, 2.4));
+    const headlight = new THREE.DirectionalLight(0xffffff, 1.1);
+    headlight.position.set(0.4, 0.6, 1);
+    this.camera.add(headlight);
+    this.scene.add(this.camera);
+
+    // Base sphere: flat theme colour until the NASA textures arrive.
+    this.sphereMat = new THREE.MeshPhongMaterial({ color: colors.sphere, shininess: 4, bumpScale: 0.02 });
+    const sphere = new THREE.Mesh(new THREE.SphereGeometry(R, 96, 96), this.sphereMat);
     sphere.renderOrder = 0;
     this.scene.add(sphere);
+    this.loadEarthTextures();
 
-    // Halo rim.
+    // Atmosphere rim.
     this.haloMat = new THREE.ShaderMaterial({
       vertexShader: HALO_VERTEX,
       fragmentShader: HALO_FRAGMENT,
@@ -205,28 +232,33 @@ export class GlobeScene {
       side: THREE.BackSide,
       transparent: true,
       depthWrite: false,
-      blending: THREE.NormalBlending,
     });
     const halo = new THREE.Mesh(new THREE.SphereGeometry(R * 1.06, 64, 64), this.haloMat);
     halo.renderOrder = 0;
     this.scene.add(halo);
 
-    // Dotted landmass.
-    const landCount = opts.landDots.length / 2;
-    const landPos = new Float32Array(landCount * 3);
-    const landAlpha = new Float32Array(landCount).fill(1);
-    const v = new THREE.Vector3();
-    for (let i = 0; i < landCount; i++) {
-      v.copy(latLngToVector3(opts.landDots[i * 2] / 100, opts.landDots[i * 2 + 1] / 100, LAND_ALT));
-      landPos.set([v.x, v.y, v.z], i * 3);
+    // Country borders (incl. coastlines) as one LineSegments draw call.
+    const segments: number[] = [];
+    const a = new THREE.Vector3();
+    const b = new THREE.Vector3();
+    for (const line of opts.borders) {
+      for (let i = 0; i + 3 < line.length; i += 2) {
+        a.copy(latLngToVector3(line[i] / 100, line[i + 1] / 100, BORDER_ALT));
+        b.copy(latLngToVector3(line[i + 2] / 100, line[i + 3] / 100, BORDER_ALT));
+        segments.push(a.x, a.y, a.z, b.x, b.y, b.z);
+      }
     }
-    const landGeo = new THREE.BufferGeometry();
-    landGeo.setAttribute('position', new THREE.BufferAttribute(landPos, 3));
-    landGeo.setAttribute('alpha', new THREE.BufferAttribute(landAlpha, 1));
-    this.landMat = makeDotMaterial(colors.land.clone(), 0.006, 0.55, 5 * this.renderer.getPixelRatio());
-    const landPoints = new THREE.Points(landGeo, this.landMat);
-    landPoints.renderOrder = 1;
-    this.scene.add(landPoints);
+    const borderGeo = new THREE.BufferGeometry();
+    borderGeo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(segments), 3));
+    this.borderMat = new THREE.LineBasicMaterial({
+      color: 0xffffff,
+      transparent: true,
+      opacity: colors.borderOpacity,
+      depthWrite: false,
+    });
+    const borderLines = new THREE.LineSegments(borderGeo, this.borderMat);
+    borderLines.renderOrder = 1;
+    this.scene.add(borderLines);
 
     // Club dots. Clubs sharing a stadium (San Siro, Stadio Olimpico) get a
     // tiny longitude nudge so both markers stay visible and clickable.
@@ -251,7 +283,11 @@ export class GlobeScene {
     this.clubPoints.renderOrder = 2;
     this.scene.add(this.clubPoints);
 
-    this.spriteGroup.renderOrder = 3;
+    this.cityGroup.renderOrder = 3;
+    this.scene.add(this.cityGroup);
+    this.cityLabels = buildCityLabels(this.clubs);
+
+    this.spriteGroup.renderOrder = 4;
     this.scene.add(this.spriteGroup);
 
     // Selection ring around the active club, lying flat on the sphere.
@@ -260,7 +296,7 @@ export class GlobeScene {
       new THREE.MeshBasicMaterial({ color: colors.club, transparent: true, opacity: 0.95, side: THREE.DoubleSide, depthWrite: false }),
     );
     this.selectionRing.visible = false;
-    this.selectionRing.renderOrder = 4;
+    this.selectionRing.renderOrder = 5;
     this.scene.add(this.selectionRing);
 
     // Events.
@@ -291,6 +327,10 @@ export class GlobeScene {
     for (const [id, sprite] of this.sprites) {
       if (!this.isVisible(id)) sprite.visible = false;
     }
+    for (const label of this.cityLabels) {
+      const sprite = this.citySprites.get(label.city);
+      if (sprite && !this.isCityVisible(label)) sprite.visible = false;
+    }
     if (this.selectedId && !this.isVisible(this.selectedId)) this.setSelected(null);
     this.requestRender();
   }
@@ -313,10 +353,11 @@ export class GlobeScene {
     const idx = this.clubIndexById.get(id);
     if (idx === undefined) return;
     this.stopAutoRotate();
-    const distance = Math.min(Math.max(this.camera.position.length(), CAM_MIN + 0.2), 2.0);
+    const distance = Math.min(Math.max(this.camera.position.length(), CAM_MIN + 0.15), 1.6);
     const to = this.clubPositions[idx].clone().normalize().multiplyScalar(distance);
     if (this.reducedMotion) {
       this.camera.position.copy(to);
+      this.camera.lookAt(0, 0, 0);
       this.requestRender();
       return;
     }
@@ -341,14 +382,17 @@ export class GlobeScene {
     this.canvas.removeEventListener('pointerleave', this.handlePointerLeave);
     document.removeEventListener('visibilitychange', this.handleVisibility);
     this.scene.traverse((obj) => {
-      if (obj instanceof THREE.Mesh || obj instanceof THREE.Points) {
+      if (obj instanceof THREE.Mesh || obj instanceof THREE.Points || obj instanceof THREE.LineSegments) {
         obj.geometry.dispose();
         const mats = Array.isArray(obj.material) ? obj.material : [obj.material];
         mats.forEach((m) => m.dispose());
       }
       if (obj instanceof THREE.Sprite) obj.material.dispose();
     });
+    this.dayTexture?.dispose();
+    this.nightTexture?.dispose();
     disposeTextureCache();
+    disposeCityLabelCache();
     this.renderer.dispose();
   }
 
@@ -356,6 +400,10 @@ export class GlobeScene {
 
   private isVisible(id: string): boolean {
     return this.visibleIds === null || this.visibleIds.has(id);
+  }
+
+  private isCityVisible(label: CityLabel): boolean {
+    return label.clubIds.some((id) => this.isVisible(id));
   }
 
   private requestRender = (): void => {
@@ -366,12 +414,48 @@ export class GlobeScene {
     this.autoRotate = false;
   };
 
+  private loadEarthTextures(): void {
+    const loader = new THREE.TextureLoader();
+    const maxAniso = Math.min(this.renderer.capabilities.getMaxAnisotropy(), 8);
+    const prep = (t: THREE.Texture) => {
+      t.colorSpace = THREE.SRGBColorSpace;
+      t.anisotropy = maxAniso;
+      return t;
+    };
+    loader.load(TEXTURE_DAY, (t) => {
+      if (this.disposed) return;
+      this.dayTexture = prep(t);
+      this.applyTheme();
+    });
+    loader.load(TEXTURE_NIGHT, (t) => {
+      if (this.disposed) return;
+      this.nightTexture = prep(t);
+      this.applyTheme();
+    });
+    loader.load(TEXTURE_TOPOLOGY, (t) => {
+      if (this.disposed) return;
+      t.anisotropy = maxAniso;
+      this.sphereMat.bumpMap = t;
+      this.sphereMat.needsUpdate = true;
+      this.requestRender();
+    });
+  }
+
   private applyTheme(): void {
     const colors = readThemeColors();
-    this.sphereMat.color.copy(colors.sphere);
-    (this.landMat.uniforms.uColor.value as THREE.Color).copy(colors.land);
+    const isLight = document.documentElement.dataset.theme === 'light';
+    const map = isLight ? this.dayTexture : this.nightTexture;
+    if (map) {
+      this.sphereMat.map = map;
+      this.sphereMat.color.set(0xffffff); // no tint over the texture
+    } else {
+      this.sphereMat.map = null;
+      this.sphereMat.color.copy(colors.sphere);
+    }
+    this.sphereMat.needsUpdate = true;
     (this.clubMat.uniforms.uColor.value as THREE.Color).copy(colors.club);
     (this.haloMat.uniforms.uColor.value as THREE.Color).copy(colors.halo);
+    this.borderMat.opacity = colors.borderOpacity;
     this.selectionRing.material.color.copy(colors.club);
     this.requestRender();
   }
@@ -385,7 +469,6 @@ export class GlobeScene {
     this.camera.aspect = w / h;
     this.camera.updateProjectionMatrix();
     const scale = (h * this.renderer.getPixelRatio()) / (2 * Math.tan((this.camera.fov * Math.PI) / 360));
-    this.landMat.uniforms.uScale.value = scale;
     this.clubMat.uniforms.uScale.value = scale;
     this.requestRender();
   }
@@ -427,8 +510,12 @@ export class GlobeScene {
       this.needsRender = true;
     }
 
+    // Fine rotation control near the surface, normal speed when zoomed out.
+    const camDist = this.camera.position.length();
+    this.controls.rotateSpeed = 0.45 * THREE.MathUtils.clamp((camDist - 1) / 1.55, 0.05, 1);
+
     if (this.controls.update()) this.needsRender = true;
-    this.updateSprites();
+    this.updateOverlays();
 
     if (this.needsRender) {
       this.needsRender = false;
@@ -436,16 +523,23 @@ export class GlobeScene {
     }
   };
 
-  // Crest sprites are created lazily once the camera is close enough, and
-  // hidden again when filtered out or on the far hemisphere.
-  private updateSprites(): void {
+  // Crest sprites and city labels are created lazily once the camera is
+  // close enough, and hidden again when filtered out or on the far side.
+  private updateOverlays(): void {
     const camDist = this.camera.position.length();
-    const zoomedIn = camDist < SPRITE_ZOOM;
     const camDir = this.camera.position.clone().normalize();
     const horizon = 1 / camDist + 0.05;
-    // Roughly constant on-screen size: shrink sprites as the camera closes in.
-    const baseScale = THREE.MathUtils.clamp(0.055 * (camDist / 2), 0.026, 0.06);
+    // Roughly constant on-screen size: scale with the camera's height above
+    // the sprite shell (not the globe centre), so deep zoom stays sane.
+    const spriteAlt = Math.max(camDist - SPRITE_ALT, 0.02);
+    const baseScale = THREE.MathUtils.clamp(0.056 * spriteAlt, 0.0035, 0.06);
+    const ringScale = THREE.MathUtils.clamp(spriteAlt / (2 - SPRITE_ALT), 0.05, 1);
+    if (Math.abs(this.selectionRing.scale.x - ringScale) > 0.001) {
+      this.selectionRing.scale.setScalar(ringScale);
+      this.needsRender = true;
+    }
 
+    const zoomedIn = camDist < SPRITE_ZOOM;
     this.clubs.forEach((club, i) => {
       const sprite = this.sprites.get(club.id);
       if (!zoomedIn) {
@@ -465,17 +559,48 @@ export class GlobeScene {
       }
       const target = club.id === this.hoveredId ? baseScale * 1.18 : baseScale;
       if (Math.abs(sprite.scale.x - target) > 0.0001) {
-        sprite.scale.setScalar(target);
+        sprite.scale.set(target, target, 1);
         this.needsRender = true;
       }
     });
+
+    const labelsIn = camDist < LABEL_ZOOM;
+    for (const label of this.cityLabels) {
+      let sprite = this.citySprites.get(label.city);
+      if (!labelsIn) {
+        if (sprite && sprite.visible) {
+          sprite.visible = false;
+          this.needsRender = true;
+        }
+        continue;
+      }
+      const pos = latLngToVector3(label.lat, label.lng, LABEL_ALT);
+      const frontFacing = pos.clone().normalize().dot(camDir) > horizon;
+      const show = frontFacing && this.isCityVisible(label);
+      if (!sprite) {
+        if (!show) continue;
+        sprite = this.createCitySprite(label, pos);
+      }
+      if (sprite.visible !== show) {
+        sprite.visible = show;
+        this.needsRender = true;
+      }
+      // Constant-ish on-screen size, smaller than the club logos.
+      const aspect = (sprite.userData.aspect as number) ?? 4;
+      const labelAlt = Math.max(camDist - LABEL_ALT, 0.02);
+      const height = THREE.MathUtils.clamp(0.051 * labelAlt, 0.0022, 0.03);
+      if (Math.abs(sprite.scale.y - height) > 0.0001) {
+        sprite.scale.set(height * aspect, height, 1);
+        this.needsRender = true;
+      }
+    }
   }
 
   private createSprite(club: GlobeClub, index: number): void {
     const material = new THREE.SpriteMaterial({ depthTest: true, transparent: true, opacity: 0 });
     const sprite = new THREE.Sprite(material);
     sprite.position.copy(this.clubPositions[index].clone().normalize().multiplyScalar(SPRITE_ALT));
-    sprite.scale.setScalar(0.062);
+    sprite.scale.setScalar(0.05);
     sprite.userData.clubId = club.id;
     this.sprites.set(club.id, sprite);
     this.spriteGroup.add(sprite);
@@ -486,6 +611,20 @@ export class GlobeScene {
       material.needsUpdate = true;
       this.requestRender();
     });
+  }
+
+  private createCitySprite(label: CityLabel, pos: THREE.Vector3): THREE.Sprite {
+    const { texture, aspect } = getCityLabelTexture(label.city);
+    const material = new THREE.SpriteMaterial({ map: texture, depthTest: true, transparent: true });
+    const sprite = new THREE.Sprite(material);
+    sprite.position.copy(pos);
+    // Anchor above centre so the text hangs just below its city point.
+    sprite.center.set(0.5, 1.6);
+    sprite.userData.aspect = aspect;
+    sprite.scale.set(0.03 * aspect, 0.03, 1);
+    this.citySprites.set(label.city, sprite);
+    this.cityGroup.add(sprite);
+    return sprite;
   }
 
   // ── Pointer interaction ─────────────────────────────────────────────
@@ -502,8 +641,8 @@ export class GlobeScene {
     const spriteHits = this.raycaster.intersectObjects([...this.sprites.values()].filter((s) => s.visible), false);
     if (spriteHits.length > 0) return (spriteHits[0].object.userData.clubId as string) ?? null;
 
-    this.raycaster.params.Points.threshold = 0.02;
     const camDist = this.camera.position.length();
+    this.raycaster.params.Points.threshold = THREE.MathUtils.clamp(0.02 * (camDist - 1), 0.0015, 0.02);
     const camDir = this.camera.position.clone().normalize();
     const horizon = 1 / camDist + 0.02;
     const hits = this.raycaster.intersectObject(this.clubPoints, false);
@@ -554,4 +693,3 @@ export class GlobeScene {
     }
   };
 }
-

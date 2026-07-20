@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import landDots from '../../../data/land-dots.json';
+import borders from '../../../data/borders.json';
 import { GlobeScene, type GlobeClub } from './globeScene';
 
 interface ClubGlobeProps {
@@ -23,7 +23,7 @@ export default function ClubGlobe({ clubs, visibleIds, selectedId, onClubClick }
     if (!canvasRef.current) return;
     const scene = new GlobeScene({
       canvas: canvasRef.current,
-      landDots: landDots as number[],
+      borders: borders as number[][],
       clubs,
       onClubClick: (id) => clickRef.current(id),
     });

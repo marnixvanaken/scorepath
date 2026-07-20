@@ -1,50 +1,56 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import borders from '../../../data/borders.json';
-import { GlobeScene, type GlobeClub } from './globeScene';
+import 'maplibre-gl/dist/maplibre-gl.css';
+import { ClubMap, type MapClub } from './clubMap';
 
 interface ClubGlobeProps {
-  clubs: GlobeClub[];
+  clubs: MapClub[];
   visibleIds: Set<string> | null;
   selectedId: string | null;
   onClubClick: (id: string) => void;
 }
 
-// Thin React wrapper around the imperative GlobeScene (the PlayerMap role):
-// mounts the scene once, then forwards prop changes to its API.
+// Thin React wrapper around the imperative ClubMap (MapLibre globe):
+// mounts the map once, then forwards prop changes to its API.
 export default function ClubGlobe({ clubs, visibleIds, selectedId, onClubClick }: ClubGlobeProps) {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const sceneRef = useRef<GlobeScene | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const mapRef = useRef<ClubMap | null>(null);
   const clickRef = useRef(onClubClick);
   clickRef.current = onClubClick;
 
   useEffect(() => {
-    if (!canvasRef.current) return;
-    const scene = new GlobeScene({
-      canvas: canvasRef.current,
-      borders: borders as number[][],
+    if (!containerRef.current) return;
+    const map = new ClubMap({
+      container: containerRef.current,
       clubs,
       onClubClick: (id) => clickRef.current(id),
     });
-    sceneRef.current = scene;
+    mapRef.current = map;
     if (process.env.NODE_ENV !== 'production') {
-      (window as unknown as { __globeScene?: GlobeScene }).__globeScene = scene;
+      (window as unknown as { __clubMap?: ClubMap }).__clubMap = map;
     }
     return () => {
-      scene.dispose();
-      sceneRef.current = null;
+      map.dispose();
+      mapRef.current = null;
     };
   }, [clubs]);
 
   useEffect(() => {
-    sceneRef.current?.setFilter(visibleIds);
+    mapRef.current?.setFilter(visibleIds);
   }, [visibleIds]);
 
   useEffect(() => {
-    sceneRef.current?.setSelected(selectedId);
-    if (selectedId) sceneRef.current?.focusClub(selectedId);
+    mapRef.current?.setSelected(selectedId);
+    if (selectedId) mapRef.current?.focusClub(selectedId);
   }, [selectedId]);
 
-  return <canvas ref={canvasRef} className="block h-full w-full touch-none" style={{ cursor: 'grab' }} aria-hidden />;
+  // Buitenste div positioneert; de binnenste is de MapLibre-container
+  // (MapLibre zet daar zelf position:relative op, dat mag niet onze
+  // absolute plaatsing overschrijven).
+  return (
+    <div className="absolute inset-0">
+      <div ref={containerRef} className="h-full w-full" />
+    </div>
+  );
 }

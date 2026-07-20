@@ -185,3 +185,86 @@ input[type="number"]::-webkit-outer-spin-button {
 input[type="number"] {
   -moz-appearance: textfield;
 }
+
+/* ── Club Globe: kaart-markers ─────────────────────────────────────── */
+.club-marker {
+  position: relative;
+  width: 14px;
+  height: 14px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+.club-marker__dot {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 11px;
+  height: 11px;
+  border-radius: 9999px;
+  background: var(--cta);
+  border: 1.5px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+  transition: opacity 0.18s;
+}
+.club-marker__logo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(0.4);
+  width: 38px;
+  height: 44px;
+  max-width: none; /* Tailwind-preflight img{max-width:100%} zou op de 14px-knop clampen */
+  object-fit: contain;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.18s, transform 0.18s;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.35));
+}
+.club-marker__badge {
+  width: 34px;
+  height: 34px;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 700;
+  font-size: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+}
+.club-marker--logo .club-marker__dot { opacity: 0; }
+.club-marker--logo .club-marker__logo {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+.club-marker--hidden { display: none; }
+.club-marker--selected { z-index: 10; }
+.club-marker__ring {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 52px;
+  height: 52px;
+  border: 2.5px solid var(--cta);
+  border-radius: 9999px;
+  opacity: 0;
+  transition: opacity 0.18s;
+  pointer-events: none;
+}
+.club-marker--selected .club-marker__ring { opacity: 1; }
+
+/* MapLibre-chrome in huisstijl */
+.maplibregl-ctrl-group {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border) !important;
+}
+.maplibregl-ctrl-group button + button { border-top: 1px solid var(--border) !important; }
+.maplibregl-ctrl-attrib {
+  background: color-mix(in srgb, var(--bg-card) 80%, transparent) !important;
+  color: var(--fg-subtle) !important;
+  font-size: 10px !important;
+}
+.maplibregl-ctrl-attrib a { color: var(--fg-muted) !important; }

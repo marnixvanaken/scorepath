@@ -28,6 +28,9 @@ export default function ClubGlobe({ clubs, visibleIds, selectedId, onClubClick }
       onClubClick: (id) => clickRef.current(id),
     });
     sceneRef.current = scene;
+    if (process.env.NODE_ENV !== 'production') {
+      (window as unknown as { __globeScene?: GlobeScene }).__globeScene = scene;
+    }
     return () => {
       scene.dispose();
       sceneRef.current = null;

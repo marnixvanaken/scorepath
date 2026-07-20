@@ -1,10 +1,12 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import { useEffect, useState } from 'react';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import type { Club } from '@/data/clubs';
 import type { Messages } from '@/i18n/types';
 import { isWebGLAvailable } from './webgl';
+import ClubPanel from './ClubPanel';
 
 export type GlobeMessages = Messages['globe'];
 
@@ -30,10 +32,29 @@ interface GlobeFeatureProps {
   locale: string;
 }
 
-export default function GlobeFeature({ clubs, m }: GlobeFeatureProps) {
-  // null = not probed yet (first client render), then true/false.
+export default function GlobeFeature({ clubs, m, locale }: GlobeFeatureProps) {
+  // null = nog niet geprobed (eerste client-render), daarna true/false.
   const [webgl, setWebgl] = useState<boolean | null>(null);
-  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const clubById = useMemo(() => new Map(clubs.map((c) => [c.id, c])), [clubs]);
+
+  // De URL is de bron van waarheid voor de selectie (?club=) — deelbaar en
+  // deep-linkbaar; onzin-waarden vallen terug op "niets geselecteerd".
+  const selectedClub = clubById.get(searchParams.get('club') ?? '') ?? null;
+
+  const setSelected = useCallback(
+    (id: string | null) => {
+      const params = new URLSearchParams(searchParams.toString());
+      if (id) params.set('club', id);
+      else params.delete('club');
+      const qs = params.toString();
+      router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
+    },
+    [router, pathname, searchParams],
+  );
 
   useEffect(() => {
     setWebgl(isWebGLAvailable());
@@ -51,17 +72,18 @@ export default function GlobeFeature({ clubs, m }: GlobeFeatureProps) {
   }
 
   return (
-    <div className="absolute inset-0">
+    <div className="absolute inset-0 overflow-hidden">
       <p className="sr-only">{m.globeHint}</p>
       {webgl && (
         <ClubGlobe
           clubs={clubs}
           visibleIds={null}
-          selectedId={selectedId}
-          onClubClick={(id) => setSelectedId(id)}
+          selectedId={selectedClub?.id ?? null}
+          onClubClick={(id) => setSelected(id)}
         />
       )}
       {webgl === null && <GlobeLoading />}
+      <ClubPanel club={selectedClub} m={m} locale={locale} onClose={() => setSelected(null)} />
     </div>
   );
 }

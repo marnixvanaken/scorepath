@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { isLocale, DEFAULT_LOCALE, getMessages } from '@/i18n';
@@ -45,7 +46,10 @@ export default async function GlobePage(props: PageProps<'/[lang]/club-globe'>) 
     <div className="h-dvh flex flex-col overflow-hidden" style={{ background: 'var(--bg)', color: 'var(--fg)' }}>
       <SiteHeader lang={lang} width="max-w-none" />
       <main className="flex-1 min-h-0 relative">
-        <GlobeFeature clubs={clubs} m={msg.globe} locale={lang} />
+        {/* Suspense: GlobeFeature leest useSearchParams (?club=, filters). */}
+        <Suspense>
+          <GlobeFeature clubs={clubs} m={msg.globe} locale={lang} />
+        </Suspense>
       </main>
     </div>
   );

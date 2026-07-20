@@ -70,3 +70,49 @@ export function mapFdResponse(data: { matches?: FdMatch[] }): LiveResultsRespons
 
   return { results, hasActiveMatch };
 }
+
+// ── Aankomende wedstrijden per team (club-globe) ──────────────────────
+
+export interface FdTeamMatch {
+  id: number;
+  utcDate: string;
+  status: string;
+  competition?: { name?: string };
+  homeTeam: { id?: number; name?: string; shortName?: string };
+  awayTeam: { id?: number; name?: string; shortName?: string };
+}
+
+export interface ClubMatch {
+  id: number;
+  utcDate: string;
+  competition: string;
+  home: string;
+  away: string;
+  /** true als het opgevraagde team thuis speelt */
+  isHome: boolean;
+}
+
+export interface ClubMatchesResponse {
+  matches: ClubMatch[];
+}
+
+export function mapFdTeamMatches(
+  data: { matches?: FdTeamMatch[] },
+  fdId: number,
+  limit = 5,
+): ClubMatchesResponse {
+  const matches = (data.matches ?? [])
+    .filter((m) => m.status === 'SCHEDULED' || m.status === 'TIMED')
+    .sort((a, b) => a.utcDate.localeCompare(b.utcDate))
+    .slice(0, limit)
+    .map((m) => ({
+      id: m.id,
+      utcDate: m.utcDate,
+      competition: m.competition?.name ?? '',
+      home: m.homeTeam.shortName ?? m.homeTeam.name ?? '',
+      away: m.awayTeam.shortName ?? m.awayTeam.name ?? '',
+      isHome: m.homeTeam.id === fdId,
+    }));
+
+  return { matches };
+}

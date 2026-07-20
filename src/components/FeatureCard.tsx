@@ -10,7 +10,7 @@ export interface CardScheme {
   shadow: string;     // kleur van de slagschaduw
 }
 
-export const CARD_SCHEMES: Record<'ucl' | 'wc' | 'birthplace', CardScheme> = {
+export const CARD_SCHEMES: Record<'ucl' | 'wc' | 'birthplace' | 'globe', CardScheme> = {
   // Champions League — diep nachtblauw met goud.
   ucl: {
     gradient: 'linear-gradient(135deg, #001D62 0%, #0A2A7A 55%, #001142 100%)',
@@ -26,6 +26,14 @@ export const CARD_SCHEMES: Record<'ucl' | 'wc' | 'birthplace', CardScheme> = {
     buttonBg: '#FFFFFF',
     buttonText: '#B0240F',
     shadow: 'rgba(176, 36, 15, 0.55)',
+  },
+  // Club Globe — diep atmosfeerblauw met lichtblauw accent.
+  globe: {
+    gradient: 'linear-gradient(135deg, #0B2E4F 0%, #113C66 55%, #06182B 100%)',
+    eyebrow: '#8FC6F5',
+    buttonBg: '#8FC6F5',
+    buttonText: '#06182B',
+    shadow: 'rgba(11, 46, 79, 0.65)',
   },
   // Geboorteplaats — kaart-/locatiegroen.
   birthplace: {

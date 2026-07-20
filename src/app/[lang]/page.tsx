@@ -6,7 +6,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { SITE_NAME, SITE_URL } from '@/lib/siteConfig';
 import { isLocale, DEFAULT_LOCALE, getMessages } from '@/i18n';
-import { alternatesFor, ogLocaleFields, ogImages, simulatorPath, birthplacePath, uclPath } from '@/lib/routes';
+import { alternatesFor, ogLocaleFields, ogImages, simulatorPath, birthplacePath, uclPath, globePath } from '@/lib/routes';
 import { FeatureCard, CARD_SCHEMES } from '@/components/FeatureCard';
 
 export async function generateMetadata(props: PageProps<'/[lang]'>): Promise<Metadata> {
@@ -147,6 +147,16 @@ export default async function HomePage(props: PageProps<'/[lang]'> & {
 
       <section className="border-t border-themed px-6 sm:px-10 py-14 sm:py-20">
         <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="lg:col-span-2">
+            <FeatureCard
+              href={globePath(lang)}
+              eyebrow={msg.home.globeEyebrow}
+              title={msg.home.globeTitle}
+              desc={msg.home.globeDesc}
+              cta={msg.home.openGlobe}
+              scheme={CARD_SCHEMES.globe}
+            />
+          </div>
           <FeatureCard
             href={uclPath(lang)}
             eyebrow={msg.home.uclEyebrow}

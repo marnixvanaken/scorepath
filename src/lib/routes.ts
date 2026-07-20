@@ -26,6 +26,10 @@ export const BIRTHPLACE_PHYSICAL_SLUG = BIRTHPLACE_SLUG.nl;
 // Eén gedeelde slug voor alle talen.
 export const UCL_SLUG = 'ucl-2027';
 
+// ── Club Globe ────────────────────────────────────────────────────────
+// Eén gedeelde slug voor alle talen (zelfde patroon als UCL).
+export const GLOBE_SLUG = 'club-globe';
+
 // Blog: canonieke slug (= nl-slug, tevens content-key) -> gelokaliseerde slug per taal.
 export const BLOG_SLUGS: Record<string, Record<Locale, string>> = {
   'drie-legendes-wk-2026': {
@@ -93,6 +97,11 @@ export function birthplacePath(locale: string): string {
 export function uclPath(locale: string): string {
   const l = toLocale(locale);
   return `/${l}/${UCL_SLUG}`;
+}
+
+export function globePath(locale: string): string {
+  const l = toLocale(locale);
+  return `/${l}/${GLOBE_SLUG}`;
 }
 
 export function localizedBlogSlug(canonical: string, locale: string): string {

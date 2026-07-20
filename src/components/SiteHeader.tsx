@@ -3,7 +3,7 @@ import { Logo } from './Logo';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import { ThemeToggle } from './ThemeToggle';
 import { getMessages } from '@/i18n';
-import { simulatorPath, birthplacePath, uclPath } from '@/lib/routes';
+import { simulatorPath, birthplacePath, uclPath, globePath } from '@/lib/routes';
 
 /**
  * Shared site header for the marketing/content pages (home, blog, about,
@@ -23,6 +23,7 @@ export function SiteHeader({
     { href: simulatorPath(lang), label: msg.nav.simulator, hideMobile: false },
     { href: uclPath(lang), label: msg.nav.ucl, hideMobile: true },
     { href: birthplacePath(lang), label: msg.nav.birthplace, hideMobile: true },
+    { href: globePath(lang), label: msg.nav.globe, hideMobile: false },
     { href: `/${lang}/blog`, label: msg.nav.blog, hideMobile: false },
   ];
 

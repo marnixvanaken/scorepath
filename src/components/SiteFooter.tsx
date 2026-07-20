@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { Logo } from './Logo';
 import { getMessages } from '@/i18n';
 import { SITE_NAME } from '@/lib/siteConfig';
-import { simulatorPath } from '@/lib/routes';
+import { simulatorPath, globePath } from '@/lib/routes';
 
 /**
  * Shared site footer for the marketing/content pages (home, about, blog,
@@ -20,6 +20,7 @@ export function SiteFooter({
   const links = [
     { href: `/${lang}/blog`, label: msg.nav.blog },
     { href: simulatorPath(lang), label: msg.nav.simulator },
+    { href: globePath(lang), label: msg.nav.globe },
     { href: `/${lang}/about`, label: msg.nav.about },
     { href: `/${lang}/privacy`, label: msg.nav.privacy },
   ];

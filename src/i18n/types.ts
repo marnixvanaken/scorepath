@@ -126,6 +126,10 @@ export interface Messages {
     uclTitle: string;
     uclDesc: string;
     openUcl: string;
+    globeEyebrow: string;
+    globeTitle: string;
+    globeDesc: string;
+    openGlobe: string;
   };
   start: {
     step1Label: string;
@@ -164,6 +168,7 @@ export interface Messages {
     about: string;
     birthplace: string;
     ucl: string;
+    globe: string;
   };
   privacy: {
     pageTitle: string;
@@ -253,6 +258,34 @@ export interface Messages {
     cardTeam: string;
     cardPosition: string;
     mapLabel: string;
+  };
+  globe: {
+    title: string;
+    subtitle: string;
+    loading: string;
+    tierLabel: string;
+    tierAll: string;
+    tier1: string;
+    tier2: string;
+    capacityLabel: string;
+    capAny: string;
+    /** '{n}' wordt vervangen door het aantal zichtbare clubs. */
+    clubsShown: string;
+    stadiumLabel: string;
+    capacityWord: string;
+    upcomingMatches: string;
+    matchesLoading: string;
+    noMatches: string;
+    ctaTickets: string;
+    ctaHotels: string;
+    ctaTrip: string;
+    affiliateDisclosure: string;
+    close: string;
+    resetFilters: string;
+    webglTitle: string;
+    webglDesc: string;
+    listTitle: string;
+    globeHint: string;
   };
   ogCard: {
     /** Gedeelde footer onderaan elke gegenereerde kaart. */

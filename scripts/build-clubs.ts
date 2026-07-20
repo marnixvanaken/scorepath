@@ -249,7 +249,8 @@ async function main(): Promise<void> {
           capacity: wd.capacity ?? prev?.stadium.capacity ?? null,
         },
         fdId: fd?.id ?? prev?.fdId ?? null,
-        crest: fd?.crest ?? prev?.crest ?? null,
+        // Bundled logos (scripts/import-logos.ts) win over remote fd crests.
+        crest: prev?.crest?.startsWith('/logos/') ? prev.crest : fd?.crest ?? prev?.crest ?? null,
         wikidataId: wd.wikidataId,
       };
       if (prev?.colors) club.colors = prev.colors;

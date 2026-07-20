@@ -1,4 +1,6 @@
 import { describe, it, expect } from 'vitest';
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
 import { clubs, COMPETITIONS, getClub, countryName } from '@/data/clubs';
 
 describe('clubs dataset', () => {
@@ -35,12 +37,18 @@ describe('clubs dataset', () => {
     }
   });
 
-  it('only uses football-data.org crest URLs, consistent with fdId', () => {
+  it('points every crest at a bundled logo that actually exists', () => {
     for (const c of clubs) {
       if (c.crest !== null) {
-        expect(c.crest, c.id).toMatch(/^https:\/\/crests\.football-data\.org\//);
-        expect(c.fdId, `${c.id} has a crest but no fdId`).not.toBeNull();
+        expect(c.crest, c.id).toBe(`/logos/${c.id}.png`);
+        expect(existsSync(join(process.cwd(), 'public', c.crest)), `${c.id}: ${c.crest} missing on disk`).toBe(true);
       }
+    }
+  });
+
+  it('gives every tier-1 club a real crest', () => {
+    for (const c of clubs.filter((c) => c.tier === 1)) {
+      expect(c.crest, c.id).not.toBeNull();
     }
   });
 

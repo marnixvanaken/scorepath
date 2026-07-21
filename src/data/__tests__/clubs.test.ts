@@ -200,6 +200,25 @@ describe('clubs dataset', () => {
     expect(getClub('es-oviedo')?.competition).toBe('SD');
   });
 
+  it('fields Ligue 2 with 18 French tier-2 clubs', () => {
+    const fl2 = clubs.filter((c) => c.competition === 'FL2');
+    expect(fl2.length).toBe(18);
+    for (const c of fl2) {
+      expect(c.tier, c.id).toBe(2);
+      expect(c.country, c.id).toBe('fr');
+    }
+    // Uit Ligue 1 gedegradeerde clubs houden hun record + crest.
+    expect(getClub('fr-metz')?.competition).toBe('FL2');
+    expect(clubs.find((c) => c.id === 'fr-metz')?.crest).not.toBeNull();
+  });
+
+  it('groups every second-tier competition under tier 2', () => {
+    const tier2 = new Set(['KKD', 'ELC', 'BL2', 'SB', 'SD', 'FL2']);
+    for (const code of tier2) expect(COMPETITIONS[code]?.tier, code).toBe(2);
+    // Elke tier-2-competitie heeft een gevulde indeling.
+    for (const code of tier2) expect(MEMBERSHIPS[code]?.clubs.length, code).toBeGreaterThanOrEqual(18);
+  });
+
   it('looks up clubs by id', () => {
     expect(getClub('nl-ajax')?.name).toBe('Ajax');
     expect(getClub('bestaat-niet')).toBeUndefined();

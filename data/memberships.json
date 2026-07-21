@@ -766,5 +766,28 @@
    "es-tenerife",
    "es-valladolid"
   ]
+ },
+ "FL2": {
+  "season": "2026/27",
+  "clubs": [
+   "fr-annecy",
+   "fr-boulogne",
+   "fr-clermont",
+   "fr-dijon",
+   "fr-dunkerque",
+   "fr-grenoble",
+   "fr-guingamp",
+   "fr-laval",
+   "fr-metz",
+   "fr-montpellier",
+   "fr-nancy",
+   "fr-nantes",
+   "fr-pau",
+   "fr-red-star",
+   "fr-reims",
+   "fr-rodez",
+   "fr-saint-etienne",
+   "fr-sochaux"
+  ]
  }
 }

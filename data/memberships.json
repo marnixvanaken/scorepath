@@ -739,5 +739,32 @@
    "it-vicenza",
    "it-virtus-entella"
   ]
+ },
+ "SD": {
+  "season": "2026/27",
+  "clubs": [
+   "es-albacete",
+   "es-almeria",
+   "es-andorra",
+   "es-burgos",
+   "es-cadiz",
+   "es-castellon",
+   "es-celta-fortuna",
+   "es-ceuta",
+   "es-cordoba",
+   "es-eibar",
+   "es-eldense",
+   "es-girona",
+   "es-granada",
+   "es-las-palmas",
+   "es-leganes",
+   "es-mallorca",
+   "es-oviedo",
+   "es-real-sociedad-b",
+   "es-sabadell",
+   "es-sporting-gijon",
+   "es-tenerife",
+   "es-valladolid"
+  ]
  }
 }

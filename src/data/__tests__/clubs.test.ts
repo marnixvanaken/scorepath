@@ -189,6 +189,17 @@ describe('clubs dataset', () => {
     expect(clubs.find((c) => c.id === 'it-cremonese')?.crest).not.toBeNull();
   });
 
+  it('fields the Segunda División with 22 clubs, including Andorra', () => {
+    const sd = clubs.filter((c) => c.competition === 'SD');
+    expect(sd.length).toBe(22);
+    for (const c of sd) expect(c.tier, c.id).toBe(2);
+    // FC Andorra speelt in het Spaanse systeem maar houdt zijn eigen land.
+    expect(getClub('es-andorra')?.country).toBe('ad');
+    expect(countryName('ad', 'nl')).toBe('Andorra');
+    // Uit LaLiga gedegradeerde clubs houden hun record + crest.
+    expect(getClub('es-oviedo')?.competition).toBe('SD');
+  });
+
   it('looks up clubs by id', () => {
     expect(getClub('nl-ajax')?.name).toBe('Ajax');
     expect(getClub('bestaat-niet')).toBeUndefined();

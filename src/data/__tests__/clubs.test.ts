@@ -111,6 +111,18 @@ describe('clubs dataset', () => {
     expect(clubs.find((c) => c.id === 'en-west-ham')?.fdId).not.toBeNull();
   });
 
+  it('fields the German second tier (2. Bundesliga) with 18 clubs', () => {
+    const bl2 = clubs.filter((c) => c.competition === 'BL2');
+    expect(bl2.length).toBe(18);
+    for (const c of bl2) {
+      expect(c.tier, c.id).toBe(2);
+      expect(c.country, c.id).toBe('de');
+    }
+    // Uit de Bundesliga gedegradeerde clubs houden hun football-data-id.
+    expect(clubs.find((c) => c.id === 'de-wolfsburg')?.competition).toBe('BL2');
+    expect(clubs.find((c) => c.id === 'de-wolfsburg')?.fdId).not.toBeNull();
+  });
+
   it('looks up clubs by id', () => {
     expect(getClub('nl-ajax')?.name).toBe('Ajax');
     expect(getClub('bestaat-niet')).toBeUndefined();

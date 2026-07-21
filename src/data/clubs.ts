@@ -61,6 +61,7 @@ export const COMPETITIONS: Record<string, CompetitionMeta> = {
   ELC: { country: 'gb-eng', tier: 2, label: 'Championship' },
   PD:  { country: 'es',     tier: 1, label: 'LaLiga' },
   BL1: { country: 'de',     tier: 1, label: 'Bundesliga' },
+  BL2: { country: 'de',     tier: 2, label: '2. Bundesliga' },
   SA:  { country: 'it',     tier: 1, label: 'Serie A' },
   FL1: { country: 'fr',     tier: 1, label: 'Ligue 1' },
   AT1: { country: 'at',     tier: 1, label: 'Bundesliga (AT)' },

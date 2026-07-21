@@ -573,5 +573,28 @@
    "en-wolverhampton",
    "en-wrexham"
   ]
+ },
+ "BL2": {
+  "season": "2026/27",
+  "clubs": [
+   "de-arminia-bielefeld",
+   "de-darmstadt-98",
+   "de-dynamo-dresden",
+   "de-eintracht-braunschweig",
+   "de-energie-cottbus",
+   "de-greuther-furth",
+   "de-hannover-96",
+   "de-heidenheim",
+   "de-hertha-bsc",
+   "de-holstein-kiel",
+   "de-kaiserslautern",
+   "de-karlsruher-sc",
+   "de-magdeburg",
+   "de-nurnberg",
+   "de-st-pauli",
+   "de-vfl-bochum",
+   "de-vfl-osnabruck",
+   "de-wolfsburg"
+  ]
  }
 }

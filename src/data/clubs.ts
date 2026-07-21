@@ -83,6 +83,7 @@ export const COMPETITIONS: Record<string, CompetitionMeta> = {
   CH1: { country: 'ch',     tier: 1, label: 'Super League (CH)' },
   TR1: { country: 'tr',     tier: 1, label: 'Super Lig' },
   UA1: { country: 'ua',     tier: 1, label: 'Premier Liga (UA)' },
+  BSA: { country: 'br',     tier: 1, label: 'Brasileirão Série A' },
 };
 
 interface Membership {

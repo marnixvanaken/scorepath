@@ -596,5 +596,30 @@
    "de-vfl-osnabruck",
    "de-wolfsburg"
   ]
+ },
+ "BSA": {
+  "season": "2026",
+  "clubs": [
+   "br-athletico-paranaense",
+   "br-atletico-mineiro",
+   "br-bahia",
+   "br-botafogo",
+   "br-bragantino",
+   "br-chapecoense",
+   "br-corinthians",
+   "br-coritiba",
+   "br-cruzeiro",
+   "br-flamengo",
+   "br-fluminense",
+   "br-gremio",
+   "br-internacional",
+   "br-mirassol",
+   "br-palmeiras",
+   "br-remo",
+   "br-santos",
+   "br-sao-paulo",
+   "br-vasco-da-gama",
+   "br-vitoria"
+  ]
  }
 }

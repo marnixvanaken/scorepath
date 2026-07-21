@@ -123,6 +123,18 @@ describe('clubs dataset', () => {
     expect(clubs.find((c) => c.id === 'de-wolfsburg')?.fdId).not.toBeNull();
   });
 
+  it('fields the Brazilian Série A as a calendar-year top division', () => {
+    const bsa = clubs.filter((c) => c.competition === 'BSA');
+    expect(bsa.length).toBe(20);
+    for (const c of bsa) {
+      expect(c.tier, c.id).toBe(1);
+      expect(c.country, c.id).toBe('br');
+      expect(c.lat, c.id).toBeLessThan(6); // zuidelijk halfrond / equator
+    }
+    expect(MEMBERSHIPS.BSA.season).toBe('2026'); // kalenderjaar, geen 2026/27
+    expect(countryName('br', 'nl')).toBe('Brazilië');
+  });
+
   it('looks up clubs by id', () => {
     expect(getClub('nl-ajax')?.name).toBe('Ajax');
     expect(getClub('bestaat-niet')).toBeUndefined();

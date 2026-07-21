@@ -163,6 +163,20 @@ describe('clubs dataset', () => {
     expect(azteca.map((c) => c.id).sort()).toEqual(['mx-america', 'mx-atlante', 'mx-cruz-azul']);
   });
 
+  it('fields MLS across the USA and Canada with 30 clubs', () => {
+    const mls = clubs.filter((c) => c.competition === 'MLS');
+    expect(mls.length).toBe(30);
+    for (const c of mls) {
+      expect(c.tier, c.id).toBe(1);
+      expect(['us', 'ca'], c.id).toContain(c.country);
+    }
+    // De drie Canadese clubs houden hun eigen land.
+    const canadian = mls.filter((c) => c.country === 'ca').map((c) => c.id).sort();
+    expect(canadian).toEqual(['ca-montreal', 'ca-toronto', 'ca-vancouver']);
+    expect(countryName('us', 'nl')).toBe('Verenigde Staten');
+    expect(countryName('ca', 'en')).toBe('Canada');
+  });
+
   it('looks up clubs by id', () => {
     expect(getClub('nl-ajax')?.name).toBe('Ajax');
     expect(getClub('bestaat-niet')).toBeUndefined();

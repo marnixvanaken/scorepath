@@ -679,5 +679,40 @@
    "mx-tijuana",
    "mx-toluca"
   ]
+ },
+ "MLS": {
+  "season": "2026",
+  "clubs": [
+   "ca-montreal",
+   "ca-toronto",
+   "ca-vancouver",
+   "us-atlanta-united",
+   "us-austin",
+   "us-charlotte",
+   "us-chicago-fire",
+   "us-cincinnati",
+   "us-colorado",
+   "us-columbus-crew",
+   "us-dallas",
+   "us-dc-united",
+   "us-houston",
+   "us-inter-miami",
+   "us-la-galaxy",
+   "us-lafc",
+   "us-minnesota",
+   "us-nashville",
+   "us-new-england",
+   "us-ny-red-bulls",
+   "us-nycfc",
+   "us-orlando-city",
+   "us-philadelphia",
+   "us-portland",
+   "us-real-salt-lake",
+   "us-san-diego",
+   "us-san-jose",
+   "us-seattle",
+   "us-sporting-kc",
+   "us-st-louis"
+  ]
  }
 }

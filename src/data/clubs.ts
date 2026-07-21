@@ -86,6 +86,7 @@ export const COMPETITIONS: Record<string, CompetitionMeta> = {
   BSA: { country: 'br',     tier: 1, label: 'Brasileirão Série A' },
   ARP: { country: 'ar',     tier: 1, label: 'Liga Profesional (AR)' },
   LMX: { country: 'mx',     tier: 1, label: 'Liga MX' },
+  MLS: { country: 'us',     tier: 1, label: 'Major League Soccer' },
 };
 
 interface Membership {

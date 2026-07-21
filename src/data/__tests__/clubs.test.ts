@@ -149,6 +149,20 @@ describe('clubs dataset', () => {
     expect(getClub('ar-independiente-rivadavia')?.name).toBe('Independiente Rivadavia');
   });
 
+  it('fields Liga MX with 18 clubs on the northern hemisphere', () => {
+    const lmx = clubs.filter((c) => c.competition === 'LMX');
+    expect(lmx.length).toBe(18);
+    for (const c of lmx) {
+      expect(c.tier, c.id).toBe(1);
+      expect(c.country, c.id).toBe('mx');
+      expect(c.lng, c.id).toBeLessThan(-85); // Mexico ligt ruim ten westen
+    }
+    // Drie clubs delen Estadio Banorte (Azteca); de dup-stadion-nudge in
+    // clubMap spreidt overlappende markers.
+    const azteca = lmx.filter((c) => c.stadium.name === 'Estadio Banorte');
+    expect(azteca.map((c) => c.id).sort()).toEqual(['mx-america', 'mx-atlante', 'mx-cruz-azul']);
+  });
+
   it('looks up clubs by id', () => {
     expect(getClub('nl-ajax')?.name).toBe('Ajax');
     expect(getClub('bestaat-niet')).toBeUndefined();

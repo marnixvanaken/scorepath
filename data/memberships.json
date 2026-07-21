@@ -656,5 +656,28 @@
    "ar-union-santa-fe",
    "ar-velez-sarsfield"
   ]
+ },
+ "LMX": {
+  "season": "2026/27",
+  "clubs": [
+   "mx-america",
+   "mx-atlante",
+   "mx-atlas",
+   "mx-atletico-san-luis",
+   "mx-cruz-azul",
+   "mx-guadalajara",
+   "mx-juarez",
+   "mx-leon",
+   "mx-monterrey",
+   "mx-necaxa",
+   "mx-pachuca",
+   "mx-puebla",
+   "mx-pumas",
+   "mx-queretaro",
+   "mx-santos-laguna",
+   "mx-tigres",
+   "mx-tijuana",
+   "mx-toluca"
+  ]
  }
 }

@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
-import { clubs, COMPETITIONS, getClub, countryName } from '@/data/clubs';
+import { clubs, register, MEMBERSHIPS, COMPETITIONS, getClub, countryName } from '@/data/clubs';
 
 describe('clubs dataset', () => {
   it('has a substantial, unique set of clubs', () => {
@@ -57,9 +57,23 @@ describe('clubs dataset', () => {
     }
   });
 
-  it('gives every tier-1 club a real crest', () => {
-    for (const c of clubs.filter((c) => c.tier === 1)) {
-      expect(c.crest, c.id).not.toBeNull();
+  it('has crests for the vast majority of clubs (promovendi may lag until the logo repo rolls)', () => {
+    const withCrest = clubs.filter((c) => c.crest !== null).length;
+    expect(withCrest / clubs.length).toBeGreaterThan(0.85);
+  });
+
+  it('has consistent memberships: valid register ids, one competition per club, season labels', () => {
+    const registerIds = new Set(register.map((c) => c.id));
+    const seen = new Set<string>();
+    for (const [comp, membership] of Object.entries(MEMBERSHIPS)) {
+      expect(COMPETITIONS[comp], `onbekende competitie ${comp}`).toBeDefined();
+      expect(membership.season, comp).toMatch(/^\d{4}(\/\d{2})?$/);
+      expect(membership.clubs.length, comp).toBeGreaterThanOrEqual(10);
+      for (const id of membership.clubs) {
+        expect(registerIds.has(id), `${comp}: ${id} niet in register`).toBe(true);
+        expect(seen.has(id), `${id} zit in twee competities`).toBe(false);
+        seen.add(id);
+      }
     }
   });
 

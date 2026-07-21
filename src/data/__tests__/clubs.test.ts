@@ -135,6 +135,20 @@ describe('clubs dataset', () => {
     expect(countryName('br', 'nl')).toBe('Brazilië');
   });
 
+  it('fields the Argentine Primera División with 30 calendar-year clubs', () => {
+    const arp = clubs.filter((c) => c.competition === 'ARP');
+    expect(arp.length).toBe(30);
+    for (const c of arp) {
+      expect(c.tier, c.id).toBe(1);
+      expect(c.country, c.id).toBe('ar');
+      expect(c.lat, c.id).toBeLessThan(-20); // Argentinië ligt diep op het zuidelijk halfrond
+    }
+    expect(MEMBERSHIPS.ARP.season).toBe('2026');
+    // Gelijknamige clubs blijven onderscheiden op id.
+    expect(getClub('ar-independiente')?.name).toBe('Independiente');
+    expect(getClub('ar-independiente-rivadavia')?.name).toBe('Independiente Rivadavia');
+  });
+
   it('looks up clubs by id', () => {
     expect(getClub('nl-ajax')?.name).toBe('Ajax');
     expect(getClub('bestaat-niet')).toBeUndefined();

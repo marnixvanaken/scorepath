@@ -621,5 +621,40 @@
    "br-vasco-da-gama",
    "br-vitoria"
   ]
+ },
+ "ARP": {
+  "season": "2026",
+  "clubs": [
+   "ar-aldosivi",
+   "ar-argentinos-juniors",
+   "ar-atletico-tucuman",
+   "ar-banfield",
+   "ar-barracas-central",
+   "ar-belgrano",
+   "ar-boca-juniors",
+   "ar-central-cordoba",
+   "ar-defensa-y-justicia",
+   "ar-deportivo-riestra",
+   "ar-estudiantes-lp",
+   "ar-estudiantes-rc",
+   "ar-gimnasia-lp",
+   "ar-gimnasia-mendoza",
+   "ar-huracan",
+   "ar-independiente",
+   "ar-independiente-rivadavia",
+   "ar-instituto",
+   "ar-lanus",
+   "ar-newells",
+   "ar-platense",
+   "ar-racing-club",
+   "ar-river-plate",
+   "ar-rosario-central",
+   "ar-san-lorenzo",
+   "ar-sarmiento",
+   "ar-talleres",
+   "ar-tigre",
+   "ar-union-santa-fe",
+   "ar-velez-sarsfield"
+  ]
  }
 }

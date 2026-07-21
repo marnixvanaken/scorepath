@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import type { Club } from '@/data/clubs';
-import { COMPETITIONS, countryName } from '@/data/clubs';
+import { COMPETITIONS, UEFA_LABELS, countryName } from '@/data/clubs';
 import type { ClubMatch, ClubMatchesResponse } from '@/lib/footballDataMapper';
 import { hotelsUrl, tripUrl, ticketsUrl, type AffiliateContext } from '@/lib/affiliates';
 import { badgeInitials, badgeColor } from '@/lib/badge';
@@ -127,6 +127,7 @@ function ClubHeader({ club, locale }: { club: Club; locale: string }) {
           />
           <span className="truncate">
             {countryName(club.country, locale)} · {comp?.label ?? club.competition}
+            {club.uefa && <> · {UEFA_LABELS[club.uefa]}</>}
           </span>
         </p>
       </div>

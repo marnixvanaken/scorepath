@@ -269,6 +269,10 @@ export interface Messages {
     tier2: string;
     capacityLabel: string;
     capAny: string;
+    competitionLabel: string;
+    compAll: string;
+    uefaLabel: string;
+    uefaAll: string;
     /** '{n}' wordt vervangen door het aantal zichtbare clubs. */
     clubsShown: string;
     stadiumLabel: string;

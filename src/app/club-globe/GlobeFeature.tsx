@@ -59,12 +59,14 @@ export default function GlobeFeature({ clubs, m, locale }: GlobeFeatureProps) {
 
   const replaceParams = useCallback(
     (mutate: (params: URLSearchParams) => void) => {
-      const params = new URLSearchParams(searchParams.toString());
+      // window.location i.p.v. de useSearchParams-snapshot: bij twee snelle
+      // filterklikken zou de tweede anders de eerste overschrijven.
+      const params = new URLSearchParams(window.location.search);
       mutate(params);
       const qs = params.toString();
       router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
     },
-    [router, pathname, searchParams],
+    [router, pathname],
   );
 
   const setSelected = useCallback(

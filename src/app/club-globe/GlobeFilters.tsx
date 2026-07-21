@@ -1,7 +1,8 @@
 'use client';
 
 import { motion } from 'motion/react';
-import { CAPACITY_PRESETS, isDefault, type GlobeFilters } from '@/lib/globeFilters';
+import { COMPETITIONS, UEFA_LABELS } from '@/data/clubs';
+import { CAPACITY_PRESETS, UEFA_COMPS, isDefault, type GlobeFilters } from '@/lib/globeFilters';
 import type { GlobeMessages } from './GlobeFeature';
 
 interface GlobeFiltersBarProps {
@@ -58,16 +59,39 @@ export default function GlobeFiltersBar({ filters, onChange, shownCount, m }: Gl
     })),
   ];
 
+  const uefaOptions: PillOption[] = [
+    { label: m.uefaAll, active: filters.uefa === null, onSelect: () => onChange({ ...filters, uefa: null }) },
+    ...UEFA_COMPS.map((comp) => ({
+      label: UEFA_LABELS[comp],
+      active: filters.uefa === comp,
+      onSelect: () => onChange({ ...filters, uefa: comp }),
+    })),
+  ];
+
   return (
     <div className="absolute top-3 left-3 right-3 z-20 flex flex-wrap items-center gap-2 pointer-events-none">
       <div className="flex flex-wrap items-center gap-2 pointer-events-auto">
-        <span className="c-fg-subtle text-[11px] font-bold tracking-widest uppercase hidden sm:inline">{m.tierLabel}</span>
+        <label className="sr-only" htmlFor="globe-comp">{m.competitionLabel}</label>
+        <select
+          id="globe-comp"
+          value={filters.competition ?? ''}
+          onChange={(e) => onChange({ ...filters, competition: e.target.value || null })}
+          className="view-toggle rounded-lg px-2.5 min-h-[44px] text-xs font-semibold c-fg"
+        >
+          <option value="">{m.compAll}</option>
+          {Object.entries(COMPETITIONS).map(([code, meta]) => (
+            <option key={code} value={code}>{meta.label}</option>
+          ))}
+        </select>
+        <span className="c-fg-subtle text-[11px] font-bold tracking-widest uppercase hidden lg:inline">{m.uefaLabel}</span>
+        <PillGroup label={m.uefaLabel} options={uefaOptions} layoutId="globe-uefa-pill" />
+        <span className="c-fg-subtle text-[11px] font-bold tracking-widest uppercase hidden lg:inline">{m.tierLabel}</span>
         <PillGroup label={m.tierLabel} options={tierOptions} layoutId="globe-tier-pill" />
-        <span className="c-fg-subtle text-[11px] font-bold tracking-widest uppercase hidden sm:inline">{m.capacityLabel}</span>
+        <span className="c-fg-subtle text-[11px] font-bold tracking-widest uppercase hidden lg:inline">{m.capacityLabel}</span>
         <PillGroup label={m.capacityLabel} options={capacityOptions} layoutId="globe-cap-pill" />
         {!isDefault(filters) && (
           <button
-            onClick={() => onChange({ tier: null, minCapacity: null })}
+            onClick={() => onChange({ tier: null, minCapacity: null, competition: null, uefa: null })}
             className="c-fg-muted text-xs font-semibold min-h-[44px] px-2 underline underline-offset-4 transition-opacity hover:opacity-70"
           >
             {m.resetFilters}

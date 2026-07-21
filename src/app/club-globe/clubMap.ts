@@ -64,10 +64,18 @@ export class ClubMap {
     // Belt-and-braces naast "projection" in de stijl-JSON.
     this.map.on('style.load', () => this.map.setProjection({ type: 'globe' }));
 
+    // Clubs die een stadion delen (Letzigrund, San Siro, Teddy, ...) krijgen
+    // een kleine lengtegraad-verschuiving zodat beide markers klikbaar blijven.
+    const seenCoords = new Map<string, number>();
     for (const club of opts.clubs) {
+      const key = `${club.lat.toFixed(4)},${club.lng.toFixed(4)}`;
+      const dupes = seenCoords.get(key) ?? 0;
+      seenCoords.set(key, dupes + 1);
       const el = this.buildMarkerElement(club, opts.onClubClick);
       this.markerEls.set(club.id, el);
-      new maplibregl.Marker({ element: el }).setLngLat([club.lng, club.lat]).addTo(this.map);
+      new maplibregl.Marker({ element: el })
+        .setLngLat([club.lng + dupes * 0.006, club.lat])
+        .addTo(this.map);
     }
 
     this.map.on('zoom', this.updateMarkerMode);

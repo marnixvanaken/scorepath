@@ -154,6 +154,41 @@ const MAPPING: Record<string, Record<string, string>> = {
   },
 };
 
+// De overige competities gebruiken automatische id-afleiding: bestandsnaam
+// -> slug met het landvoorvoegsel hieronder (zelfde afleiding als waarmee de
+// records in data/clubs.json zijn aangemaakt).
+const AUTO_LEAGUES: Record<string, string> = {
+  'Austria - Bundesliga': 'at',
+  'Belgium - Jupiler Pro League': 'be',
+  'Bulgaria - efbet Liga': 'bg',
+  'Croatia - SuperSport HNL': 'hr',
+  'Czech Republic - Chance Liga': 'cz',
+  'Denmark - Superliga': 'dk',
+  'Greece - Super League 1': 'gr',
+  "Israel - Ligat ha'Al": 'il',
+  'Norway - Eliteserien': 'no',
+  'Poland - PKO BP Ekstraklasa': 'pl',
+  'Portugal - Liga Portugal': 'pt',
+  'Romania - SuperLiga': 'ro',
+  'Russia - Premier Liga': 'ru',
+  'Scotland - Scottish Premiership': 'sct',
+  'Serbia - Super liga Srbije': 'rs',
+  'Sweden - Allsvenskan': 'se',
+  'Switzerland - Super League': 'ch',
+  'Türkiye - Süper Lig': 'tr',
+  'Ukraine - Premier Liga': 'ua',
+};
+
+function slugify(name: string): string {
+  return name
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '')
+    .replace(/ø/g, 'o').replace(/æ/g, 'ae').replace(/ß/g, 'ss').replace(/ı/g, 'i')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
 interface ClubRecord {
   id: string;
   tier: number;
@@ -186,6 +221,25 @@ async function main(): Promise<void> {
         continue;
       }
       await fs.copyFile(src, path.join(OUT_DIR, `${clubId}.png`));
+      copied++;
+    }
+  }
+
+  // Auto-afgeleide competities: id = '{prefix}-{slug(bestandsnaam)}'.
+  for (const [league, prefix] of Object.entries(AUTO_LEAGUES)) {
+    const dir = path.join(sourceRoot, 'logos', league);
+    if (!existsSync(dir)) {
+      problems.push(`missing league folder: ${league}`);
+      continue;
+    }
+    for (const entry of await fs.readdir(dir)) {
+      if (!entry.endsWith('.png')) continue;
+      const clubId = `${prefix}-${slugify(entry.replace(/\.png$/, ''))}`;
+      if (!clubIds.has(clubId)) {
+        problems.push(`no club record for ${league}/${entry} (verwacht id ${clubId})`);
+        continue;
+      }
+      await fs.copyFile(path.join(dir, entry), path.join(OUT_DIR, `${clubId}.png`));
       copied++;
     }
   }

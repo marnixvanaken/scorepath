@@ -15,9 +15,17 @@ export interface Club {
   stadium: { name: string; capacity: number | null };
   fdId: number | null;     // football-data.org team id; null ⇒ no fixtures
   crest: string | null;    // crest URL; null ⇒ generated initials badge
+  /** Europese deelname dit seizoen (league phase), indien van toepassing. */
+  uefa?: 'UCL' | 'UEL' | 'UECL';
   colors?: [string, string];
   wikidataId?: string;
 }
+
+export const UEFA_LABELS: Record<string, string> = {
+  UCL: 'Champions League',
+  UEL: 'Europa League',
+  UECL: 'Conference League',
+};
 
 export interface CompetitionMeta {
   country: string;
@@ -33,6 +41,25 @@ export const COMPETITIONS: Record<string, CompetitionMeta> = {
   BL1: { country: 'de',     tier: 1, label: 'Bundesliga' },
   SA:  { country: 'it',     tier: 1, label: 'Serie A' },
   FL1: { country: 'fr',     tier: 1, label: 'Ligue 1' },
+  AT1: { country: 'at',     tier: 1, label: 'Bundesliga (AT)' },
+  BE1: { country: 'be',     tier: 1, label: 'Jupiler Pro League' },
+  BG1: { country: 'bg',     tier: 1, label: 'efbet Liga' },
+  HR1: { country: 'hr',     tier: 1, label: 'SuperSport HNL' },
+  CZ1: { country: 'cz',     tier: 1, label: 'Chance Liga' },
+  DK1: { country: 'dk',     tier: 1, label: 'Superliga' },
+  GR1: { country: 'gr',     tier: 1, label: 'Super League 1' },
+  IL1: { country: 'il',     tier: 1, label: "Ligat ha'Al" },
+  NO1: { country: 'no',     tier: 1, label: 'Eliteserien' },
+  PL1: { country: 'pl',     tier: 1, label: 'Ekstraklasa' },
+  PPL: { country: 'pt',     tier: 1, label: 'Liga Portugal' },
+  RO1: { country: 'ro',     tier: 1, label: 'SuperLiga' },
+  RU1: { country: 'ru',     tier: 1, label: 'Premier Liga (RU)' },
+  SC1: { country: 'gb-sct', tier: 1, label: 'Scottish Premiership' },
+  RS1: { country: 'rs',     tier: 1, label: 'Super liga Srbije' },
+  SE1: { country: 'se',     tier: 1, label: 'Allsvenskan' },
+  CH1: { country: 'ch',     tier: 1, label: 'Super League (CH)' },
+  TR1: { country: 'tr',     tier: 1, label: 'Super Lig' },
+  UA1: { country: 'ua',     tier: 1, label: 'Premier Liga (UA)' },
 };
 
 export const clubs: Club[] = rawClubs as Club[];

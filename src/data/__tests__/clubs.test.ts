@@ -5,12 +5,23 @@ import { clubs, COMPETITIONS, getClub, countryName } from '@/data/clubs';
 
 describe('clubs dataset', () => {
   it('has a substantial, unique set of clubs', () => {
-    expect(clubs.length).toBeGreaterThanOrEqual(130);
+    expect(clubs.length).toBeGreaterThanOrEqual(400);
     const ids = new Set(clubs.map((c) => c.id));
     expect(ids.size).toBe(clubs.length);
   });
 
-  it('covers all seven v1 competitions', () => {
+  it('only uses valid uefa values', () => {
+    for (const c of clubs) {
+      if (c.uefa !== undefined) {
+        expect(['UCL', 'UEL', 'UECL'], c.id).toContain(c.uefa);
+      }
+    }
+    // Alle drie de Europese toernooien komen voor in de dataset.
+    const present = new Set(clubs.map((c) => c.uefa).filter(Boolean));
+    expect([...present].sort()).toEqual(['UCL', 'UECL', 'UEL']);
+  });
+
+  it('covers all competitions in the metadata map', () => {
     const present = new Set(clubs.map((c) => c.competition));
     for (const code of Object.keys(COMPETITIONS)) {
       expect(present.has(code), `competition ${code} missing`).toBe(true);

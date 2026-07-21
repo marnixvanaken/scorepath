@@ -40,21 +40,19 @@
   ]
  },
  "BG1": {
-  "season": "2025/26",
+  "season": "2026/27",
   "clubs": [
    "bg-arda-kardzhali",
-   "bg-beroe-stara-zagora",
    "bg-botev-plovdiv",
    "bg-botev-vratsa",
    "bg-cherno-more-varna",
    "bg-cska-1948",
    "bg-cska-sofia",
-   "bg-dobrudzha-dobrich",
+   "bg-dunav-ruse",
    "bg-levski-sofia",
    "bg-lokomotiv-plovdiv",
    "bg-lokomotiv-sofia",
    "bg-ludogorets-razgrad",
-   "bg-montana",
    "bg-septemvri-sofia",
    "bg-slavia-sofia",
    "bg-spartak-varna"
@@ -101,40 +99,40 @@
   ]
  },
  "CZ1": {
-  "season": "2025/26",
+  "season": "2026/27",
   "clubs": [
    "cz-1-fc-slovacko",
-   "cz-fc-banik-ostrava",
+   "cz-ac-sparta-prague",
    "cz-bohemians-prague-1905",
-   "cz-fk-dukla-prague",
-   "cz-fc-zlin",
+   "cz-fc-banik-ostrava",
    "cz-fc-hradec-kralove",
+   "cz-fc-slovan-liberec",
+   "cz-fc-viktoria-plzen",
+   "cz-fc-zbrojovka-brno",
+   "cz-fc-zlin",
    "cz-fk-jablonec",
-   "cz-mfk-karvina",
    "cz-fk-mlada-boleslav",
    "cz-fk-pardubice",
-   "cz-sk-sigma-olomouc",
-   "cz-sk-slavia-prague",
-   "cz-fc-slovan-liberec",
-   "cz-ac-sparta-prague",
    "cz-fk-teplice",
-   "cz-fc-viktoria-plzen"
+   "cz-sk-artis-brno",
+   "cz-sk-sigma-olomouc",
+   "cz-sk-slavia-prague"
   ]
  },
  "DK1": {
-  "season": "2025/26",
+  "season": "2026/27",
   "clubs": [
    "dk-aarhus-gf",
+   "dk-ac-horsens",
    "dk-brondby-if",
-   "dk-fc-fredericia",
    "dk-fc-copenhagen",
    "dk-fc-midtjylland",
    "dk-fc-nordsjaelland",
+   "dk-lyngby-bk",
    "dk-odense-boldklub",
    "dk-randers-fc",
    "dk-silkeborg-if",
    "dk-sonderjyske",
-   "dk-vejle-boldklub",
    "dk-viborg-ff"
   ]
  },
@@ -185,37 +183,37 @@
   ]
  },
  "GR1": {
-  "season": "2025/26",
+  "season": "2026/27",
   "clubs": [
+   "gr-ae-kifisias",
    "gr-aek-athens",
-   "gr-ae-larisa",
+   "gr-apo-levadiakos",
    "gr-aris-thessaloniki",
    "gr-asteras-aktor",
    "gr-atromitos-athens",
-   "gr-ae-kifisias",
-   "gr-apo-levadiakos",
+   "gr-iraklis-thessaloniki",
+   "gr-kalamata-fc",
    "gr-ofi-crete-fc",
    "gr-olympiacos-piraeus",
    "gr-panathinaikos-fc",
    "gr-panetolikos-gfs",
-   "gr-panserraikos",
    "gr-paok-thessaloniki",
    "gr-volos-nps"
   ]
  },
  "HR1": {
-  "season": "2025/26",
+  "season": "2026/27",
   "clubs": [
    "hr-gnk-dinamo-zagreb",
    "hr-hnk-gorica",
    "hr-hnk-hajduk-split",
+   "hr-hnk-rijeka",
    "hr-nk-istra-1961",
    "hr-nk-lokomotiva-zagreb",
    "hr-nk-osijek",
-   "hr-hnk-rijeka",
-   "hr-slaven-belupo-koprivnica",
+   "hr-nk-rudes",
    "hr-nk-varazdin",
-   "hr-hnk-vukovar-1991"
+   "hr-slaven-belupo-koprivnica"
   ]
  },
  "IL1": {
@@ -380,44 +378,42 @@
   ]
  },
  "RO1": {
-  "season": "2025/26",
+  "season": "2026/27",
   "clubs": [
-   "ro-cfr-cluj",
-   "ro-afk-csikszereda-miercurea-ciuc",
-   "ro-fc-dinamo-1948",
-   "ro-fcv-farul-constanta",
    "ro-acsc-fc-arges",
+   "ro-afk-csikszereda-miercurea-ciuc",
+   "ro-cfr-cluj",
+   "ro-cs-universitatea-craiova",
    "ro-fc-botosani",
-   "ro-fcsb",
-   "ro-fc-hermannstadt",
-   "ro-fc-metaloglobus-bucharest",
-   "ro-sc-otelul-galati",
-   "ro-petrolul-ploiesti",
+   "ro-fc-corvinul-hunedoara",
+   "ro-fc-dinamo-1948",
    "ro-fc-rapid-1923",
    "ro-fc-universitatea-cluj",
-   "ro-afc-unirea-04-slobozia",
-   "ro-cs-universitatea-craiova",
+   "ro-fc-voluntari",
+   "ro-fcsb",
+   "ro-fcv-farul-constanta",
+   "ro-petrolul-ploiesti",
+   "ro-sc-otelul-galati",
+   "ro-sepsi-osk-sf-gheorghe",
    "ro-uta-arad"
   ]
  },
  "RS1": {
-  "season": "2025/26",
+  "season": "2026/27",
   "clubs": [
    "rs-fk-cukaricki",
    "rs-fk-imt-belgrad",
-   "rs-fk-javor-matis-ivanjica",
+   "rs-fk-macva-sabac",
    "rs-fk-mladost-lucani",
-   "rs-fk-napredak-krusevac",
    "rs-fk-novi-pazar",
-   "rs-ofk-beograd",
    "rs-fk-partizan-belgrade",
    "rs-fk-radnicki-1923-kragujevac",
    "rs-fk-radnicki-nis",
    "rs-fk-radnik-surdulica",
-   "rs-red-star-belgrade",
-   "rs-fk-spartak-subotica",
-   "rs-fk-tsc-backa-topola",
    "rs-fk-vojvodina-novi-sad",
+   "rs-fk-zemun",
+   "rs-ofk-beograd",
+   "rs-red-star-belgrade",
    "rs-zeleznicar-pancevo"
   ]
  },
@@ -529,23 +525,23 @@
   ]
  },
  "UA1": {
-  "season": "2025/26",
+  "season": "2026/27",
   "clubs": [
+   "ua-bukovyna-chernivtsi",
+   "ua-chornomorets-odesa",
    "ua-dynamo-kyiv",
    "ua-epicentr-kamyanets-podilskyi",
+   "ua-fc-kudrivka",
    "ua-karpaty-lviv",
    "ua-kolos-kovalivka",
    "ua-kryvbas-kryvyi-rig",
-   "ua-fc-kudrivka",
+   "ua-livyi-bereg-kyiv",
    "ua-lnz-cherkasy",
    "ua-metalist-1925-kharkiv",
-   "ua-obolon-kyiv",
-   "ua-fc-oleksandriya",
-   "ua-polissya-zhytomyr",
-   "ua-rukh-lviv",
-   "ua-sc-poltava",
-   "ua-shakhtar-donetsk",
    "ua-nk-veres-rivne",
+   "ua-obolon-kyiv",
+   "ua-polissya-zhytomyr",
+   "ua-shakhtar-donetsk",
    "ua-zorya-lugansk"
   ]
  }

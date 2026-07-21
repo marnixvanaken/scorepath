@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { clubs, register, MEMBERSHIPS, COMPETITIONS, getClub, countryName } from '@/data/clubs';
+import rawUefa from '../../../data/uefa.json';
 
 describe('clubs dataset', () => {
   it('has a substantial, unique set of clubs', () => {
@@ -16,9 +17,21 @@ describe('clubs dataset', () => {
         expect(['UCL', 'UEL', 'UECL'], c.id).toContain(c.uefa);
       }
     }
-    // Alle drie de Europese toernooien komen voor in de dataset.
+    // CL en EL hebben directe deelnemers; de UECL-league-phase kan tot de
+    // loting (eind augustus) leeg zijn omdat álle 36 tickets via de
+    // kwalificatie lopen.
     const present = new Set(clubs.map((c) => c.uefa).filter(Boolean));
-    expect([...present].sort()).toEqual(['UCL', 'UECL', 'UEL']);
+    expect(present.has('UCL')).toBe(true);
+    expect(present.has('UEL')).toBe(true);
+  });
+
+  it('references only active clubs in uefa.json', () => {
+    const active = new Set(clubs.map((c) => c.id));
+    for (const comp of ['UCL', 'UEL', 'UECL'] as const) {
+      for (const id of rawUefa[comp]) {
+        expect(active.has(id), `${comp}: ${id} is geen actieve club`).toBe(true);
+      }
+    }
   });
 
   it('covers all competitions in the metadata map', () => {

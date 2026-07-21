@@ -58,6 +58,7 @@ export const COMPETITIONS: Record<string, CompetitionMeta> = {
   ED:  { country: 'nl',     tier: 1, label: 'Eredivisie' },
   KKD: { country: 'nl',     tier: 2, label: 'Keuken Kampioen Divisie' },
   PL:  { country: 'gb-eng', tier: 1, label: 'Premier League' },
+  ELC: { country: 'gb-eng', tier: 2, label: 'Championship' },
   PD:  { country: 'es',     tier: 1, label: 'LaLiga' },
   BL1: { country: 'de',     tier: 1, label: 'Bundesliga' },
   SA:  { country: 'it',     tier: 1, label: 'Serie A' },

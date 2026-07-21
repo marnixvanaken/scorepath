@@ -544,5 +544,34 @@
    "ua-shakhtar-donetsk",
    "ua-zorya-lugansk"
   ]
+ },
+ "ELC": {
+  "season": "2026/27",
+  "clubs": [
+   "en-birmingham-city",
+   "en-blackburn",
+   "en-bolton",
+   "en-bristol-city",
+   "en-burnley",
+   "en-cardiff-city",
+   "en-charlton",
+   "en-derby-county",
+   "en-lincoln-city",
+   "en-middlesbrough",
+   "en-millwall",
+   "en-norwich-city",
+   "en-portsmouth",
+   "en-preston",
+   "en-qpr",
+   "en-sheffield-united",
+   "en-southampton",
+   "en-stoke-city",
+   "en-swansea-city",
+   "en-watford",
+   "en-west-brom",
+   "en-west-ham",
+   "en-wolverhampton",
+   "en-wrexham"
+  ]
  }
 }

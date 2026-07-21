@@ -99,6 +99,18 @@ describe('clubs dataset', () => {
     }
   });
 
+  it('fields a full 24-club Championship as an English tier-2 competition', () => {
+    const elc = clubs.filter((c) => c.competition === 'ELC');
+    expect(elc.length).toBe(24);
+    for (const c of elc) expect(c.tier, c.id).toBe(2);
+    // Welshe clubs spelen in het Engelse systeem maar houden hun eigen land.
+    const welsh = elc.filter((c) => c.country === 'gb-wls').map((c) => c.id).sort();
+    expect(welsh).toEqual(['en-cardiff-city', 'en-swansea-city', 'en-wrexham']);
+    // Uit de Premier League gedegradeerde clubs houden hun football-data-id.
+    expect(getClub('en-west-ham')?.competition).toBe('ELC');
+    expect(clubs.find((c) => c.id === 'en-west-ham')?.fdId).not.toBeNull();
+  });
+
   it('looks up clubs by id', () => {
     expect(getClub('nl-ajax')?.name).toBe('Ajax');
     expect(getClub('bestaat-niet')).toBeUndefined();

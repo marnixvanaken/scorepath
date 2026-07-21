@@ -10,7 +10,8 @@
     "test:watch": "vitest",
     "build-players": "npx tsx scripts/build-players.ts",
     "build-clubs": "npx tsx scripts/build-clubs.ts",
-    "season-rollover": "npx tsx scripts/season-rollover.ts"
+    "season-rollover": "npx tsx scripts/season-rollover.ts",
+    "sync-globe": "npx tsx scripts/sync-globe-supabase.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.100.1",

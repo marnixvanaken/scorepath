@@ -714,5 +714,30 @@
    "us-sporting-kc",
    "us-st-louis"
   ]
+ },
+ "SB": {
+  "season": "2026/27",
+  "clubs": [
+   "it-arezzo",
+   "it-ascoli",
+   "it-avellino",
+   "it-benevento",
+   "it-carrarese",
+   "it-catanzaro",
+   "it-cesena",
+   "it-cremonese",
+   "it-empoli",
+   "it-juve-stabia",
+   "it-mantova",
+   "it-modena",
+   "it-padova",
+   "it-palermo",
+   "it-pisa",
+   "it-sampdoria",
+   "it-sudtirol",
+   "it-verona",
+   "it-vicenza",
+   "it-virtus-entella"
+  ]
  }
 }

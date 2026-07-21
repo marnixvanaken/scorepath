@@ -63,6 +63,7 @@ export const COMPETITIONS: Record<string, CompetitionMeta> = {
   BL1: { country: 'de',     tier: 1, label: 'Bundesliga' },
   BL2: { country: 'de',     tier: 2, label: '2. Bundesliga' },
   SA:  { country: 'it',     tier: 1, label: 'Serie A' },
+  SB:  { country: 'it',     tier: 2, label: 'Serie B' },
   FL1: { country: 'fr',     tier: 1, label: 'Ligue 1' },
   AT1: { country: 'at',     tier: 1, label: 'Bundesliga (AT)' },
   BE1: { country: 'be',     tier: 1, label: 'Jupiler Pro League' },

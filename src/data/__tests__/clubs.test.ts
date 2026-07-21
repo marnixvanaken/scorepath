@@ -177,6 +177,18 @@ describe('clubs dataset', () => {
     expect(countryName('ca', 'en')).toBe('Canada');
   });
 
+  it('fields Serie B as an Italian tier-2 competition of 20 clubs', () => {
+    const sb = clubs.filter((c) => c.competition === 'SB');
+    expect(sb.length).toBe(20);
+    for (const c of sb) {
+      expect(c.tier, c.id).toBe(2);
+      expect(c.country, c.id).toBe('it');
+    }
+    // Uit Serie A gedegradeerde clubs houden hun record + crest.
+    expect(getClub('it-cremonese')?.competition).toBe('SB');
+    expect(clubs.find((c) => c.id === 'it-cremonese')?.crest).not.toBeNull();
+  });
+
   it('looks up clubs by id', () => {
     expect(getClub('nl-ajax')?.name).toBe('Ajax');
     expect(getClub('bestaat-niet')).toBeUndefined();

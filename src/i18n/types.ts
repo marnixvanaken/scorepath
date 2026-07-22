@@ -277,6 +277,9 @@ export interface Messages {
     clubsShown: string;
     stadiumLabel: string;
     capacityWord: string;
+    /** UCL-knop in het clubpaneel (alleen voor geplaatste clubs). */
+    uclEyebrow: string;
+    uclCta: string;
     upcomingMatches: string;
     matchesLoading: string;
     noMatches: string;

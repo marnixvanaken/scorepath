@@ -278,6 +278,8 @@ export const ES: Messages = {
     clubsShown: '{n} clubes',
     stadiumLabel: 'Estadio',
     capacityWord: 'asientos',
+    uclEyebrow: 'Champions League',
+    uclCta: 'Síguelo en el sorteo',
     upcomingMatches: 'Próximos partidos',
     matchesLoading: 'Cargando partidos...',
     noMatches: 'No se encontraron próximos partidos.',

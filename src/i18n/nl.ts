@@ -278,6 +278,8 @@ export const NL: Messages = {
     clubsShown: '{n} clubs',
     stadiumLabel: 'Stadion',
     capacityWord: 'plaatsen',
+    uclEyebrow: 'Champions League',
+    uclCta: 'Volg in de loting',
     upcomingMatches: 'Komende wedstrijden',
     matchesLoading: 'Wedstrijden laden...',
     noMatches: 'Geen komende wedstrijden gevonden.',

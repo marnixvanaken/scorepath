@@ -1,11 +1,9 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import type { Club } from '@/data/clubs';
 import { COMPETITIONS, UEFA_LABELS, countryName } from '@/data/clubs';
-import type { ClubMatch, ClubMatchesResponse } from '@/lib/footballDataMapper';
-import { hotelsUrl, tripUrl, ticketsUrl, type AffiliateContext } from '@/lib/affiliates';
 import { badgeInitials, badgeColor } from '@/lib/badge';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import type { GlobeMessages } from './GlobeFeature';
@@ -90,8 +88,7 @@ export default function ClubPanel({ club, m, locale, onClose }: ClubPanelProps) 
 
               <ClubHeader club={club} locale={locale} />
               <StadiumBlock club={club} m={m} />
-              {club.fdId !== null && <MatchesBlock club={club} m={m} locale={locale} />}
-              <TripBlock club={club} m={m} />
+              {club.uefa === 'UCL' && <UCLBlock locale={locale} m={m} />}
             </div>
           </motion.aside>
         </>
@@ -150,97 +147,34 @@ function StadiumBlock({ club, m }: { club: Club; m: GlobeMessages }) {
   );
 }
 
-function MatchesBlock({ club, m, locale }: { club: Club; m: GlobeMessages; locale: string }) {
-  const [matches, setMatches] = useState<ClubMatch[] | null>(null);
-
-  useEffect(() => {
-    let cancelled = false;
-    setMatches(null);
-    fetch(`/api/club-matches?club=${encodeURIComponent(club.id)}`)
-      .then((res) => (res.ok ? res.json() : { matches: [] }))
-      .then((data: ClubMatchesResponse) => {
-        if (!cancelled) setMatches(data.matches);
-      })
-      .catch(() => {
-        if (!cancelled) setMatches([]);
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, [club.id]);
-
+// Alleen zichtbaar voor clubs die zich voor de Champions League-league phase
+// hebben geplaatst: knop naar de Scorepath-UCL-loting, in de bekende
+// UCL-huisstijl (nachtblauw met goud).
+function UCLBlock({ locale, m }: { locale: string; m: GlobeMessages }) {
   return (
     <div className="mt-5">
-      <p className="c-fg-subtle text-[11px] font-bold tracking-widest uppercase mb-2">{m.upcomingMatches}</p>
-      {matches === null && <p className="c-fg-muted text-sm">{m.matchesLoading}</p>}
-      {matches !== null && matches.length === 0 && <p className="c-fg-muted text-sm">{m.noMatches}</p>}
-      {matches !== null && matches.length > 0 && (
-        <ul className="flex flex-col gap-2">
-          {matches.map((match) => (
-            <li
-              key={match.id}
-              className="rounded-lg px-3 py-2 text-sm"
-              style={{ background: 'var(--bg-panel)', border: '1px solid var(--border)' }}
-            >
-              <p className="font-bold leading-snug">
-                {match.home} – {match.away}
-              </p>
-              <p className="c-fg-muted text-xs">
-                {new Date(match.utcDate).toLocaleDateString(locale, {
-                  weekday: 'short',
-                  day: 'numeric',
-                  month: 'short',
-                  hour: '2-digit',
-                  minute: '2-digit',
-                })}
-                {match.competition && <> · {match.competition}</>}
-              </p>
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
-  );
-}
-
-function TripBlock({ club, m }: { club: Club; m: GlobeMessages }) {
-  const ctx: AffiliateContext = {
-    clubName: club.name,
-    stadiumName: club.stadium.name,
-    city: club.city,
-    lat: club.lat,
-    lng: club.lng,
-  };
-  const ctas = [
-    { href: ticketsUrl(ctx), label: m.ctaTickets, primary: true },
-    { href: hotelsUrl(ctx), label: m.ctaHotels, primary: false },
-    { href: tripUrl(ctx), label: m.ctaTrip, primary: false },
-  ];
-
-  return (
-    <div className="mt-5">
-      <div className="flex flex-col gap-2">
-        {ctas.map((cta) => (
-          <a
-            key={cta.label}
-            href={cta.href}
-            target="_blank"
-            rel="sponsored noopener noreferrer"
-            className="flex items-center justify-between px-4 py-3 font-display tracking-widest text-sm transition-opacity hover:opacity-85"
-            style={
-              cta.primary
-                ? { background: 'var(--cta)', color: '#fff', borderRadius: '0 10px 0 10px' }
-                : { background: 'var(--bg-panel)', border: '1px solid var(--border-strong)', color: 'var(--fg)', borderRadius: '0 10px 0 10px' }
-            }
-          >
-            {cta.label}
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-              <path d="M7 17 17 7M7 7h10v10" />
-            </svg>
-          </a>
-        ))}
-      </div>
-      <p className="c-fg-subtle text-[11px] mt-2 leading-relaxed">{m.affiliateDisclosure}</p>
+      <a
+        href={`/${locale}/ucl-2027`}
+        className="group flex items-center justify-between px-4 py-3.5 font-display tracking-widest transition-transform hover:-translate-y-0.5"
+        style={{
+          background: 'linear-gradient(135deg, #001D62 0%, #0A2A7A 55%, #001142 100%)',
+          borderRadius: '0 12px 0 12px',
+          boxShadow: '0 14px 34px -20px rgba(0, 29, 98, 0.85)',
+        }}
+      >
+        <span className="flex flex-col gap-0.5 min-w-0">
+          <span className="text-[10px] font-bold tracking-[0.22em] uppercase" style={{ color: '#C9A843' }}>
+            {m.uclEyebrow}
+          </span>
+          <span className="text-sm text-white truncate">{m.uclCta}</span>
+        </span>
+        <svg
+          width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C9A843" strokeWidth="2.5"
+          strokeLinecap="round" strokeLinejoin="round" className="shrink-0" aria-hidden
+        >
+          <path d="M5 12h14M12 5l7 7-7 7" />
+        </svg>
+      </a>
     </div>
   );
 }
